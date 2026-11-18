@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Hub 360 - Production & Operations</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+
+<body class="flex h-screen overflow-hidden text-slate-800">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white border-r border-gray-200 flex flex-col shadow-sm z-20">
+        <div class="h-16 flex items-center px-6 border-b border-gray-100">
+            <i class="ph-fill ph-planet text-blue-600 text-2xl mr-2"></i>
+            <span class="font-bold text-lg tracking-tight">ClientHub<span class="text-blue-600">360</span></span>
+        </div>
+        <nav class="flex-1 py-4 flex flex-col gap-1">
+
+            <a href="prospecting.html"
+                class="flex items-center gap-3 px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-funnel text-xl"></i>
+                <span>Prospecting</span>
+            </a>
+
+            <a href="onboarding.html"
+                class="flex items-center gap-3 px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-user-plus text-xl"></i>
+                <span>Onboarding</span>
+            </a>
+
+            <a href="production.html"
+                class="flex items-center gap-3 px-6 py-3 bg-blue-50 text-blue-700 border-r-4 border-blue-600 font-semibold transition-colors">
+                <i class="ph-kanban text-xl"></i>
+                <span>Production</span>
+            </a>
+
+            <a href="reporting.html"
+                class="flex items-center gap-3 px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-chart-line-up text-xl"></i>
+                <span>Reporting</span>
+            </a>
+
+            <a href="upsells.html"
+                class="flex items-center gap-3 px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-trend-up text-xl"></i>
+                <span>Upsells</span>
+            </a>
+
+            <a href="users.html"
+                class="flex items-center gap-3 px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-users text-xl"></i>
+                <span>Users & Teams</span>
+            </a>
+
+        </nav>
+        <div class="p-4 border-t border-gray-100">
+            <div class="flex items-center gap-3">
+                <div
+                    class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">
+                    AM</div>
+                <div class="text-sm">
+                    <p class="font-semibold text-gray-800">Admin User</p>
+                    <p class="text-xs text-gray-500">Agency Workspace</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col h-screen overflow-y-auto relative">
+        <header
+            class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-8 sticky top-0 z-10 shadow-sm">
+            <h1 class="text-xl font-semibold text-gray-800">Production & Operations</h1>
+            <div class="flex items-center gap-4">
+                <button class="p-2 text-gray-400 hover:text-gray-600"><i class="ph ph-bell text-xl"></i></button>
+            </div>
+        </header>
+        <div class="p-8 flex-1">
+
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                <div class="flex items-center gap-4">
+                    <label class="font-semibold text-gray-700">Client Workspace:</label>
+                    <select
+                        class="border border-gray-300 rounded-lg px-4 py-2 bg-white shadow-sm font-semibold outline-none w-64">
+                        <option>Global Dynamics</option>
+                        <option>Apex Logistics</option>
+                        <option>TechFlow Inc</option>
+                    </select>
+                    <span
+                        class="px-3 py-1 bg-green-100 text-green-800 text-xs font-bold rounded-full border border-green-200">Active
+                        • Month 1</span>
+                </div>
+                <div class="flex items-center gap-3 text-xs">
+                    <span class="bg-white border border-gray-200 px-3 py-1.5 rounded-lg text-gray-600">Profitability:
+                        <strong class="text-emerald-600">On Track (38 / 55 hrs)</strong></span>
+                    <button onclick="showToast('Recurring Month 2 tasks queued for 1st of next month.', 'info')"
+                        class="bg-white border border-gray-300 hover:bg-gray-50 px-3 py-1.5 rounded-lg font-medium text-gray-700 flex items-center gap-1.5"><i
+                            class="ph ph-arrows-clockwise"></i> Preview Month 2 Auto-Tasks</button>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="border-b border-gray-200 mb-6 flex overflow-x-auto hide-scrollbar">
+                <button onclick="switchTab('overview')" id="tab-overview"
+                    class="prod-tab px-5 py-3 font-medium text-sm text-gray-500 border-b-2 border-transparent hover:text-gray-700 whitespace-nowrap">Overview</button>
+                <button onclick="switchTab('seo')" id="tab-seo"
+                    class="prod-tab px-5 py-3 font-medium text-sm text-blue-600 border-b-2 border-blue-600 whitespace-nowrap">SEO</button>
+                <button onclick="switchTab('content')" id="tab-content"
+                    class="prod-tab px-5 py-3 font-medium text-sm text-gray-500 border-b-2 border-transparent hover:text-gray-700 whitespace-nowrap">Content</button>
+                <button onclick="switchTab('ppc')" id="tab-ppc"
+                    class="prod-tab px-5 py-3 font-medium text-sm text-gray-500 border-b-2 border-transparent hover:text-gray-700 whitespace-nowrap">PPC</button>
+                <button onclick="switchTab('design')" id="tab-design"
+                    class="prod-tab px-5 py-3 font-medium text-sm text-gray-500 border-b-2 border-transparent hover:text-gray-700 whitespace-nowrap">Design
+                    &amp; Dev</button>
+                <button onclick="switchTab('social')" id="tab-social"
+                    class="prod-tab px-5 py-3 font-medium text-sm text-gray-500 border-b-2 border-transparent hover:text-gray-700 whitespace-nowrap">Paid
+                    Social</button>
+                <button onclick="switchTab('files')" id="tab-files"
+                    class="prod-tab px-5 py-3 font-medium text-sm text-gray-500 border-b-2 border-transparent hover:text-gray-700 whitespace-nowrap flex items-center gap-1.5"><i
+                        class="ph ph-folder-open"></i> Files</button>
+                <button onclick="switchTab('links')" id="tab-links"
+                    class="prod-tab px-5 py-3 font-medium text-sm text-gray-500 border-b-2 border-transparent hover:text-gray-700 whitespace-nowrap">Live
+                    Links / PR</button>
+                <button onclick="switchTab('log')" id="tab-log"
+                    class="prod-tab px-5 py-3 font-medium text-sm text-gray-500 border-b-2 border-transparent hover:text-gray-700 whitespace-nowrap">Activity
+                    Log</button>
+            </div>
+
+            <!-- Tab Contents -->
+
+            <!-- Overview Tab -->
+            <div id="content-overview" class="prod-content hidden">
+                <div class="grid grid-cols-3 gap-6">
+                    <div class="col-span-2 bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+                        <h2 class="font-bold text-lg mb-4">Client Profile</h2>
+                        <div class="grid grid-cols-2 gap-4 text-sm text-gray-700">
+                            <p><strong class="block text-gray-500 text-xs">Business</strong> Global Dynamics</p>
+                            <p><strong class="block text-gray-500 text-xs">Primary Contact</strong> John Doe
+                                (john@globaldyn.com)</p>
+                            <p><strong class="block text-gray-500 text-xs">Active Services</strong> SEO, Content, PPC
+                            </p>
+                            <p><strong class="block text-gray-500 text-xs">Total Budget</strong> $6,000 / month</p>
+                            <p><strong class="block text-gray-500 text-xs">Campaign Term</strong> 12 Months (Ends Oct
+                                2027)</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+                        <h2 class="font-bold text-lg mb-4">Important Files</h2>
+                        <ul class="space-y-3">
+                            <li
+                                class="flex items-center justify-between text-sm p-2 bg-gray-50 rounded border border-gray-100">
+                                <span class="flex items-center gap-2"><i
+                                        class="ph-fill ph-file-pdf text-red-500 text-lg"></i>
+                                    Signed_Agreement.pdf</span>
+                                <i class="ph ph-download-simple text-gray-400 cursor-pointer"></i>
+                            </li>
+                            <li
+                                class="flex items-center justify-between text-sm p-2 bg-gray-50 rounded border border-gray-100">
+                                <span class="flex items-center gap-2"><i
+                                        class="ph-fill ph-image text-blue-500 text-lg"></i> Brand_Assets.zip</span>
+                                <i class="ph ph-download-simple text-gray-400 cursor-pointer"></i>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEO Tab -->
+            <div id="content-seo" class="prod-content block h-full flex flex-col">
+                <!-- INFO BAR (Restored inside service tab) -->
+                <div
+                    class="bg-indigo-50 border border-indigo-100 rounded-lg p-3 flex justify-between items-center mb-6">
+                    <div class="flex gap-8">
+                        <div><span class="text-xs text-indigo-500 font-semibold block uppercase tracking-wider">SEO
+                                Budget</span><span class="font-bold text-indigo-900">$2,500/mo</span></div>
+                        <div><span
+                                class="text-xs text-indigo-500 font-semibold block uppercase tracking-wider">Responsible</span>
+                            <div class="flex items-center gap-2 font-medium text-indigo-900">
+                                <div
+                                    class="w-5 h-5 rounded-full bg-indigo-200 text-indigo-700 flex items-center justify-center text-[10px]">
+                                    AR</div> Alex Rivera (Lead)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs text-indigo-500 font-semibold block uppercase tracking-wider">Hours
+                            Logged</span>
+                        <div class="flex items-center gap-2">
+                            <div class="w-32 bg-indigo-200 rounded-full h-2">
+                                <div class="bg-indigo-600 h-2 rounded-full w-[70%]"></div>
+                            </div><span class="font-bold text-indigo-900 text-sm">14 / 20</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex gap-6 overflow-x-auto pb-4 flex-1">
+                    <!-- Backlog -->
+                    <div class="w-80 flex-shrink-0 bg-gray-50 rounded-lg border border-gray-200 flex flex-col">
+                        <h3 class="p-3 border-b font-semibold text-gray-700 bg-gray-100/50">To Do (Month 1)</h3>
+                        <div class="p-3 space-y-3 flex-1 overflow-y-auto">
+                            <div class="bg-white p-3 rounded shadow-sm border border-gray-200 text-sm">
+                                <span
+                                    class="text-[10px] font-bold bg-blue-100 text-blue-700 px-2 py-0.5 rounded uppercase">Tech
+                                    SEO</span>
+                                <p class="font-medium mt-1 mb-2">Initial Website Audit</p>
+                                <div class="flex justify-between items-center text-xs text-gray-500 mb-2">
+                                    <span>Est: 4 hrs</span>
+                                    <span class="text-amber-600 font-medium flex items-center gap-1"><i class="ph ph-calendar"></i> Due Nov 21</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <button onclick="showToast('Attached file to Initial Website Audit.', 'info')" class="text-xs border px-2 py-1 rounded bg-gray-50 hover:bg-gray-100"><i
+                                            class="ph ph-paperclip"></i> Attach File</button>
+                                    <div
+                                        class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] font-bold">
+                                        AR</div>
+                                </div>
+                            </div>
+                            <div class="bg-white p-3 rounded shadow-sm border border-gray-200 text-sm">
+                                <span
+                                    class="text-[10px] font-bold bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded uppercase">On-Page</span>
+                                <p class="font-medium mt-1 mb-2">Schema Markup &amp; Meta Optimization</p>
+                                <div class="flex justify-between items-center text-xs text-gray-500 mb-2">
+                                    <span>Est: 3 hrs</span>
+                                    <span class="text-gray-500 font-medium flex items-center gap-1"><i class="ph ph-calendar"></i> Due Nov 26</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <button onclick="showToast('Attached file to Schema Markup.', 'info')" class="text-xs border px-2 py-1 rounded bg-gray-50 hover:bg-gray-100"><i
+                                            class="ph ph-paperclip"></i> Attach File</button>
+                                    <div
+                                        class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] font-bold">
+                                        AR</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- In Progress -->
+                    <div class="w-80 flex-shrink-0 bg-gray-50 rounded-lg border border-gray-200 flex flex-col">
+                        <h3 class="p-3 border-b font-semibold text-gray-700 bg-gray-100/50">In Progress</h3>
+                        <div class="p-3 space-y-3 flex-1 overflow-y-auto">
+                            <div
+                                class="bg-white p-3 rounded shadow-sm border border-blue-200 text-sm border-l-4 border-l-blue-500">
+                                <span
+                                    class="text-[10px] font-bold bg-purple-100 text-purple-700 px-2 py-0.5 rounded uppercase">Strategy</span>
+                                <p class="font-medium mt-1 mb-2">12-Month Work Plan Generator</p>
+                                <div class="flex justify-between items-center text-xs text-gray-500 mb-2">
+                                    <span>Logged: 2/3 hrs</span>
+                                    <span class="text-red-600 font-semibold flex items-center gap-1"><i class="ph ph-calendar"></i> Due Nov 20</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <button onclick="showToast('12-Month SEO Work Plan generated & saved to Files tab!')" class="text-xs border px-2 py-1 rounded bg-gray-50 hover:bg-gray-100"><i
+                                            class="ph ph-magic-wand"></i> Auto-Generate</button>
+                                    <div
+                                        class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] font-bold">
+                                        AR</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Done -->
+                    <div class="w-80 flex-shrink-0 bg-gray-50 rounded-lg border border-gray-200 flex flex-col">
+                        <h3 class="p-3 border-b font-semibold text-gray-700 bg-gray-100/50">Done</h3>
+                        <div class="p-3 space-y-3 flex-1 overflow-y-auto">
+                            <div class="bg-white p-3 rounded shadow-sm border border-gray-200 text-sm opacity-75">
+                                <span
+                                    class="text-[10px] font-bold bg-gray-100 text-gray-700 px-2 py-0.5 rounded uppercase">Setup</span>
+                                <p class="font-medium mt-1 mb-2">Competitor Analysis (Automated)</p>
+                                <div class="flex justify-between items-center text-xs text-gray-500 mb-2">
+                                    <span class="flex items-center gap-1 text-green-600"><i class="ph-fill ph-file-pdf"></i> Audit_Report.pdf</span>
+                                    <span class="text-gray-400">Done Nov 12</span>
+                                </div>
+                                <div class="flex justify-end">
+                                    <div
+                                        class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] font-bold">
+                                        AR</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Tab -->
+            <div id="content-content" class="prod-content hidden h-full flex flex-col">
+                <!-- INFO BAR -->
+                <div
+                    class="bg-indigo-50 border border-indigo-100 rounded-lg p-3 flex justify-between items-center mb-6">
+                    <div class="flex gap-8">
+                        <div><span class="text-xs text-indigo-500 font-semibold block uppercase tracking-wider">Content
+                                Budget</span><span class="font-bold text-indigo-900">$1,500/mo</span></div>
+                        <div><span
+                                class="text-xs text-indigo-500 font-semibold block uppercase tracking-wider">Responsible</span>
+                            <div class="flex items-center gap-2 font-medium text-indigo-900">
+                                <div
+                                    class="w-5 h-5 rounded-full bg-indigo-200 text-indigo-700 flex items-center justify-center text-[10px]">
+                                    SJ</div> Sarah J. (Lead)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs text-indigo-500 font-semibold block uppercase tracking-wider">Hours
+                            Logged</span>
+                        <div class="flex items-center gap-2">
+                            <div class="w-32 bg-indigo-200 rounded-full h-2">
+                                <div class="bg-indigo-600 h-2 rounded-full w-[45%]"></div>
+                            </div><span class="font-bold text-indigo-900 text-sm">9 / 20</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex gap-6 overflow-x-auto pb-4 flex-1">
+                    <!-- Drafting -->
+                    <div class="w-80 flex-shrink-0 bg-gray-50 rounded-lg border border-gray-200 flex flex-col">
+                        <h3 class="p-3 border-b font-semibold text-gray-700 bg-gray-100/50">Drafting (2)</h3>
+                        <div class="p-3 space-y-3">
+                            <div class="bg-white p-3 rounded shadow-sm border border-gray-200 text-sm">
+                                <span
+                                    class="text-[10px] font-bold bg-orange-100 text-orange-700 px-2 py-0.5 rounded uppercase">Blog
+                                    • 4 Credits</span>
+                                <p class="font-medium mt-1 mb-1">Cloud Security Best Practices 2026</p>
+                                <p class="text-xs text-gray-400 mb-2">Est: 3 hrs • Due Nov 22</p>
+                                <div class="flex justify-end">
+                                    <div
+                                        class="w-6 h-6 rounded-full bg-purple-600 text-white flex items-center justify-center text-[10px] font-bold">
+                                        SJ</div>
+                                </div>
+                            </div>
+                            <div class="bg-white p-3 rounded shadow-sm border border-gray-200 text-sm">
+                                <span
+                                    class="text-[10px] font-bold bg-pink-100 text-pink-700 px-2 py-0.5 rounded uppercase">Ad
+                                    Copy • 2 Credits</span>
+                                <p class="font-medium mt-1 mb-1">Q4 LinkedIn Lead Gen Carousel Copy</p>
+                                <p class="text-xs text-gray-400 mb-2">Est: 1.5 hrs • Due Nov 24</p>
+                                <div class="flex justify-end">
+                                    <div
+                                        class="w-6 h-6 rounded-full bg-purple-600 text-white flex items-center justify-center text-[10px] font-bold">
+                                        SJ</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Client Approval Required -->
+                    <div class="w-80 flex-shrink-0 bg-yellow-50 rounded-lg border border-yellow-200 flex flex-col">
+                        <h3 class="p-3 border-b font-semibold text-yellow-800 bg-yellow-100/50">Client Approval Required
+                        </h3>
+                        <div id="col-approval-required" class="p-3 space-y-3">
+                            <div id="approval-card-1"
+                                class="bg-white p-3 rounded shadow-md border-l-4 border-l-yellow-500 text-sm">
+                                <div class="flex justify-between items-center">
+                                    <span
+                                        class="text-[10px] font-bold bg-orange-100 text-orange-700 px-2 py-0.5 rounded uppercase">Service
+                                        Page</span>
+                                    <span class="text-[10px] text-amber-600 font-semibold">Link Active</span>
+                                </div>
+                                <p class="font-medium mt-1.5 mb-1">B2B SaaS Security Solutions</p>
+                                <p class="text-xs text-gray-500 mb-2">1,250 words • Draft v1.2 ready for client review
+                                </p>
+                                <div class="flex gap-2 mt-2">
+                                    <a href="content-approval.html"
+                                        class="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white text-xs font-semibold py-1.5 px-2 rounded flex justify-center items-center gap-1">
+                                        <i class="ph ph-magic-wand"></i> Open Approval Magic Link
+                                    </a>
+                                    <button
+                                        onclick="openApprovalModal('approval-card-1', 'B2B SaaS Security Solutions', 'Service Page Copy (1,250 words)')"
+                                        class="border border-gray-300 bg-gray-50 hover:bg-gray-100 text-gray-700 text-xs px-2 py-1.5 rounded"
+                                        title="Quick Modal Preview">
+                                        <i class="ph ph-eye"></i>
+                                    </button>
+                                    <button onclick="showToast('Approval Magic Link copied: https://hub.agency/approve/apr_live_4f92c810', 'info')"
+                                        class="border border-gray-300 bg-gray-50 hover:bg-gray-100 text-gray-700 text-xs px-2 py-1.5 rounded"
+                                        title="Copy Magic Link">
+                                        <i class="ph ph-copy"></i>
+                                    </button>
+                                </div>
+                                <div class="flex justify-between items-center mt-2 pt-2 border-t border-gray-100">
+                                    <span class="text-[10px] text-gray-400">Sent Nov 18, 09:15 AM</span>
+                                    <div
+                                        class="w-6 h-6 rounded-full bg-purple-600 text-white flex items-center justify-center text-[10px] font-bold">
+                                        SJ</div>
+                                </div>
+                            </div>
+
+                            <div id="approval-card-2"
+                                class="bg-white p-3 rounded shadow-md border-l-4 border-l-yellow-500 text-sm">
+                                <div class="flex justify-between items-center">
+                                    <span
+                                        class="text-[10px] font-bold bg-blue-100 text-blue-700 px-2 py-0.5 rounded uppercase">Ad
+                                        Creative</span>
+                                    <span class="text-[10px] text-gray-400">Not Sent</span>
+                                </div>
+                                <p class="font-medium mt-1.5 mb-1">Zero-Trust Cloud Banner Set (3x)</p>
+                                <p class="text-xs text-gray-500 mb-2">Google Display &amp; LinkedIn variants</p>
+                                <div class="flex gap-2 mt-2">
+                                    <button
+                                        onclick="openApprovalModal('approval-card-2', 'Zero-Trust Cloud Banner Set (3x)', 'Paid Media Ad Creative')"
+                                        class="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white text-xs font-semibold py-1.5 px-2 rounded flex justify-center items-center gap-1">
+                                        <i class="ph ph-eye"></i> Preview Approval Link
+                                    </button>
+                                    <button
+                                        onclick="showToast('One-click approval link sent to client via Email/Slack.')"
+                                        class="border border-gray-300 bg-gray-50 hover:bg-gray-100 text-gray-700 text-xs px-2 py-1.5 rounded">
+                                        <i class="ph ph-paper-plane-tilt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Revision Requested -->
+                    <div class="w-80 flex-shrink-0 bg-red-50/40 rounded-lg border border-red-200 flex flex-col">
+                        <h3 class="p-3 border-b font-semibold text-red-800 bg-red-100/40">Revision Requested</h3>
+                        <div id="col-revision" class="p-3 space-y-3">
+                            <div class="bg-white p-3 rounded shadow-sm border-l-4 border-l-red-500 text-sm">
+                                <span
+                                    class="text-[10px] font-bold bg-red-100 text-red-700 px-2 py-0.5 rounded uppercase">Rejected
+                                    • Nov 16</span>
+                                <p class="font-medium mt-1 mb-1">Enterprise SOC2 Compliance Guide</p>
+                                <p class="text-xs text-red-600 bg-red-50 p-2 rounded mb-2">"Please update pricing tier
+                                    mention in paragraph 3 to reflect Q4 enterprise plan."</p>
+                                <span class="text-[10px] text-gray-400">Feedback by John Doe • 11:42 AM</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Approved & Scheduled -->
+                    <div class="w-80 flex-shrink-0 bg-emerald-50/40 rounded-lg border border-emerald-200 flex flex-col">
+                        <h3 class="p-3 border-b font-semibold text-emerald-800 bg-emerald-100/40">Approved &amp;
+                            Published</h3>
+                        <div id="col-approved" class="p-3 space-y-3">
+                            <div class="bg-white p-3 rounded shadow-sm border-l-4 border-l-emerald-500 text-sm">
+                                <span
+                                    class="text-[10px] font-bold bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded uppercase">Approved
+                                    • Nov 18</span>
+                                <p class="font-medium mt-1 mb-1">Blog: Why Multi-Cloud Needs Unified IAM</p>
+                                <p class="text-xs text-emerald-700">"Looks great, approved for immediate publish!"</p>
+                                <span class="text-[10px] text-gray-400 block mt-1">John Doe • 09:30 AM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PPC Tab -->
+            <div id="content-ppc" class="prod-content hidden">
+                <div
+                    class="bg-amber-50 border border-amber-200 rounded-lg p-3 flex flex-wrap justify-between items-center mb-6 gap-4">
+                    <div class="flex gap-8">
+                        <div><span class="text-xs text-amber-700 font-semibold block uppercase">Monthly Ad Spend
+                                Budget</span><span class="font-bold text-amber-950">$5,000 / mo</span></div>
+                        <div><span class="text-xs text-amber-700 font-semibold block uppercase">Live Pacing (Day
+                                18/30)</span><span class="font-bold text-emerald-700">$3,120 Spent (62.4% — On
+                                Pace)</span></div>
+                        <div><span class="text-xs text-amber-700 font-semibold block uppercase">Management
+                                Fee</span><span class="font-bold text-amber-950">$2,000 / mo</span></div>
+                    </div>
+                    <span class="text-xs bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full font-semibold"><i
+                            class="ph-fill ph-check-circle"></i> Conversion Pixel QA Passed</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
+                        <h3 class="font-bold text-gray-800 mb-3">Pixel &amp; Tracking QA Checklist</h3>
+                        <ul class="space-y-2.5 text-sm">
+                            <li class="flex items-center gap-2 text-emerald-700"><i class="ph-fill ph-check-circle"></i>
+                                Google Ads Conversion Tag Firing</li>
+                            <li class="flex items-center gap-2 text-emerald-700"><i class="ph-fill ph-check-circle"></i>
+                                Enhanced Conversions Enabled</li>
+                            <li class="flex items-center gap-2 text-emerald-700"><i class="ph-fill ph-check-circle"></i>
+                                GA4 Lead Form Event Linked</li>
+                            <li class="flex items-center gap-2 text-amber-600"><i class="ph-fill ph-clock"></i> Call
+                                Tracking Number Swap QA</li>
+                        </ul>
+                    </div>
+                    <div class="md:col-span-2 bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
+                        <h3 class="font-bold text-gray-800 mb-3">Active Campaign Build Tracker</h3>
+                        <table class="w-full text-sm text-left">
+                            <thead class="bg-gray-50 text-xs text-gray-500 uppercase border-b">
+                                <tr>
+                                    <th class="px-3 py-2">Campaign</th>
+                                    <th class="px-3 py-2">Status</th>
+                                    <th class="px-3 py-2">Spend MTD</th>
+                                    <th class="px-3 py-2">Conv.</th>
+                                    <th class="px-3 py-2">ROAS</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100">
+                                <tr>
+                                    <td class="px-3 py-2.5 font-medium">Search - Enterprise Cloud Security</td>
+                                    <td class="px-3 py-2.5"><span
+                                            class="bg-green-100 text-green-700 text-xs px-2 py-0.5 rounded">Live</span>
+                                    </td>
+                                    <td class="px-3 py-2.5">$1,840</td>
+                                    <td class="px-3 py-2.5">28</td>
+                                    <td class="px-3 py-2.5 font-semibold text-emerald-600">3.8x</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2.5 font-medium">Search - Competitor Conquesting</td>
+                                    <td class="px-3 py-2.5"><span
+                                            class="bg-green-100 text-green-700 text-xs px-2 py-0.5 rounded">Live</span>
+                                    </td>
+                                    <td class="px-3 py-2.5">$890</td>
+                                    <td class="px-3 py-2.5">11</td>
+                                    <td class="px-3 py-2.5 font-semibold text-emerald-600">2.9x</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2.5 font-medium">PMax - B2B SaaS Demo</td>
+                                    <td class="px-3 py-2.5"><span
+                                            class="bg-yellow-100 text-yellow-700 text-xs px-2 py-0.5 rounded">Learning</span>
+                                    </td>
+                                    <td class="px-3 py-2.5">$390</td>
+                                    <td class="px-3 py-2.5">4</td>
+                                    <td class="px-3 py-2.5 font-semibold text-gray-600">2.1x</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Design & Dev Tab -->
+            <div id="content-design" class="prod-content hidden">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
+                        <h3 class="font-bold text-gray-800 mb-3">Pre-Launch QA Checklist</h3>
+                        <ul class="space-y-2.5 text-sm">
+                            <li class="flex items-center gap-2 text-emerald-700"><i class="ph-fill ph-check-circle"></i>
+                                SSL &amp; HTTPS Redirects Verified</li>
+                            <li class="flex items-center gap-2 text-emerald-700"><i class="ph-fill ph-check-circle"></i>
+                                Mobile Responsive Breakpoints</li>
+                            <li class="flex items-center gap-2 text-emerald-700"><i class="ph-fill ph-check-circle"></i>
+                                Core Web Vitals (LCP &lt; 2.5s)</li>
+                            <li class="flex items-center gap-2 text-gray-500"><i class="ph ph-circle"></i> Staging →
+                                Prod DNS Cutover</li>
+                        </ul>
+                    </div>
+                    <div class="md:col-span-2 bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
+                        <h3 class="font-bold text-gray-800 mb-3">Bug / Ticket Intake &amp; Revision Rounds</h3>
+                        <div class="space-y-3 text-sm">
+                            <div
+                                class="p-3 bg-gray-50 rounded-lg border border-gray-200 flex justify-between items-center">
+                                <div>
+                                    <span
+                                        class="text-[10px] font-bold bg-blue-100 text-blue-700 px-2 py-0.5 rounded uppercase">Landing
+                                        Page</span>
+                                    <p class="font-semibold text-gray-800 mt-1">Cloud Security Hero Redesign</p>
+                                    <p class="text-xs text-gray-500">Revision Round: <strong>1 of 2</strong> • Assigned:
+                                        Mike K.</p>
+                                </div>
+                                <span class="px-2.5 py-1 bg-amber-100 text-amber-800 text-xs font-semibold rounded">In
+                                    Review</span>
+                            </div>
+                            <div
+                                class="p-3 bg-gray-50 rounded-lg border border-gray-200 flex justify-between items-center">
+                                <div>
+                                    <span
+                                        class="text-[10px] font-bold bg-red-100 text-red-700 px-2 py-0.5 rounded uppercase">Bug
+                                        Ticket</span>
+                                    <p class="font-semibold text-gray-800 mt-1">HubSpot Form Webhook Timeout on Safari
+                                    </p>
+                                    <p class="text-xs text-gray-500">Est: 2 hrs • Priority: High</p>
+                                </div>
+                                <span
+                                    class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-semibold rounded">Fixed</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paid Social Tab -->
+            <div id="content-social" class="prod-content hidden">
+                <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+                    <div class="flex justify-between items-center mb-4">
+                        <div>
+                            <h3 class="font-bold text-gray-800 text-lg">Paid Social Creative Loops &amp; Pixel QA</h3>
+                            <p class="text-xs text-gray-500">Meta Business Manager &amp; LinkedIn Campaign Manager</p>
+                        </div>
+                        <span class="text-xs bg-purple-100 text-purple-700 px-3 py-1 rounded-full font-semibold">Meta
+                            Pixel &amp; LinkedIn Insight Tag Active</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div class="p-4 border rounded-lg bg-gray-50">
+                            <span class="text-xs font-bold text-blue-700 uppercase">LinkedIn Ads</span>
+                            <p class="font-semibold mt-1">CTO / CISO Decision Makers (UK)</p>
+                            <p class="text-xs text-gray-500 mt-1">3 Carousel Ads • CTR: 1.42% • CPL: $68</p>
+                        </div>
+                        <div class="p-4 border rounded-lg bg-gray-50">
+                            <span class="text-xs font-bold text-indigo-700 uppercase">Meta Retargeting</span>
+                            <p class="font-semibold mt-1">30-Day Pricing Page Visitors</p>
+                            <p class="text-xs text-gray-500 mt-1">2 Video Variants • ROAS: 4.1x</p>
+                        </div>
+                        <div class="p-4 border rounded-lg bg-yellow-50 border-yellow-200">
+                            <span class="text-xs font-bold text-yellow-800 uppercase">Creative Refresh Due</span>
+                            <p class="font-semibold mt-1">Q4 Case Study Static Ads</p>
+                            <p class="text-xs text-gray-600 mt-1">Awaiting client approval in Content tab</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Files Tab (NEW) -->
+            <div id="content-files" class="prod-content hidden">
+                <div class="flex flex-wrap justify-between items-center gap-4 mb-6">
+                    <div>
+                        <h2 class="font-bold text-lg text-gray-800">Client Files &amp; Shared Drive Directory</h2>
+                        <p class="text-xs text-gray-500">Synced with Google Drive / SharePoint • Centralized assets for
+                            Global Dynamics</p>
+                    </div>
+                    <div class="flex gap-3">
+                        <button
+                            onclick="showToast('Opening Google Drive folder: /ClientHub360/Global-Dynamics', 'info')"
+                            class="bg-white border border-gray-300 text-gray-700 px-3.5 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 flex items-center gap-2">
+                            <i class="ph ph-google-drive-logo text-blue-600"></i> Open Shared Drive
+                        </button>
+                        <button onclick="showToast('File upload dialog opened (Demo).')"
+                            class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 flex items-center gap-2">
+                            <i class="ph ph-upload-simple"></i> Upload File
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Folder Cards -->
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
+                    <div onclick="showToast('Filtered: Contracts & Scope', 'info')"
+                        class="bg-white p-4 rounded-xl border border-gray-200 hover:border-blue-300 cursor-pointer shadow-sm">
+                        <i class="ph-fill ph-folder text-blue-500 text-3xl mb-2"></i>
+                        <p class="font-semibold text-sm text-gray-800">01_Contracts</p>
+                        <p class="text-xs text-gray-400">3 files</p>
+                    </div>
+                    <div onclick="showToast('Filtered: Brand Assets', 'info')"
+                        class="bg-white p-4 rounded-xl border border-gray-200 hover:border-blue-300 cursor-pointer shadow-sm">
+                        <i class="ph-fill ph-folder text-purple-500 text-3xl mb-2"></i>
+                        <p class="font-semibold text-sm text-gray-800">02_Brand_Assets</p>
+                        <p class="text-xs text-gray-400">12 files</p>
+                    </div>
+                    <div onclick="showToast('Filtered: SEO Audits', 'info')"
+                        class="bg-white p-4 rounded-xl border border-gray-200 hover:border-blue-300 cursor-pointer shadow-sm">
+                        <i class="ph-fill ph-folder text-emerald-500 text-3xl mb-2"></i>
+                        <p class="font-semibold text-sm text-gray-800">03_SEO_Audits</p>
+                        <p class="text-xs text-gray-400">5 files</p>
+                    </div>
+                    <div onclick="showToast('Filtered: Content & Creatives', 'info')"
+                        class="bg-white p-4 rounded-xl border border-gray-200 hover:border-blue-300 cursor-pointer shadow-sm">
+                        <i class="ph-fill ph-folder text-amber-500 text-3xl mb-2"></i>
+                        <p class="font-semibold text-sm text-gray-800">04_Content_Drafts</p>
+                        <p class="text-xs text-gray-400">8 files</p>
+                    </div>
+                    <div onclick="showToast('Filtered: Monthly Reports', 'info')"
+                        class="bg-white p-4 rounded-xl border border-gray-200 hover:border-blue-300 cursor-pointer shadow-sm">
+                        <i class="ph-fill ph-folder text-indigo-500 text-3xl mb-2"></i>
+                        <p class="font-semibold text-sm text-gray-800">05_Reports_PDF</p>
+                        <p class="text-xs text-gray-400">2 files</p>
+                    </div>
+                </div>
+
+                <!-- Files Table -->
+                <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-gray-50 text-gray-600 uppercase text-xs border-b border-gray-200">
+                            <tr>
+                                <th class="px-4 py-3">File Name</th>
+                                <th class="px-4 py-3">Department</th>
+                                <th class="px-4 py-3">Uploaded By</th>
+                                <th class="px-4 py-3">Date</th>
+                                <th class="px-4 py-3">Size</th>
+                                <th class="px-4 py-3 text-right">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 text-gray-700">
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-4 py-3 flex items-center gap-2 font-medium"><i
+                                        class="ph-fill ph-file-pdf text-red-500 text-lg"></i>
+                                    Global_Dynamics_Signed_MSA.pdf</td>
+                                <td class="px-4 py-3"><span
+                                        class="bg-gray-100 text-gray-700 px-2 py-0.5 rounded text-xs">Commercial</span>
+                                </td>
+                                <td class="px-4 py-3">Mike K.</td>
+                                <td class="px-4 py-3 text-xs text-gray-500">Nov 01, 2026</td>
+                                <td class="px-4 py-3 text-xs text-gray-500">1.4 MB</td>
+                                <td class="px-4 py-3 text-right"><button
+                                        onclick="showToast('Downloading Global_Dynamics_Signed_MSA.pdf')"
+                                        class="text-blue-600 hover:underline text-xs font-semibold">Download</button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-4 py-3 flex items-center gap-2 font-medium"><i
+                                        class="ph-fill ph-file-pdf text-red-500 text-lg"></i>
+                                    Technical_SEO_Audit_Month1.pdf</td>
+                                <td class="px-4 py-3"><span
+                                        class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-xs">SEO</span></td>
+                                <td class="px-4 py-3">Alex Rivera</td>
+                                <td class="px-4 py-3 text-xs text-gray-500">Nov 12, 2026</td>
+                                <td class="px-4 py-3 text-xs text-gray-500">4.8 MB</td>
+                                <td class="px-4 py-3 text-right"><button
+                                        onclick="showToast('Downloading Technical_SEO_Audit_Month1.pdf')"
+                                        class="text-blue-600 hover:underline text-xs font-semibold">Download</button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-4 py-3 flex items-center gap-2 font-medium"><i
+                                        class="ph-fill ph-file-xls text-emerald-600 text-lg"></i>
+                                    12_Month_SEO_Workplan_v2.xlsx</td>
+                                <td class="px-4 py-3"><span
+                                        class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-xs">SEO</span></td>
+                                <td class="px-4 py-3">Alex Rivera</td>
+                                <td class="px-4 py-3 text-xs text-gray-500">Nov 14, 2026</td>
+                                <td class="px-4 py-3 text-xs text-gray-500">620 KB</td>
+                                <td class="px-4 py-3 text-right"><button
+                                        onclick="showToast('Opening in Google Sheets...')"
+                                        class="text-blue-600 hover:underline text-xs font-semibold">Open</button></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-4 py-3 flex items-center gap-2 font-medium"><i
+                                        class="ph-fill ph-file-doc text-blue-600 text-lg"></i>
+                                    B2B_SaaS_Security_Solutions_v1.2.docx</td>
+                                <td class="px-4 py-3"><span
+                                        class="bg-orange-100 text-orange-700 px-2 py-0.5 rounded text-xs">Content</span>
+                                </td>
+                                <td class="px-4 py-3">Sarah Jenkins</td>
+                                <td class="px-4 py-3 text-xs text-gray-500">Nov 18, 2026</td>
+                                <td class="px-4 py-3 text-xs text-gray-500">340 KB</td>
+                                <td class="px-4 py-3 text-right"><button
+                                        onclick="openApprovalModal('approval-card-1', 'B2B SaaS Security Solutions', 'Service Page Copy (1,250 words)')"
+                                        class="text-amber-600 hover:underline text-xs font-semibold">Review</button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-4 py-3 flex items-center gap-2 font-medium"><i
+                                        class="ph-fill ph-file-zip text-purple-600 text-lg"></i>
+                                    Global_Dynamics_Brand_Guidelines_Logos.zip</td>
+                                <td class="px-4 py-3"><span
+                                        class="bg-purple-100 text-purple-700 px-2 py-0.5 rounded text-xs">Design</span>
+                                </td>
+                                <td class="px-4 py-3">Client (Magic Link)</td>
+                                <td class="px-4 py-3 text-xs text-gray-500">Nov 03, 2026</td>
+                                <td class="px-4 py-3 text-xs text-gray-500">28.4 MB</td>
+                                <td class="px-4 py-3 text-right"><button
+                                        onclick="showToast('Downloading Brand_Guidelines_Logos.zip')"
+                                        class="text-blue-600 hover:underline text-xs font-semibold">Download</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Live Links Tab -->
+            <div id="content-links" class="prod-content hidden">
+                <h2 class="font-bold text-lg mb-4 text-gray-800">Live URL Placements</h2>
+                <div class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-gray-50 text-gray-600 uppercase text-xs border-b border-gray-200">
+                            <tr>
+                                <th class="px-4 py-3">Date</th>
+                                <th class="px-4 py-3">Type</th>
+                                <th class="px-4 py-3">URL</th>
+                                <th class="px-4 py-3">Domain Authority</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 text-gray-700">
+                            <tr>
+                                <td class="px-4 py-3">Nov 10, 2026</td>
+                                <td><span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs">Guest
+                                        Post</span></td>
+                                <td>https://techcrunch-example.com/cloud-security</td>
+                                <td class="px-4 py-3 font-semibold text-blue-600">82</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3">Nov 14, 2026</td>
+                                <td><span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-xs">PR
+                                        Mention</span></td>
+                                <td>https://industry-news.com/b2b-saas-trends</td>
+                                <td class="px-4 py-3 font-semibold text-blue-600">65</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Log Tab -->
+            <div id="content-log" class="prod-content hidden max-w-3xl">
+                <div class="relative border-l-2 border-gray-200 ml-4 space-y-6">
+                    <div class="relative pl-6">
+                        <span
+                            class="absolute -left-1.5 top-1 w-3 h-3 rounded-full bg-blue-500 ring-4 ring-white"></span>
+                        <p class="text-sm font-semibold text-gray-800">Client Approved Content</p>
+                        <p class="text-xs text-gray-500">John Doe clicked "Yes (Approve)" on Blog: Cloud Security.
+                            <br>Nov 18, 2026 - 09:30 AM</p>
+                    </div>
+                    <div class="relative pl-6">
+                        <span
+                            class="absolute -left-1.5 top-1 w-3 h-3 rounded-full bg-gray-400 ring-4 ring-white"></span>
+                        <p class="text-sm font-semibold text-gray-800">Approval Link Sent</p>
+                        <p class="text-xs text-gray-500">Sarah J. sent approval link for Blog: Cloud Security.<br>Nov
+                            17, 2026 - 14:15 PM</p>
+                    </div>
+                    <div class="relative pl-6">
+                        <span
+                            class="absolute -left-1.5 top-1 w-3 h-3 rounded-full bg-purple-500 ring-4 ring-white"></span>
+                        <p class="text-sm font-semibold text-gray-800">File Uploaded</p>
+                        <p class="text-xs text-gray-500">Alex R. attached "Audit_Report.pdf" to SEO tasks.<br>Nov 12,
+                            2026 - 11:00 AM</p>
+                    </div>
+                    <div class="relative pl-6">
+                        <span
+                            class="absolute -left-1.5 top-1 w-3 h-3 rounded-full bg-green-500 ring-4 ring-white"></span>
+                        <p class="text-sm font-semibold text-gray-800">Client Onboarded</p>
+                        <p class="text-xs text-gray-500">System verified all logins. Transitioned to Production.<br>Nov
+                            1, 2026 - 09:00 AM</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Client Content Approval Link Modal -->
+            <div id="approvalModal"
+                class="hidden fixed inset-0 bg-gray-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                <div
+                    class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden flex flex-col max-h-[90vh]">
+                    <div class="bg-slate-900 text-white px-5 py-3 flex justify-between items-center text-xs">
+                        <div class="flex items-center gap-2">
+                            <span
+                                class="px-2 py-0.5 bg-yellow-500 text-slate-900 font-bold rounded uppercase text-[10px]">Client
+                                Approval Link Preview</span>
+                            <span class="text-slate-300">One-Click Passwordless Review (Sent via Email / Slack)</span>
+                        </div>
+                        <button onclick="document.getElementById('approvalModal').classList.add('hidden')"
+                            class="text-slate-300 hover:text-white"><i class="ph ph-x text-lg"></i></button>
+                    </div>
+                    <div class="p-6 overflow-y-auto space-y-4">
+                        <div>
+                            <span id="am-type"
+                                class="text-[10px] font-bold bg-orange-100 text-orange-700 px-2 py-0.5 rounded uppercase">Service
+                                Page Copy</span>
+                            <h2 id="am-title" class="text-xl font-bold text-gray-900 mt-1">B2B SaaS Security Solutions
+                            </h2>
+                            <p class="text-xs text-gray-500">Prepared by Sarah Jenkins • Global Dynamics Workspace</p>
+                        </div>
+                        <div
+                            class="bg-gray-50 border border-gray-200 rounded-xl p-4 text-sm text-gray-700 space-y-2 leading-relaxed">
+                            <p class="font-semibold text-gray-900">H1: Enterprise-Grade Cloud Security Built for Modern
+                                B2B SaaS</p>
+                            <p>Protect customer data, accelerate SOC2 compliance, and eliminate misconfiguration risks
+                                across AWS, Azure, and GCP with automated zero-trust guardrails...</p>
+                            <p class="text-xs text-blue-600 font-medium pt-1"><i class="ph ph-file-doc"></i> Full draft
+                                attached (1,250 words • Meta Title &amp; Description included)</p>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-1">Client Feedback / Revision
+                                Notes (Optional for Approval, Required for Revision)</label>
+                            <textarea id="am-feedback" rows="2"
+                                placeholder="e.g. Looks great! Approved for publishing. Or: Please tweak the CTA in section 2..."
+                                class="w-full border border-gray-300 rounded-lg p-2.5 text-sm outline-none focus:border-blue-500"></textarea>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3 pt-2">
+                            <button onclick="submitClientApproval(false)"
+                                class="bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-colors">
+                                <i class="ph-fill ph-x-circle text-lg"></i> No (Reject / Revise)
+                            </button>
+                            <button onclick="submitClientApproval(true)"
+                                class="bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-sm transition-colors">
+                                <i class="ph-fill ph-check-circle text-lg"></i> Yes (Approve)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                let currentApprovalCardId = null;
+                let currentApprovalTitle = '';
+
+                function openApprovalModal(cardId, title, type) {
+                    currentApprovalCardId = cardId;
+                    currentApprovalTitle = title;
+                    document.getElementById('am-title').textContent = title;
+                    document.getElementById('am-type').textContent = type;
+                    document.getElementById('am-feedback').value = '';
+                    document.getElementById('approvalModal').classList.remove('hidden');
+                }
+
+                function submitClientApproval(approved) {
+                    const feedback = document.getElementById('am-feedback').value.trim() || (approved ? 'Approved with no changes.' : 'Revision requested by client.');
+                    const card = document.getElementById(currentApprovalCardId);
+                    const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                    if (card) {
+                        card.remove();
+                        const targetCol = document.getElementById(approved ? 'col-approved' : 'col-revision');
+                        const newCard = document.createElement('div');
+                        newCard.className = approved
+                            ? 'bg-white p-3 rounded shadow-sm border-l-4 border-l-emerald-500 text-sm'
+                            : 'bg-white p-3 rounded shadow-sm border-l-4 border-l-red-500 text-sm';
+                        newCard.innerHTML = `
+                <span class="text-[10px] font-bold ${approved ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700'} px-2 py-0.5 rounded uppercase">${approved ? 'Approved' : 'Revision Requested'} • Today</span>
+                <p class="font-medium mt-1 mb-1">${currentApprovalTitle}</p>
+                <p class="text-xs ${approved ? 'text-emerald-700' : 'text-red-600 bg-red-50 p-2 rounded'}">"${feedback}"</p>
+                <span class="text-[10px] text-gray-400 block mt-1">John Doe • ${now}</span>
+            `;
+                        targetCol.prepend(newCard);
+                    }
+                    const logContainer = document.querySelector('#content-log .border-l-2');
+                    if (logContainer) {
+                        const logItem = document.createElement('div');
+                        logItem.className = 'relative pl-6';
+                        logItem.innerHTML = `
+                <span class="absolute -left-1.5 top-1 w-3 h-3 rounded-full ${approved ? 'bg-emerald-500' : 'bg-red-500'} ring-4 ring-white"></span>
+                <p class="text-sm font-semibold text-gray-800">${approved ? 'Client Approved Content' : 'Client Requested Revision'}</p>
+                <p class="text-xs text-gray-500">John Doe clicked "${approved ? 'Yes (Approve)' : 'No (Reject/Revise)'}" on ${currentApprovalTitle}. Note: "${feedback}"<br>Today - ${now}</p>
+            `;
+                        logContainer.prepend(logItem);
+                    }
+                    document.getElementById('approvalModal').classList.add('hidden');
+                    showToast(approved ? `Approved! Moved "${currentApprovalTitle}" & logged timestamp.` : `Revision logged! Moved "${currentApprovalTitle}" back to team.`);
+                }
+
+                function switchTab(tabId) {
+                    document.querySelectorAll('.prod-content').forEach(el => el.classList.add('hidden'));
+                    document.querySelectorAll('.prod-tab').forEach(el => {
+                        el.classList.remove('text-blue-600', 'border-b-blue-600');
+                        el.classList.add('text-gray-500', 'border-transparent');
+                    });
+                    document.getElementById('content-' + tabId).classList.remove('hidden');
+                    document.getElementById('tab-' + tabId).classList.remove('text-gray-500', 'border-transparent');
+                    document.getElementById('tab-' + tabId).classList.add('text-blue-600', 'border-b-blue-600');
+                }
+            </script>
+
+        </div>
+    </main>
+
+    <!-- Global Toast Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 flex flex-col gap-3 z-50"></div>
+
+    <script>
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            const icon = type === 'success' ? 'ph-check-circle text-green-500' : 'ph-info text-blue-500';
+            const bg = type === 'success' ? 'border-green-100' : 'border-blue-100';
+
+            toast.className = `flex items-center gap-3 bg-white px-4 py-3 rounded-lg shadow-lg border ${bg} transform transition-all duration-300 translate-y-10 opacity-0`;
+            toast.innerHTML = `<i class="ph-fill ${icon} text-xl"></i><span class="text-sm font-medium text-gray-700">${message}</span>`;
+
+            container.appendChild(toast);
+
+            setTimeout(() => { toast.classList.remove('translate-y-10', 'opacity-0'); }, 10);
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+    </script>
+</body>
+
+</html>

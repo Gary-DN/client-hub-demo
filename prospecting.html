@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Hub 360 - Prospecting & Pipeline</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+
+<body class="flex h-screen overflow-hidden text-slate-800">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white border-r border-gray-200 flex flex-col shadow-sm z-20">
+        <div class="h-16 flex items-center px-6 border-b border-gray-100">
+            <i class="ph-fill ph-planet text-blue-600 text-2xl mr-2"></i>
+            <span class="font-bold text-lg tracking-tight">ClientHub<span class="text-blue-600">360</span></span>
+        </div>
+        <nav class="flex-1 py-4 flex flex-col gap-1">
+
+            <a href="prospecting.html"
+                class="flex items-center gap-3 px-6 py-3 bg-blue-50 text-blue-700 border-r-4 border-blue-600 font-semibold transition-colors">
+                <i class="ph-funnel text-xl"></i>
+                <span>Prospecting</span>
+            </a>
+
+            <a href="onboarding.html"
+                class="flex items-center gap-3 px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-user-plus text-xl"></i>
+                <span>Onboarding</span>
+            </a>
+
+            <a href="production.html"
+                class="flex items-center gap-3 px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-kanban text-xl"></i>
+                <span>Production</span>
+            </a>
+
+            <a href="reporting.html"
+                class="flex items-center gap-3 px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-chart-line-up text-xl"></i>
+                <span>Reporting</span>
+            </a>
+
+            <a href="upsells.html"
+                class="flex items-center gap-3 px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-trend-up text-xl"></i>
+                <span>Upsells</span>
+            </a>
+
+            <a href="users.html"
+                class="flex items-center gap-3 px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-users text-xl"></i>
+                <span>Users & Teams</span>
+            </a>
+
+        </nav>
+        <div class="p-4 border-t border-gray-100">
+            <div class="flex items-center gap-3">
+                <div
+                    class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">
+                    AM</div>
+                <div class="text-sm">
+                    <p class="font-semibold text-gray-800">Admin User</p>
+                    <p class="text-xs text-gray-500">Agency Workspace</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col h-screen overflow-y-auto relative">
+        <header
+            class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-8 sticky top-0 z-10 shadow-sm">
+            <h1 class="text-xl font-semibold text-gray-800">Prospecting & Pipeline</h1>
+            <div class="flex items-center gap-4">
+                <button class="p-2 text-gray-400 hover:text-gray-600"><i class="ph ph-bell text-xl"></i></button>
+            </div>
+        </header>
+        <div class="p-8 flex-1">
+
+            <div class="flex justify-between items-center mb-6">
+                <div class="flex items-center gap-4">
+                    <div class="flex gap-1 bg-white p-1 rounded-lg border border-gray-200">
+                        <button id="btn-kanban" onclick="setProspectView('kanban')"
+                            class="px-4 py-1.5 bg-blue-50 text-blue-600 rounded-md font-medium text-sm">Kanban</button>
+                        <button id="btn-list" onclick="setProspectView('list')"
+                            class="px-4 py-1.5 text-gray-500 hover:text-gray-700 rounded-md font-medium text-sm">List</button>
+                    </div>
+                    <span class="text-xs text-gray-500 bg-white px-3 py-1.5 rounded-lg border border-gray-200">Pipeline
+                        Value: <strong class="text-gray-800">$29,400/mo</strong> • 11 Active Deals</span>
+                </div>
+                <button onclick="document.getElementById('addProspectModal').classList.remove('hidden')"
+                    class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 flex items-center gap-2">
+                    <i class="ph ph-plus"></i> Add Prospect
+                </button>
+            </div>
+
+            <!-- Kanban View -->
+            <div id="view-kanban" class="flex gap-6 overflow-x-auto pb-4 h-[calc(100%-80px)] scrollbar-hide">
+                <!-- Leads -->
+                <div class="w-80 flex-shrink-0 flex flex-col bg-gray-50 rounded-xl border border-gray-200">
+                    <div
+                        class="p-3 border-b border-gray-200 flex justify-between items-center bg-gray-100/50 rounded-t-xl">
+                        <h3 class="font-semibold text-gray-700">Leads (Spoken To)</h3><span
+                            class="bg-gray-200 text-gray-600 text-xs px-2 py-1 rounded-full">3</span>
+                    </div>
+                    <div class="p-3 flex-1 overflow-y-auto space-y-3">
+                        <div onclick="openDealModal('TechFlow Inc', 'Leads • 25% Probability', 'Sarah Connor', 'sarah@techflow.com', '+44 7700 900123', 'techflow.io', 'Inbound Web Form', 'Unassigned', 'SEO, PPC', '$2,500/mo', '6 Months', 'Monthly Adv.', 'Interested in Q1 launch. Needs technical SEO audit.', 'Pending', 'Pending', false)"
+                            class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:border-blue-300 cursor-pointer">
+                            <div class="flex justify-between items-start mb-2">
+                                <span
+                                    class="text-xs font-semibold px-2 py-1 bg-purple-100 text-purple-700 rounded">Website
+                                    Form</span>
+                                <span class="text-xs text-gray-400">2 Days</span>
+                            </div>
+                            <h4 class="font-bold text-gray-800">TechFlow Inc</h4>
+                            <p class="text-xs text-gray-500 mb-3">Sarah Connor • sarah@techflow.com<br>+44 7700 900123
+                            </p>
+                            <div class="flex justify-between items-center text-xs text-gray-600 mb-3">
+                                <span><i class="ph ph-package mr-1"></i>SEO, PPC</span>
+                                <span class="font-semibold">$2,500/mo</span>
+                            </div>
+                            <div class="flex justify-between items-center pt-3 border-t border-gray-100">
+                                <span class="text-xs text-gray-400">Prob: 25% • Unassigned</span>
+                                <div
+                                    class="w-6 h-6 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center text-[10px] font-bold">
+                                    ?</div>
+                            </div>
+                        </div>
+                        <div onclick="openDealModal('Veloce Motors', 'Leads • 20% Probability', 'Marcus Vance', 'm.vance@velocemotors.co.uk', '+44 7911 445566', 'velocemotors.co.uk', 'Manual Entry (Referral)', 'Mike K.', 'Paid Social, Design & Dev', '$3,200/mo', '6 Months', 'Monthly Adv.', 'Referred by existing client. Wants showroom lead gen.', 'Not Sent', 'Not Sent', false)"
+                            class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:border-blue-300 cursor-pointer">
+                            <div class="flex justify-between items-start mb-2">
+                                <span
+                                    class="text-xs font-semibold px-2 py-1 bg-blue-100 text-blue-700 rounded">Referral</span>
+                                <span class="text-xs text-gray-400">4 Days</span>
+                            </div>
+                            <h4 class="font-bold text-gray-800">Veloce Motors</h4>
+                            <p class="text-xs text-gray-500 mb-3">Marcus Vance • m.vance@velocemotors.co.uk</p>
+                            <div class="flex justify-between items-center text-xs text-gray-600 mb-3">
+                                <span><i class="ph ph-package mr-1"></i>Paid Social, Dev</span>
+                                <span class="font-semibold">$3,200/mo</span>
+                            </div>
+                            <div class="flex justify-between items-center pt-3 border-t border-gray-100">
+                                <span class="text-xs text-gray-500">Prob: 20% • Mike K.</span>
+                                <div
+                                    class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] font-bold">
+                                    MK</div>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:border-blue-300 cursor-pointer">
+                            <div class="flex justify-between items-start mb-2">
+                                <span
+                                    class="text-xs font-semibold px-2 py-1 bg-emerald-100 text-emerald-700 rounded">Google
+                                    Ads</span>
+                                <span class="text-xs text-gray-400">1 Day</span>
+                            </div>
+                            <h4 class="font-bold text-gray-800">Harbour Dental Group</h4>
+                            <p class="text-xs text-gray-500 mb-3">Dr. Priya Patel • priya@harbourdental.com</p>
+                            <div class="flex justify-between items-center text-xs text-gray-600 mb-3">
+                                <span><i class="ph ph-package mr-1"></i>Local SEO, PPC</span>
+                                <span class="font-semibold">$1,800/mo</span>
+                            </div>
+                            <div class="flex justify-between items-center pt-3 border-t border-gray-100">
+                                <span class="text-xs text-gray-500">Prob: 30% • Alex R.</span>
+                                <div
+                                    class="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-[10px] font-bold">
+                                    AR</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Discovery -->
+                <div class="w-80 flex-shrink-0 flex flex-col bg-gray-50 rounded-xl border border-gray-200">
+                    <div
+                        class="p-3 border-b border-gray-200 flex justify-between items-center bg-gray-100/50 rounded-t-xl">
+                        <h3 class="font-semibold text-gray-700">Discovery Complete</h3><span
+                            class="bg-gray-200 text-gray-600 text-xs px-2 py-1 rounded-full">2</span>
+                    </div>
+                    <div class="p-3 flex-1 overflow-y-auto space-y-3">
+                        <div
+                            class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:border-blue-300 cursor-pointer">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="text-xs font-semibold px-2 py-1 bg-amber-100 text-amber-700 rounded">50%
+                                    Probable</span>
+                                <span class="text-xs text-gray-400">7 Days</span>
+                            </div>
+                            <h4 class="font-bold text-gray-800">Nordic FinTech</h4>
+                            <p class="text-xs text-gray-500 mb-3">Erik Lindqvist • erik@nordicfintech.eu</p>
+                            <div class="flex justify-between items-center text-xs text-gray-600 mb-3">
+                                <span><i class="ph ph-package mr-1"></i>SEO, Content</span>
+                                <span class="font-semibold">$4,500/mo</span>
+                            </div>
+                            <div class="flex justify-between items-center pt-3 border-t border-gray-100">
+                                <span class="text-xs text-gray-500">Meeting Booked</span>
+                                <div
+                                    class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] font-bold">
+                                    MK</div>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:border-blue-300 cursor-pointer">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="text-xs font-semibold px-2 py-1 bg-amber-100 text-amber-700 rounded">45%
+                                    Probable</span>
+                                <span class="text-xs text-gray-400">9 Days</span>
+                            </div>
+                            <h4 class="font-bold text-gray-800">BrightPath Education</h4>
+                            <p class="text-xs text-gray-500 mb-3">Claire Hughes • claire@brightpath.edu</p>
+                            <div class="flex justify-between items-center text-xs text-gray-600 mb-3">
+                                <span><i class="ph ph-package mr-1"></i>PPC, Paid Social</span>
+                                <span class="font-semibold">$2,900/mo</span>
+                            </div>
+                            <div class="flex justify-between items-center pt-3 border-t border-gray-100">
+                                <span class="text-xs text-gray-500">Rep: Sarah J.</span>
+                                <div
+                                    class="w-6 h-6 rounded-full bg-purple-600 text-white flex items-center justify-center text-[10px] font-bold">
+                                    SJ</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proposal -->
+                <div class="w-80 flex-shrink-0 flex flex-col bg-gray-50 rounded-xl border border-gray-200">
+                    <div
+                        class="p-3 border-b border-gray-200 flex justify-between items-center bg-gray-100/50 rounded-t-xl">
+                        <h3 class="font-semibold text-gray-700">Proposal Sent</h3><span
+                            class="bg-gray-200 text-gray-600 text-xs px-2 py-1 rounded-full">2</span>
+                    </div>
+                    <div class="p-3 flex-1 overflow-y-auto space-y-3">
+                        <div
+                            class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:border-blue-300 cursor-pointer">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="text-xs font-semibold px-2 py-1 bg-blue-100 text-blue-700 rounded">75%
+                                    Probable</span>
+                                <span class="text-xs text-gray-400">11 Days</span>
+                            </div>
+                            <h4 class="font-bold text-gray-800">Kestrel Logistics</h4>
+                            <p class="text-xs text-gray-500 mb-3">Tom Hardy • tom@kestrellogistics.com</p>
+                            <div class="flex justify-between items-center text-xs text-gray-600 mb-3">
+                                <span><i class="ph ph-package mr-1"></i>SEO, Design & Dev</span>
+                                <span class="font-semibold">$4,800/mo</span>
+                            </div>
+                            <div class="flex justify-between items-center pt-3 border-t border-gray-100">
+                                <span class="text-xs text-indigo-600 font-medium"><i class="ph ph-file-text"></i>
+                                    PandaDoc Viewed</span>
+                                <div
+                                    class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] font-bold">
+                                    MK</div>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:border-blue-300 cursor-pointer">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="text-xs font-semibold px-2 py-1 bg-blue-100 text-blue-700 rounded">70%
+                                    Probable</span>
+                                <span class="text-xs text-gray-400">12 Days</span>
+                            </div>
+                            <h4 class="font-bold text-gray-800">Oakwood Legal</h4>
+                            <p class="text-xs text-gray-500 mb-3">Hannah Abbott • hannah@oakwoodlegal.co.uk</p>
+                            <div class="flex justify-between items-center text-xs text-gray-600 mb-3">
+                                <span><i class="ph ph-package mr-1"></i>SEO, Content</span>
+                                <span class="font-semibold">$3,700/mo</span>
+                            </div>
+                            <div class="flex justify-between items-center pt-3 border-t border-gray-100">
+                                <span class="text-xs text-gray-500">PandaDoc Sent</span>
+                                <div
+                                    class="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-[10px] font-bold">
+                                    AR</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Awaiting Agreement -->
+                <div class="w-80 flex-shrink-0 flex flex-col bg-blue-50/50 rounded-xl border border-blue-100">
+                    <div class="p-3 border-b border-blue-100 flex justify-between items-center bg-blue-50 rounded-t-xl">
+                        <h3 class="font-semibold text-blue-800">Awaiting Agreement</h3><span
+                            class="bg-blue-200 text-blue-800 text-xs px-2 py-1 rounded-full">2</span>
+                    </div>
+                    <div class="p-3 flex-1 overflow-y-auto space-y-3">
+                        <!-- Clickable Card for Demo -->
+                        <div onclick="openDealModal('Global Dynamics', 'Awaiting Agreement • 90% Probability', 'John Doe', 'john@globaldyn.com', '+44 7800 123456', 'globaldyn.com', 'Outbound LinkedIn', 'Mike K.', 'SEO, Content, PPC', '$6,000/mo', '12 Months', 'Monthly Adv.', 'Client requires strict scope adherence: 4 blogs/mo, 5 outreach links/mo. No social media included in Phase 1.', 'Signed (PandaDoc)', 'Paid (£6,000 Deposit)', true)"
+                            class="bg-white p-4 rounded-lg shadow-md border-l-4 border-blue-500 cursor-pointer hover:shadow-lg transition-shadow">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="text-xs font-semibold px-2 py-1 bg-green-100 text-green-700 rounded">90%
+                                    Probable</span>
+                                <span class="text-xs text-orange-500 font-medium">14 Days</span>
+                            </div>
+                            <h4 class="font-bold text-gray-800 text-base">Global Dynamics</h4>
+                            <p class="text-xs text-gray-500 mb-3">John Doe • john@globaldyn.com<br>+44 7800 123456 •
+                                globaldyn.com</p>
+                            <div
+                                class="flex justify-between items-center text-xs text-gray-600 mb-3 bg-gray-50 p-2 rounded">
+                                <span><i class="ph ph-package mr-1"></i>SEO, Content, PPC</span>
+                                <span class="font-semibold">$6,000/mo</span>
+                            </div>
+                            <div class="flex justify-between items-center pt-3 border-t border-gray-100">
+                                <span class="text-xs font-medium text-blue-600">Click to Sign-Off →</span>
+                                <div class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] font-bold"
+                                    title="Mike K (Sales)">MK</div>
+                            </div>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-sm border border-blue-200 cursor-pointer">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="text-xs font-semibold px-2 py-1 bg-green-100 text-green-700 rounded">85%
+                                    Probable</span>
+                                <span class="text-xs text-gray-400">16 Days</span>
+                            </div>
+                            <h4 class="font-bold text-gray-800">Solstice Wellness</h4>
+                            <p class="text-xs text-gray-500 mb-3">Mia Wallace • mia@solsticewellness.com</p>
+                            <div
+                                class="flex justify-between items-center text-xs text-gray-600 mb-3 bg-gray-50 p-2 rounded">
+                                <span><i class="ph ph-package mr-1"></i>Paid Social, Content</span>
+                                <span class="font-semibold">$3,500/mo</span>
+                            </div>
+                            <div class="flex justify-between items-center pt-3 border-t border-gray-100">
+                                <span class="text-xs text-amber-600 font-medium">Xero Deposit Pending</span>
+                                <div
+                                    class="w-6 h-6 rounded-full bg-purple-600 text-white flex items-center justify-center text-[10px] font-bold">
+                                    SJ</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Closed Lost -->
+                <div class="w-80 flex-shrink-0 flex flex-col bg-gray-50 rounded-xl border border-gray-200">
+                    <div
+                        class="p-3 border-b border-gray-200 flex justify-between items-center bg-gray-100/50 rounded-t-xl">
+                        <h3 class="font-semibold text-gray-700">Closed-Lost</h3><span
+                            class="bg-gray-200 text-gray-600 text-xs px-2 py-1 rounded-full">2</span>
+                    </div>
+                    <div class="p-3 flex-1 overflow-y-auto space-y-3">
+                        <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 opacity-80">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="text-xs font-semibold px-2 py-1 bg-red-100 text-red-700 rounded">Reason:
+                                    Budget</span>
+                                <span class="text-xs text-gray-400">21 Days</span>
+                            </div>
+                            <h4 class="font-bold text-gray-700">PixelCraft Studio</h4>
+                            <p class="text-xs text-gray-500 mb-2">Liam O'Connor • $1,500/mo</p>
+                            <p class="text-[11px] text-gray-400">Re-engage in Q2 2027.</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 opacity-80">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="text-xs font-semibold px-2 py-1 bg-red-100 text-red-700 rounded">Reason:
+                                    Competitor</span>
+                                <span class="text-xs text-gray-400">19 Days</span>
+                            </div>
+                            <h4 class="font-bold text-gray-700">Metro Retail</h4>
+                            <p class="text-xs text-gray-500 mb-2">Nina Brooks • $4,000/mo</p>
+                            <p class="text-[11px] text-gray-400">Chose incumbent agency.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- List View (Hidden by default) -->
+            <div id="view-list" class="hidden bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+                <table class="w-full text-sm text-left">
+                    <thead class="bg-gray-50 text-gray-600 uppercase text-xs border-b border-gray-200">
+                        <tr>
+                            <th class="px-4 py-3">Business &amp; Contact</th>
+                            <th class="px-4 py-3">Attribution</th>
+                            <th class="px-4 py-3">Sales Rep</th>
+                            <th class="px-4 py-3">Services</th>
+                            <th class="px-4 py-3">Budget</th>
+                            <th class="px-4 py-3">Prob.</th>
+                            <th class="px-4 py-3">Days</th>
+                            <th class="px-4 py-3">Stage / Integrations</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100 text-gray-700">
+                        <tr onclick="openDealModal('Global Dynamics', 'Awaiting Agreement • 90% Probability', 'John Doe', 'john@globaldyn.com', '+44 7800 123456', 'globaldyn.com', 'Outbound LinkedIn', 'Mike K.', 'SEO, Content, PPC', '$6,000/mo', '12 Months', 'Monthly Adv.', 'Client requires strict scope adherence: 4 blogs/mo, 5 outreach links/mo.', 'Signed (PandaDoc)', 'Paid (£6,000 Deposit)', true)"
+                            class="hover:bg-blue-50/40 cursor-pointer">
+                            <td class="px-4 py-3"><strong class="text-gray-900 block">Global Dynamics</strong><span
+                                    class="text-xs text-gray-500">John Doe • globaldyn.com</span></td>
+                            <td class="px-4 py-3 text-xs">Outbound LinkedIn</td>
+                            <td class="px-4 py-3">Mike K.</td>
+                            <td class="px-4 py-3 text-xs">SEO, Content, PPC</td>
+                            <td class="px-4 py-3 font-semibold">$6,000/mo</td>
+                            <td class="px-4 py-3"><span
+                                    class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs font-semibold">90%</span>
+                            </td>
+                            <td class="px-4 py-3">14</td>
+                            <td class="px-4 py-3"><span
+                                    class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-xs font-semibold">Awaiting
+                                    Agreement</span></td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-4 py-3"><strong class="text-gray-900 block">Kestrel Logistics</strong><span
+                                    class="text-xs text-gray-500">Tom Hardy • kestrellogistics.com</span></td>
+                            <td class="px-4 py-3 text-xs">Inbound Web</td>
+                            <td class="px-4 py-3">Mike K.</td>
+                            <td class="px-4 py-3 text-xs">SEO, Design &amp; Dev</td>
+                            <td class="px-4 py-3 font-semibold">$4,800/mo</td>
+                            <td class="px-4 py-3"><span
+                                    class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-xs font-semibold">75%</span>
+                            </td>
+                            <td class="px-4 py-3">11</td>
+                            <td class="px-4 py-3"><span
+                                    class="bg-gray-100 text-gray-700 px-2 py-0.5 rounded text-xs font-semibold">Proposal
+                                    Sent</span></td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-4 py-3"><strong class="text-gray-900 block">Nordic FinTech</strong><span
+                                    class="text-xs text-gray-500">Erik Lindqvist • nordicfintech.eu</span></td>
+                            <td class="px-4 py-3 text-xs">Partner Referral</td>
+                            <td class="px-4 py-3">Mike K.</td>
+                            <td class="px-4 py-3 text-xs">SEO, Content</td>
+                            <td class="px-4 py-3 font-semibold">$4,500/mo</td>
+                            <td class="px-4 py-3"><span
+                                    class="bg-amber-100 text-amber-700 px-2 py-0.5 rounded text-xs font-semibold">50%</span>
+                            </td>
+                            <td class="px-4 py-3">7</td>
+                            <td class="px-4 py-3"><span
+                                    class="bg-gray-100 text-gray-700 px-2 py-0.5 rounded text-xs font-semibold">Discovery
+                                    Complete</span></td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-4 py-3"><strong class="text-gray-900 block">TechFlow Inc</strong><span
+                                    class="text-xs text-gray-500">Sarah Connor • techflow.io</span></td>
+                            <td class="px-4 py-3 text-xs">Website Form</td>
+                            <td class="px-4 py-3">Unassigned</td>
+                            <td class="px-4 py-3 text-xs">SEO, PPC</td>
+                            <td class="px-4 py-3 font-semibold">$2,500/mo</td>
+                            <td class="px-4 py-3"><span
+                                    class="bg-purple-100 text-purple-700 px-2 py-0.5 rounded text-xs font-semibold">25%</span>
+                            </td>
+                            <td class="px-4 py-3">2</td>
+                            <td class="px-4 py-3"><span
+                                    class="bg-gray-100 text-gray-700 px-2 py-0.5 rounded text-xs font-semibold">Leads</span>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 opacity-75">
+                            <td class="px-4 py-3"><strong class="text-gray-900 block">PixelCraft Studio</strong><span
+                                    class="text-xs text-gray-500">Liam O'Connor</span></td>
+                            <td class="px-4 py-3 text-xs">Cold Email</td>
+                            <td class="px-4 py-3">Sarah J.</td>
+                            <td class="px-4 py-3 text-xs">SEO</td>
+                            <td class="px-4 py-3 font-semibold">$1,500/mo</td>
+                            <td class="px-4 py-3"><span
+                                    class="bg-red-100 text-red-700 px-2 py-0.5 rounded text-xs font-semibold">0%</span>
+                            </td>
+                            <td class="px-4 py-3">21</td>
+                            <td class="px-4 py-3"><span
+                                    class="bg-red-100 text-red-700 px-2 py-0.5 rounded text-xs font-semibold">Closed-Lost
+                                    (Budget)</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Deal Modal -->
+            <div id="dealModal"
+                class="hidden fixed inset-0 bg-gray-900/40 backdrop-blur-sm flex items-center justify-center z-50">
+                <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col">
+                    <div class="flex justify-between items-center p-6 border-b border-gray-100">
+                        <div>
+                            <h2 id="dm-title" class="text-2xl font-bold text-gray-800">Global Dynamics</h2>
+                            <p id="dm-sub" class="text-sm text-gray-500">Awaiting Agreement • 90% Probability</p>
+                        </div>
+                        <button onclick="document.getElementById('dealModal').classList.add('hidden')"
+                            class="text-gray-400 hover:text-gray-700"><i class="ph ph-x text-2xl"></i></button>
+                    </div>
+                    <div class="p-6 overflow-y-auto flex-1 space-y-6">
+                        <div class="grid grid-cols-2 gap-6">
+                            <div>
+                                <h3 class="text-sm font-semibold text-gray-800 mb-3 border-b pb-2">Client Data &amp;
+                                    Enrichment</h3>
+                                <ul class="text-sm space-y-1.5 text-gray-600">
+                                    <li><strong>Contact:</strong> <span id="dm-contact">John Doe</span></li>
+                                    <li><strong>Email:</strong> <span id="dm-email">john@globaldyn.com</span></li>
+                                    <li><strong>Phone:</strong> <span id="dm-phone">+44 7800 123456</span></li>
+                                    <li><strong>URL:</strong> <span id="dm-url">globaldyn.com</span></li>
+                                    <li><strong>Lead Source:</strong> <span id="dm-source">Outbound LinkedIn</span></li>
+                                    <li><strong>Sales Rep:</strong> <span id="dm-rep">Mike K.</span></li>
+                                    <li><strong>Enrichment:</strong> <span class="text-emerald-600 font-medium"><i
+                                                class="ph-fill ph-check-circle"></i> Companies House Verified</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-semibold text-gray-800 mb-3 border-b pb-2">Commercial Terms</h3>
+                                <ul class="text-sm space-y-1.5 text-gray-600">
+                                    <li><strong>Services:</strong> <span id="dm-services">SEO, Content, PPC</span></li>
+                                    <li><strong>Monthly Budget:</strong> <span id="dm-budget">$6,000/mo</span></li>
+                                    <li><strong>Contract Term:</strong> <span id="dm-term">12 Months</span></li>
+                                    <li><strong>Billing Cycle:</strong> <span id="dm-billing">Monthly Adv.</span></li>
+                                    <li><strong>PandaDoc:</strong> <span id="dm-pandadoc"
+                                            class="text-emerald-600 font-medium">Signed</span></li>
+                                    <li><strong>Xero Deposit:</strong> <span id="dm-xero"
+                                            class="text-emerald-600 font-medium">Paid</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded-lg border border-gray-200 text-xs text-gray-700">
+                            <strong class="block text-gray-800 mb-1">Sales Handover Notes (Scope Guardrail):</strong>
+                            <span id="dm-notes">Client requires strict scope adherence: 4 blogs/mo, 5 outreach links/mo.
+                                No social media included in Phase 1.</span>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                            <h3 class="text-sm font-bold text-blue-900 mb-1">Mandatory Sign-Off Gate &amp; Automated
+                                Handoff</h3>
+                            <p class="text-xs text-blue-700 mb-3">When the signed agreement is uploaded, PandaDoc is
+                                signed, and Xero deposit is paid, the system automatically flips status to
+                                <em>Onboarding</em>.</p>
+                            <div class="flex flex-wrap items-center gap-3">
+                                <input type="file" id="agreementFile"
+                                    class="text-xs text-gray-600 file:mr-3 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-white file:text-blue-700 hover:file:bg-blue-100">
+                                <button
+                                    onclick="showToast('Signed Agreement verified! Automated stage change → Onboarding.'); document.getElementById('dealModal').classList.add('hidden');"
+                                    class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 flex items-center gap-2">
+                                    <i class="ph ph-upload-simple"></i> Complete Sign-Off &amp; Move to Onboarding
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Prospect Modal -->
+            <div id="addProspectModal"
+                class="hidden fixed inset-0 bg-gray-900/40 backdrop-blur-sm flex items-center justify-center z-50">
+                <div class="bg-white rounded-xl shadow-2xl w-full max-w-lg p-6">
+                    <div class="flex justify-between items-center mb-4 border-b pb-3">
+                        <h2 class="text-lg font-bold text-gray-800">Add New Prospect</h2>
+                        <button onclick="document.getElementById('addProspectModal').classList.add('hidden')"
+                            class="text-gray-400 hover:text-gray-700"><i class="ph ph-x text-xl"></i></button>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 text-sm">
+                        <div><label class="text-xs font-semibold text-gray-600 block mb-1">Business Name</label><input
+                                type="text" placeholder="e.g. Zenith Cloud" class="w-full border rounded px-3 py-2">
+                        </div>
+                        <div><label class="text-xs font-semibold text-gray-600 block mb-1">Contact Name</label><input
+                                type="text" placeholder="e.g. Rachel Green" class="w-full border rounded px-3 py-2">
+                        </div>
+                        <div><label class="text-xs font-semibold text-gray-600 block mb-1">Email</label><input
+                                type="email" placeholder="rachel@zenith.io" class="w-full border rounded px-3 py-2">
+                        </div>
+                        <div><label class="text-xs font-semibold text-gray-600 block mb-1">Lead Source
+                                (Attribution)</label><select class="w-full border rounded px-3 py-2">
+                                <option>Inbound</option>
+                                <option>Website Form</option>
+                                <option>Outbound LinkedIn</option>
+                                <option>Referral</option>
+                                <option>Google Ads</option>
+                            </select></div>
+                        <div><label class="text-xs font-semibold text-gray-600 block mb-1">Proposed Budget</label><input
+                                type="text" placeholder="$3,500/mo" class="w-full border rounded px-3 py-2"></div>
+                        <div><label class="text-xs font-semibold text-gray-600 block mb-1">Assigned Sales
+                                Rep</label><select class="w-full border rounded px-3 py-2">
+                                <option>Mike K.</option>
+                                <option>Alex Rivera</option>
+                                <option>Sarah Jenkins</option>
+                            </select></div>
+                    </div>
+                    <div class="mt-5 flex justify-end gap-2">
+                        <button onclick="document.getElementById('addProspectModal').classList.add('hidden')"
+                            class="px-4 py-2 border rounded-lg text-sm text-gray-600">Cancel</button>
+                        <button
+                            onclick="showToast('New prospect added to Leads column!'); document.getElementById('addProspectModal').classList.add('hidden');"
+                            class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700">Save
+                            Prospect</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Global Toast Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 flex flex-col gap-3 z-50"></div>
+
+    <script>
+        function setProspectView(view) {
+            const isKanban = view === 'kanban';
+            document.getElementById('view-kanban').classList.toggle('hidden', !isKanban);
+            document.getElementById('view-list').classList.toggle('hidden', isKanban);
+            document.getElementById('btn-kanban').className = isKanban ? 'px-4 py-1.5 bg-blue-50 text-blue-600 rounded-md font-medium text-sm' : 'px-4 py-1.5 text-gray-500 hover:text-gray-700 rounded-md font-medium text-sm';
+            document.getElementById('btn-list').className = !isKanban ? 'px-4 py-1.5 bg-blue-50 text-blue-600 rounded-md font-medium text-sm' : 'px-4 py-1.5 text-gray-500 hover:text-gray-700 rounded-md font-medium text-sm';
+        }
+
+        function openDealModal(title, sub, contact, email, phone, url, source, rep, services, budget, term, billing, notes, pandadoc, xero) {
+            document.getElementById('dm-title').textContent = title;
+            document.getElementById('dm-sub').textContent = sub;
+            document.getElementById('dm-contact').textContent = contact;
+            document.getElementById('dm-email').textContent = email;
+            document.getElementById('dm-phone').textContent = phone;
+            document.getElementById('dm-url').textContent = url;
+            document.getElementById('dm-source').textContent = source;
+            document.getElementById('dm-rep').textContent = rep;
+            document.getElementById('dm-services').textContent = services;
+            document.getElementById('dm-budget').textContent = budget;
+            document.getElementById('dm-term').textContent = term;
+            document.getElementById('dm-billing').textContent = billing;
+            document.getElementById('dm-notes').textContent = notes;
+            document.getElementById('dm-pandadoc').textContent = pandadoc;
+            document.getElementById('dm-xero').textContent = xero;
+            document.getElementById('dealModal').classList.remove('hidden');
+        }
+
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            const icon = type === 'success' ? 'ph-check-circle text-green-500' : 'ph-info text-blue-500';
+            const bg = type === 'success' ? 'border-green-100' : 'border-blue-100';
+
+            toast.className = `flex items-center gap-3 bg-white px-4 py-3 rounded-lg shadow-lg border ${bg} transform transition-all duration-300 translate-y-10 opacity-0`;
+            toast.innerHTML = `<i class="ph-fill ${icon} text-xl"></i><span class="text-sm font-medium text-gray-700">${message}</span>`;
+
+            container.appendChild(toast);
+
+            setTimeout(() => { toast.classList.remove('translate-y-10', 'opacity-0'); }, 10);
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+    </script>
+</body>
+
+</html>

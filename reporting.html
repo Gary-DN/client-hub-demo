@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Hub 360 - Client Reporting</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .glass-panel { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden text-slate-800">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white border-r border-gray-200 flex flex-col shadow-sm z-20">
+        <div class="h-16 flex items-center px-6 border-b border-gray-100">
+            <i class="ph-fill ph-planet text-blue-600 text-2xl mr-2"></i>
+            <span class="font-bold text-lg tracking-tight">ClientHub<span class="text-blue-600">360</span></span>
+        </div>
+        <nav class="flex-1 py-4 flex flex-col gap-1">
+            
+        <a href="prospecting.html" class="flex items-center gap-3 px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+            <i class="ph-funnel text-xl"></i>
+            <span>Prospecting</span>
+        </a>
+        
+        <a href="onboarding.html" class="flex items-center gap-3 px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+            <i class="ph-user-plus text-xl"></i>
+            <span>Onboarding</span>
+        </a>
+        
+        <a href="production.html" class="flex items-center gap-3 px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+            <i class="ph-kanban text-xl"></i>
+            <span>Production</span>
+        </a>
+        
+        <a href="reporting.html" class="flex items-center gap-3 px-6 py-3 bg-blue-50 text-blue-700 border-r-4 border-blue-600 font-semibold transition-colors">
+            <i class="ph-chart-line-up text-xl"></i>
+            <span>Reporting</span>
+        </a>
+        
+        <a href="upsells.html" class="flex items-center gap-3 px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+            <i class="ph-trend-up text-xl"></i>
+            <span>Upsells</span>
+        </a>
+        
+        <a href="users.html" class="flex items-center gap-3 px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+            <i class="ph-users text-xl"></i>
+            <span>Users & Teams</span>
+        </a>
+        
+        </nav>
+        <div class="p-4 border-t border-gray-100">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">AM</div>
+                <div class="text-sm">
+                    <p class="font-semibold text-gray-800">Admin User</p>
+                    <p class="text-xs text-gray-500">Agency Workspace</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col h-screen overflow-y-auto relative">
+        <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-8 sticky top-0 z-10 shadow-sm">
+            <h1 class="text-xl font-semibold text-gray-800">Client Reporting</h1>
+            <div class="flex items-center gap-4">
+                <button class="p-2 text-gray-400 hover:text-gray-600"><i class="ph ph-bell text-xl"></i></button>
+            </div>
+        </header>
+        <div class="p-8 flex-1">
+            
+<div class="flex flex-wrap justify-between items-center gap-4 mb-6">
+    <div class="flex flex-wrap items-center gap-4">
+        <label class="font-semibold text-gray-700">Client Report:</label>
+        <select class="border border-gray-300 rounded-lg px-4 py-2 bg-white shadow-sm outline-none">
+            <option>Global Dynamics</option>
+            <option>Apex Logistics</option>
+            <option>TechFlow Inc</option>
+        </select>
+        <span class="text-sm text-gray-500">Period: Nov 1 - Nov 30, 2026</span>
+    </div>
+    <div class="flex items-center gap-3">
+        <div class="flex bg-white p-1 rounded-lg border border-gray-200 text-xs font-medium">
+            <button id="rep-am-btn" onclick="setReportMode('am')" class="px-3 py-1.5 bg-blue-50 text-blue-700 rounded">Agency AM View</button>
+            <button id="rep-client-btn" onclick="setReportMode('client')" class="px-3 py-1.5 text-gray-500 hover:text-gray-700 rounded">Client Portal (PWA)</button>
+        </div>
+        <button onclick="showToast('Scheduled monthly report & WhatsApp/Slack alerts configured.', 'info')" class="bg-white border border-gray-300 text-gray-700 px-3 py-2 rounded-lg text-xs font-semibold hover:bg-gray-50 flex items-center gap-1.5"><i class="ph ph-bell-ringing"></i> Alerts</button>
+        <button onclick="showToast('Exporting branded PDF report...')" class="bg-gray-800 text-white px-4 py-2 rounded-lg text-sm hover:bg-gray-900"><i class="ph ph-export mr-1"></i> Export PDF</button>
+    </div>
+</div>
+
+<!-- Live Connectors Strip -->
+<div class="flex flex-wrap items-center gap-2 mb-6 text-xs">
+    <span class="text-gray-500 font-semibold mr-1">Live Connectors:</span>
+    <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-full font-medium"><i class="ph-fill ph-check-circle"></i> GA4 Analytics</span>
+    <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-full font-medium"><i class="ph-fill ph-check-circle"></i> Search Console</span>
+    <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-full font-medium"><i class="ph-fill ph-check-circle"></i> Ahrefs / SEMrush</span>
+    <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-full font-medium"><i class="ph-fill ph-check-circle"></i> Google Ads</span>
+    <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-full font-medium"><i class="ph-fill ph-check-circle"></i> Meta &amp; LinkedIn Ads</span>
+</div>
+
+<!-- Executive Summary (Mandatory) -->
+<div class="bg-blue-50 border border-blue-100 rounded-xl p-6 mb-6">
+    <div class="flex justify-between items-start mb-3">
+        <h2 class="font-bold text-blue-900 flex items-center gap-2"><i class="ph-fill ph-chat-text text-xl"></i> Executive Summary (Wins &amp; Next Month's Focus)</h2>
+        <div class="flex items-center gap-2">
+            <span class="text-xs bg-blue-200 text-blue-800 px-2 py-1 rounded font-semibold uppercase">Account Manager Notes</span>
+            <button id="save-exec-btn" onclick="showToast('Executive Summary saved & report finalized for Client Portal!')" class="text-xs bg-blue-600 text-white px-3 py-1 rounded font-semibold hover:bg-blue-700">Save &amp; Finalize</button>
+        </div>
+    </div>
+    <textarea id="exec-summary-text" class="w-full bg-white border border-blue-200 rounded p-3 text-sm text-gray-700 outline-none focus:ring-1 focus:ring-blue-400" rows="3">Great month across the board! Organic traffic is up 18% following the implementation of our technical audit fixes. The new Cloud Security landing pages went live and are already indexing. Next month, we are focusing heavily on Outreach to boost domain authority and scaling our top-performing Google Ads search campaigns.</textarea>
+</div>
+
+<!-- KPI Grid (6 metrics: Organic + Paid Media) -->
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-6">
+    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200">
+        <p class="text-[11px] text-gray-500 font-semibold uppercase mb-1">Organic Sessions</p>
+        <div class="flex items-end gap-2"><span class="text-2xl font-bold text-gray-800">14,205</span><span class="text-xs text-green-600 font-semibold">+18%</span></div>
+    </div>
+    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200">
+        <p class="text-[11px] text-gray-500 font-semibold uppercase mb-1">Total Conversions</p>
+        <div class="flex items-end gap-2"><span class="text-2xl font-bold text-gray-800">184</span><span class="text-xs text-green-600 font-semibold">+24%</span></div>
+    </div>
+    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200">
+        <p class="text-[11px] text-gray-500 font-semibold uppercase mb-1">Avg. Bounce Rate</p>
+        <div class="flex items-end gap-2"><span class="text-2xl font-bold text-gray-800">42.1%</span><span class="text-xs text-green-600 font-semibold">-2.4%</span></div>
+    </div>
+    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200">
+        <p class="text-[11px] text-gray-500 font-semibold uppercase mb-1">Live Ad Spend</p>
+        <div class="flex items-end gap-2"><span class="text-2xl font-bold text-gray-800">$4,820</span><span class="text-xs text-gray-400">MTD</span></div>
+    </div>
+    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200">
+        <p class="text-[11px] text-gray-500 font-semibold uppercase mb-1">Blended CPA</p>
+        <div class="flex items-end gap-2"><span class="text-2xl font-bold text-gray-800">$48.50</span><span class="text-xs text-green-600 font-semibold">-11%</span></div>
+    </div>
+    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200">
+        <p class="text-[11px] text-gray-500 font-semibold uppercase mb-1">PPC ROAS</p>
+        <div class="flex items-end gap-2"><span class="text-2xl font-bold text-gray-800">3.4x</span><span class="text-xs text-green-600 font-semibold">+0.2x</span></div>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+    <!-- Visual Graph -->
+    <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200">
+        <h3 class="font-bold text-gray-800 mb-4">Avg. Keyword Ranking Target: "B2B Cloud Security"</h3>
+        <div class="h-44 flex items-end justify-between px-2 pt-4 border-b border-l border-gray-200 relative pb-1">
+            <svg class="absolute inset-0 h-full w-full" preserveAspectRatio="none" viewBox="0 0 100 100">
+                <path d="M0,80 L20,70 L40,75 L60,40 L80,30 L100,10" fill="none" stroke="#3b82f6" stroke-width="2" />
+                <circle cx="100" cy="10" r="2.5" fill="#3b82f6" />
+            </svg>
+            <div class="w-full flex justify-between text-[10px] text-gray-400 mt-2 absolute -bottom-5 left-0">
+                <span>Week 1 (Pos 18)</span><span>Week 2 (Pos 14)</span><span>Week 3 (Pos 8)</span><span>Week 4 (Pos 3)</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Data + Output Feed -->
+    <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200">
+        <h3 class="font-bold text-gray-800 mb-4">Data + Output View (Work Completed vs Results)</h3>
+        <ul class="space-y-3 text-sm text-gray-700">
+            <li class="flex items-center gap-3"><i class="ph-fill ph-check-circle text-green-500 text-lg"></i> <strong>4 Blogs Published</strong> <span class="text-gray-400">→ Driving +400 new organic sessions</span></li>
+            <li class="flex items-center gap-3"><i class="ph-fill ph-check-circle text-green-500 text-lg"></i> <strong>Tech Audit Fixes</strong> <span class="text-gray-400">→ Crawl errors reduced to 0</span></li>
+            <li class="flex items-center gap-3"><i class="ph-fill ph-check-circle text-green-500 text-lg"></i> <strong>12 Backlinks Placed</strong> <span class="text-gray-400">→ Domain Authority increased to 45</span></li>
+            <li class="flex items-center gap-3"><i class="ph-fill ph-check-circle text-green-500 text-lg"></i> <strong>3 Ad Variants Tested</strong> <span class="text-gray-400">→ CPC reduced by $0.40</span></li>
+        </ul>
+    </div>
+</div>
+
+<!-- Example Analytics & Reporting Tables -->
+<div class="space-y-6">
+    <!-- Table 1: GA4 Traffic Acquisition by Channel -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        <div class="p-4 border-b border-gray-100 flex justify-between items-center bg-gray-50/60">
+            <h3 class="font-bold text-gray-800 text-sm">GA4 Analytics — Traffic Acquisition by Channel</h3>
+            <span class="text-xs text-gray-400">Source: Google Analytics 4</span>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm text-left">
+                <thead class="bg-gray-50 text-gray-600 uppercase text-xs border-b">
+                    <tr><th class="px-4 py-3">Default Channel Group</th><th class="px-4 py-3">Sessions</th><th class="px-4 py-3">Engaged Sessions</th><th class="px-4 py-3">Engagement Rate</th><th class="px-4 py-3">Conversions</th><th class="px-4 py-3">Conv. Rate</th></tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100 text-gray-700">
+                    <tr class="hover:bg-gray-50"><td class="px-4 py-2.5 font-medium">Organic Search</td><td class="px-4 py-2.5">14,205 <span class="text-xs text-emerald-600">(+18%)</span></td><td class="px-4 py-2.5">10,369</td><td class="px-4 py-2.5">73.0%</td><td class="px-4 py-2.5 font-semibold">92</td><td class="px-4 py-2.5">0.65%</td></tr>
+                    <tr class="hover:bg-gray-50"><td class="px-4 py-2.5 font-medium">Paid Search (Google Ads)</td><td class="px-4 py-2.5">4,810 <span class="text-xs text-emerald-600">(+12%)</span></td><td class="px-4 py-2.5">3,655</td><td class="px-4 py-2.5">76.0%</td><td class="px-4 py-2.5 font-semibold">61</td><td class="px-4 py-2.5">1.27%</td></tr>
+                    <tr class="hover:bg-gray-50"><td class="px-4 py-2.5 font-medium">Paid Social (LinkedIn / Meta)</td><td class="px-4 py-2.5">2,190</td><td class="px-4 py-2.5">1,401</td><td class="px-4 py-2.5">64.0%</td><td class="px-4 py-2.5 font-semibold">19</td><td class="px-4 py-2.5">0.87%</td></tr>
+                    <tr class="hover:bg-gray-50"><td class="px-4 py-2.5 font-medium">Direct</td><td class="px-4 py-2.5">3,120</td><td class="px-4 py-2.5">2,028</td><td class="px-4 py-2.5">65.0%</td><td class="px-4 py-2.5 font-semibold">12</td><td class="px-4 py-2.5">0.38%</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Table 2: Top Pages -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <div class="p-4 border-b border-gray-100 flex justify-between items-center bg-gray-50/60">
+                <h3 class="font-bold text-gray-800 text-sm">Top Pages (GA4)</h3>
+                <span class="text-xs text-gray-400">By Pageviews</span>
+            </div>
+            <table class="w-full text-sm text-left">
+                <thead class="bg-gray-50 text-gray-600 uppercase text-xs border-b">
+                    <tr><th class="px-4 py-2.5">Page Path</th><th class="px-4 py-2.5">Views</th><th class="px-4 py-2.5">Avg. Time</th><th class="px-4 py-2.5">Bounce</th></tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100 text-gray-700 text-xs">
+                    <tr><td class="px-4 py-2.5 font-mono text-blue-600">/</td><td class="px-4 py-2.5 font-semibold">6,840</td><td class="px-4 py-2.5">1m 48s</td><td class="px-4 py-2.5">38.2%</td></tr>
+                    <tr><td class="px-4 py-2.5 font-mono text-blue-600">/solutions/cloud-security</td><td class="px-4 py-2.5 font-semibold">4,120</td><td class="px-4 py-2.5">2m 34s</td><td class="px-4 py-2.5">31.5%</td></tr>
+                    <tr><td class="px-4 py-2.5 font-mono text-blue-600">/blog/soc2-compliance-guide</td><td class="px-4 py-2.5 font-semibold">2,890</td><td class="px-4 py-2.5">3m 12s</td><td class="px-4 py-2.5">44.0%</td></tr>
+                    <tr><td class="px-4 py-2.5 font-mono text-blue-600">/pricing</td><td class="px-4 py-2.5 font-semibold">1,950</td><td class="px-4 py-2.5">2m 05s</td><td class="px-4 py-2.5">29.8%</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Table 3: Top Landing Pages -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <div class="p-4 border-b border-gray-100 flex justify-between items-center bg-gray-50/60">
+                <h3 class="font-bold text-gray-800 text-sm">Top Landing Pages (Conversions)</h3>
+                <span class="text-xs text-gray-400">Organic &amp; Paid</span>
+            </div>
+            <table class="w-full text-sm text-left">
+                <thead class="bg-gray-50 text-gray-600 uppercase text-xs border-b">
+                    <tr><th class="px-4 py-2.5">Landing Page</th><th class="px-4 py-2.5">Source</th><th class="px-4 py-2.5">Sessions</th><th class="px-4 py-2.5">Leads</th></tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100 text-gray-700 text-xs">
+                    <tr><td class="px-4 py-2.5 font-mono text-blue-600">/lp/enterprise-cloud-demo</td><td class="px-4 py-2.5"><span class="bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded">Google Ads</span></td><td class="px-4 py-2.5">2,410</td><td class="px-4 py-2.5 font-bold text-emerald-600">48</td></tr>
+                    <tr><td class="px-4 py-2.5 font-mono text-blue-600">/solutions/cloud-security</td><td class="px-4 py-2.5"><span class="bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded">Organic</span></td><td class="px-4 py-2.5">3,380</td><td class="px-4 py-2.5 font-bold text-emerald-600">41</td></tr>
+                    <tr><td class="px-4 py-2.5 font-mono text-blue-600">/blog/multi-cloud-iam</td><td class="px-4 py-2.5"><span class="bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded">Organic</span></td><td class="px-4 py-2.5">1,640</td><td class="px-4 py-2.5 font-bold text-emerald-600">22</td></tr>
+                    <tr><td class="px-4 py-2.5 font-mono text-blue-600">/lp/ciso-whitepaper</td><td class="px-4 py-2.5"><span class="bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded">LinkedIn</span></td><td class="px-4 py-2.5">980</td><td class="px-4 py-2.5 font-bold text-emerald-600">19</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Table 4: Search Console & Keyword Rankings -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        <div class="p-4 border-b border-gray-100 flex justify-between items-center bg-gray-50/60">
+            <h3 class="font-bold text-gray-800 text-sm">SEO Keyword Rankings &amp; Search Console Signals</h3>
+            <span class="text-xs text-gray-400">Ahrefs + Google Search Console</span>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm text-left">
+                <thead class="bg-gray-50 text-gray-600 uppercase text-xs border-b">
+                    <tr><th class="px-4 py-3">Target Keyword</th><th class="px-4 py-3">Pos.</th><th class="px-4 py-3">Change</th><th class="px-4 py-3">Search Vol.</th><th class="px-4 py-3">Impressions</th><th class="px-4 py-3">Clicks</th><th class="px-4 py-3">CTR</th></tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100 text-gray-700">
+                    <tr><td class="px-4 py-2.5 font-medium">b2b cloud security</td><td class="px-4 py-2.5 font-bold">3</td><td class="px-4 py-2.5 text-emerald-600 font-semibold">▲ +15</td><td class="px-4 py-2.5">2,400</td><td class="px-4 py-2.5">18,420</td><td class="px-4 py-2.5">1,105</td><td class="px-4 py-2.5">6.0%</td></tr>
+                    <tr><td class="px-4 py-2.5 font-medium">enterprise saas compliance</td><td class="px-4 py-2.5 font-bold">5</td><td class="px-4 py-2.5 text-emerald-600 font-semibold">▲ +7</td><td class="px-4 py-2.5">1,900</td><td class="px-4 py-2.5">12,100</td><td class="px-4 py-2.5">544</td><td class="px-4 py-2.5">4.5%</td></tr>
+                    <tr><td class="px-4 py-2.5 font-medium">zero trust iam platform</td><td class="px-4 py-2.5 font-bold">8</td><td class="px-4 py-2.5 text-emerald-600 font-semibold">▲ +4</td><td class="px-4 py-2.5">1,300</td><td class="px-4 py-2.5">7,840</td><td class="px-4 py-2.5">282</td><td class="px-4 py-2.5">3.6%</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+        </div>
+    </main>
+
+    <!-- Global Toast Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 flex flex-col gap-3 z-50"></div>
+
+    <script>
+        function setReportMode(mode) {
+            const isClient = mode === 'client';
+            document.getElementById('rep-am-btn').className = !isClient ? 'px-3 py-1.5 bg-blue-50 text-blue-700 rounded' : 'px-3 py-1.5 text-gray-500 hover:text-gray-700 rounded';
+            document.getElementById('rep-client-btn').className = isClient ? 'px-3 py-1.5 bg-blue-50 text-blue-700 rounded' : 'px-3 py-1.5 text-gray-500 hover:text-gray-700 rounded';
+            document.getElementById('exec-summary-text').readOnly = isClient;
+            document.getElementById('save-exec-btn').classList.toggle('hidden', isClient);
+            showToast(isClient ? 'Switched to Client Portal (PWA) View — Read-only mode.' : 'Switched to Agency AM View.', 'info');
+        }
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            const icon = type === 'success' ? 'ph-check-circle text-green-500' : 'ph-info text-blue-500';
+            const bg = type === 'success' ? 'border-green-100' : 'border-blue-100';
+            
+            toast.className = `flex items-center gap-3 bg-white px-4 py-3 rounded-lg shadow-lg border ${bg} transform transition-all duration-300 translate-y-10 opacity-0`;
+            toast.innerHTML = `<i class="ph-fill ${icon} text-xl"></i><span class="text-sm font-medium text-gray-700">${message}</span>`;
+            
+            container.appendChild(toast);
+            
+            setTimeout(() => { toast.classList.remove('translate-y-10', 'opacity-0'); }, 10);
+            setTimeout(() => { 
+                toast.classList.add('opacity-0'); 
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

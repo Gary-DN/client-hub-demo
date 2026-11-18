@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Hub 360 - Retention & Upsells</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+
+<body class="flex h-screen overflow-hidden text-slate-800">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white border-r border-gray-200 flex flex-col shadow-sm z-20">
+        <div class="h-16 flex items-center px-6 border-b border-gray-100">
+            <i class="ph-fill ph-planet text-blue-600 text-2xl mr-2"></i>
+            <span class="font-bold text-lg tracking-tight">ClientHub<span class="text-blue-600">360</span></span>
+        </div>
+        <nav class="flex-1 py-4 flex flex-col gap-1">
+
+            <a href="prospecting.html"
+                class="flex items-center gap-3 px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-funnel text-xl"></i>
+                <span>Prospecting</span>
+            </a>
+
+            <a href="onboarding.html"
+                class="flex items-center gap-3 px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-user-plus text-xl"></i>
+                <span>Onboarding</span>
+            </a>
+
+            <a href="production.html"
+                class="flex items-center gap-3 px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-kanban text-xl"></i>
+                <span>Production</span>
+            </a>
+
+            <a href="reporting.html"
+                class="flex items-center gap-3 px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-chart-line-up text-xl"></i>
+                <span>Reporting</span>
+            </a>
+
+            <a href="upsells.html"
+                class="flex items-center gap-3 px-6 py-3 bg-blue-50 text-blue-700 border-r-4 border-blue-600 font-semibold transition-colors">
+                <i class="ph-trend-up text-xl"></i>
+                <span>Upsells</span>
+            </a>
+
+            <a href="users.html"
+                class="flex items-center gap-3 px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-users text-xl"></i>
+                <span>Users & Teams</span>
+            </a>
+
+        </nav>
+        <div class="p-4 border-t border-gray-100">
+            <div class="flex items-center gap-3">
+                <div
+                    class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">
+                    AM</div>
+                <div class="text-sm">
+                    <p class="font-semibold text-gray-800">Admin User</p>
+                    <p class="text-xs text-gray-500">Agency Workspace</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col h-screen overflow-y-auto relative">
+        <header
+            class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-8 sticky top-0 z-10 shadow-sm">
+            <h1 class="text-xl font-semibold text-gray-800">Retention & Upsells</h1>
+            <div class="flex items-center gap-4">
+                <button class="p-2 text-gray-400 hover:text-gray-600"><i class="ph ph-bell text-xl"></i></button>
+            </div>
+        </header>
+        <div class="p-8 flex-1">
+
+            <div class="flex flex-wrap justify-between items-center gap-4 mb-6">
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-800">Retention, Health Score &amp; Offboarding</h1>
+                    <p class="text-sm text-gray-500">Automated Red/Amber/Green health scoring, 90-day cross-sell
+                        triggers, and structured cancellation.</p>
+                </div>
+                <div class="flex gap-2 bg-white p-1 rounded-lg border border-gray-200 text-sm font-medium">
+                    <button id="ret-tab-health" onclick="switchRetentionTab('health')"
+                        class="px-4 py-1.5 bg-blue-50 text-blue-700 rounded-md">Health &amp; Upsells</button>
+                    <button id="ret-tab-offboard" onclick="switchRetentionTab('offboard')"
+                        class="px-4 py-1.5 text-gray-500 hover:text-gray-700 rounded-md">Offboarding /
+                        Cancellation</button>
+                </div>
+            </div>
+
+            <!-- Tab 1: Health Score + Upsell Board -->
+            <div id="ret-panel-health" class="space-y-8">
+                <!-- Automated Client Health Score (Scope Sec 5) -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                    <div class="p-4 border-b border-gray-100 flex justify-between items-center bg-gray-50/60">
+                        <h2 class="font-bold text-gray-800">Automated Client Health Score (RAG)</h2>
+                        <span class="text-xs text-gray-500">Scored on Invoice Status, KPI Trends, Overdue Tasks &amp;
+                            Engagement</span>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left">
+                            <thead class="bg-gray-50 text-gray-600 uppercase text-xs border-b">
+                                <tr>
+                                    <th class="px-4 py-3">Client</th>
+                                    <th class="px-4 py-3">Health</th>
+                                    <th class="px-4 py-3">Invoices</th>
+                                    <th class="px-4 py-3">KPI Trend</th>
+                                    <th class="px-4 py-3">Overdue Tasks</th>
+                                    <th class="px-4 py-3">Engagement</th>
+                                    <th class="px-4 py-3 text-right">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100 text-gray-700">
+                                <tr>
+                                    <td class="px-4 py-3 font-semibold text-gray-900">Global Dynamics <span
+                                            class="block text-xs font-normal text-gray-400">SEO, Content, PPC •
+                                            $6,000/mo</span></td>
+                                    <td class="px-4 py-3"><span
+                                            class="px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-full text-xs font-bold">GREEN
+                                            (92)</span></td>
+                                    <td class="px-4 py-3 text-emerald-600 font-medium">Paid on time</td>
+                                    <td class="px-4 py-3 text-emerald-600">▲ +18% Traffic</td>
+                                    <td class="px-4 py-3">0</td>
+                                    <td class="px-4 py-3">High (Approvals &lt;24h)</td>
+                                    <td class="px-4 py-3 text-right"><span
+                                            class="text-xs text-purple-600 font-semibold">90-Day Upsell Ready</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-semibold text-gray-900">TechFlow Inc <span
+                                            class="block text-xs font-normal text-gray-400">SEO, PPC • $2,500/mo</span>
+                                    </td>
+                                    <td class="px-4 py-3"><span
+                                            class="px-2.5 py-1 bg-amber-100 text-amber-800 rounded-full text-xs font-bold">AMBER
+                                            (68)</span></td>
+                                    <td class="px-4 py-3 text-emerald-600 font-medium">Paid</td>
+                                    <td class="px-4 py-3 text-gray-500">Flat (+2%)</td>
+                                    <td class="px-4 py-3 text-amber-600 font-semibold">2 Overdue</td>
+                                    <td class="px-4 py-3">Missed 1 check-in</td>
+                                    <td class="px-4 py-3 text-right"><button
+                                            onclick="showToast('Check-in reminder scheduled with AM.', 'info')"
+                                            class="text-xs border border-gray-300 px-2.5 py-1 rounded hover:bg-gray-50">Schedule
+                                            Sync</button></td>
+                                </tr>
+                                <tr class="bg-red-50/30">
+                                    <td class="px-4 py-3 font-semibold text-gray-900">Apex Logistics <span
+                                            class="block text-xs font-normal text-gray-400">Design &amp; Dev, Paid
+                                            Social • $4,800/mo</span></td>
+                                    <td class="px-4 py-3"><span
+                                            class="px-2.5 py-1 bg-red-100 text-red-800 rounded-full text-xs font-bold">RED
+                                            • ISSUE (38)</span></td>
+                                    <td class="px-4 py-3 text-red-600 font-semibold">14 Days Overdue</td>
+                                    <td class="px-4 py-3 text-red-600">▼ -14% ROAS</td>
+                                    <td class="px-4 py-3 text-red-600 font-semibold">4 Overdue</td>
+                                    <td class="px-4 py-3 text-red-600">Low (No login 21d)</td>
+                                    <td class="px-4 py-3 text-right"><button
+                                            onclick="showToast('Recovery Playbook triggered! Leadership & AM alerted via Slack.')"
+                                            class="text-xs bg-red-600 text-white px-3 py-1.5 rounded font-semibold hover:bg-red-700">Trigger
+                                            Recovery Playbook</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Cross-Sell / Upsell Pipeline -->
+                <div class="flex gap-6 overflow-x-auto pb-4">
+                    <!-- Potential (Automated Triggers) -->
+                    <div class="w-80 flex-shrink-0 flex flex-col bg-purple-50/50 rounded-xl border border-purple-100">
+                        <div
+                            class="p-3 border-b border-purple-100 flex justify-between items-center bg-purple-50 rounded-t-xl">
+                            <h3 class="font-semibold text-purple-800">Potential (90-Day Triggers)</h3><span
+                                class="bg-purple-200 text-purple-800 text-xs px-2 py-1 rounded-full">2</span>
+                        </div>
+                        <div class="p-3 flex-1 space-y-3">
+                            <div class="bg-white p-4 rounded-lg shadow-sm border border-purple-200">
+                                <div class="flex justify-between items-start mb-2">
+                                    <span
+                                        class="text-[10px] font-bold px-2 py-1 bg-red-100 text-red-700 rounded uppercase flex items-center"><i
+                                            class="ph-fill ph-clock mr-1"></i> 90-Day Trigger</span>
+                                    <span
+                                        class="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">GREEN</span>
+                                </div>
+                                <h4 class="font-bold text-gray-800 text-base mb-1">Global Dynamics</h4>
+                                <p class="text-xs text-gray-500 mb-3">Active SEO + Content, no Paid Social yet. Strong
+                                    ROAS on Search.</p>
+                                <div
+                                    class="bg-gray-50 p-2 rounded border border-gray-100 text-xs text-gray-700 font-medium mb-3">
+                                    Action: Pitch LinkedIn Paid Social (+$2,000/mo)
+                                </div>
+                                <div class="flex justify-between items-center pt-3 border-t border-gray-100">
+                                    <button onclick="showToast('Upsell PandaDoc proposal created for Global Dynamics!')"
+                                        class="text-xs bg-purple-600 text-white px-3 py-1.5 rounded hover:bg-purple-700">Create
+                                        Proposal</button>
+                                    <div
+                                        class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] font-bold">
+                                        AM</div>
+                                </div>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-sm border border-purple-200">
+                                <div class="flex justify-between items-start mb-2">
+                                    <span
+                                        class="text-[10px] font-bold px-2 py-1 bg-purple-100 text-purple-700 rounded uppercase">Single-Service
+                                        Flag</span>
+                                </div>
+                                <h4 class="font-bold text-gray-800 text-base mb-1">Harbour Dental Group</h4>
+                                <p class="text-xs text-gray-500 mb-3">90 days on Local SEO only. High conversion intent.
+                                </p>
+                                <div
+                                    class="bg-gray-50 p-2 rounded border border-gray-100 text-xs text-gray-700 font-medium mb-3">
+                                    Action: Pitch Google Ads PPC (+$1,500/mo)
+                                </div>
+                                <button onclick="showToast('Upsell PandaDoc proposal created for Harbour Dental!')"
+                                    class="text-xs bg-purple-600 text-white px-3 py-1.5 rounded hover:bg-purple-700">Create
+                                    Proposal</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proposal Sent -->
+                    <div class="w-80 flex-shrink-0 flex flex-col bg-gray-50 rounded-xl border border-gray-200">
+                        <div
+                            class="p-3 border-b border-gray-200 flex justify-between items-center bg-gray-100/50 rounded-t-xl">
+                            <h3 class="font-semibold text-gray-700">Proposal Sent</h3><span
+                                class="bg-gray-200 text-gray-600 text-xs px-2 py-1 rounded-full">1</span>
+                        </div>
+                        <div class="p-3 flex-1 space-y-3">
+                            <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+                                <span
+                                    class="text-[10px] font-bold px-2 py-1 bg-blue-100 text-blue-700 rounded uppercase">PandaDoc
+                                    Sent</span>
+                                <h4 class="font-bold text-gray-800 text-base mt-2 mb-1">Nordic FinTech</h4>
+                                <p class="text-xs text-gray-500 mb-2">CRO &amp; Landing Page Redesign (+$3,500 one-off)
+                                </p>
+                                <span class="text-xs text-gray-400">Viewed 3 times • Rep: Mike K.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Agreed -->
+                    <div class="w-80 flex-shrink-0 flex flex-col bg-gray-50 rounded-xl border border-gray-200">
+                        <div
+                            class="p-3 border-b border-gray-200 flex justify-between items-center bg-gray-100/50 rounded-t-xl">
+                            <h3 class="font-semibold text-gray-700">Agreed (Added to Retainer)</h3><span
+                                class="bg-gray-200 text-gray-600 text-xs px-2 py-1 rounded-full">1</span>
+                        </div>
+                        <div class="p-3 flex-1 space-y-3">
+                            <div class="bg-white p-4 rounded-lg shadow-sm border border-emerald-200">
+                                <span
+                                    class="text-[10px] font-bold px-2 py-1 bg-emerald-100 text-emerald-700 rounded uppercase">Added
+                                    to Xero &amp; Prod</span>
+                                <h4 class="font-bold text-gray-800 text-base mt-2 mb-1">Solstice Wellness</h4>
+                                <p class="text-xs text-gray-500">+4 Blogs/mo Content Add-on (+$1,200/mo)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 2: Structured Offboarding / Cancellation (Scope Sec 5) -->
+            <div id="ret-panel-offboard" class="hidden grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 space-y-5">
+                    <div class="flex justify-between items-start border-b pb-4">
+                        <div>
+                            <span class="text-xs font-bold bg-red-100 text-red-700 px-2.5 py-1 rounded uppercase">Notice
+                                Given</span>
+                            <h2 class="text-xl font-bold text-gray-800 mt-2">Legacy Retail Ltd</h2>
+                            <p class="text-xs text-gray-500">Retainer: $2,200/mo • SEO • AM: Sarah Jenkins</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs text-gray-400 block">Notice Period Ends</span>
+                            <span class="font-bold text-red-600 text-sm">Dec 31, 2026 (43 Days)</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <label class="block text-xs font-bold text-gray-700 uppercase">Mandatory Churn Reason
+                            (Leadership Analytics) *</label>
+                        <select
+                            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-500">
+                            <option>Select Churn Reason...</option>
+                            <option selected>Budget Cuts / Restructuring</option>
+                            <option>Moving Marketing In-House</option>
+                            <option>Performance / ROI Expectations</option>
+                            <option>Switched to Competitor</option>
+                            <option>Project / Contract Completed</option>
+                        </select>
+                    </div>
+
+                    <div class="space-y-3 pt-2">
+                        <h3 class="text-xs font-bold text-gray-700 uppercase">Automated Offboarding Actions</h3>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg border">
+                            <span class="text-sm font-medium text-gray-700">1. Final Xero Reconciliation Invoice</span>
+                            <button onclick="showToast('Final Xero reconciliation invoice scheduled for Dec 31.')"
+                                class="text-xs bg-blue-600 text-white px-3 py-1.5 rounded font-semibold hover:bg-blue-700">Schedule
+                                Invoice</button>
+                        </div>
+                        <div
+                            class="flex items-center justify-between p-3 bg-emerald-50 rounded-lg border border-emerald-200">
+                            <span class="text-sm font-medium text-emerald-900">2. Halt Future Recurring Production
+                                Tasks</span>
+                            <span
+                                class="text-xs bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded font-semibold">Auto-Paused
+                                Jan 1</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                    <h3 class="font-bold text-gray-800 text-lg mb-1">Platform Access Revocation Checklist</h3>
+                    <p class="text-xs text-gray-500 mb-4">Ensures clean compliance when offboarding agency access from
+                        client platforms.</p>
+                    <div class="space-y-2.5 text-sm">
+                        <label
+                            class="flex items-center justify-between p-3 bg-gray-50 rounded-lg border cursor-pointer">
+                            <span class="flex items-center gap-2"><input type="checkbox" checked
+                                    class="accent-blue-600"> Remove Agency from GA4 &amp; Search Console</span>
+                            <span class="text-xs text-emerald-600 font-semibold">Revoked</span>
+                        </label>
+                        <label
+                            class="flex items-center justify-between p-3 bg-gray-50 rounded-lg border cursor-pointer">
+                            <span class="flex items-center gap-2"><input type="checkbox" checked
+                                    class="accent-blue-600"> Unlink Google Ads MCC &amp; Meta Business Manager</span>
+                            <span class="text-xs text-emerald-600 font-semibold">Revoked</span>
+                        </label>
+                        <label
+                            class="flex items-center justify-between p-3 bg-gray-50 rounded-lg border cursor-pointer">
+                            <span class="flex items-center gap-2"><input type="checkbox" class="accent-blue-600">
+                                Archive 1Password Vault &amp; Revoke CMS Logins</span>
+                            <span class="text-xs text-amber-600 font-semibold">Pending Dec 31</span>
+                        </label>
+                        <label
+                            class="flex items-center justify-between p-3 bg-gray-50 rounded-lg border cursor-pointer">
+                            <span class="flex items-center gap-2"><input type="checkbox" class="accent-blue-600">
+                                Archive Shared Slack Connect Channel</span>
+                            <span class="text-xs text-amber-600 font-semibold">Pending Dec 31</span>
+                        </label>
+                    </div>
+                    <button
+                        onclick="showToast('Offboarding checklist saved & Churn Reason logged to Leadership Analytics.')"
+                        class="w-full mt-5 bg-gray-800 text-white py-2.5 rounded-lg text-sm font-semibold hover:bg-gray-900">Complete
+                        Offboarding &amp; Archive Client</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Global Toast Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 flex flex-col gap-3 z-50"></div>
+
+    <script>
+        function switchRetentionTab(tab) {
+            const isHealth = tab === 'health';
+            document.getElementById('ret-panel-health').classList.toggle('hidden', !isHealth);
+            document.getElementById('ret-panel-offboard').classList.toggle('hidden', isHealth);
+            document.getElementById('ret-tab-health').className = isHealth ? 'px-4 py-1.5 bg-blue-50 text-blue-700 rounded-md' : 'px-4 py-1.5 text-gray-500 hover:text-gray-700 rounded-md';
+            document.getElementById('ret-tab-offboard').className = !isHealth ? 'px-4 py-1.5 bg-blue-50 text-blue-700 rounded-md' : 'px-4 py-1.5 text-gray-500 hover:text-gray-700 rounded-md';
+        }
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            const icon = type === 'success' ? 'ph-check-circle text-green-500' : 'ph-info text-blue-500';
+            const bg = type === 'success' ? 'border-green-100' : 'border-blue-100';
+
+            toast.className = `flex items-center gap-3 bg-white px-4 py-3 rounded-lg shadow-lg border ${bg} transform transition-all duration-300 translate-y-10 opacity-0`;
+            toast.innerHTML = `<i class="ph-fill ${icon} text-xl"></i><span class="text-sm font-medium text-gray-700">${message}</span>`;
+
+            container.appendChild(toast);
+
+            setTimeout(() => { toast.classList.remove('translate-y-10', 'opacity-0'); }, 10);
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+    </script>
+</body>
+
+</html>

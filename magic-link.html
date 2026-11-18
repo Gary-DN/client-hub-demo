@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Hub 360 - Client Magic Link Onboarding</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; }
+    </style>
+</head>
+<body class="min-h-screen text-slate-800 flex flex-col">
+
+    <!-- Demo Context Banner -->
+    <div class="bg-slate-900 text-white px-6 py-2.5 flex flex-wrap items-center justify-between gap-3 text-xs sticky top-0 z-30 shadow-md">
+        <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 bg-blue-600 rounded font-semibold uppercase tracking-wide text-[10px]">Client-Facing Preview</span>
+            <span class="text-slate-300">Passwordless <strong>Magic Link Wizard</strong> — Dynamically adapts fields to the client's subscribed services.</span>
+        </div>
+        <div class="flex items-center gap-3">
+            <span class="text-slate-400">Token: <code class="text-emerald-400">ml_live_98f2a7c1</code> (Expires in 6 days)</span>
+            <a href="onboarding.html" class="bg-white/10 hover:bg-white/20 text-white px-3 py-1 rounded font-medium flex items-center gap-1 transition-colors">
+                <i class="ph ph-arrow-left"></i> Back to Agency View
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Wizard Container -->
+    <div class="flex-1 max-w-4xl w-full mx-auto px-4 py-8">
+        <!-- Branded Header -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-sm">
+                    <i class="ph-fill ph-planet text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-gray-900">Welcome to Digital Next, Global Dynamics!</h1>
+                    <p class="text-sm text-gray-500">Complete this quick, passwordless setup so our team can launch your campaign.</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-2 bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-2 rounded-lg text-xs font-semibold">
+                <i class="ph-fill ph-lock-key text-base"></i>
+                <span>End-to-End Encrypted (1Password / Bitwarden Vault)</span>
+            </div>
+        </div>
+
+        <!-- Demo Service Switcher (to show dynamic conditional fields) -->
+        <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+                <div>
+                    <p class="text-xs font-bold text-blue-900 uppercase tracking-wider">Demo Control: Subscribed Services</p>
+                    <p class="text-xs text-blue-700">Toggle services below to see the Magic Link form dynamically show/hide required credentials:</p>
+                </div>
+                <div class="flex flex-wrap gap-2 text-xs font-medium">
+                    <label class="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-lg border border-blue-200 cursor-pointer">
+                        <input type="checkbox" checked onchange="toggleService('seo', this.checked)" class="accent-blue-600"> SEO
+                    </label>
+                    <label class="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-lg border border-blue-200 cursor-pointer">
+                        <input type="checkbox" checked onchange="toggleService('content', this.checked)" class="accent-blue-600"> Content
+                    </label>
+                    <label class="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-lg border border-blue-200 cursor-pointer">
+                        <input type="checkbox" checked onchange="toggleService('ppc', this.checked)" class="accent-blue-600"> PPC (Google Ads)
+                    </label>
+                    <label class="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-lg border border-blue-200 cursor-pointer">
+                        <input type="checkbox" onchange="toggleService('social', this.checked)" class="accent-blue-600"> Paid Social
+                    </label>
+                    <label class="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-lg border border-blue-200 cursor-pointer">
+                        <input type="checkbox" onchange="toggleService('dev', this.checked)" class="accent-blue-600"> Design & Dev
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="mb-6">
+            <div class="flex justify-between text-xs font-semibold text-gray-500 mb-2">
+                <span>Onboarding Completion</span>
+                <span id="progress-label">3 of 5 Sections Completed</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-300" style="width: 60%"></div>
+            </div>
+        </div>
+
+        <form onsubmit="handleMagicSubmit(event)" class="space-y-6">
+            <!-- Section 1: Google Access (SEO & PPC) -->
+            <div id="sec-google" class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                <div class="p-5 border-b border-gray-100 bg-gray-50/70 flex justify-between items-center">
+                    <div class="flex items-center gap-3">
+                        <span class="w-7 h-7 rounded-full bg-blue-100 text-blue-700 font-bold text-xs flex items-center justify-center">1</span>
+                        <div>
+                            <h2 class="font-bold text-gray-800">Google Ecosystem Connectors</h2>
+                            <p class="text-xs text-gray-500">One-click OAuth connectors to grant verified access (no manual ID copying needed)</p>
+                        </div>
+                    </div>
+                    <span class="text-xs bg-green-100 text-green-700 px-2.5 py-1 rounded-full font-semibold">3/4 Connected</span>
+                </div>
+                <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-3.5 rounded-xl border border-green-200 bg-green-50/50 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-gray-800 block">Google Analytics 4 (GA4)</span>
+                            <span class="text-[11px] text-green-700">Connected: analytics@globaldyn.com (G-94827104X)</span>
+                        </div>
+                        <span class="px-2.5 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold flex items-center gap-1"><i class="ph-fill ph-check-circle"></i>Connected</span>
+                    </div>
+                    <div class="p-3.5 rounded-xl border border-green-200 bg-green-50/50 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-gray-800 block">Google Search Console</span>
+                            <span class="text-[11px] text-green-700">Connected: sc-domain:globaldyn.com</span>
+                        </div>
+                        <span class="px-2.5 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold flex items-center gap-1"><i class="ph-fill ph-check-circle"></i>Connected</span>
+                    </div>
+                    <div id="ml-gtm-box" class="p-3.5 rounded-xl border border-yellow-200 bg-yellow-50/50 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-gray-800 block">Google Tag Manager (GTM)</span>
+                            <span id="ml-gtm-sub" class="text-[11px] text-yellow-700">Click to authorize GTM container access</span>
+                        </div>
+                        <button type="button" id="ml-gtm-btn" onclick="connectMagicGtm()" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow-sm">
+                            <i class="ph ph-google-logo"></i> Connect Account
+                        </button>
+                    </div>
+                    <div id="field-gads" class="p-3.5 rounded-xl border border-green-200 bg-green-50/50 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-gray-800 block">Google Ads MCC</span>
+                            <span class="text-[11px] text-green-700">Connected: 123-456-7890</span>
+                        </div>
+                        <span class="px-2.5 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold flex items-center gap-1"><i class="ph-fill ph-check-circle"></i>Connected</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Social & Paid Ads (Dynamic: Paid Social) -->
+            <div id="sec-social" class="hidden bg-white rounded-xl shadow-sm border border-purple-200 overflow-hidden">
+                <div class="p-5 border-b border-purple-100 bg-purple-50/50 flex justify-between items-center">
+                    <div class="flex items-center gap-3">
+                        <span class="w-7 h-7 rounded-full bg-purple-100 text-purple-700 font-bold text-xs flex items-center justify-center">2</span>
+                        <div>
+                            <h2 class="font-bold text-gray-800">Social &amp; Paid Media Accounts</h2>
+                            <p class="text-xs text-purple-700">Shown dynamically because Paid Social is selected</p>
+                        </div>
+                    </div>
+                    <span class="text-xs bg-purple-100 text-purple-700 px-2.5 py-1 rounded-full font-semibold">Required</span>
+                </div>
+                <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-1">Meta Business Manager ID *</label>
+                        <input type="text" placeholder="e.g. 8849201928374" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-1">LinkedIn Campaign Manager ID</label>
+                        <input type="text" placeholder="e.g. 50928172" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-1">TikTok Ad Account ID</label>
+                        <input type="text" placeholder="Optional" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-1">Social Profile URLs</label>
+                        <input type="text" placeholder="LinkedIn, Instagram, X URLs" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-500">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Website Logins, Vault & Hosting (Dynamic: SEO / Dev) -->
+            <div id="sec-vault" class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                <div class="p-5 border-b border-gray-100 bg-gray-50/70 flex justify-between items-center">
+                    <div class="flex items-center gap-3">
+                        <span class="w-7 h-7 rounded-full bg-blue-100 text-blue-700 font-bold text-xs flex items-center justify-center">3</span>
+                        <div>
+                            <h2 class="font-bold text-gray-800">Website &amp; Hosting Vault</h2>
+                            <p class="text-xs text-gray-500">Credentials go straight to our encrypted 1Password Vault (never stored in plain text)</p>
+                        </div>
+                    </div>
+                    <span class="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-semibold flex items-center gap-1"><i class="ph-fill ph-shield-check"></i> AES-256</span>
+                </div>
+                <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-1">CMS Admin URL (WordPress / Webflow / Shopify) *</label>
+                        <input type="url" value="https://globaldyn.com/wp-admin" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-1">CMS Username &amp; Temp Password *</label>
+                        <input type="password" value="••••••••••••" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-500">
+                    </div>
+                    <div id="field-hosting" class="hidden md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 border-t border-dashed border-gray-200">
+                        <div>
+                            <label class="block text-xs font-semibold text-purple-800 mb-1">Hosting / DNS Provider (Cloudflare / AWS) *</label>
+                            <input type="text" placeholder="e.g. Cloudflare / WP Engine" class="w-full border border-purple-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-purple-800 mb-1">Staging Environment URL *</label>
+                            <input type="url" placeholder="https://staging.globaldyn.com" class="w-full border border-purple-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-500">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Brand Assets, Competitors & Slack -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                <div class="p-5 border-b border-gray-100 bg-gray-50/70 flex justify-between items-center">
+                    <div class="flex items-center gap-3">
+                        <span class="w-7 h-7 rounded-full bg-blue-100 text-blue-700 font-bold text-xs flex items-center justify-center">4</span>
+                        <div>
+                            <h2 class="font-bold text-gray-800">Brand Assets, Competitors &amp; Comms</h2>
+                            <p class="text-xs text-gray-500">Used for Content tone, SEO competitor tracking, and Slack channel automation</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-5 space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-1">Brand Guidelines &amp; Asset Folder Link</label>
+                            <input type="url" placeholder="https://drive.google.com/drive/folders/..." class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-1">Primary Slack Handle (for automated alerts) *</label>
+                            <input type="text" value="@johndoe-globaldyn" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-500">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-1">Top 3–5 Competitor URLs (one per line) *</label>
+                        <textarea rows="3" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-500">https://competitor-cloud.io
+https://nexgen-security.com
+https://saas-enterprise-rival.co.uk</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit -->
+            <div class="flex items-center justify-between bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
+                <p class="text-xs text-gray-500">Your progress auto-saves. You can close this link and return anytime.</p>
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold text-sm flex items-center gap-2 shadow-sm">
+                    <i class="ph-fill ph-paper-plane-tilt"></i> Submit &amp; Sync to Vault
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div id="toast-container" class="fixed bottom-5 right-5 flex flex-col gap-3 z-50"></div>
+
+    <script>
+        const activeServices = { seo: true, content: true, ppc: true, social: false, dev: false };
+
+        function connectMagicGtm() {
+            const box = document.getElementById('ml-gtm-box');
+            box.className = 'p-3.5 rounded-xl border border-green-200 bg-green-50/50 flex items-center justify-between';
+            document.getElementById('ml-gtm-sub').className = 'text-[11px] text-green-700';
+            document.getElementById('ml-gtm-sub').textContent = 'Connected: GTM-K92M4LP';
+            document.getElementById('ml-gtm-btn').outerHTML = '<span class="px-2.5 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold flex items-center gap-1"><i class="ph-fill ph-check-circle"></i>Connected</span>';
+            showToast('Google Tag Manager OAuth account connected!');
+        }
+
+        function toggleService(svc, isChecked) {
+            activeServices[svc] = isChecked;
+            document.getElementById('sec-social').classList.toggle('hidden', !activeServices.social);
+            document.getElementById('field-gads').classList.toggle('hidden', !activeServices.ppc);
+            document.getElementById('field-hosting').classList.toggle('hidden', !activeServices.dev);
+            document.getElementById('sec-google').classList.toggle('hidden', !activeServices.seo && !activeServices.ppc);
+            showToast(`Updated form fields for ${svc.toUpperCase()} (${isChecked ? 'Included' : 'Removed'})`, 'info');
+        }
+
+        function handleMagicSubmit(e) {
+            e.preventDefault();
+            document.getElementById('progress-bar').style.width = '100%';
+            document.getElementById('progress-label').textContent = 'All Required Credentials Submitted!';
+            showToast('Credentials encrypted to 1Password Vault & Account Manager notified!');
+        }
+
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            const icon = type === 'success' ? 'ph-check-circle text-green-500' : 'ph-info text-blue-500';
+            const bg = type === 'success' ? 'border-green-100' : 'border-blue-100';
+            toast.className = `flex items-center gap-3 bg-white px-4 py-3 rounded-lg shadow-lg border ${bg} transform transition-all duration-300 translate-y-10 opacity-0`;
+            toast.innerHTML = `<i class="ph-fill ${icon} text-xl"></i><span class="text-sm font-medium text-gray-700">${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => toast.classList.remove('translate-y-10', 'opacity-0'), 10);
+            setTimeout(() => { toast.classList.add('opacity-0'); setTimeout(() => toast.remove(), 300); }, 3500);
+        }
+    </script>
+</body>
+</html>
