@@ -177,13 +177,13 @@
                         </div>
                     </div>
 
-                    <!-- Campaign Term Breakdown (Inspired by Spreadsheet Bottom-Right Box) -->
+                    <!-- Selected Campaign Term Breakdown -->
                     <div class="bg-slate-50 rounded-xl border border-slate-200 p-4 space-y-2 text-xs">
-                        <p class="font-bold text-slate-700 uppercase tracking-wider text-[11px] mb-2">Monthly Retainer Comparison</p>
-                        <div class="flex justify-between"><span>1 Month Campaign</span><strong id="term-1">£0.00 / mo</strong></div>
-                        <div class="flex justify-between"><span>3 Month Campaign</span><strong id="term-3">£0.00 / mo</strong></div>
-                        <div class="flex justify-between"><span>6 Month Campaign</span><strong id="term-6">£0.00 / mo</strong></div>
-                        <div class="flex justify-between text-blue-700 font-bold bg-blue-50 px-2 py-1 rounded"><span>12 Month Campaign</span><span id="term-12">£0.00 / mo</span></div>
+                        <p class="font-bold text-slate-700 uppercase tracking-wider text-[11px] mb-1">Selected Campaign Retainer</p>
+                        <div class="flex justify-between items-center text-blue-700 font-bold bg-blue-50 px-3 py-2 rounded-lg text-sm">
+                            <span id="term-selected-label">12 Month Campaign</span>
+                            <span id="term-selected-val">£0.00 / mo</span>
+                        </div>
                     </div>
 
                     <div class="space-y-2 pt-1">
@@ -445,10 +445,8 @@
             document.getElementById('sum-extra-fees').textContent = fmt(extraFees);
             document.getElementById('sum-total').textContent = fmt(grandTotal);
 
-            document.getElementById('term-1').textContent = `${fmt(grandTotal)} / mo`;
-            document.getElementById('term-3').textContent = `${fmt(grandTotal / 3)} / mo`;
-            document.getElementById('term-6').textContent = `${fmt(grandTotal / 6)} / mo`;
-            document.getElementById('term-12').textContent = `${fmt(grandTotal / 12)} / mo`;
+            document.getElementById('term-selected-label').textContent = `${months} Month Campaign`;
+            document.getElementById('term-selected-val').textContent = `${fmt(grandTotal / months)} / mo`;
         }
 
         function applyPreset(preset) {
@@ -478,8 +476,9 @@
             const client = document.getElementById('qb-client').value;
             const total = document.getElementById('sum-total').textContent;
             const hrs = document.getElementById('sum-hours').textContent;
-            const m12 = document.getElementById('term-12').textContent;
-            navigator.clipboard?.writeText(`ClientHub360 Quote — ${client}\nTotal Hours: ${hrs}\nTotal Campaign Value: ${total}\n12-Month Retainer: ${m12}`);
+            const termLabel = document.getElementById('term-selected-label').textContent;
+            const termVal = document.getElementById('term-selected-val').textContent;
+            navigator.clipboard?.writeText(`ClientHub360 Quote — ${client}\nTotal Hours: ${hrs}\nTotal Campaign Value: ${total}\n${termLabel}: ${termVal}`);
             showToast('Quote breakdown copied to clipboard!');
         }
 
