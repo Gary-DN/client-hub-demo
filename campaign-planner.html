@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Hub 360 - Campaign Planner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden text-slate-800">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white border-r border-gray-200 flex flex-col shadow-sm z-20 flex-shrink-0">
+        <div class="h-16 flex items-center px-6 border-b border-gray-100">
+            <i class="ph-fill ph-planet text-blue-600 text-2xl mr-2"></i>
+            <span class="font-bold text-lg tracking-tight">ClientHub<span class="text-blue-600">360</span></span>
+        </div>
+        <nav class="flex-1 py-4 flex flex-col gap-1 overflow-y-auto">
+            <a href="prospecting.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-funnel text-xl"></i><span>Prospecting</span>
+            </a>
+            <a href="onboarding.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-user-plus text-xl"></i><span>Onboarding</span>
+            </a>
+            <a href="production.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-kanban text-xl"></i><span>Production</span>
+            </a>
+            <a href="reporting.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-chart-line-up text-xl"></i><span>Reporting</span>
+            </a>
+            <a href="upsells.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-trend-up text-xl"></i><span>Retention &amp; Upsells</span>
+            </a>
+            <a href="users.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-users text-xl"></i><span>Users &amp; Teams</span>
+            </a>
+
+            <!-- Tools Section -->
+            <div class="mt-4 pt-4 border-t border-gray-100">
+                <div class="px-6 pb-2 flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-gray-400">
+                    <i class="ph ph-wrench"></i><span>Tools</span>
+                </div>
+                <a href="quote-builder.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                    <i class="ph-calculator text-xl"></i><span>Quote Builder</span>
+                </a>
+                <a href="campaign-planner.html" class="flex items-center gap-3 px-6 py-2.5 bg-blue-50 text-blue-700 border-r-4 border-blue-600 font-semibold transition-colors">
+                    <i class="ph-calendar-check text-xl"></i><span>Campaign Planner</span>
+                </a>
+                <a href="mcp-setup.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                    <i class="ph-plugs-connected text-xl"></i><span>MCP Setup</span>
+                </a>
+            </div>
+        </nav>
+        <div class="p-4 border-t border-gray-100">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">AM</div>
+                <div class="text-sm">
+                    <p class="font-semibold text-gray-800">Admin User</p>
+                    <p class="text-xs text-gray-500">Agency Workspace</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col h-screen overflow-y-auto relative">
+        <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-8 sticky top-0 z-10 shadow-sm">
+            <h1 class="text-xl font-semibold text-gray-800">Campaign Planner</h1>
+            <div class="flex items-center gap-3">
+                <button onclick="autoGeneratePlan()" class="text-xs bg-white border border-gray-300 text-gray-700 px-3.5 py-2 rounded-lg font-medium hover:bg-gray-50 flex items-center gap-1.5">
+                    <i class="ph ph-magic-wand text-indigo-600"></i> Auto-Generate From Quote
+                </button>
+                <button onclick="sendTasksToProduction()" class="text-xs bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 flex items-center gap-1.5 shadow-sm">
+                    <i class="ph ph-paper-plane-tilt"></i> Send Tasks
+                </button>
+            </div>
+        </header>
+
+        <div class="p-8 flex-1 space-y-6">
+            <!-- Client Selector & Summary Strip -->
+            <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex flex-wrap items-center gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Select Client</label>
+                        <select id="cp-client" onchange="switchClientPlan(this.value)" class="border border-gray-300 rounded-lg px-4 py-2 bg-white text-sm font-semibold outline-none focus:border-blue-500 w-72">
+                            <option value="global">Global Dynamics (SEO, Content, PPC)</option>
+                            <option value="techflow">TechFlow Inc (SEO, PPC)</option>
+                            <option value="apex">Apex Logistics (Design &amp; Dev, Paid Social)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Target Month</label>
+                        <select id="cp-month-filter" onchange="renderPlan()" class="border border-gray-300 rounded-lg px-3 py-2 bg-white text-sm font-medium outline-none focus:border-blue-500">
+                            <option value="all">All Planned Months (M1–M4)</option>
+                            <option value="Month 1">Month 1 (Kickoff)</option>
+                            <option value="Month 2">Month 2 (Execution)</option>
+                            <option value="Month 3">Month 3 (Scale &amp; Audit)</option>
+                            <option value="Month 4">Month 4 (Optimization)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-6 text-sm">
+                    <div>
+                        <span class="text-xs text-gray-400 block uppercase font-semibold">Services</span>
+                        <span id="cp-services" class="font-semibold text-gray-800">SEO, Content, PPC</span>
+                    </div>
+                    <div>
+                        <span class="text-xs text-gray-400 block uppercase font-semibold">Campaign Term</span>
+                        <span id="cp-term" class="font-semibold text-gray-800">12 Months</span>
+                    </div>
+                    <div>
+                        <span class="text-xs text-gray-400 block uppercase font-semibold">Selected Tasks</span>
+                        <span id="cp-count" class="font-bold text-blue-600">10 tasks (38 hrs)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Planned Tasks Table -->
+            <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+                <div class="px-6 py-4 border-b border-gray-100 bg-gray-50/60 flex flex-wrap justify-between items-center gap-3">
+                    <div>
+                        <h2 class="font-bold text-gray-800">Scheduled Campaign Deliverables</h2>
+                        <p class="text-xs text-gray-500">Review, adjust assignees/due dates, and click <strong>Send Tasks</strong> to populate the client's Production Kanban board.</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <label class="text-xs font-medium text-gray-600 flex items-center gap-1.5 cursor-pointer">
+                            <input type="checkbox" id="select-all-box" checked onchange="toggleAllTasks(this.checked)" class="accent-blue-600"> Select All
+                        </label>
+                        <button onclick="sendTasksToProduction()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow-sm">
+                            <i class="ph ph-kanban"></i> Send Selected Tasks to Production
+                        </button>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-gray-50 text-gray-600 uppercase text-xs border-b border-gray-200">
+                            <tr>
+                                <th class="px-5 py-3 w-10"></th>
+                                <th class="px-4 py-3">Month</th>
+                                <th class="px-4 py-3">Department</th>
+                                <th class="px-4 py-3">Task / Deliverable</th>
+                                <th class="px-4 py-3">Assignee</th>
+                                <th class="px-4 py-3">Est. Hours</th>
+                                <th class="px-4 py-3">Due Date</th>
+                                <th class="px-4 py-3 text-right">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="plan-tbody" class="divide-y divide-gray-100 text-gray-700"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="toast-container" class="fixed bottom-5 right-5 flex flex-col gap-3 z-50"></div>
+
+    <script>
+        const clientConfigs = {
+            global: {
+                name: 'Global Dynamics',
+                services: 'SEO, Content, PPC',
+                term: '12 Months',
+                tasks: [
+                    { id: 1, month: 'Month 1', dept: 'SEO', title: 'Competitor Analysis (Automated)', assignee: 'Alex Rivera', hrs: 3, due: 'Nov 12, 2026', checked: true, sent: true },
+                    { id: 2, month: 'Month 1', dept: 'SEO', title: 'Initial Website Technical Audit', assignee: 'Alex Rivera', hrs: 10, due: 'Nov 21, 2026', checked: true, sent: false },
+                    { id: 3, month: 'Month 1', dept: 'SEO', title: 'Event / Goal Tracking & GA4 QA', assignee: 'Alex Rivera', hrs: 3, due: 'Nov 24, 2026', checked: true, sent: false },
+                    { id: 4, month: 'Month 1', dept: 'Content', title: 'Blog 1: Cloud Security Best Practices 2026', assignee: 'Sarah Jenkins', hrs: 4, due: 'Nov 22, 2026', checked: true, sent: false },
+                    { id: 5, month: 'Month 1', dept: 'PPC', title: 'Google Ads Search Campaign Build & Pixel QA', assignee: 'Mike K.', hrs: 5, due: 'Nov 25, 2026', checked: true, sent: false },
+                    { id: 6, month: 'Month 2', dept: 'SEO', title: 'On-page Optimisation & Schema Markup', assignee: 'Alex Rivera', hrs: 5, due: 'Dec 08, 2026', checked: true, sent: false },
+                    { id: 7, month: 'Month 2', dept: 'Outreach', title: 'Backlink Prospecting & 2 Digital PR Placements', assignee: 'Alex Rivera', hrs: 8, due: 'Dec 15, 2026', checked: true, sent: false },
+                    { id: 8, month: 'Month 2', dept: 'Content', title: 'Blog 2: Enterprise Zero-Trust IAM Guide', assignee: 'Sarah Jenkins', hrs: 4, due: 'Dec 18, 2026', checked: true, sent: false },
+                    { id: 9, month: 'Month 3', dept: 'SEO', title: 'Q1 Technical Audit Refresh & Core Web Vitals', assignee: 'Alex Rivera', hrs: 6, due: 'Jan 12, 2027', checked: true, sent: false },
+                    { id: 10, month: 'Month 4', dept: 'Content', title: 'Resource Guide / Ebook Draft (SOC2)', assignee: 'Sarah Jenkins', hrs: 14, due: 'Feb 10, 2027', checked: true, sent: false }
+                ]
+            },
+            techflow: {
+                name: 'TechFlow Inc',
+                services: 'SEO, PPC',
+                term: '6 Months',
+                tasks: [
+                    { id: 11, month: 'Month 1', dept: 'SEO', title: 'Technical SEO Audit & Crawl Diagnostics', assignee: 'Alex Rivera', hrs: 8, due: 'Nov 26, 2026', checked: true, sent: false },
+                    { id: 12, month: 'Month 1', dept: 'PPC', title: 'Google Ads Account Setup & Conversion Tracking', assignee: 'Mike K.', hrs: 5, due: 'Nov 28, 2026', checked: true, sent: false },
+                    { id: 13, month: 'Month 2', dept: 'SEO', title: 'Keyword Research & Landing Page Mapping', assignee: 'Alex Rivera', hrs: 4, due: 'Dec 10, 2026', checked: true, sent: false },
+                    { id: 14, month: 'Month 3', dept: 'PPC', title: 'Targeted Remarketing Campaign Setup', assignee: 'Mike K.', hrs: 3, due: 'Jan 09, 2027', checked: true, sent: false }
+                ]
+            },
+            apex: {
+                name: 'Apex Logistics',
+                services: 'Design & Dev, Paid Social',
+                term: '6 Months',
+                tasks: [
+                    { id: 21, month: 'Month 1', dept: 'Design & Dev', title: 'UX Audit & Conversion Landing Page Wireframes', assignee: 'Mike K.', hrs: 12, due: 'Nov 25, 2026', checked: true, sent: false },
+                    { id: 22, month: 'Month 1', dept: 'Paid Social', title: 'Meta Business Manager & LinkedIn Insight Tag QA', assignee: 'Sarah Jenkins', hrs: 4, due: 'Nov 27, 2026', checked: true, sent: false },
+                    { id: 23, month: 'Month 2', dept: 'Paid Social', title: 'LinkedIn Lead Gen Carousel Creative Loop', assignee: 'Sarah Jenkins', hrs: 6, due: 'Dec 12, 2026', checked: true, sent: false }
+                ]
+            }
+        };
+
+        let activeClientKey = 'global';
+
+        function deptBadge(dept) {
+            const map = {
+                'SEO': 'bg-blue-100 text-blue-700',
+                'Content': 'bg-orange-100 text-orange-700',
+                'PPC': 'bg-amber-100 text-amber-800',
+                'Outreach': 'bg-emerald-100 text-emerald-700',
+                'Design & Dev': 'bg-indigo-100 text-indigo-700',
+                'Paid Social': 'bg-purple-100 text-purple-700'
+            };
+            return map[dept] || 'bg-gray-100 text-gray-700';
+        }
+
+        function switchClientPlan(key) {
+            activeClientKey = key;
+            const cfg = clientConfigs[key];
+            document.getElementById('cp-services').textContent = cfg.services;
+            document.getElementById('cp-term').textContent = cfg.term;
+            renderPlan();
+            showToast(`Loaded campaign plan for ${cfg.name}`, 'info');
+        }
+
+        function renderPlan() {
+            const cfg = clientConfigs[activeClientKey];
+            const filter = document.getElementById('cp-month-filter').value;
+            const tbody = document.getElementById('plan-tbody');
+            tbody.innerHTML = '';
+
+            let selectedCount = 0;
+            let selectedHrs = 0;
+
+            cfg.tasks.forEach(task => {
+                if (task.checked) { selectedCount++; selectedHrs += task.hrs; }
+                if (filter !== 'all' && task.month !== filter) return;
+
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-gray-50/70';
+                tr.innerHTML = `
+                    <td class="px-5 py-3"><input type="checkbox" ${task.checked ? 'checked' : ''} onchange="toggleTask(${task.id}, this.checked)" class="accent-blue-600"></td>
+                    <td class="px-4 py-3 font-semibold text-xs text-gray-600">${task.month}</td>
+                    <td class="px-4 py-3"><span class="text-[10px] font-bold px-2 py-0.5 rounded uppercase ${deptBadge(task.dept)}">${task.dept}</span></td>
+                    <td class="px-4 py-3 font-medium text-gray-800">${task.title}</td>
+                    <td class="px-4 py-3 text-xs text-gray-600">${task.assignee}</td>
+                    <td class="px-4 py-3 text-xs font-mono font-semibold">${task.hrs} hrs</td>
+                    <td class="px-4 py-3 text-xs text-gray-500">${task.due}</td>
+                    <td class="px-4 py-3 text-right">
+                        ${task.sent
+                            ? '<span class="px-2.5 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-semibold">Sent to Production</span>'
+                            : '<span class="px-2.5 py-1 bg-gray-100 text-gray-600 rounded-full text-xs font-medium">Queued</span>'}
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            document.getElementById('cp-count').textContent = `${selectedCount} tasks (${selectedHrs} hrs)`;
+        }
+
+        function toggleTask(id, checked) {
+            const task = clientConfigs[activeClientKey].tasks.find(t => t.id === id);
+            if (task) task.checked = checked;
+            renderPlan();
+        }
+
+        function toggleAllTasks(checked) {
+            clientConfigs[activeClientKey].tasks.forEach(t => t.checked = checked);
+            renderPlan();
+        }
+
+        function autoGeneratePlan() {
+            const cfg = clientConfigs[activeClientKey];
+            showToast(`Auto-generated ${cfg.term} roadmap for ${cfg.name} from approved Quote!`, 'info');
+            renderPlan();
+        }
+
+        function sendTasksToProduction() {
+            const cfg = clientConfigs[activeClientKey];
+            let newlySent = 0;
+            cfg.tasks.forEach(t => {
+                if (t.checked && !t.sent) {
+                    t.sent = true;
+                    newlySent++;
+                }
+            });
+            renderPlan();
+            if (newlySent > 0) {
+                showToast(`Sent ${newlySent} tasks to ${cfg.name}'s Production Kanban boards!`);
+            } else {
+                showToast(`All selected tasks for ${cfg.name} are already in Production.`, 'info');
+            }
+        }
+
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            const icon = type === 'success' ? 'ph-check-circle text-green-500' : 'ph-info text-blue-500';
+            const bg = type === 'success' ? 'border-green-100' : 'border-blue-100';
+            toast.className = `flex items-center gap-3 bg-white px-4 py-3 rounded-lg shadow-lg border ${bg} transform transition-all duration-300 translate-y-10 opacity-0`;
+            toast.innerHTML = `<i class="ph-fill ${icon} text-xl"></i><span class="text-sm font-medium text-gray-700">${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => toast.classList.remove('translate-y-10', 'opacity-0'), 10);
+            setTimeout(() => { toast.classList.add('opacity-0'); setTimeout(() => toast.remove(), 300); }, 3500);
+        }
+
+        renderPlan();
+    </script>
+</body>
+</html>
