@@ -247,6 +247,38 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Section 4: Automated Slack Alert System -->
+            <div class="space-y-4">
+                <h3 class="text-lg font-bold text-gray-900 flex items-center gap-2"><i class="ph-fill ph-slack-logo text-purple-600"></i> 4. Automated Slack Alert System (Dedicated Client Channels)</h3>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                    <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 space-y-3">
+                        <h4 class="font-bold text-gray-900 text-sm">How Client Slack Integration Works</h4>
+                        <p class="text-xs text-gray-600">Every live client is linked to a dedicated Slack channel (e.g., <code class="bg-gray-100 px-1.5 py-0.5 rounded text-purple-700">#client-global-dynamics</code>) during Onboarding. ClientHub360 automatically fires real-time alerts to that channel whenever key events happen:</p>
+                        <ul class="text-xs text-gray-600 space-y-1.5 list-disc pl-4">
+                            <li><strong>Tasks Marked Complete:</strong> Notifies the account team (and optionally the client channel) when deliverables move to Done.</li>
+                            <li><strong>Connected Accounts Disconnecting / Expiring:</strong> Instant warning if GA4, Search Console, Google Ads, or Meta Business Manager loses OAuth access or a token is about to expire.</li>
+                            <li><strong>Content Approvals &amp; Proposal Sign-Off:</strong> Alerts when a client clicks <em>Yes (Approve)</em>, <em>No (Revise)</em>, or signs an SOW.</li>
+                            <li><strong>Budget Pacing &amp; Health Score Drops:</strong> Flags ad spend anomalies, overdue invoices, or a client dropping to <em>AMBER / RED</em>.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-900 text-slate-200 rounded-xl p-5 space-y-3 text-xs font-mono shadow-sm">
+                        <div class="flex items-center justify-between border-b border-slate-700 pb-2">
+                            <span class="font-bold text-white">#client-global-dynamics</span>
+                            <span class="text-[10px] bg-purple-500/30 text-purple-200 px-2 py-0.5 rounded">Slack Bot Preview</span>
+                        </div>
+                        <div class="bg-slate-800/80 border-l-4 border-emerald-400 p-3 rounded-r space-y-1">
+                            <p class="text-emerald-300 font-bold">✅ Task Completed — SEO</p>
+                            <p class="text-slate-300">Alex Rivera completed <strong>Competitor Analysis (Automated)</strong> and attached <em>Audit_Report.pdf</em>.</p>
+                        </div>
+                        <div class="bg-slate-800/80 border-l-4 border-amber-400 p-3 rounded-r space-y-1">
+                            <p class="text-amber-300 font-bold">⚠️ Connector Alert — Meta Business Manager</p>
+                            <p class="text-slate-300">OAuth token for <strong>BM-8849201928</strong> expires in 7 days. <span class="underline text-blue-300">Send Refresh Magic Link</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 </body>
