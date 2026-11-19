@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Hub 360 - Sales Quote Builder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden text-slate-800">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white border-r border-gray-200 flex flex-col shadow-sm z-20 flex-shrink-0">
+        <div class="h-16 flex items-center px-6 border-b border-gray-100">
+            <i class="ph-fill ph-planet text-blue-600 text-2xl mr-2"></i>
+            <span class="font-bold text-lg tracking-tight">ClientHub<span class="text-blue-600">360</span></span>
+        </div>
+        <nav class="flex-1 py-4 flex flex-col gap-1 overflow-y-auto">
+            <a href="prospecting.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-funnel text-xl"></i><span>Prospecting</span>
+            </a>
+            <a href="onboarding.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-user-plus text-xl"></i><span>Onboarding</span>
+            </a>
+            <a href="production.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-kanban text-xl"></i><span>Production</span>
+            </a>
+            <a href="reporting.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-chart-line-up text-xl"></i><span>Reporting</span>
+            </a>
+            <a href="upsells.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-trend-up text-xl"></i><span>Retention &amp; Upsells</span>
+            </a>
+            <a href="users.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-users text-xl"></i><span>Users &amp; Teams</span>
+            </a>
+
+            <!-- Tools Section -->
+            <div class="mt-4 pt-4 border-t border-gray-100">
+                <div class="px-6 pb-2 flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-gray-400">
+                    <i class="ph ph-wrench"></i><span>Tools</span>
+                </div>
+                <a href="quote-builder.html" class="flex items-center gap-3 px-6 py-2.5 bg-blue-50 text-blue-700 border-r-4 border-blue-600 font-semibold transition-colors">
+                    <i class="ph-calculator text-xl"></i><span>Quote Builder</span>
+                </a>
+                <a href="mcp-setup.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                    <i class="ph-plugs-connected text-xl"></i><span>MCP Setup</span>
+                </a>
+            </div>
+        </nav>
+        <div class="p-4 border-t border-gray-100">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">AM</div>
+                <div class="text-sm">
+                    <p class="font-semibold text-gray-800">Admin User</p>
+                    <p class="text-xs text-gray-500">Agency Workspace</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col h-screen overflow-y-auto relative">
+        <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-8 sticky top-0 z-10 shadow-sm">
+            <div>
+                <h1 class="text-xl font-semibold text-gray-800">Sales Quote Builder</h1>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="resetQuote()" class="text-xs bg-white border border-gray-300 text-gray-700 px-3 py-1.5 rounded-lg hover:bg-gray-50 font-medium">Reset to Defaults</button>
+                <button onclick="showToast('Quote synced to Global Dynamics deal in Prospecting!')" class="text-xs bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 flex items-center gap-1.5">
+                    <i class="ph ph-paper-plane-tilt"></i> Push Quote to Prospecting
+                </button>
+            </div>
+        </header>
+
+        <div class="p-8 flex-1">
+            <!-- Top Deal Context Bar -->
+            <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-6 grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Prospect / Client</label>
+                    <input type="text" id="qb-client" value="Global Dynamics" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm font-semibold outline-none focus:border-blue-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Campaign Length</label>
+                    <select id="qb-months" onchange="recalculate()" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm font-semibold outline-none focus:border-blue-500">
+                        <option value="1">1 Month Campaign</option>
+                        <option value="3">3 Month Campaign</option>
+                        <option value="6">6 Month Campaign</option>
+                        <option value="12" selected>12 Month Campaign</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Blended Hourly Rate (£)</label>
+                    <input type="number" id="qb-rate" value="65" min="1" oninput="recalculate()" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm font-semibold outline-none focus:border-blue-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Quick Preset</label>
+                    <select onchange="applyPreset(this.value)" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-500">
+                        <option value="custom">Custom / Current</option>
+                        <option value="seo-growth">SEO + Content Growth (12m)</option>
+                        <option value="full-funnel">Full Funnel (SEO + PPC + Social)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 items-start">
+                <!-- Left 2 Columns: Service Categories -->
+                <div class="xl:col-span-2 space-y-5">
+                    <!-- Category Tabs -->
+                    <div class="flex flex-wrap gap-2 bg-white p-2 rounded-xl border border-gray-200 shadow-sm text-xs font-semibold">
+                        <button onclick="filterCat('all')" class="cat-btn px-3 py-1.5 rounded-lg bg-blue-600 text-white" data-cat="all">All Services</button>
+                        <button onclick="filterCat('mgmt')" class="cat-btn px-3 py-1.5 rounded-lg text-gray-600 hover:bg-gray-100" data-cat="mgmt">Account Mgmt</button>
+                        <button onclick="filterCat('seo')" class="cat-btn px-3 py-1.5 rounded-lg text-gray-600 hover:bg-gray-100" data-cat="seo">SEO</button>
+                        <button onclick="filterCat('content')" class="cat-btn px-3 py-1.5 rounded-lg text-gray-600 hover:bg-gray-100" data-cat="content">Content &amp; Email</button>
+                        <button onclick="filterCat('outreach')" class="cat-btn px-3 py-1.5 rounded-lg text-gray-600 hover:bg-gray-100" data-cat="outreach">Outreach / PR</button>
+                        <button onclick="filterCat('ppc')" class="cat-btn px-3 py-1.5 rounded-lg text-gray-600 hover:bg-gray-100" data-cat="ppc">PPC</button>
+                        <button onclick="filterCat('social')" class="cat-btn px-3 py-1.5 rounded-lg text-gray-600 hover:bg-gray-100" data-cat="social">Paid Social</button>
+                        <button onclick="filterCat('ai')" class="cat-btn px-3 py-1.5 rounded-lg text-gray-600 hover:bg-gray-100" data-cat="ai">AI Search</button>
+                        <button onclick="filterCat('web')" class="cat-btn px-3 py-1.5 rounded-lg text-gray-600 hover:bg-gray-100" data-cat="web">Web &amp; Hosting</button>
+                    </div>
+
+                    <!-- Dynamic Categories Container -->
+                    <div id="categories-container" class="space-y-5"></div>
+                </div>
+
+                <!-- Right Column: Sticky Quote Summary -->
+                <div class="bg-white rounded-2xl border border-gray-200 shadow-md p-6 sticky top-20 space-y-5">
+                    <div class="flex justify-between items-center border-b border-gray-100 pb-4">
+                        <div>
+                            <h2 class="font-bold text-gray-900 text-lg">Quote Summary</h2>
+                            <p id="sum-client-label" class="text-xs text-gray-500">Global Dynamics • 12 Month Campaign</p>
+                        </div>
+                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-bold">Live Calc</span>
+                    </div>
+
+                    <div class="space-y-2.5 text-sm">
+                        <div class="flex justify-between text-gray-600">
+                            <span>Total Allocated Hours</span>
+                            <strong id="sum-hours" class="text-gray-900">0 hrs</strong>
+                        </div>
+                        <div class="flex justify-between text-gray-600">
+                            <span>Cost of Hours</span>
+                            <strong id="sum-hours-cost" class="text-gray-900">£0.00</strong>
+                        </div>
+                        <div class="flex justify-between text-gray-600">
+                            <span>PPC Management Fee (15% of spend)</span>
+                            <strong id="sum-ppc-fee" class="text-gray-900">£0.00</strong>
+                        </div>
+                        <div class="flex justify-between text-gray-600">
+                            <span>Social Management Fee (20% of spend)</span>
+                            <strong id="sum-social-fee" class="text-gray-900">£0.00</strong>
+                        </div>
+                        <div class="flex justify-between text-gray-600">
+                            <span>Outreach &amp; Hosting Fees</span>
+                            <strong id="sum-extra-fees" class="text-gray-900">£0.00</strong>
+                        </div>
+                        <div class="border-t border-gray-200 pt-3 flex justify-between items-baseline">
+                            <span class="font-bold text-gray-900">Total Campaign Cost</span>
+                            <span id="sum-total" class="text-2xl font-extrabold text-blue-600">£0.00</span>
+                        </div>
+                    </div>
+
+                    <!-- Campaign Term Breakdown (Inspired by Spreadsheet Bottom-Right Box) -->
+                    <div class="bg-slate-50 rounded-xl border border-slate-200 p-4 space-y-2 text-xs">
+                        <p class="font-bold text-slate-700 uppercase tracking-wider text-[11px] mb-2">Monthly Retainer Comparison</p>
+                        <div class="flex justify-between"><span>1 Month Campaign</span><strong id="term-1">£0.00 / mo</strong></div>
+                        <div class="flex justify-between"><span>3 Month Campaign</span><strong id="term-3">£0.00 / mo</strong></div>
+                        <div class="flex justify-between"><span>6 Month Campaign</span><strong id="term-6">£0.00 / mo</strong></div>
+                        <div class="flex justify-between text-blue-700 font-bold bg-blue-50 px-2 py-1 rounded"><span>12 Month Campaign</span><span id="term-12">£0.00 / mo</span></div>
+                    </div>
+
+                    <div class="space-y-2 pt-1">
+                        <button onclick="copyQuoteText()" class="w-full bg-slate-900 hover:bg-slate-800 text-white py-2.5 rounded-xl text-sm font-semibold flex items-center justify-center gap-2">
+                            <i class="ph ph-copy"></i> Copy Quote Breakdown
+                        </button>
+                        <button onclick="showToast('PandaDoc Proposal draft generated from Quote!')" class="w-full bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 py-2.5 rounded-xl text-sm font-semibold flex items-center justify-center gap-2">
+                            <i class="ph ph-file-pdf text-red-500"></i> Generate PandaDoc Quote
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="toast-container" class="fixed bottom-5 right-5 flex flex-col gap-3 z-50"></div>
+
+    <script>
+        const quoteModel = [
+            {
+                id: 'mgmt',
+                title: 'Account Management (Core)',
+                badge: 'Required',
+                badgeClass: 'bg-amber-100 text-amber-800',
+                items: [
+                    { name: 'SEO Management Hours (per month)', hours: 5, qty: 12 },
+                    { name: 'Client Operations & Strategy (COS / mo)', hours: 3, qty: 12 }
+                ]
+            },
+            {
+                id: 'seo',
+                title: 'SEO',
+                badge: 'Technical & On-Page',
+                badgeClass: 'bg-blue-100 text-blue-700',
+                items: [
+                    { name: 'Technical Audit', hours: 10, qty: 4 },
+                    { name: 'Page Speed Audit', hours: 7, qty: 0 },
+                    { name: 'On-page Optimisation (per hour)', hours: 1, qty: 5 },
+                    { name: 'Backlink Analysis / Clean Up / Disavow', hours: 1, qty: 0 },
+                    { name: 'Keyword Research / KWM', hours: 1, qty: 0 },
+                    { name: 'Competitor Analysis / Reporting', hours: 1, qty: 0 },
+                    { name: 'Event / Goal Tracking', hours: 3, qty: 1 },
+                    { name: 'Tag Manager Migration', hours: 5, qty: 0 },
+                    { name: '301 Redirect Work', hours: 1, qty: 0 }
+                ]
+            },
+            {
+                id: 'content',
+                title: 'Content / Blog Management / Email',
+                badge: 'Production',
+                badgeClass: 'bg-orange-100 text-orange-700',
+                items: [
+                    { name: 'Blog Management 1 (2 blogs per month)', hours: 4, qty: 12 },
+                    { name: 'Blog Management 2 (4 blogs per month)', hours: 8, qty: 0 },
+                    { name: 'Blog Management 3 (2 blogs + 2 features/mo)', hours: 12, qty: 0 },
+                    { name: 'Additional Website Copy (per 1000 words)', hours: 1, qty: 0 },
+                    { name: 'Site Content Audit (per hour)', hours: 1, qty: 0 },
+                    { name: 'How To / Resource Guide / Ebook', hours: 14, qty: 0 },
+                    { name: 'Static Infographic', hours: 10, qty: 0 },
+                    { name: 'Email Template Design & Dev', hours: 20, qty: 0 },
+                    { name: 'Email Campaign Management (per hour)', hours: 1, qty: 0 }
+                ]
+            },
+            {
+                id: 'outreach',
+                title: 'Outreach / Digital PR',
+                badge: 'Link Building',
+                badgeClass: 'bg-emerald-100 text-emerald-700',
+                extraFeePerQty: 120,
+                items: [
+                    { name: 'Backlink Prospecting (per hour)', hours: 1, qty: 12 },
+                    { name: 'Press Release + Circulation', hours: 10, qty: 0 },
+                    { name: 'Directories / Citations 10 / 10', hours: 1, qty: 0 },
+                    { name: 'Outreach (per article)', hours: 4, qty: 24, feePerUnit: 123.75 },
+                    { name: 'Research (per hour)', hours: 1, qty: 0 }
+                ]
+            },
+            {
+                id: 'ppc',
+                title: 'PPC (Google / Bing Ads)',
+                badge: 'Paid Search',
+                badgeClass: 'bg-indigo-100 text-indigo-700',
+                spendInputId: 'ppc-spend',
+                spendLabel: 'Annual / Campaign Ad Spend (£)',
+                defaultSpend: 250000,
+                feeRate: 0.15,
+                items: [
+                    { name: 'Account Setup', hours: 5, qty: 0 },
+                    { name: 'HTML5 Banners', hours: 12, qty: 0 },
+                    { name: 'Targeted Remarketing Setup', hours: 3, qty: 0 },
+                    { name: 'Dynamic Remarketing Setup', hours: 7, qty: 0 },
+                    { name: 'Shopping Setup (up to 700 products)', hours: 12, qty: 0 },
+                    { name: 'YouTube Channel Setup', hours: 4, qty: 0 },
+                    { name: 'Bing Advertising Setup (per hour)', hours: 1, qty: 0 }
+                ]
+            },
+            {
+                id: 'social',
+                title: 'Paid Social',
+                badge: 'Meta / LinkedIn',
+                badgeClass: 'bg-purple-100 text-purple-700',
+                spendInputId: 'social-spend',
+                spendLabel: 'Campaign Social Ad Spend (£)',
+                defaultSpend: 10000,
+                feeRate: 0.20,
+                items: [
+                    { name: 'Campaign Set-Up (per channel)', hours: 5, qty: 0 },
+                    { name: 'Social Competition (per hour)', hours: 1, qty: 0 },
+                    { name: 'Asset Creation (per hour)', hours: 1, qty: 0 },
+                    { name: 'Audience Setup (per hour)', hours: 1, qty: 0 }
+                ]
+            },
+            {
+                id: 'ai',
+                title: 'AI Search & GEO',
+                badge: 'AI Visibility',
+                badgeClass: 'bg-cyan-100 text-cyan-800',
+                items: [
+                    { name: 'AI Tracking / Reporting', hours: 2, qty: 12 },
+                    { name: 'Long Form AI Content', hours: 2, qty: 0 },
+                    { name: 'Quora / Reddit Setup', hours: 1, qty: 0 }
+                ]
+            },
+            {
+                id: 'web',
+                title: 'Web, CRO & Server Hosting',
+                badge: 'Design & Dev',
+                badgeClass: 'bg-slate-100 text-slate-700',
+                hostingInputId: 'hosting-months',
+                items: [
+                    { name: 'CRO Report', hours: 21, qty: 0 },
+                    { name: 'UX Audit', hours: 21, qty: 0 },
+                    { name: 'Landing Page Design (per hour)', hours: 1, qty: 0 },
+                    { name: 'Landing Page Development (per hour)', hours: 1, qty: 0 },
+                    { name: 'Support Contract (per hour)', hours: 1, qty: 0 },
+                    { name: 'Plugin Integrations / Dev Fixes', hours: 1, qty: 0 }
+                ]
+            }
+        ];
+
+        let activeFilter = 'all';
+
+        function renderCategories() {
+            const container = document.getElementById('categories-container');
+            container.innerHTML = '';
+
+            quoteModel.forEach((cat, cIdx) => {
+                if (activeFilter !== 'all' && activeFilter !== cat.id) return;
+
+                let spendHtml = '';
+                if (cat.spendInputId) {
+                    spendHtml = `
+                        <div class="px-5 py-3 bg-amber-50/70 border-b border-amber-100 flex flex-wrap items-center justify-between gap-3">
+                            <span class="text-xs font-bold text-amber-900">${cat.spendLabel}</span>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-bold text-gray-500">£</span>
+                                <input type="number" id="${cat.spendInputId}" value="${cat.defaultSpend}" min="0" step="500" oninput="recalculate()" class="w-36 border border-amber-300 bg-white rounded px-2.5 py-1 text-sm font-bold text-right outline-none focus:border-blue-500">
+                            </div>
+                        </div>
+                    `;
+                }
+                if (cat.hostingInputId) {
+                    spendHtml = `
+                        <div class="px-5 py-3 bg-slate-50 border-b border-gray-100 flex flex-wrap items-center justify-between gap-3">
+                            <span class="text-xs font-semibold text-gray-700">Managed Hosting (£150 / month) — Months</span>
+                            <input type="number" id="${cat.hostingInputId}" value="0" min="0" max="24" oninput="recalculate()" class="w-24 border border-gray-300 bg-white rounded px-2.5 py-1 text-sm font-bold text-right outline-none focus:border-blue-500">
+                        </div>
+                    `;
+                }
+
+                const rowsHtml = cat.items.map((item, iIdx) => `
+                    <tr class="hover:bg-gray-50/70">
+                        <td class="px-5 py-2.5 text-sm text-gray-700 font-medium">${item.name}</td>
+                        <td class="px-3 py-2.5 text-center text-xs text-gray-500 font-mono">${item.hours}h</td>
+                        <td class="px-3 py-2.5 text-center">
+                            <input type="number" min="0" value="${item.qty}" oninput="updateQty(${cIdx}, ${iIdx}, this.value)" class="w-20 border border-gray-300 rounded px-2 py-1 text-sm text-center font-semibold outline-none focus:border-blue-500">
+                        </td>
+                        <td id="row-tot-${cIdx}-${iIdx}" class="px-5 py-2.5 text-right text-sm font-bold text-gray-800">${item.hours * item.qty}h</td>
+                    </tr>
+                `).join('');
+
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden';
+                card.innerHTML = `
+                    <div class="px-5 py-3.5 border-b border-gray-100 bg-gray-50/60 flex justify-between items-center">
+                        <div class="flex items-center gap-2.5">
+                            <h3 class="font-bold text-gray-800">${cat.title}</h3>
+                            <span class="text-[10px] font-bold px-2 py-0.5 rounded uppercase ${cat.badgeClass}">${cat.badge}</span>
+                        </div>
+                        <span id="cat-hrs-${cIdx}" class="text-xs font-bold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-full">0 hrs</span>
+                    </div>
+                    ${spendHtml}
+                    <table class="w-full text-left">
+                        <thead class="bg-gray-50 text-[11px] text-gray-500 uppercase border-b border-gray-100">
+                            <tr><th class="px-5 py-2">Deliverable / Line Item</th><th class="px-3 py-2 text-center">Hrs/Unit</th><th class="px-3 py-2 text-center">Qty / Months</th><th class="px-5 py-2 text-right">Total Hrs</th></tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">${rowsHtml}</tbody>
+                    </table>
+                `;
+                container.appendChild(card);
+            });
+            recalculate();
+        }
+
+        function updateQty(cIdx, iIdx, val) {
+            quoteModel[cIdx].items[iIdx].qty = Math.max(0, parseInt(val || 0, 10));
+            const item = quoteModel[cIdx].items[iIdx];
+            const cell = document.getElementById(`row-tot-${cIdx}-${iIdx}`);
+            if (cell) cell.textContent = `${item.hours * item.qty}h`;
+            recalculate();
+        }
+
+        function filterCat(cat) {
+            activeFilter = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                const active = btn.dataset.cat === cat;
+                btn.className = active ? 'cat-btn px-3 py-1.5 rounded-lg bg-blue-600 text-white' : 'cat-btn px-3 py-1.5 rounded-lg text-gray-600 hover:bg-gray-100';
+            });
+            renderCategories();
+        }
+
+        function fmt(num) {
+            return '£' + num.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function recalculate() {
+            const rate = parseFloat(document.getElementById('qb-rate').value || 65);
+            const months = parseInt(document.getElementById('qb-months').value || 12, 10);
+            const client = document.getElementById('qb-client').value || 'Prospect';
+            document.getElementById('sum-client-label').textContent = `${client} • ${months} Month Campaign`;
+
+            let totalHours = 0;
+            let outreachFee = 0;
+
+            quoteModel.forEach((cat, cIdx) => {
+                let catHours = 0;
+                cat.items.forEach(item => {
+                    const h = item.hours * item.qty;
+                    catHours += h;
+                    if (item.feePerUnit) outreachFee += item.qty * item.feePerUnit;
+                });
+                totalHours += catHours;
+                const badge = document.getElementById(`cat-hrs-${cIdx}`);
+                if (badge) badge.textContent = `${catHours} hrs`;
+            });
+
+            const ppcSpend = parseFloat(document.getElementById('ppc-spend')?.value || 250000);
+            const socialSpend = parseFloat(document.getElementById('social-spend')?.value || 10000);
+            const hostingMonths = parseInt(document.getElementById('hosting-months')?.value || 0, 10);
+
+            const hoursCost = totalHours * rate;
+            const ppcFee = ppcSpend * 0.15;
+            const socialFee = socialSpend * 0.20;
+            const extraFees = outreachFee + (hostingMonths * 150);
+            const grandTotal = hoursCost + ppcFee + socialFee + extraFees;
+
+            document.getElementById('sum-hours').textContent = `${totalHours} hrs`;
+            document.getElementById('sum-hours-cost').textContent = fmt(hoursCost);
+            document.getElementById('sum-ppc-fee').textContent = fmt(ppcFee);
+            document.getElementById('sum-social-fee').textContent = fmt(socialFee);
+            document.getElementById('sum-extra-fees').textContent = fmt(extraFees);
+            document.getElementById('sum-total').textContent = fmt(grandTotal);
+
+            document.getElementById('term-1').textContent = `${fmt(grandTotal)} / mo`;
+            document.getElementById('term-3').textContent = `${fmt(grandTotal / 3)} / mo`;
+            document.getElementById('term-6').textContent = `${fmt(grandTotal / 6)} / mo`;
+            document.getElementById('term-12').textContent = `${fmt(grandTotal / 12)} / mo`;
+        }
+
+        function applyPreset(preset) {
+            if (preset === 'seo-growth') {
+                quoteModel[0].items[0].qty = 12;
+                quoteModel[0].items[1].qty = 12;
+                quoteModel[1].items[0].qty = 2;
+                quoteModel[2].items[1].qty = 12;
+                document.getElementById('ppc-spend').value = 0;
+                document.getElementById('social-spend').value = 0;
+                showToast('Loaded SEO + Content Growth preset.', 'info');
+            } else if (preset === 'full-funnel') {
+                quoteModel[4].items[0].qty = 1;
+                quoteModel[5].items[0].qty = 2;
+                document.getElementById('ppc-spend').value = 120000;
+                document.getElementById('social-spend').value = 24000;
+                showToast('Loaded Full Funnel preset.', 'info');
+            }
+            renderCategories();
+        }
+
+        function resetQuote() {
+            location.reload();
+        }
+
+        function copyQuoteText() {
+            const client = document.getElementById('qb-client').value;
+            const total = document.getElementById('sum-total').textContent;
+            const hrs = document.getElementById('sum-hours').textContent;
+            const m12 = document.getElementById('term-12').textContent;
+            navigator.clipboard?.writeText(`ClientHub360 Quote — ${client}\nTotal Hours: ${hrs}\nTotal Campaign Value: ${total}\n12-Month Retainer: ${m12}`);
+            showToast('Quote breakdown copied to clipboard!');
+        }
+
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            const icon = type === 'success' ? 'ph-check-circle text-green-500' : 'ph-info text-blue-500';
+            const bg = type === 'success' ? 'border-green-100' : 'border-blue-100';
+            toast.className = `flex items-center gap-3 bg-white px-4 py-3 rounded-lg shadow-lg border ${bg} transform transition-all duration-300 translate-y-10 opacity-0`;
+            toast.innerHTML = `<i class="ph-fill ${icon} text-xl"></i><span class="text-sm font-medium text-gray-700">${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => toast.classList.remove('translate-y-10', 'opacity-0'), 10);
+            setTimeout(() => { toast.classList.add('opacity-0'); setTimeout(() => toast.remove(), 300); }, 3000);
+        }
+
+        renderCategories();
+    </script>
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Hub 360 - MCP Setup</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden text-slate-800">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white border-r border-gray-200 flex flex-col shadow-sm z-20 flex-shrink-0">
+        <div class="h-16 flex items-center px-6 border-b border-gray-100">
+            <i class="ph-fill ph-planet text-blue-600 text-2xl mr-2"></i>
+            <span class="font-bold text-lg tracking-tight">ClientHub<span class="text-blue-600">360</span></span>
+        </div>
+        <nav class="flex-1 py-4 flex flex-col gap-1 overflow-y-auto">
+            <a href="prospecting.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-funnel text-xl"></i><span>Prospecting</span>
+            </a>
+            <a href="onboarding.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-user-plus text-xl"></i><span>Onboarding</span>
+            </a>
+            <a href="production.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-kanban text-xl"></i><span>Production</span>
+            </a>
+            <a href="reporting.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-chart-line-up text-xl"></i><span>Reporting</span>
+            </a>
+            <a href="upsells.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-trend-up text-xl"></i><span>Retention &amp; Upsells</span>
+            </a>
+            <a href="users.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-users text-xl"></i><span>Users &amp; Teams</span>
+            </a>
+
+            <!-- Tools Section -->
+            <div class="mt-4 pt-4 border-t border-gray-100">
+                <div class="px-6 pb-2 flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-gray-400">
+                    <i class="ph ph-wrench"></i><span>Tools</span>
+                </div>
+                <a href="quote-builder.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                    <i class="ph-calculator text-xl"></i><span>Quote Builder</span>
+                </a>
+                <a href="mcp-setup.html" class="flex items-center gap-3 px-6 py-2.5 bg-blue-50 text-blue-700 border-r-4 border-blue-600 font-semibold transition-colors">
+                    <i class="ph-plugs-connected text-xl"></i><span>MCP Setup</span>
+                </a>
+            </div>
+        </nav>
+        <div class="p-4 border-t border-gray-100">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">AM</div>
+                <div class="text-sm">
+                    <p class="font-semibold text-gray-800">Admin User</p>
+                    <p class="text-xs text-gray-500">Agency Workspace</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col h-screen overflow-y-auto relative">
+        <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-8 sticky top-0 z-10 shadow-sm">
+            <div class="flex items-center gap-3">
+                <h1 class="text-xl font-semibold text-gray-800">MCP Server Setup</h1>
+                <span class="px-2.5 py-0.5 bg-emerald-100 text-emerald-700 rounded-full text-xs font-bold">Model Context Protocol v1.0</span>
+            </div>
+            <button onclick="showToast('MCP Server health check passed (200 OK — 14ms).')" class="text-xs bg-white border border-gray-300 text-gray-700 px-3.5 py-2 rounded-lg font-medium hover:bg-gray-50 flex items-center gap-1.5">
+                <i class="ph-fill ph-pulse text-emerald-500"></i> Test Endpoint
+            </button>
+        </header>
+
+        <div class="p-8 flex-1 space-y-6 max-w-6xl">
+            <!-- Hero Explainer -->
+            <div class="bg-gradient-to-r from-slate-900 to-blue-900 text-white rounded-2xl p-6 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div class="space-y-2 max-w-2xl">
+                    <span class="text-[11px] font-bold uppercase tracking-wider bg-blue-500/30 text-blue-200 px-2.5 py-1 rounded">AI Chat Data Source</span>
+                    <h2 class="text-2xl font-bold">Query ClientHub360 directly from your AI Chat Window</h2>
+                    <p class="text-sm text-slate-300">Connect ClientHub360 as an MCP server in <strong>Claude, ChatGPT, Cursor, or Antigravity</strong>. Ask natural-language questions about pipeline deals, client health scores, hours profitability, and GA4 performance without leaving your chat.</p>
+                </div>
+                <div class="bg-white/10 border border-white/20 rounded-xl p-4 text-xs space-y-1.5 min-w-[230px]">
+                    <p class="text-slate-300 font-semibold">Server Status</p>
+                    <p class="text-emerald-400 font-bold flex items-center gap-1.5"><i class="ph-fill ph-check-circle"></i> Live &amp; Ready (SSE / HTTP)</p>
+                    <p class="text-slate-400">Read-only RBAC enforced per user</p>
+                </div>
+            </div>
+
+            <!-- Step 1 & Step 2 Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Step 1: Credentials & Permissions -->
+                <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-6 space-y-4">
+                    <div class="flex items-center gap-2.5 border-b border-gray-100 pb-3">
+                        <span class="w-6 h-6 rounded-full bg-blue-600 text-white text-xs font-bold flex items-center justify-center">1</span>
+                        <h3 class="font-bold text-gray-800">Endpoint &amp; Workspace Token</h3>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">MCP Server URL (SSE)</label>
+                        <div class="flex gap-2">
+                            <input type="text" readonly value="https://mcp.clienthub360.agency/sse" class="flex-1 bg-gray-50 border border-gray-300 rounded-lg px-3 py-2 text-xs font-mono text-gray-700">
+                            <button onclick="copyVal('https://mcp.clienthub360.agency/sse', 'MCP URL')" class="px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-xs font-semibold text-gray-700">Copy</button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Personal Access Token (Bearer)</label>
+                        <div class="flex gap-2">
+                            <input type="text" readonly id="mcp-token" value="ch360_mcp_live_9a4f82c1e7b03d" class="flex-1 bg-gray-50 border border-gray-300 rounded-lg px-3 py-2 text-xs font-mono text-gray-700">
+                            <button onclick="copyVal(document.getElementById('mcp-token').value, 'Token')" class="px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-xs font-semibold text-gray-700">Copy</button>
+                            <button onclick="rotateToken()" class="px-3 py-2 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-lg text-xs font-semibold">Rotate</button>
+                        </div>
+                    </div>
+
+                    <div class="pt-2">
+                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-2">Allowed Data Scopes</label>
+                        <div class="grid grid-cols-2 gap-2 text-xs">
+                            <label class="flex items-center gap-2 p-2.5 bg-gray-50 rounded-lg border cursor-pointer"><input type="checkbox" checked class="accent-blue-600"> Pipeline &amp; Deals</label>
+                            <label class="flex items-center gap-2 p-2.5 bg-gray-50 rounded-lg border cursor-pointer"><input type="checkbox" checked class="accent-blue-600"> Production &amp; Hours</label>
+                            <label class="flex items-center gap-2 p-2.5 bg-gray-50 rounded-lg border cursor-pointer"><input type="checkbox" checked class="accent-blue-600"> Reporting &amp; GA4</label>
+                            <label class="flex items-center gap-2 p-2.5 bg-gray-50 rounded-lg border cursor-pointer"><input type="checkbox" checked class="accent-blue-600"> Health &amp; Retention</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Client Config Snippet -->
+                <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-6 space-y-4">
+                    <div class="flex items-center justify-between border-b border-gray-100 pb-3">
+                        <div class="flex items-center gap-2.5">
+                            <span class="w-6 h-6 rounded-full bg-blue-600 text-white text-xs font-bold flex items-center justify-center">2</span>
+                            <h3 class="font-bold text-gray-800">Add to Your AI Chat Client</h3>
+                        </div>
+                        <div class="flex gap-1 bg-gray-100 p-1 rounded-lg text-xs font-semibold">
+                            <button onclick="setClientTab('antigravity')" id="ct-antigravity" class="px-2.5 py-1 bg-white text-blue-700 rounded shadow-sm">Antigravity / Claude</button>
+                            <button onclick="setClientTab('chatgpt')" id="ct-chatgpt" class="px-2.5 py-1 text-gray-600 rounded">ChatGPT</button>
+                        </div>
+                    </div>
+
+                    <div id="panel-antigravity" class="space-y-3">
+                        <p class="text-xs text-gray-600">Paste this into your <code class="bg-gray-100 px-1.5 py-0.5 rounded">mcp_config.json</code> (or Claude Desktop / Cursor MCP settings):</p>
+                        <pre class="bg-slate-900 text-emerald-300 p-4 rounded-xl text-xs overflow-x-auto leading-relaxed"><code>{
+  "mcpServers": {
+    "clienthub360": {
+      "serverUrl": "https://mcp.clienthub360.agency/sse",
+      "headers": {
+        "Authorization": "Bearer ch360_mcp_live_9a4f82c1e7b03d"
+      }
+    }
+  }
+}</code></pre>
+                        <button onclick="copyVal(document.querySelector('#panel-antigravity code').textContent, 'MCP Config JSON')" class="text-xs bg-slate-900 text-white px-4 py-2 rounded-lg font-semibold hover:bg-slate-800 flex items-center gap-1.5">
+                            <i class="ph ph-copy"></i> Copy Config JSON
+                        </button>
+                    </div>
+
+                    <div id="panel-chatgpt" class="hidden space-y-3 text-xs text-gray-700">
+                        <ol class="list-decimal pl-5 space-y-2 leading-relaxed">
+                            <li>Open ChatGPT → <strong>Settings → Connectors / Apps → Add Custom MCP</strong>.</li>
+                            <li>Enter Name: <code class="bg-gray-100 px-1.5 py-0.5 rounded">ClientHub360</code>.</li>
+                            <li>Paste Server URL: <code class="bg-gray-100 px-1.5 py-0.5 rounded">https://mcp.clienthub360.agency/sse</code>.</li>
+                            <li>Select <strong>Bearer Token</strong> authentication and paste your Workspace Token from Step 1.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3 & 4: Available Tools + Interactive AI Prompt Tester -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Available MCP Tools -->
+                <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+                    <h3 class="font-bold text-gray-800 mb-1">Exposed MCP Tools &amp; Resources</h3>
+                    <p class="text-xs text-gray-500 mb-4">Functions your AI assistant can call in real time:</p>
+                    <div class="space-y-2.5 text-xs">
+                        <div class="p-3 bg-gray-50 rounded-lg border border-gray-100">
+                            <code class="font-bold text-blue-700">get_pipeline_deals(stage?)</code>
+                            <p class="text-gray-600 mt-0.5">Lists prospects, deal values, probability %, and PandaDoc/Xero sign-off status.</p>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded-lg border border-gray-100">
+                            <code class="font-bold text-blue-700">get_client_health_scores(status?)</code>
+                            <p class="text-gray-600 mt-0.5">Returns RAG health scores, overdue invoices, and 90-day upsell triggers.</p>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded-lg border border-gray-100">
+                            <code class="font-bold text-blue-700">get_production_profitability(client)</code>
+                            <p class="text-gray-600 mt-0.5">Compares allocated hours vs. logged hours and pending content approvals.</p>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded-lg border border-gray-100">
+                            <code class="font-bold text-blue-700">get_reporting_metrics(client, period)</code>
+                            <p class="text-gray-600 mt-0.5">Pulls GA4 sessions, top landing pages, Search Console keywords, and PPC ROAS.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Prompt Simulator -->
+                <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-6 flex flex-col">
+                    <h3 class="font-bold text-gray-800 mb-1">Try an AI Chat Prompt (Demo)</h3>
+                    <p class="text-xs text-gray-500 mb-3">Click a prompt to preview how your AI chat window answers using ClientHub360 MCP:</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <button onclick="runPrompt('health')" class="text-xs bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 px-3 py-1.5 rounded-lg font-medium">"Which clients are RED or at risk?"</button>
+                        <button onclick="runPrompt('hours')" class="text-xs bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 px-3 py-1.5 rounded-lg font-medium">"Check Global Dynamics SEO hours &amp; ROAS"</button>
+                        <button onclick="runPrompt('pipeline')" class="text-xs bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 px-3 py-1.5 rounded-lg font-medium">"What deals are awaiting sign-off?"</button>
+                    </div>
+                    <div id="ai-chat-preview" class="flex-1 bg-slate-50 border border-slate-200 rounded-xl p-4 text-xs text-slate-700 space-y-2 min-h-[170px]">
+                        <p class="text-slate-400 italic">Select a sample prompt above to simulate an MCP tool call...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="toast-container" class="fixed bottom-5 right-5 flex flex-col gap-3 z-50"></div>
+
+    <script>
+        function copyVal(text, label) {
+            navigator.clipboard?.writeText(text);
+            showToast(`${label} copied to clipboard!`);
+        }
+
+        function rotateToken() {
+            const rand = Math.random().toString(36).substring(2, 10);
+            document.getElementById('mcp-token').value = `ch360_mcp_live_${rand}e7b03d`;
+            showToast('New MCP Bearer token generated.');
+        }
+
+        function setClientTab(tab) {
+            const isAg = tab === 'antigravity';
+            document.getElementById('panel-antigravity').classList.toggle('hidden', !isAg);
+            document.getElementById('panel-chatgpt').classList.toggle('hidden', isAg);
+            document.getElementById('ct-antigravity').className = isAg ? 'px-2.5 py-1 bg-white text-blue-700 rounded shadow-sm' : 'px-2.5 py-1 text-gray-600 rounded';
+            document.getElementById('ct-chatgpt').className = !isAg ? 'px-2.5 py-1 bg-white text-blue-700 rounded shadow-sm' : 'px-2.5 py-1 text-gray-600 rounded';
+        }
+
+        function runPrompt(key) {
+            const box = document.getElementById('ai-chat-preview');
+            const responses = {
+                health: `<p class="font-semibold text-slate-900">Tool called: <code class="text-blue-700">get_client_health_scores(status="RED")</code></p><p><strong>1 at-risk client found:</strong></p><ul class="list-disc pl-4 space-y-1"><li><strong>Apex Logistics</strong> — Score: <span class="text-red-600 font-bold">38/100 (RED • ISSUE)</span>. Invoice 14 days overdue, ROAS down 14%, 4 overdue tasks. Recovery Playbook recommended.</li><li><em>TechFlow Inc</em> is currently <strong>AMBER (68)</strong> with 2 overdue tasks.</li></ul>`,
+                hours: `<p class="font-semibold text-slate-900">Tools called: <code class="text-blue-700">get_production_profitability</code> &amp; <code class="text-blue-700">get_reporting_metrics</code></p><p><strong>Global Dynamics (Month 1):</strong></p><ul class="list-disc pl-4 space-y-1"><li>SEO Hours Logged: <strong>14 / 20 hrs</strong> (70% — On Track)</li><li>Organic Sessions: <strong>14,205 (+18%)</strong> • PPC ROAS: <strong>3.4x</strong></li><li>Pending Client Approval: <em>B2B SaaS Security Solutions</em></li></ul>`,
+                pipeline: `<p class="font-semibold text-slate-900">Tool called: <code class="text-blue-700">get_pipeline_deals(stage="Awaiting Agreement")</code></p><p><strong>2 deals awaiting final sign-off:</strong></p><ul class="list-disc pl-4 space-y-1"><li><strong>Global Dynamics</strong> ($6,000/mo, 90% prob.) — PandaDoc signed &amp; Xero deposit paid; awaiting uploaded agreement.</li><li><strong>Solstice Wellness</strong> ($3,500/mo, 85% prob.) — Xero deposit pending.</li></ul>`
+            };
+            box.innerHTML = responses[key];
+        }
+
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'flex items-center gap-3 bg-white px-4 py-3 rounded-lg shadow-lg border border-green-100 transform transition-all duration-300 translate-y-10 opacity-0';
+            toast.innerHTML = `<i class="ph-fill ph-check-circle text-green-500 text-xl"></i><span class="text-sm font-medium text-gray-700">${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => toast.classList.remove('translate-y-10', 'opacity-0'), 10);
+            setTimeout(() => { toast.classList.add('opacity-0'); setTimeout(() => toast.remove(), 300); }, 3000);
+        }
+    </script>
+</body>
+</html>
