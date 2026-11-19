@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Hub 360 - Proposals &amp; E-Sign</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden text-slate-800">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white border-r border-gray-200 flex flex-col shadow-sm z-20 flex-shrink-0">
+        <div class="h-16 flex items-center px-6 border-b border-gray-100">
+            <i class="ph-fill ph-planet text-blue-600 text-2xl mr-2"></i>
+            <span class="font-bold text-lg tracking-tight">ClientHub<span class="text-blue-600">360</span></span>
+        </div>
+        <nav class="flex-1 py-4 flex flex-col gap-1 overflow-y-auto">
+            <a href="prospecting.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-funnel text-xl"></i><span>Prospecting</span>
+            </a>
+            <a href="onboarding.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-user-plus text-xl"></i><span>Onboarding</span>
+            </a>
+            <a href="production.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-kanban text-xl"></i><span>Production</span>
+            </a>
+            <a href="reporting.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-chart-line-up text-xl"></i><span>Reporting</span>
+            </a>
+            <a href="upsells.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-trend-up text-xl"></i><span>Retention &amp; Upsells</span>
+            </a>
+            <a href="users.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-users text-xl"></i><span>Users &amp; Teams</span>
+            </a>
+
+            <!-- Tools Section -->
+            <div class="mt-4 pt-4 border-t border-gray-100 flex flex-col gap-1">
+                <div class="px-6 pb-2 flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-gray-400">
+                    <i class="ph ph-wrench"></i><span>Tools</span>
+                </div>
+                <a href="quote-builder.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                    <i class="ph-calculator text-xl"></i><span>Quote Builder</span>
+                </a>
+                <a href="proposals.html" class="flex items-center gap-3 px-6 py-2.5 bg-blue-50 text-blue-700 border-r-4 border-blue-600 font-semibold transition-colors">
+                    <i class="ph-file-signature text-xl"></i><span>Proposals &amp; E-Sign</span>
+                </a>
+                <a href="campaign-planner.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                    <i class="ph-calendar-check text-xl"></i><span>Campaign Planner</span>
+                </a>
+                <a href="rank-tracker.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                    <i class="ph-magnifying-glass-plus text-xl"></i><span>Rank Tracker</span>
+                </a>
+                <a href="mcp-setup.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                    <i class="ph-plugs-connected text-xl"></i><span>MCP Setup</span>
+                </a>
+            </div>
+        </nav>
+        <div class="p-4 border-t border-gray-100">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">AM</div>
+                <div class="text-sm">
+                    <p class="font-semibold text-gray-800">Admin User</p>
+                    <p class="text-xs text-gray-500">Agency Workspace</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col h-screen overflow-y-auto relative">
+        <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-8 sticky top-0 z-10 shadow-sm">
+            <div class="flex items-center gap-3">
+                <h1 class="text-xl font-semibold text-gray-800">Proposals &amp; E-Sign</h1>
+                <span class="px-2.5 py-0.5 bg-indigo-100 text-indigo-700 rounded-full text-xs font-bold">Native PandaDoc Replacement</span>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="proposal-view.html" class="text-xs bg-white border border-gray-300 text-gray-700 px-3.5 py-2 rounded-lg font-medium hover:bg-gray-50 flex items-center gap-1.5">
+                    <i class="ph ph-eye"></i> Preview Client Sign-Off Link
+                </a>
+                <button onclick="document.getElementById('newPropModal').classList.remove('hidden')" class="text-xs bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 flex items-center gap-1.5 shadow-sm">
+                    <i class="ph ph-plus"></i> New Proposal from Quote
+                </button>
+            </div>
+        </header>
+
+        <div class="p-8 flex-1 space-y-6">
+            <!-- KPI Strip -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                    <p class="text-xs text-gray-500 font-semibold uppercase mb-1">Active Proposals</p>
+                    <span class="text-2xl font-bold text-gray-900">4</span>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                    <p class="text-xs text-gray-500 font-semibold uppercase mb-1">Awaiting Signature</p>
+                    <span class="text-2xl font-bold text-amber-600">£12,000<span class="text-xs font-normal text-gray-400">/mo</span></span>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                    <p class="text-xs text-gray-500 font-semibold uppercase mb-1">Signed This Month</p>
+                    <span class="text-2xl font-bold text-emerald-600">£5,189<span class="text-xs font-normal text-gray-400">/mo</span></span>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                    <p class="text-xs text-gray-500 font-semibold uppercase mb-1">Avg. Time to Sign</p>
+                    <span class="text-2xl font-bold text-gray-900">1.8 Days</span>
+                </div>
+            </div>
+
+            <!-- Proposals Table -->
+            <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+                <div class="px-6 py-4 border-b border-gray-100 bg-gray-50/60 flex justify-between items-center">
+                    <div>
+                        <h2 class="font-bold text-gray-800">Sent Proposals &amp; Agreements</h2>
+                        <p class="text-xs text-gray-500">Auto-populated from Quote Builder with live view tracking, e-signature audit trail, and Onboarding handoff.</p>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-gray-50 text-gray-600 uppercase text-xs border-b">
+                            <tr>
+                                <th class="px-5 py-3">Client / Proposal</th>
+                                <th class="px-4 py-3">Template</th>
+                                <th class="px-4 py-3">Value</th>
+                                <th class="px-4 py-3">Client Activity</th>
+                                <th class="px-4 py-3">Status</th>
+                                <th class="px-5 py-3 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 text-gray-700">
+                            <tr class="hover:bg-gray-50/70">
+                                <td class="px-5 py-3.5">
+                                    <strong class="text-gray-900 block">Global Dynamics</strong>
+                                    <span class="text-xs text-gray-500">John Doe • john@globaldyn.com</span>
+                                </td>
+                                <td class="px-4 py-3.5 text-xs">12-Month Growth Retainer SOW</td>
+                                <td class="px-4 py-3.5 font-semibold">£5,189.17/mo</td>
+                                <td class="px-4 py-3.5 text-xs text-gray-500">Viewed 4x • Signed Nov 18 (IP: 82.14.192.44)</td>
+                                <td class="px-4 py-3.5"><span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-full text-xs font-bold">Signed &amp; Locked</span></td>
+                                <td class="px-5 py-3.5 text-right space-x-2">
+                                    <a href="proposal-view.html" class="text-xs text-blue-600 hover:underline font-semibold">Open Link</a>
+                                    <button onclick="showToast('Downloaded signed PDF + SHA-256 Audit Certificate.')" class="text-xs border border-gray-300 px-2.5 py-1 rounded hover:bg-gray-50">PDF</button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50/70">
+                                <td class="px-5 py-3.5">
+                                    <strong class="text-gray-900 block">Kestrel Logistics</strong>
+                                    <span class="text-xs text-gray-500">Tom Hardy • tom@kestrellogistics.com</span>
+                                </td>
+                                <td class="px-4 py-3.5 text-xs">SEO + Web Redesign MSA</td>
+                                <td class="px-4 py-3.5 font-semibold">£4,800.00/mo</td>
+                                <td class="px-4 py-3.5 text-xs text-indigo-600 font-medium"><i class="ph-fill ph-eye"></i> Viewed 3x (4m 12s spent)</td>
+                                <td class="px-4 py-3.5"><span class="px-2.5 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-bold">Viewed</span></td>
+                                <td class="px-5 py-3.5 text-right space-x-2">
+                                    <a href="proposal-view.html" class="text-xs bg-blue-600 text-white px-3 py-1 rounded font-semibold hover:bg-blue-700">Client View</a>
+                                    <button onclick="showToast('Proposal Magic Link copied to clipboard!', 'info')" class="text-xs border border-gray-300 px-2.5 py-1 rounded hover:bg-gray-50">Copy Link</button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50/70">
+                                <td class="px-5 py-3.5">
+                                    <strong class="text-gray-900 block">Oakwood Legal</strong>
+                                    <span class="text-xs text-gray-500">Hannah Abbott • hannah@oakwoodlegal.co.uk</span>
+                                </td>
+                                <td class="px-4 py-3.5 text-xs">SEO &amp; Content Retainer SOW</td>
+                                <td class="px-4 py-3.5 font-semibold">£3,700.00/mo</td>
+                                <td class="px-4 py-3.5 text-xs text-gray-400">Sent Nov 17 • Not opened yet</td>
+                                <td class="px-4 py-3.5"><span class="px-2.5 py-1 bg-amber-100 text-amber-800 rounded-full text-xs font-bold">Sent</span></td>
+                                <td class="px-5 py-3.5 text-right space-x-2">
+                                    <button onclick="showToast('Reminder email & Magic Link re-sent to Hannah Abbott.', 'info')" class="text-xs border border-gray-300 px-2.5 py-1 rounded hover:bg-gray-50">Nudge</button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50/70">
+                                <td class="px-5 py-3.5">
+                                    <strong class="text-gray-900 block">Solstice Wellness</strong>
+                                    <span class="text-xs text-gray-500">Mia Wallace • mia@solsticewellness.com</span>
+                                </td>
+                                <td class="px-4 py-3.5 text-xs">Paid Social &amp; Content SOW</td>
+                                <td class="px-4 py-3.5 font-semibold">£3,500.00/mo</td>
+                                <td class="px-4 py-3.5 text-xs text-indigo-600 font-medium"><i class="ph-fill ph-eye"></i> Viewed 1x (Today)</td>
+                                <td class="px-4 py-3.5"><span class="px-2.5 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-bold">Viewed</span></td>
+                                <td class="px-5 py-3.5 text-right space-x-2">
+                                    <a href="proposal-view.html" class="text-xs text-blue-600 hover:underline font-semibold">Open Link</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- New Proposal Modal -->
+    <div id="newPropModal" class="hidden fixed inset-0 bg-gray-900/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 space-y-4">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h2 class="text-lg font-bold text-gray-800">Generate Proposal from Quote</h2>
+                <button onclick="document.getElementById('newPropModal').classList.add('hidden')" class="text-gray-400 hover:text-gray-700"><i class="ph ph-x text-xl"></i></button>
+            </div>
+            <div class="space-y-3 text-sm">
+                <div>
+                    <label class="text-xs font-semibold text-gray-600 block mb-1">Prospect / Deal</label>
+                    <select class="w-full border rounded-lg px-3 py-2">
+                        <option>Kestrel Logistics (£4,800/mo)</option>
+                        <option>Global Dynamics (£5,189.17/mo)</option>
+                        <option>Nordic FinTech (£4,500/mo)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="text-xs font-semibold text-gray-600 block mb-1">Contract Template</label>
+                    <select class="w-full border rounded-lg px-3 py-2">
+                        <option>12-Month Growth Retainer SOW + Standard MSA</option>
+                        <option>6-Month SEO &amp; Paid Media SOW</option>
+                        <option>Web Design &amp; Dev Project Agreement</option>
+                    </select>
+                </div>
+                <label class="flex items-center gap-2 text-xs text-gray-600 pt-1">
+                    <input type="checkbox" checked class="accent-blue-600"> Auto-move Prospecting stage to <strong>Onboarding</strong> &amp; trigger Xero deposit invoice when signed
+                </label>
+            </div>
+            <div class="flex justify-end gap-2 pt-3 border-t">
+                <button onclick="document.getElementById('newPropModal').classList.add('hidden')" class="px-4 py-2 border rounded-lg text-sm text-gray-600">Cancel</button>
+                <a href="proposal-view.html" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700">Create &amp; Preview Magic Link</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container" class="fixed bottom-5 right-5 flex flex-col gap-3 z-50"></div>
+
+    <script>
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            const icon = type === 'success' ? 'ph-check-circle text-green-500' : 'ph-info text-blue-500';
+            const bg = type === 'success' ? 'border-green-100' : 'border-blue-100';
+            toast.className = `flex items-center gap-3 bg-white px-4 py-3 rounded-lg shadow-lg border ${bg} transform transition-all duration-300 translate-y-10 opacity-0`;
+            toast.innerHTML = `<i class="ph-fill ${icon} text-xl"></i><span class="text-sm font-medium text-gray-700">${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => toast.classList.remove('translate-y-10', 'opacity-0'), 10);
+            setTimeout(() => { toast.classList.add('opacity-0'); setTimeout(() => toast.remove(), 300); }, 3000);
+        }
+    </script>
+</body>
+</html>
