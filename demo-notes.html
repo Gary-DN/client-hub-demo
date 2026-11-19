@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Hub 360 - Demo Notes &amp; Platform Breakdown</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden text-slate-800">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white border-r border-gray-200 flex flex-col shadow-sm z-20 flex-shrink-0">
+        <div class="h-16 flex items-center px-6 border-b border-gray-100">
+            <i class="ph-fill ph-planet text-blue-600 text-2xl mr-2"></i>
+            <span class="font-bold text-lg tracking-tight">ClientHub<span class="text-blue-600">360</span></span>
+        </div>
+        <nav class="flex-1 py-4 flex flex-col gap-1 overflow-y-auto">
+            <a href="prospecting.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-funnel text-xl"></i><span>Prospecting</span>
+            </a>
+            <a href="onboarding.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-user-plus text-xl"></i><span>Onboarding</span>
+            </a>
+            <a href="production.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-kanban text-xl"></i><span>Production</span>
+            </a>
+            <a href="reporting.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-chart-line-up text-xl"></i><span>Reporting</span>
+            </a>
+            <a href="upsells.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-trend-up text-xl"></i><span>Retention &amp; Upsells</span>
+            </a>
+            <a href="users.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-users text-xl"></i><span>Users &amp; Teams</span>
+            </a>
+
+            <!-- Tools Section -->
+            <div class="mt-4 pt-4 border-t border-gray-100 flex flex-col gap-1">
+                <div class="px-6 pb-2 flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-gray-400">
+                    <i class="ph ph-wrench"></i><span>Tools</span>
+                </div>
+                <a href="quote-builder.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                    <i class="ph-calculator text-xl"></i><span>Quote Builder</span>
+                </a>
+                <a href="proposals.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                    <i class="ph-file-signature text-xl"></i><span>Proposals &amp; E-Sign</span>
+                </a>
+                <a href="campaign-planner.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                    <i class="ph-calendar-check text-xl"></i><span>Campaign Planner</span>
+                </a>
+                <a href="rank-tracker.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                    <i class="ph-magnifying-glass-plus text-xl"></i><span>Rank Tracker</span>
+                </a>
+                <a href="mcp-setup.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                    <i class="ph-plugs-connected text-xl"></i><span>MCP Setup</span>
+                </a>
+            </div>
+
+            <!-- Demo Notes -->
+            <div class="mt-4 pt-4 border-t border-gray-100 flex flex-col gap-1">
+                <a href="demo-notes.html" class="flex items-center gap-3 px-6 py-2.5 bg-blue-50 text-blue-700 border-r-4 border-blue-600 font-semibold transition-colors">
+                    <i class="ph-notebook text-xl"></i><span>Demo Notes</span>
+                </a>
+            </div>
+        </nav>
+        <div class="p-4 border-t border-gray-100">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">AM</div>
+                <div class="text-sm">
+                    <p class="font-semibold text-gray-800">Admin User</p>
+                    <p class="text-xs text-gray-500">Agency Workspace</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col h-screen overflow-y-auto relative">
+        <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-8 sticky top-0 z-10 shadow-sm">
+            <div class="flex items-center gap-3">
+                <h1 class="text-xl font-semibold text-gray-800">Demo Notes &amp; Complete Build Breakdown</h1>
+                <span class="px-2.5 py-0.5 bg-blue-100 text-blue-700 rounded-full text-xs font-bold">14 Interactive Pages</span>
+            </div>
+            <button onclick="window.print()" class="text-xs bg-white border border-gray-300 text-gray-700 px-3.5 py-2 rounded-lg font-medium hover:bg-gray-50 flex items-center gap-1.5">
+                <i class="ph ph-printer"></i> Print / Save Summary
+            </button>
+        </header>
+
+        <div class="p-8 flex-1 space-y-8 max-w-6xl">
+            <!-- Hero Summary -->
+            <div class="bg-gradient-to-r from-slate-900 to-blue-900 text-white rounded-2xl p-6 shadow-sm space-y-3">
+                <span class="text-[11px] font-bold uppercase tracking-wider bg-blue-500/30 text-blue-200 px-2.5 py-1 rounded">Executive Walkthrough Guide</span>
+                <h2 class="text-2xl font-bold">ClientHub 360 — End-to-End Agency Operating System</h2>
+                <p class="text-sm text-slate-300 max-w-3xl">This prototype demonstrates the complete client lifecycle from <strong>Prospecting &amp; Quoting</strong> through <strong>Passwordless Onboarding, Production, Reporting, Retention &amp; Offboarding</strong>, plus built-in <strong>Agency Tools &amp; AI/MCP integration</strong>.</p>
+                <div class="flex flex-wrap gap-2 pt-2 text-xs">
+                    <a href="prospecting.html" class="bg-white/15 hover:bg-white/25 px-3 py-1.5 rounded-lg font-medium">1. Start at Prospecting →</a>
+                    <a href="quote-builder.html" class="bg-white/15 hover:bg-white/25 px-3 py-1.5 rounded-lg font-medium">2. Build a Quote →</a>
+                    <a href="proposal-view.html" class="bg-white/15 hover:bg-white/25 px-3 py-1.5 rounded-lg font-medium">3. Client E-Sign Link →</a>
+                    <a href="magic-link.html" class="bg-white/15 hover:bg-white/25 px-3 py-1.5 rounded-lg font-medium">4. Client Onboarding Magic Link →</a>
+                    <a href="content-approval.html" class="bg-white/15 hover:bg-white/25 px-3 py-1.5 rounded-lg font-medium">5. Content Approval Link →</a>
+                </div>
+            </div>
+
+            <!-- Section 1: Core Client Lifecycle -->
+            <div class="space-y-4">
+                <h3 class="text-lg font-bold text-gray-900 flex items-center gap-2"><i class="ph-fill ph-arrows-clockwise text-blue-600"></i> 1. Core Client Lifecycle Modules (6 Pages)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <a href="prospecting.html" class="font-bold text-blue-700 hover:underline text-base">Prospecting &amp; Pipeline</a>
+                            <code class="text-[11px] bg-gray-100 px-2 py-0.5 rounded text-gray-600">prospecting.html</code>
+                        </div>
+                        <ul class="text-xs text-gray-600 space-y-1.5 list-disc pl-4">
+                            <li><strong>Views:</strong> Working <strong>Kanban</strong> &amp; <strong>List View</strong> toggle across 5 stages (`Leads`, `Discovery Complete`, `Proposal Sent`, `Awaiting Agreement`, `Closed-Lost` with reasons).</li>
+                            <li><strong>Add Prospect Modal:</strong> Includes <em>Inbound</em>, Website Form, Outbound LinkedIn, Referral, Google Ads attribution &amp; assigned rep.</li>
+                            <li><strong>Deal Modal:</strong> Commercial terms, Sales Handover Notes (scope guardrail), <strong>Creditsafe / Companies House Enrichment</strong> (Credit Limit £45k, Risk Score 84/100, Reg No., Turnover, VAT, CCJs), <strong>Mandatory Sign-Off Gate</strong>, and <strong>Defer Lead</strong> (archive &amp; auto-return date).</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <a href="onboarding.html" class="font-bold text-blue-700 hover:underline text-base">Onboarding &amp; Client Magic Link</a>
+                            <code class="text-[11px] bg-gray-100 px-2 py-0.5 rounded text-gray-600">onboarding.html</code>
+                        </div>
+                        <ul class="text-xs text-gray-600 space-y-1.5 list-disc pl-4">
+                            <li><strong>Live Client Profile:</strong> Client switcher (`Global Dynamics`, `TechFlow Inc`, `Apex Logistics`), subscribed services, live budget, Slack handle, and days live.</li>
+                            <li><strong>OAuth Connectors:</strong> Shows <strong>Connected</strong> OAuth status for GA4, Search Console, Google Ads MCC, 1Password Vault, Drive Assets, and Competitors — plus a live <strong>Connect Account</strong> button for GTM.</li>
+                            <li><strong>Campaign Creation Data:</strong> Blog/page/link targets to populate Month 1 boards.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <a href="production.html" class="font-bold text-blue-700 hover:underline text-base">Production &amp; Operations</a>
+                            <code class="text-[11px] bg-gray-100 px-2 py-0.5 rounded text-gray-600">production.html</code>
+                        </div>
+                        <ul class="text-xs text-gray-600 space-y-1.5 list-disc pl-4">
+                            <li><strong>9 Department &amp; Ops Tabs:</strong> `Overview`, `SEO`, `Content`, `PPC`, `Design & Dev`, `Paid Social`, <strong>`Files`</strong> (Shared Drive folders + file directory), `Live Links / PR`, and `Activity Log`.</li>
+                            <li><strong>Profitability &amp; Due Dates:</strong> Allocated vs. logged hours per service and calendar due dates on Kanban cards.</li>
+                            <li><strong>Content Approval Loop:</strong> Cards have both a quick preview modal and a <strong>Copy / Open Approval Magic Link</strong> flow that logs client Yes/No &amp; feedback straight to the board and Activity Log.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <a href="reporting.html" class="font-bold text-blue-700 hover:underline text-base">Client Reporting &amp; Portal</a>
+                            <code class="text-[11px] bg-gray-100 px-2 py-0.5 rounded text-gray-600">reporting.html</code>
+                        </div>
+                        <ul class="text-xs text-gray-600 space-y-1.5 list-disc pl-4">
+                            <li><strong>Dual Mode:</strong> Toggle between <strong>Agency AM View</strong> (editable Executive Summary) and <strong>Client Portal (PWA)</strong> (read-only client view).</li>
+                            <li><strong>Data + Output View:</strong> Connects completed tasks (`4 Blogs Published → +400 sessions`) to KPIs (Organic Sessions, Conversions, Bounce Rate, Ad Spend, CPA, ROAS).</li>
+                            <li><strong>4 Analytics Tables:</strong> GA4 Channel Acquisition, Top Pages, Top Landing Pages (Conversions), and SEO Keyword Rankings &amp; Search Console.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <a href="upsells.html" class="font-bold text-blue-700 hover:underline text-base">Retention, Health Score &amp; Offboarding</a>
+                            <code class="text-[11px] bg-gray-100 px-2 py-0.5 rounded text-gray-600">upsells.html</code>
+                        </div>
+                        <ul class="text-xs text-gray-600 space-y-1.5 list-disc pl-4">
+                            <li><strong>RAG Client Health Score:</strong> Automated Red/Amber/Green scoring across Invoices, KPI Trends, Overdue Tasks, and Engagement with a <strong>Trigger Recovery Playbook</strong> button for `RED • ISSUE` clients.</li>
+                            <li><strong>90-Day Cross-Sell Board:</strong> Automated upsell triggers (`Potential → Proposal Sent → Agreed`).</li>
+                            <li><strong>Structured Offboarding Tab:</strong> Notice period tracker, mandatory Churn Reason, final Xero invoice, auto-halt recurring tasks, and access revocation checklist.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <a href="users.html" class="font-bold text-blue-700 hover:underline text-base">Users &amp; Teams</a>
+                            <code class="text-[11px] bg-gray-100 px-2 py-0.5 rounded text-gray-600">users.html</code>
+                        </div>
+                        <ul class="text-xs text-gray-600 space-y-1.5 list-disc pl-4">
+                            <li><strong>Team Workload &amp; Roles:</strong> Account Managers, SEO Leads, Content Leads, and Sales Reps with client assignment modal.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Client-Facing Passwordless Magic Links -->
+            <div class="space-y-4">
+                <h3 class="text-lg font-bold text-gray-900 flex items-center gap-2"><i class="ph-fill ph-magic-wand text-indigo-600"></i> 2. Client-Facing Passwordless "Magic Link" Pages (3 Pages)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <div class="bg-white rounded-xl border border-indigo-200 shadow-sm p-5 space-y-2">
+                        <a href="magic-link.html" class="font-bold text-indigo-700 hover:underline text-sm block">Onboarding Magic Link Wizard</a>
+                        <code class="text-[11px] bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded">magic-link.html</code>
+                        <p class="text-xs text-gray-600 pt-1">Dynamically shows/hides credential fields based on subscribed services (demo toggles at top), OAuth Google connectors, 1Password/Bitwarden vault encryption, competitors &amp; Slack handle.</p>
+                    </div>
+                    <div class="bg-white rounded-xl border border-amber-200 shadow-sm p-5 space-y-2">
+                        <a href="content-approval.html" class="font-bold text-amber-700 hover:underline text-sm block">Content Approval Magic Link</a>
+                        <code class="text-[11px] bg-amber-50 text-amber-700 px-2 py-0.5 rounded">content-approval.html</code>
+                        <p class="text-xs text-gray-600 pt-1">Temporary link showing SEO Meta preview + full formatted article draft with one-click <strong>Yes (Approve)</strong> / <strong>No (Reject / Revise)</strong> and feedback logging.</p>
+                    </div>
+                    <div class="bg-white rounded-xl border border-emerald-200 shadow-sm p-5 space-y-2">
+                        <a href="proposal-view.html" class="font-bold text-emerald-700 hover:underline text-sm block">Proposal &amp; E-Sign Magic Link</a>
+                        <code class="text-[11px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded">proposal-view.html</code>
+                        <p class="text-xs text-gray-600 pt-1">Client-facing Statement of Work &amp; investment table with live electronic signature, UTC timestamp, IP &amp; SHA-256 audit certificate.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Agency Tools Suite -->
+            <div class="space-y-4">
+                <h3 class="text-lg font-bold text-gray-900 flex items-center gap-2"><i class="ph-fill ph-wrench text-emerald-600"></i> 3. Agency Tools Suite (5 Pages)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <a href="quote-builder.html" class="font-bold text-blue-700 hover:underline text-base">Quote Builder</a>
+                            <code class="text-[11px] bg-gray-100 px-2 py-0.5 rounded text-gray-600">quote-builder.html</code>
+                        </div>
+                        <p class="text-xs text-gray-600">Replaces the agency pricing spreadsheet with interactive `£` calculations across Account Mgmt, SEO, Content/Email, Outreach/PR, PPC (15% spend fee), Paid Social (20% spend fee), AI Search, and Web/Hosting — with 1/3/6/12-month retainer comparisons and direct handoff to Proposals.</p>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <a href="proposals.html" class="font-bold text-blue-700 hover:underline text-base">Proposals &amp; E-Sign</a>
+                            <code class="text-[11px] bg-gray-100 px-2 py-0.5 rounded text-gray-600">proposals.html</code>
+                        </div>
+                        <p class="text-xs text-gray-600">Native PandaDoc replacement: tracks Sent, Viewed (view count &amp; time spent), and Signed proposals, generates new SOWs from Quote Builder, and triggers Onboarding + Xero on signature.</p>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <a href="campaign-planner.html" class="font-bold text-blue-700 hover:underline text-base">Campaign Planner</a>
+                            <code class="text-[11px] bg-gray-100 px-2 py-0.5 rounded text-gray-600">campaign-planner.html</code>
+                        </div>
+                        <p class="text-xs text-gray-600">Client selector + Month 1–4 deliverable roadmap with auto-generation from Quote Builder and a <strong>Send Tasks</strong> button to push selected tasks into Production.</p>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <a href="rank-tracker.html" class="font-bold text-blue-700 hover:underline text-base">Rank Tracker</a>
+                            <code class="text-[11px] bg-gray-100 px-2 py-0.5 rounded text-gray-600">rank-tracker.html</code>
+                        </div>
+                        <p class="text-xs text-gray-600">Client selector demonstrating both <strong>Setup Mode</strong> (`TechFlow Inc`: domain, location, up to 50 keywords with live counter) and <strong>Active Tracking Mode</strong> (`Global Dynamics`: 6-month ranking graph + keyword positions, 30d change, volume, and ranking URL).</p>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 space-y-2 md:col-span-2">
+                        <div class="flex justify-between items-center">
+                            <a href="mcp-setup.html" class="font-bold text-blue-700 hover:underline text-base">MCP Setup (AI Chat Data Source)</a>
+                            <code class="text-[11px] bg-gray-100 px-2 py-0.5 rounded text-gray-600">mcp-setup.html</code>
+                        </div>
+                        <p class="text-xs text-gray-600">Guides team members through connecting ClientHub360 as a live Model Context Protocol (MCP) data source in Antigravity, Claude, ChatGPT, or Cursor — complete with SSE endpoint, Bearer token, RBAC scopes, JSON config, exposed tools, and an interactive AI prompt tester.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
