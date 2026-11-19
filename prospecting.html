@@ -564,6 +564,22 @@
                                 </button>
                             </div>
                         </div>
+
+                        <!-- Defer Lead (Archive & Auto-Reopen) -->
+                        <div class="bg-amber-50/70 p-4 rounded-lg border border-amber-200">
+                            <div class="flex justify-between items-center mb-1">
+                                <h3 class="text-sm font-bold text-amber-900 flex items-center gap-1.5"><i class="ph ph-clock-countdown text-base"></i> Defer Lead (Archive &amp; Re-engage)</h3>
+                                <span class="text-[11px] text-amber-700 font-medium">Auto-returns to Leads</span>
+                            </div>
+                            <p class="text-xs text-amber-800 mb-3">Not ready right now? Archive this lead and automatically add it back to the <strong>Leads</strong> board on a set date to re-engage.</p>
+                            <div class="flex flex-wrap items-center gap-2">
+                                <input type="date" id="defer-date" value="2027-01-15" class="border border-amber-300 bg-white rounded-md px-3 py-1.5 text-xs font-medium text-gray-700 outline-none focus:border-amber-500">
+                                <input type="text" id="defer-reason" placeholder="Re-engage note (e.g. Budget locked until Q1)" class="flex-1 min-w-[180px] border border-amber-300 bg-white rounded-md px-3 py-1.5 text-xs outline-none focus:border-amber-500">
+                                <button onclick="deferCurrentLead()" class="bg-amber-600 hover:bg-amber-700 text-white px-4 py-1.5 rounded-md text-xs font-semibold flex items-center gap-1.5">
+                                    <i class="ph ph-archive"></i> Defer &amp; Archive Lead
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -647,6 +663,13 @@
             document.getElementById('dm-pandadoc').textContent = pandadoc;
             document.getElementById('dm-xero').textContent = xero;
             document.getElementById('dealModal').classList.remove('hidden');
+        }
+
+        function deferCurrentLead() {
+            const title = document.getElementById('dm-title').textContent;
+            const date = document.getElementById('defer-date').value || '2027-01-15';
+            document.getElementById('dealModal').classList.add('hidden');
+            showToast(`${title} archived! Auto-scheduled to return to Leads on ${date}.`, 'info');
         }
 
         function showToast(message, type = 'success') {
