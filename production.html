@@ -171,38 +171,149 @@
             <!-- Tab Contents -->
 
             <!-- Overview Tab -->
-            <div id="content-overview" class="prod-content hidden">
-                <div class="grid grid-cols-3 gap-6">
-                    <div class="col-span-2 bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-                        <h2 class="font-bold text-lg mb-4">Client Profile</h2>
-                        <div class="grid grid-cols-2 gap-4 text-sm text-gray-700">
-                            <p><strong class="block text-gray-500 text-xs">Business</strong> Global Dynamics</p>
-                            <p><strong class="block text-gray-500 text-xs">Primary Contact</strong> John Doe
-                                (john@globaldyn.com)</p>
-                            <p><strong class="block text-gray-500 text-xs">Active Services</strong> SEO, Content, PPC
-                            </p>
-                            <p><strong class="block text-gray-500 text-xs">Total Budget</strong> $6,000 / month</p>
-                            <p><strong class="block text-gray-500 text-xs">Campaign Term</strong> 12 Months (Ends Oct
-                                2027)</p>
+            <div id="content-overview" class="prod-content hidden space-y-6">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Full Client Details & Contacts -->
+                    <div class="lg:col-span-2 bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-5">
+                        <div class="flex flex-wrap justify-between items-center gap-2 border-b border-gray-100 pb-3">
+                            <div>
+                                <h2 class="font-bold text-lg text-gray-900">Client Profile &amp; Contacts</h2>
+                                <p class="text-xs text-gray-500">Full commercial, company, and stakeholder details</p>
+                            </div>
+                            <span class="px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded-full border border-emerald-200">Health: GREEN (92/100)</span>
+                        </div>
+
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-sm text-gray-700">
+                            <div><strong class="block text-gray-400 text-[11px] uppercase">Business Name</strong><span class="font-semibold text-gray-900">Global Dynamics Ltd</span></div>
+                            <div><strong class="block text-gray-400 text-[11px] uppercase">Website URL</strong><a href="#" class="text-blue-600 hover:underline font-medium">https://globaldyn.com</a></div>
+                            <div><strong class="block text-gray-400 text-[11px] uppercase">Industry</strong><span>B2B Cloud Security / SaaS</span></div>
+                            <div><strong class="block text-gray-400 text-[11px] uppercase">Company Reg / VAT</strong><span class="font-mono text-xs">09482173 • GB 248 9102 33</span></div>
+                            <div><strong class="block text-gray-400 text-[11px] uppercase">Registered Address</strong><span class="text-xs">22 Bishopsgate, London, EC2N 4BQ</span></div>
+                            <div><strong class="block text-gray-400 text-[11px] uppercase">Days as Live Client</strong><span class="font-semibold">18 Days (Month 1)</span></div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-gray-100 text-sm">
+                            <div class="bg-gray-50 p-3.5 rounded-lg border border-gray-200 space-y-1">
+                                <span class="text-[10px] font-bold uppercase text-blue-700 bg-blue-100 px-2 py-0.5 rounded">Primary Contact</span>
+                                <p class="font-bold text-gray-900 pt-1">John Doe <span class="font-normal text-xs text-gray-500">• VP of Marketing</span></p>
+                                <p class="text-xs text-gray-600"><i class="ph ph-envelope"></i> john@globaldyn.com</p>
+                                <p class="text-xs text-gray-600"><i class="ph ph-phone"></i> +44 7800 123456 • Slack: <code>@johndoe-globaldyn</code></p>
+                            </div>
+                            <div class="bg-gray-50 p-3.5 rounded-lg border border-gray-200 space-y-1">
+                                <span class="text-[10px] font-bold uppercase text-gray-700 bg-gray-200 px-2 py-0.5 rounded">Billing &amp; Finance Contact</span>
+                                <p class="font-bold text-gray-900 pt-1">Claire Vance <span class="font-normal text-xs text-gray-500">• Finance Controller</span></p>
+                                <p class="text-xs text-gray-600"><i class="ph ph-envelope"></i> accounts@globaldyn.com</p>
+                                <p class="text-xs text-gray-600"><i class="ph ph-phone"></i> +44 20 7946 0812 • Xero Auto-Bill</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-gray-100 text-xs">
+                            <div><strong class="block text-gray-400 uppercase mb-0.5">Active Services</strong><span class="font-semibold text-gray-800">SEO, Content, PPC</span></div>
+                            <div><strong class="block text-gray-400 uppercase mb-0.5">Monthly Retainer</strong><span class="font-bold text-emerald-700">£5,294.17 / mo</span></div>
+                            <div><strong class="block text-gray-400 uppercase mb-0.5">Contract Term</strong><span class="font-semibold text-gray-800">12 Months (Ends Oct 2027)</span></div>
+                            <div><strong class="block text-gray-400 uppercase mb-0.5">Agency Team</strong><span class="font-semibold text-gray-800">SJ (AM), AR (SEO), MK (PPC)</span></div>
                         </div>
                     </div>
-                    <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-                        <h2 class="font-bold text-lg mb-4">Important Files</h2>
-                        <ul class="space-y-3">
-                            <li
-                                class="flex items-center justify-between text-sm p-2 bg-gray-50 rounded border border-gray-100">
-                                <span class="flex items-center gap-2"><i
-                                        class="ph-fill ph-file-pdf text-red-500 text-lg"></i>
-                                    Signed_Agreement.pdf</span>
-                                <i class="ph ph-download-simple text-gray-400 cursor-pointer"></i>
-                            </li>
-                            <li
-                                class="flex items-center justify-between text-sm p-2 bg-gray-50 rounded border border-gray-100">
-                                <span class="flex items-center gap-2"><i
-                                        class="ph-fill ph-image text-blue-500 text-lg"></i> Brand_Assets.zip</span>
-                                <i class="ph ph-download-simple text-gray-400 cursor-pointer"></i>
-                            </li>
-                        </ul>
+
+                    <!-- Important Files -->
+                    <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <h2 class="font-bold text-lg mb-4">Important Files</h2>
+                            <ul class="space-y-3">
+                                <li class="flex items-center justify-between text-sm p-2.5 bg-gray-50 rounded-lg border border-gray-100">
+                                    <span class="flex items-center gap-2"><i class="ph-fill ph-file-pdf text-red-500 text-lg"></i> Signed_Agreement.pdf</span>
+                                    <i onclick="showToast('Downloading Signed_Agreement.pdf')" class="ph ph-download-simple text-gray-400 hover:text-gray-700 cursor-pointer"></i>
+                                </li>
+                                <li class="flex items-center justify-between text-sm p-2.5 bg-gray-50 rounded-lg border border-gray-100">
+                                    <span class="flex items-center gap-2"><i class="ph-fill ph-image text-blue-500 text-lg"></i> Brand_Assets.zip</span>
+                                    <i onclick="showToast('Downloading Brand_Assets.zip')" class="ph ph-download-simple text-gray-400 hover:text-gray-700 cursor-pointer"></i>
+                                </li>
+                                <li class="flex items-center justify-between text-sm p-2.5 bg-gray-50 rounded-lg border border-gray-100">
+                                    <span class="flex items-center gap-2"><i class="ph-fill ph-file-pdf text-red-500 text-lg"></i> Technical_Audit_M1.pdf</span>
+                                    <i onclick="showToast('Downloading Technical_Audit_M1.pdf')" class="ph ph-download-simple text-gray-400 hover:text-gray-700 cursor-pointer"></i>
+                                </li>
+                            </ul>
+                        </div>
+                        <button onclick="switchTab('files')" class="w-full mt-4 text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2.5 rounded-lg">Open Full Files Directory →</button>
+                    </div>
+                </div>
+
+                <!-- Live Account Connectors Status -->
+                <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+                    <div class="p-5 border-b border-gray-100 bg-gray-50/60 flex flex-wrap justify-between items-center gap-3">
+                        <div>
+                            <h2 class="font-bold text-gray-900 text-lg">Connected Accounts &amp; Live Connector Health</h2>
+                            <p class="text-xs text-gray-500">Real-time verification of OAuth tokens, analytics properties, ad accounts, and vault access.</p>
+                        </div>
+                        <button onclick="showToast('Verified 7/8 connectors active. Meta BM token flagged for refresh.', 'info')" class="text-xs bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-semibold flex items-center gap-1.5 shadow-sm">
+                            <i class="ph ph-arrows-clockwise"></i> Test All Connections
+                        </button>
+                    </div>
+                    <div class="p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+                        <div class="p-3.5 rounded-xl border border-emerald-200 bg-emerald-50/40 space-y-1.5">
+                            <div class="flex justify-between items-center">
+                                <strong class="text-sm text-gray-900">Google Analytics 4</strong>
+                                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-full font-bold">Connected</span>
+                            </div>
+                            <p class="text-gray-600 font-mono">G-94827104X</p>
+                            <p class="text-gray-400">Synced 12 mins ago</p>
+                        </div>
+                        <div class="p-3.5 rounded-xl border border-emerald-200 bg-emerald-50/40 space-y-1.5">
+                            <div class="flex justify-between items-center">
+                                <strong class="text-sm text-gray-900">Search Console</strong>
+                                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-full font-bold">Connected</span>
+                            </div>
+                            <p class="text-gray-600 font-mono truncate">sc-domain:globaldyn.com</p>
+                            <p class="text-gray-400">Synced 1 hr ago</p>
+                        </div>
+                        <div class="p-3.5 rounded-xl border border-emerald-200 bg-emerald-50/40 space-y-1.5">
+                            <div class="flex justify-between items-center">
+                                <strong class="text-sm text-gray-900">Google Tag Manager</strong>
+                                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-full font-bold">Connected</span>
+                            </div>
+                            <p class="text-gray-600 font-mono">GTM-K92M4LP</p>
+                            <p class="text-gray-400">Publish access verified</p>
+                        </div>
+                        <div class="p-3.5 rounded-xl border border-emerald-200 bg-emerald-50/40 space-y-1.5">
+                            <div class="flex justify-between items-center">
+                                <strong class="text-sm text-gray-900">Google Ads MCC</strong>
+                                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-full font-bold">Connected</span>
+                            </div>
+                            <p class="text-gray-600 font-mono">123-456-7890</p>
+                            <p class="text-gray-400">Live spend &amp; ROAS syncing</p>
+                        </div>
+                        <div class="p-3.5 rounded-xl border border-emerald-200 bg-emerald-50/40 space-y-1.5">
+                            <div class="flex justify-between items-center">
+                                <strong class="text-sm text-gray-900">Ahrefs / SEMrush</strong>
+                                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-full font-bold">Connected</span>
+                            </div>
+                            <p class="text-gray-600 font-mono">Project #48219</p>
+                            <p class="text-gray-400">Daily rank crawl active</p>
+                        </div>
+                        <div class="p-3.5 rounded-xl border border-amber-200 bg-amber-50/50 space-y-1.5">
+                            <div class="flex justify-between items-center">
+                                <strong class="text-sm text-gray-900">Meta Business Mgr</strong>
+                                <span class="px-2 py-0.5 bg-amber-100 text-amber-800 rounded-full font-bold">Expiring (7d)</span>
+                            </div>
+                            <p class="text-gray-600 font-mono">BM-8849201928</p>
+                            <button onclick="showToast('Meta OAuth refresh link sent to John Doe.')" class="text-blue-600 hover:underline font-semibold">Refresh Token →</button>
+                        </div>
+                        <div class="p-3.5 rounded-xl border border-emerald-200 bg-emerald-50/40 space-y-1.5">
+                            <div class="flex justify-between items-center">
+                                <strong class="text-sm text-gray-900">1Password Vault</strong>
+                                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-full font-bold">Connected</span>
+                            </div>
+                            <p class="text-gray-600">CMS &amp; Staging Logins</p>
+                            <p class="text-gray-400">AES-256 Encrypted</p>
+                        </div>
+                        <div class="p-3.5 rounded-xl border border-emerald-200 bg-emerald-50/40 space-y-1.5">
+                            <div class="flex justify-between items-center">
+                                <strong class="text-sm text-gray-900">Xero &amp; Slack</strong>
+                                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-full font-bold">Connected</span>
+                            </div>
+                            <p class="text-gray-600 font-mono">#client-global-dynamics</p>
+                            <p class="text-gray-400">Auto-invoicing active</p>
+                        </div>
                     </div>
                 </div>
             </div>
