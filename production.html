@@ -160,6 +160,9 @@
                 <button onclick="switchTab('files')" id="tab-files"
                     class="prod-tab px-5 py-3 font-medium text-sm text-gray-500 border-b-2 border-transparent hover:text-gray-700 whitespace-nowrap flex items-center gap-1.5"><i
                         class="ph ph-folder-open"></i> Files</button>
+                <button onclick="switchTab('meetings')" id="tab-meetings"
+                    class="prod-tab px-5 py-3 font-medium text-sm text-gray-500 border-b-2 border-transparent hover:text-gray-700 whitespace-nowrap flex items-center gap-1.5"><i
+                        class="ph ph-video-camera"></i> Meetings</button>
                 <button onclick="switchTab('links')" id="tab-links"
                     class="prod-tab px-5 py-3 font-medium text-sm text-gray-500 border-b-2 border-transparent hover:text-gray-700 whitespace-nowrap">Live
                     Links / PR</button>
@@ -981,7 +984,135 @@
                 </div>
             </div>
 
-            <!-- Client Content Approval Link Modal -->
+            <!-- Meetings Tab (Google Meet Scheduler, Attendance & Auto-Saved Call Notes) -->
+            <div id="content-meetings" class="prod-content hidden space-y-6">
+                <div class="flex flex-wrap justify-between items-center gap-4">
+                    <div>
+                        <h2 class="font-bold text-lg text-gray-900">Google Meet Schedule, Attendance &amp; Call Notes</h2>
+                        <p class="text-xs text-gray-500">Synced with Google Calendar &amp; Meet REST API — tracks attendance and auto-saves Gemini meeting notes to Files.</p>
+                    </div>
+                    <button onclick="document.getElementById('scheduleMeetModal').classList.remove('hidden')" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 shadow-sm">
+                        <i class="ph ph-video-camera"></i> Schedule Google Meet
+                    </button>
+                </div>
+
+                <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-gray-50 text-gray-600 uppercase text-xs border-b border-gray-200">
+                            <tr>
+                                <th class="px-5 py-3">Meeting</th>
+                                <th class="px-4 py-3">Date &amp; Time</th>
+                                <th class="px-4 py-3">Google Meet Link</th>
+                                <th class="px-4 py-3">Attendance Status</th>
+                                <th class="px-5 py-3 text-right">Notes &amp; Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="meetings-tbody" class="divide-y divide-gray-100 text-gray-700">
+                            <tr class="hover:bg-gray-50/70">
+                                <td class="px-5 py-3.5">
+                                    <strong class="text-gray-900 block">Month 1 Mid-Month Check-In</strong>
+                                    <span class="text-xs text-gray-500">Sarah Jenkins + John Doe (john@globaldyn.com)</span>
+                                </td>
+                                <td class="px-4 py-3.5 text-xs">Nov 24, 2026 • 10:00 AM</td>
+                                <td class="px-4 py-3.5 text-xs font-mono text-blue-600">meet.google.com/kqp-vnzt-mra</td>
+                                <td class="px-4 py-3.5"><span class="px-2.5 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-semibold">Scheduled • Notes On</span></td>
+                                <td class="px-5 py-3.5 text-right">
+                                    <button onclick="showToast('Copied Google Meet link: https://meet.google.com/kqp-vnzt-mra', 'info')" class="text-xs border border-gray-300 px-2.5 py-1 rounded hover:bg-gray-50 font-medium">Copy Link</button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50/70">
+                                <td class="px-5 py-3.5">
+                                    <strong class="text-gray-900 block">Kickoff &amp; Strategy Alignment</strong>
+                                    <span class="text-xs text-gray-500">Sarah Jenkins, Alex Rivera + John Doe</span>
+                                </td>
+                                <td class="px-4 py-3.5 text-xs">Nov 04, 2026 • 02:00 PM</td>
+                                <td class="px-4 py-3.5 text-xs font-mono text-gray-400">meet.google.com/abc-defg-hij</td>
+                                <td class="px-4 py-3.5"><span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-full text-xs font-bold">Completed • 34m (Both Joined)</span></td>
+                                <td class="px-5 py-3.5 text-right">
+                                    <button onclick="document.getElementById('meetNotesModal').classList.remove('hidden')" class="text-xs bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 rounded font-semibold">View Auto-Saved Notes</button>
+                                </td>
+                            </tr>
+                            <tr class="bg-red-50/30">
+                                <td class="px-5 py-3.5">
+                                    <strong class="text-gray-900 block">GTM Setup Quick Call</strong>
+                                    <span class="text-xs text-gray-500">Alex Rivera + John Doe</span>
+                                </td>
+                                <td class="px-4 py-3.5 text-xs">Nov 11, 2026 • 11:30 AM</td>
+                                <td class="px-4 py-3.5 text-xs font-mono text-gray-400">meet.google.com/xyz-pqrs-tuv</td>
+                                <td class="px-4 py-3.5"><span class="px-2.5 py-1 bg-red-100 text-red-800 rounded-full text-xs font-bold">Client No-Show (0m joined)</span></td>
+                                <td class="px-5 py-3.5 text-right">
+                                    <button onclick="document.getElementById('scheduleMeetModal').classList.remove('hidden')" class="text-xs bg-amber-600 hover:bg-amber-700 text-white px-3 py-1.5 rounded font-semibold">Reschedule</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Schedule Google Meet Modal -->
+            <div id="scheduleMeetModal" class="hidden fixed inset-0 bg-gray-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 space-y-4">
+                    <div class="flex justify-between items-center border-b pb-3">
+                        <h3 class="text-lg font-bold text-gray-900 flex items-center gap-2"><i class="ph-fill ph-video-camera text-blue-600"></i> Schedule Google Meet</h3>
+                        <button onclick="document.getElementById('scheduleMeetModal').classList.add('hidden')" class="text-gray-400 hover:text-gray-700"><i class="ph ph-x text-xl"></i></button>
+                    </div>
+                    <form onsubmit="scheduleMeetSubmit(event)" class="space-y-3 text-sm">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Meeting Title</label>
+                            <input type="text" id="meet-title" value="Month 1 Reporting Walkthrough" required class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500">
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-600 mb-1">Date &amp; Time</label>
+                                <input type="text" id="meet-dt" value="Nov 28, 2026 • 02:00 PM" required class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-600 mb-1">Client Attendee</label>
+                                <input type="email" value="john@globaldyn.com" required class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500">
+                            </div>
+                        </div>
+                        <label class="flex items-center gap-2 text-xs text-gray-700 pt-1 cursor-pointer">
+                            <input type="checkbox" checked class="accent-blue-600"> Enable Gemini "Take notes for me" &amp; auto-save transcript to Client Files
+                        </label>
+                        <div class="flex justify-end gap-2 pt-3 border-t">
+                            <button type="button" onclick="document.getElementById('scheduleMeetModal').classList.add('hidden')" class="px-4 py-2 border rounded-lg text-sm text-gray-600">Cancel</button>
+                            <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold">Create Calendar Invite &amp; Meet Link</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Auto-Saved Meeting Notes Modal -->
+            <div id="meetNotesModal" class="hidden fixed inset-0 bg-gray-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden flex flex-col max-h-[90vh]">
+                    <div class="bg-slate-900 text-white px-5 py-3 flex justify-between items-center text-xs">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2 py-0.5 bg-emerald-500 text-slate-900 font-bold rounded uppercase text-[10px]">Auto-Saved Call Notes</span>
+                            <span class="text-slate-300">Pulled from Google Meet Transcript + Drive API</span>
+                        </div>
+                        <button onclick="document.getElementById('meetNotesModal').classList.add('hidden')" class="text-slate-300 hover:text-white"><i class="ph ph-x text-lg"></i></button>
+                    </div>
+                    <div class="p-6 overflow-y-auto space-y-4 text-sm text-gray-700">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900">Kickoff &amp; Strategy Alignment — Nov 04, 2026</h3>
+                            <p class="text-xs text-gray-500">Duration: 34 mins • Attendance Verified: Sarah Jenkins (AM), Alex Rivera (SEO), John Doe (Global Dynamics)</p>
+                        </div>
+                        <div class="bg-gray-50 border border-gray-200 rounded-xl p-4 space-y-2">
+                            <p class="font-bold text-gray-900 text-xs uppercase tracking-wider">AI Meeting Summary</p>
+                            <p>Aligned on Q4 priority keywords around <em>B2B Cloud Security</em> and <em>SOC2 Compliance</em>. Client confirmed 4 blogs/month and 5 outreach links/month scope, with emphasis on landing pages before December.</p>
+                        </div>
+                        <div class="bg-blue-50 border border-blue-100 rounded-xl p-4 space-y-1.5 text-xs text-blue-900">
+                            <p class="font-bold uppercase tracking-wider">Action Items Extracted</p>
+                            <ul class="list-disc pl-4 space-y-1">
+                                <li><strong>Alex Rivera:</strong> Deliver Month 1 Technical SEO Audit by Nov 21.</li>
+                                <li><strong>Sarah Jenkins:</strong> Send B2B SaaS Security page draft via Approval Magic Link.</li>
+                                <li><strong>John Doe:</strong> Authorize GTM container access via Onboarding connector.</li>
+                            </ul>
+                        </div>
+                        <p class="text-xs text-emerald-700 font-medium"><i class="ph-fill ph-check-circle"></i> Automatically saved to Production Files: <code>Meeting_Notes_Nov04_Kickoff.pdf</code></p>
+                    </div>
+                </div>
+            </div>
             <div id="approvalModal"
                 class="hidden fixed inset-0 bg-gray-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
                 <div
@@ -1036,6 +1167,25 @@
             </div>
 
             <script>
+                function scheduleMeetSubmit(e) {
+                    e.preventDefault();
+                    const title = document.getElementById('meet-title').value;
+                    const dt = document.getElementById('meet-dt').value;
+                    const tbody = document.getElementById('meetings-tbody');
+                    const tr = document.createElement('tr');
+                    tr.className = 'hover:bg-gray-50/70 bg-blue-50/30';
+                    tr.innerHTML = `
+                        <td class="px-5 py-3.5"><strong class="text-gray-900 block">${title}</strong><span class="text-xs text-gray-500">Sarah Jenkins + John Doe (john@globaldyn.com)</span></td>
+                        <td class="px-4 py-3.5 text-xs">${dt}</td>
+                        <td class="px-4 py-3.5 text-xs font-mono text-blue-600">meet.google.com/new-demo-lnk</td>
+                        <td class="px-4 py-3.5"><span class="px-2.5 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-semibold">Scheduled • Notes On</span></td>
+                        <td class="px-5 py-3.5 text-right"><button onclick="showToast('Copied Google Meet link!', 'info')" class="text-xs border border-gray-300 px-2.5 py-1 rounded hover:bg-gray-50 font-medium">Copy Link</button></td>
+                    `;
+                    tbody.prepend(tr);
+                    document.getElementById('scheduleMeetModal').classList.add('hidden');
+                    showToast(`Google Meet scheduled: "${title}" (Calendar invite sent)!`);
+                }
+
                 let currentApprovalCardId = null;
                 let currentApprovalTitle = '';
 

@@ -279,6 +279,19 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Section 5: Google Meet Scheduling, Attendance & Auto-Saved Notes -->
+            <div class="space-y-4">
+                <h3 class="text-lg font-bold text-gray-900 flex items-center gap-2"><i class="ph-fill ph-video-camera text-blue-600"></i> 5. Google Meet Scheduling, Attendance Tracking &amp; Auto-Saved Call Notes</h3>
+                <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 space-y-3">
+                    <p class="text-xs text-gray-600">Inside <a href="production.html" class="text-blue-600 hover:underline font-semibold">Production → Meetings</a>, Account Managers can schedule Google Meet calls directly on a client's project page:</p>
+                    <ul class="text-xs text-gray-600 space-y-1.5 list-disc pl-5">
+                        <li><strong>In-App Scheduling (Google Calendar API):</strong> Creates the calendar invite, emails the client, and generates the <code>meet.google.com/...</code> link inside ClientHub360.</li>
+                        <li><strong>Attendance Verification (Google Meet REST API):</strong> Checks <code>conferenceRecords</code> &amp; <code>participants</code> after the call to automatically log <strong>Completed (duration + who joined)</strong> or flag a <strong>Client No-Show</strong> (which can feed into the Client Health Score).</li>
+                        <li><strong>Auto-Saved Call Notes (Meet Transcripts + Drive API):</strong> When Gemini <em>"Take notes for me"</em> or transcripts are enabled on Google Workspace, the Hub pulls the summary &amp; action items and saves them automatically into the client's <strong>Meetings</strong> log and <strong>Files</strong> tab.</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </main>
 </body>
