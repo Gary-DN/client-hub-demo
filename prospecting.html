@@ -70,28 +70,35 @@
             </a>
             <!-- Tools Section -->
             <div class="mt-4 pt-4 border-t border-gray-100 flex flex-col gap-1">
-                <div class="px-6 pb-2 flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-gray-400">
+                <div
+                    class="px-6 pb-2 flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-gray-400">
                     <i class="ph ph-wrench"></i><span>Tools</span>
                 </div>
-                <a href="quote-builder.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <a href="quote-builder.html"
+                    class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
                     <i class="ph-calculator text-xl"></i><span>Quote Builder</span>
                 </a>
-                                                <a href="proposals.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <a href="proposals.html"
+                    class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
                     <i class="ph-file-signature text-xl"></i><span>Proposals &amp; E-Sign</span>
                 </a>
-                <a href="campaign-planner.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <a href="campaign-planner.html"
+                    class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
                     <i class="ph-calendar-check text-xl"></i><span>Campaign Planner</span>
                 </a>
-                                <a href="rank-tracker.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <a href="rank-tracker.html"
+                    class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
                     <i class="ph-magnifying-glass-plus text-xl"></i><span>Rank Tracker</span>
                 </a>
-                <a href="mcp-setup.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <a href="mcp-setup.html"
+                    class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
                     <i class="ph-plugs-connected text-xl"></i><span>MCP Setup</span>
                 </a>
             </div>
             <!-- Demo Notes -->
             <div class="mt-4 pt-4 border-t border-gray-100 flex flex-col gap-1">
-                <a href="demo-notes.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <a href="demo-notes.html"
+                    class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
                     <i class="ph-notebook text-xl"></i><span>Demo Notes</span>
                 </a>
             </div>
@@ -119,6 +126,17 @@
         </header>
         <div class="p-8 flex-1">
 
+            <!-- Prospecting Tabs -->
+            <div class="border-b border-gray-200 mb-6 flex overflow-x-auto hide-scrollbar">
+                <button onclick="switchProspectTab('pipeline')" id="ptab-pipeline" class="prosp-tab px-5 py-3 font-medium text-sm text-blue-600 border-b-2 border-blue-600 whitespace-nowrap flex items-center gap-1.5"><i class="ph ph-kanban"></i> Pipeline (Kanban)</button>
+                <button onclick="switchProspectTab('files')" id="ptab-files" class="prosp-tab px-5 py-3 font-medium text-sm text-gray-500 border-b-2 border-transparent hover:text-gray-700 whitespace-nowrap flex items-center gap-1.5"><i class="ph ph-folder-open"></i> Files</button>
+                <button onclick="switchProspectTab('meetings')" id="ptab-meetings" class="prosp-tab px-5 py-3 font-medium text-sm text-gray-500 border-b-2 border-transparent hover:text-gray-700 whitespace-nowrap flex items-center gap-1.5"><i class="ph ph-video-camera"></i> Meetings</button>
+                <button onclick="switchProspectTab('log')" id="ptab-log" class="prosp-tab px-5 py-3 font-medium text-sm text-gray-500 border-b-2 border-transparent hover:text-gray-700 whitespace-nowrap flex items-center gap-1.5"><i class="ph ph-clock-counter-clockwise"></i> Activity Log</button>
+                <button onclick="switchProspectTab('esign')" id="ptab-esign" class="prosp-tab px-5 py-3 font-medium text-sm text-gray-500 border-b-2 border-transparent hover:text-gray-700 whitespace-nowrap flex items-center gap-1.5"><i class="ph ph-file-signature"></i> E-Sign</button>
+            </div>
+
+            <!-- Tab 1: Pipeline (Kanban / List) -->
+            <div id="pcontent-pipeline" class="prosp-content">
             <div class="flex justify-between items-center mb-6">
                 <div class="flex items-center gap-4">
                     <div class="flex gap-1 bg-white p-1 rounded-lg border border-gray-200">
@@ -494,6 +512,175 @@
                     </tbody>
                 </table>
             </div>
+            </div><!-- End Tab 1: Pipeline -->
+
+            <!-- Tab 2: Files (Sales Workspace Sync + Bucket Handoff) -->
+            <div id="pcontent-files" class="prosp-content hidden space-y-6">
+                <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 flex flex-wrap items-center justify-between gap-4">
+                    <div class="flex items-start gap-3">
+                        <i class="ph-fill ph-google-drive-logo text-blue-600 text-2xl mt-0.5"></i>
+                        <div>
+                            <h2 class="font-bold text-blue-950 text-sm">Synced with Google Workspace Sales Folder: <code>/Sales-Prospects/</code></h2>
+                            <p class="text-xs text-blue-800 mt-0.5">All prospect briefs, quotes, and discovery docs sync here. When a prospect converts to a live client, <strong>working files automatically move to the Production Client Folder</strong> and <strong>signed agreements lock into the immutable GCS Bucket</strong>.</p>
+                        </div>
+                    </div>
+                    <button onclick="showToast('Upload to Workspace Sales Folder opened (Demo).', 'info')" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5">
+                        <i class="ph ph-upload-simple"></i> Upload to Sales Folder
+                    </button>
+                </div>
+
+                <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-gray-50 text-gray-600 uppercase text-xs border-b">
+                            <tr><th class="px-5 py-3">File Name</th><th class="px-4 py-3">Prospect</th><th class="px-4 py-3">Storage Location</th><th class="px-4 py-3">On Conversion</th><th class="px-5 py-3 text-right">Action</th></tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 text-gray-700">
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-5 py-3 font-medium flex items-center gap-2"><i class="ph-fill ph-file-pdf text-red-500 text-lg"></i> Global_Dynamics_Signed_MSA.pdf</td>
+                                <td class="px-4 py-3 text-xs">Global Dynamics</td>
+                                <td class="px-4 py-3 text-xs"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-semibold">GCS Locked Bucket</span></td>
+                                <td class="px-4 py-3 text-xs text-gray-500">Immutable Compliance Archive</td>
+                                <td class="px-5 py-3 text-right"><button onclick="showToast('Downloading locked signed PDF...')" class="text-xs text-blue-600 hover:underline font-semibold">Download</button></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-5 py-3 font-medium flex items-center gap-2"><i class="ph-fill ph-file-xls text-emerald-600 text-lg"></i> Global_Dynamics_Quote_12m.xlsx</td>
+                                <td class="px-4 py-3 text-xs">Global Dynamics</td>
+                                <td class="px-4 py-3 text-xs"><span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded font-semibold">Workspace Sales Drive</span></td>
+                                <td class="px-4 py-3 text-xs text-gray-500">Auto-moves → Production Folder</td>
+                                <td class="px-5 py-3 text-right"><button onclick="showToast('Opening in Google Drive...', 'info')" class="text-xs text-blue-600 hover:underline font-semibold">Open Drive</button></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-5 py-3 font-medium flex items-center gap-2"><i class="ph-fill ph-file-doc text-blue-600 text-lg"></i> Kestrel_Logistics_Discovery_Notes.docx</td>
+                                <td class="px-4 py-3 text-xs">Kestrel Logistics</td>
+                                <td class="px-4 py-3 text-xs"><span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded font-semibold">Workspace Sales Drive</span></td>
+                                <td class="px-4 py-3 text-xs text-gray-500">Auto-moves → Production Folder</td>
+                                <td class="px-5 py-3 text-right"><button onclick="showToast('Opening in Google Docs...', 'info')" class="text-xs text-blue-600 hover:underline font-semibold">Open Drive</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tab 3: Meetings -->
+            <div id="pcontent-meetings" class="prosp-content hidden space-y-6">
+                <div class="flex flex-wrap justify-between items-center gap-4">
+                    <div>
+                        <h2 class="font-bold text-lg text-gray-900">Discovery &amp; Proposal Meetings</h2>
+                        <p class="text-xs text-gray-500">Schedule Google Meet discovery calls, track attendance, and auto-save call notes to the Sales folder.</p>
+                    </div>
+                    <button onclick="showToast('Google Meet discovery invite created & synced to Calendar!')" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2">
+                        <i class="ph ph-video-camera"></i> Schedule Discovery Meet
+                    </button>
+                </div>
+                <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-gray-50 text-gray-600 uppercase text-xs border-b">
+                            <tr><th class="px-5 py-3">Prospect &amp; Call</th><th class="px-4 py-3">Date &amp; Time</th><th class="px-4 py-3">Rep + Contact</th><th class="px-4 py-3">Attendance</th><th class="px-5 py-3 text-right">Notes</th></tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 text-gray-700">
+                            <tr>
+                                <td class="px-5 py-3.5"><strong class="text-gray-900 block">Kestrel Logistics — Proposal Walkthrough</strong><span class="text-xs font-mono text-blue-600">meet.google.com/sal-kes-910</span></td>
+                                <td class="px-4 py-3.5 text-xs">Nov 22, 2026 • 11:00 AM</td>
+                                <td class="px-4 py-3.5 text-xs">Mike K. + Tom Hardy</td>
+                                <td class="px-4 py-3.5"><span class="px-2.5 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-semibold">Scheduled</span></td>
+                                <td class="px-5 py-3.5 text-right"><button onclick="showToast('Meet link copied!', 'info')" class="text-xs border px-2.5 py-1 rounded hover:bg-gray-50">Copy Link</button></td>
+                            </tr>
+                            <tr>
+                                <td class="px-5 py-3.5"><strong class="text-gray-900 block">Global Dynamics — Discovery Call</strong><span class="text-xs font-mono text-gray-400">meet.google.com/sal-gdn-204</span></td>
+                                <td class="px-4 py-3.5 text-xs">Nov 06, 2026 • 02:30 PM</td>
+                                <td class="px-4 py-3.5 text-xs">Mike K. + John Doe</td>
+                                <td class="px-4 py-3.5"><span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-full text-xs font-bold">Completed • 42m</span></td>
+                                <td class="px-5 py-3.5 text-right"><button onclick="showToast('Auto-saved discovery notes opened from Sales Drive.', 'info')" class="text-xs bg-emerald-600 text-white px-3 py-1 rounded font-semibold">View Notes</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tab 4: Activity Log -->
+            <div id="pcontent-log" class="prosp-content hidden max-w-3xl">
+                <div class="relative border-l-2 border-gray-200 ml-4 space-y-6">
+                    <div class="relative pl-6">
+                        <span class="absolute -left-1.5 top-1 w-3 h-3 rounded-full bg-emerald-500 ring-4 ring-white"></span>
+                        <p class="text-sm font-semibold text-gray-800">Proposal Signed &amp; Locked to GCS Bucket</p>
+                        <p class="text-xs text-gray-500">Global Dynamics (John Doe) e-signed SOW. Signed PDF archived to immutable bucket; Sales Drive files queued for Production move.<br>Nov 18, 2026 - 04:12 PM</p>
+                    </div>
+                    <div class="relative pl-6">
+                        <span class="absolute -left-1.5 top-1 w-3 h-3 rounded-full bg-blue-500 ring-4 ring-white"></span>
+                        <p class="text-sm font-semibold text-gray-800">Proposal Viewed (4m 12s)</p>
+                        <p class="text-xs text-gray-500">Kestrel Logistics (Tom Hardy) opened E-Sign Magic Link for the 3rd time.<br>Nov 18, 2026 - 11:20 AM</p>
+                    </div>
+                    <div class="relative pl-6">
+                        <span class="absolute -left-1.5 top-1 w-3 h-3 rounded-full bg-purple-500 ring-4 ring-white"></span>
+                        <p class="text-sm font-semibold text-gray-800">Creditsafe &amp; Companies House Enrichment</p>
+                        <p class="text-xs text-gray-500">Global Dynamics enriched: £45,000 Credit Limit, Score 84/100 (Low Risk).<br>Nov 07, 2026 - 09:05 AM</p>
+                    </div>
+                    <div class="relative pl-6">
+                        <span class="absolute -left-1.5 top-1 w-3 h-3 rounded-full bg-gray-400 ring-4 ring-white"></span>
+                        <p class="text-sm font-semibold text-gray-800">Inbound Lead Captured</p>
+                        <p class="text-xs text-gray-500">TechFlow Inc submitted Website Form. Sales folder auto-created on Workspace.<br>Nov 05, 2026 - 03:40 PM</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 5: E-Sign (Proposal & Agreement Generator Form) -->
+            <div id="pcontent-esign" class="prosp-content hidden max-w-3xl">
+                <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+                    <div class="p-6 border-b border-gray-100 bg-gray-50/70 flex justify-between items-center">
+                        <div>
+                            <h2 class="font-bold text-gray-900 text-lg">Generate Agreement &amp; E-Sign Magic Link</h2>
+                            <p class="text-xs text-gray-500">Build a client-ready proposal &amp; agreement from Prospecting data. Signed PDFs lock into the Cloud Storage bucket.</p>
+                        </div>
+                        <span class="text-xs bg-indigo-100 text-indigo-700 px-2.5 py-1 rounded-full font-bold">Native E-Sign</span>
+                    </div>
+                    <form onsubmit="generateAgreementSubmit(event)" class="p-6 space-y-4 text-sm">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-600 mb-1">Select Prospect *</label>
+                                <select id="es-prospect" class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500">
+                                    <option>Kestrel Logistics (Tom Hardy)</option>
+                                    <option>Global Dynamics (John Doe)</option>
+                                    <option>Nordic FinTech (Erik Lindqvist)</option>
+                                    <option>Oakwood Legal (Hannah Abbott)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-600 mb-1">Agreement Template *</label>
+                                <select id="es-template" class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500">
+                                    <option>12-Month Growth Retainer SOW + MSA</option>
+                                    <option>6-Month SEO &amp; PPC Agreement</option>
+                                    <option>Web Design &amp; Dev Project SOW</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-600 mb-1">Monthly Retainer Value *</label>
+                                <input type="text" id="es-value" value="£4,800.00 / mo" required class="w-full border rounded-lg px-3 py-2 font-semibold outline-none focus:border-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-600 mb-1">Contract Term &amp; Billing</label>
+                                <input type="text" value="12 Months • Monthly in Advance (Xero)" class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Included Services &amp; Scope Guardrails</label>
+                            <textarea rows="3" class="w-full border rounded-lg p-3 text-xs outline-none focus:border-blue-500">Technical SEO Audit (Quarterly), On-Page Optimisation, 4x Blogs/month, 5x Digital PR/Outreach Links/month, and Google Ads Management.</textarea>
+                        </div>
+                        <div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-gray-100">
+                            <a href="proposal-view.html" class="text-xs text-blue-600 hover:underline font-semibold flex items-center gap-1"><i class="ph ph-eye"></i> Preview Client E-Sign Page</a>
+                            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl font-semibold text-sm flex items-center gap-2 shadow-sm">
+                                <i class="ph ph-file-signature"></i> Generate Agreement &amp; Send E-Sign Link
+                            </button>
+                        </div>
+                    </form>
+                    <div id="es-generated-box" class="hidden mx-6 mb-6 p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-900 flex flex-wrap items-center justify-between gap-3">
+                        <div>
+                            <p class="font-bold">Agreement Generated &amp; E-Sign Magic Link Ready!</p>
+                            <p id="es-gen-sub" class="text-emerald-700"></p>
+                        </div>
+                        <a href="proposal-view.html" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg font-semibold">Open Client E-Sign Link →</a>
+                    </div>
+                </div>
+            </div>
 
             <!-- Deal Modal -->
             <div id="dealModal"
@@ -540,16 +727,26 @@
                         </div>
                         <div class="bg-emerald-50/70 p-4 rounded-lg border border-emerald-200 text-xs">
                             <div class="flex justify-between items-center mb-2.5">
-                                <h3 class="font-bold text-emerald-900 flex items-center gap-1.5"><i class="ph-fill ph-buildings text-base"></i> Automated Company &amp; Finance Enrichment</h3>
-                                <span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-semibold">Creditsafe / Companies House Synced</span>
+                                <h3 class="font-bold text-emerald-900 flex items-center gap-1.5"><i
+                                        class="ph-fill ph-buildings text-base"></i> Automated Company &amp; Finance
+                                    Enrichment</h3>
+                                <span
+                                    class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-semibold">Creditsafe
+                                    / Companies House Synced</span>
                             </div>
                             <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-gray-700">
-                                <div><span class="text-gray-400 block">Credit Limit</span><strong class="text-emerald-800 text-sm">£45,000</strong></div>
-                                <div><span class="text-gray-400 block">Credit Risk Score</span><strong class="text-emerald-700">84 / 100 (Low Risk)</strong></div>
-                                <div><span class="text-gray-400 block">Company Reg No.</span><strong class="font-mono">09482173 (Active)</strong></div>
-                                <div><span class="text-gray-400 block">Est. Turnover / Size</span><strong>£4.2M • 35–50 Staff</strong></div>
-                                <div><span class="text-gray-400 block">VAT Number</span><strong class="font-mono">GB 248 9102 33</strong></div>
-                                <div><span class="text-gray-400 block">CCJs / Adverse Filings</span><strong class="text-emerald-700">0 Found</strong></div>
+                                <div><span class="text-gray-400 block">Credit Limit</span><strong
+                                        class="text-emerald-800 text-sm">£45,000</strong></div>
+                                <div><span class="text-gray-400 block">Credit Risk Score</span><strong
+                                        class="text-emerald-700">84 / 100 (Low Risk)</strong></div>
+                                <div><span class="text-gray-400 block">Company Reg No.</span><strong
+                                        class="font-mono">09482173 (Active)</strong></div>
+                                <div><span class="text-gray-400 block">Est. Turnover / Size</span><strong>£4.2M • 35–50
+                                        Staff</strong></div>
+                                <div><span class="text-gray-400 block">VAT Number</span><strong class="font-mono">GB 248
+                                        9102 33</strong></div>
+                                <div><span class="text-gray-400 block">CCJs / Adverse Filings</span><strong
+                                        class="text-emerald-700">0 Found</strong></div>
                             </div>
                         </div>
                         <div class="bg-gray-50 p-3 rounded-lg border border-gray-200 text-xs text-gray-700">
@@ -562,7 +759,8 @@
                                 Handoff</h3>
                             <p class="text-xs text-blue-700 mb-3">When the signed agreement is uploaded, PandaDoc is
                                 signed, and Xero deposit is paid, the system automatically flips status to
-                                <em>Onboarding</em>.</p>
+                                <em>Onboarding</em>.
+                            </p>
                             <div class="flex flex-wrap items-center gap-3">
                                 <input type="file" id="agreementFile"
                                     class="text-xs text-gray-600 file:mr-3 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-white file:text-blue-700 hover:file:bg-blue-100">
@@ -577,14 +775,22 @@
                         <!-- Defer Lead (Archive & Auto-Reopen) -->
                         <div class="bg-amber-50/70 p-4 rounded-lg border border-amber-200">
                             <div class="flex justify-between items-center mb-1">
-                                <h3 class="text-sm font-bold text-amber-900 flex items-center gap-1.5"><i class="ph ph-clock-countdown text-base"></i> Defer Lead (Archive &amp; Re-engage)</h3>
+                                <h3 class="text-sm font-bold text-amber-900 flex items-center gap-1.5"><i
+                                        class="ph ph-clock-countdown text-base"></i> Defer Lead (Archive &amp;
+                                    Re-engage)</h3>
                                 <span class="text-[11px] text-amber-700 font-medium">Auto-returns to Leads</span>
                             </div>
-                            <p class="text-xs text-amber-800 mb-3">Not ready right now? Archive this lead and automatically add it back to the <strong>Leads</strong> board on a set date to re-engage.</p>
+                            <p class="text-xs text-amber-800 mb-3">Not ready right now? Archive this lead and
+                                automatically add it back to the <strong>Leads</strong> board on a set date to
+                                re-engage.</p>
                             <div class="flex flex-wrap items-center gap-2">
-                                <input type="date" id="defer-date" value="2027-01-15" class="border border-amber-300 bg-white rounded-md px-3 py-1.5 text-xs font-medium text-gray-700 outline-none focus:border-amber-500">
-                                <input type="text" id="defer-reason" placeholder="Re-engage note (e.g. Budget locked until Q1)" class="flex-1 min-w-[180px] border border-amber-300 bg-white rounded-md px-3 py-1.5 text-xs outline-none focus:border-amber-500">
-                                <button onclick="deferCurrentLead()" class="bg-amber-600 hover:bg-amber-700 text-white px-4 py-1.5 rounded-md text-xs font-semibold flex items-center gap-1.5">
+                                <input type="date" id="defer-date" value="2027-01-15"
+                                    class="border border-amber-300 bg-white rounded-md px-3 py-1.5 text-xs font-medium text-gray-700 outline-none focus:border-amber-500">
+                                <input type="text" id="defer-reason"
+                                    placeholder="Re-engage note (e.g. Budget locked until Q1)"
+                                    class="flex-1 min-w-[180px] border border-amber-300 bg-white rounded-md px-3 py-1.5 text-xs outline-none focus:border-amber-500">
+                                <button onclick="deferCurrentLead()"
+                                    class="bg-amber-600 hover:bg-amber-700 text-white px-4 py-1.5 rounded-md text-xs font-semibold flex items-center gap-1.5">
                                     <i class="ph ph-archive"></i> Defer &amp; Archive Lead
                                 </button>
                             </div>
@@ -607,35 +813,95 @@
                     </div>
                     <form onsubmit="saveNewProspect(event)" class="p-6 overflow-y-auto space-y-4 text-sm">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <div><label class="text-xs font-semibold text-gray-600 block mb-1">Business Name *</label><input id="np-biz" type="text" required placeholder="e.g. Zenith Cloud" class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500"></div>
-                            <div><label class="text-xs font-semibold text-gray-600 block mb-1">Contact Name *</label><input id="np-contact" type="text" required placeholder="e.g. Rachel Green" class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500"></div>
-                            <div><label class="text-xs font-semibold text-gray-600 block mb-1">Email *</label><input id="np-email" type="email" required placeholder="rachel@zenith.io" class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500"></div>
-                            <div><label class="text-xs font-semibold text-gray-600 block mb-1">Phone</label><input id="np-phone" type="text" placeholder="+44 7700 900456" class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500"></div>
-                            <div><label class="text-xs font-semibold text-gray-600 block mb-1">Website URL</label><input id="np-url" type="text" placeholder="zenith.io" class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500"></div>
-                            <div><label class="text-xs font-semibold text-gray-600 block mb-1">Lead Source (Attribution)</label><select id="np-source" class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500"><option>Inbound</option><option>Website Form</option><option>Outbound LinkedIn</option><option>Referral</option><option>Google Ads</option></select></div>
-                            <div><label class="text-xs font-semibold text-gray-600 block mb-1">Proposed Budget</label><input id="np-budget" type="text" value="£3,500/mo" class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500"></div>
-                            <div><label class="text-xs font-semibold text-gray-600 block mb-1">Deal Probability (%)</label><input id="np-prob" type="number" min="0" max="100" value="30" class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500"></div>
-                            <div><label class="text-xs font-semibold text-gray-600 block mb-1">Contract Term</label><select id="np-term" class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500"><option>6 Months</option><option selected>12 Months</option><option>Rolling Monthly</option></select></div>
-                            <div><label class="text-xs font-semibold text-gray-600 block mb-1">Billing Cycle</label><select id="np-billing" class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500"><option>Monthly Adv.</option><option>Quarterly</option><option>Upfront</option></select></div>
-                            <div class="sm:col-span-2"><label class="text-xs font-semibold text-gray-600 block mb-1">Assigned Sales Rep</label><select id="np-rep" class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500"><option>Mike K.</option><option>Alex Rivera</option><option>Sarah Jenkins</option><option>Unassigned</option></select></div>
+                            <div><label class="text-xs font-semibold text-gray-600 block mb-1">Business Name
+                                    *</label><input id="np-biz" type="text" required placeholder="e.g. Zenith Cloud"
+                                    class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500"></div>
+                            <div><label class="text-xs font-semibold text-gray-600 block mb-1">Contact Name
+                                    *</label><input id="np-contact" type="text" required placeholder="e.g. Rachel Green"
+                                    class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500"></div>
+                            <div><label class="text-xs font-semibold text-gray-600 block mb-1">Email *</label><input
+                                    id="np-email" type="email" required placeholder="rachel@zenith.io"
+                                    class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500"></div>
+                            <div><label class="text-xs font-semibold text-gray-600 block mb-1">Phone</label><input
+                                    id="np-phone" type="text" placeholder="+44 7700 900456"
+                                    class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500"></div>
+                            <div><label class="text-xs font-semibold text-gray-600 block mb-1">Website URL</label><input
+                                    id="np-url" type="text" placeholder="zenith.io"
+                                    class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500"></div>
+                            <div><label class="text-xs font-semibold text-gray-600 block mb-1">Lead Source
+                                    (Attribution)</label><select id="np-source"
+                                    class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500">
+                                    <option>Inbound</option>
+                                    <option>Website Form</option>
+                                    <option>Outbound LinkedIn</option>
+                                    <option>Referral</option>
+                                    <option>Google Ads</option>
+                                </select></div>
+                            <div><label class="text-xs font-semibold text-gray-600 block mb-1">Proposed
+                                    Budget</label><input id="np-budget" type="text" value="£3,500/mo"
+                                    class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500"></div>
+                            <div><label class="text-xs font-semibold text-gray-600 block mb-1">Deal Probability
+                                    (%)</label><input id="np-prob" type="number" min="0" max="100" value="30"
+                                    class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500"></div>
+                            <div><label class="text-xs font-semibold text-gray-600 block mb-1">Contract
+                                    Term</label><select id="np-term"
+                                    class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500">
+                                    <option>6 Months</option>
+                                    <option selected>12 Months</option>
+                                    <option>Rolling Monthly</option>
+                                </select></div>
+                            <div><label class="text-xs font-semibold text-gray-600 block mb-1">Billing
+                                    Cycle</label><select id="np-billing"
+                                    class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500">
+                                    <option>Monthly Adv.</option>
+                                    <option>Quarterly</option>
+                                    <option>Upfront</option>
+                                </select></div>
+                            <div class="sm:col-span-2"><label
+                                    class="text-xs font-semibold text-gray-600 block mb-1">Assigned Sales
+                                    Rep</label><select id="np-rep"
+                                    class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500">
+                                    <option>Mike K.</option>
+                                    <option>Alex Rivera</option>
+                                    <option>Sarah Jenkins</option>
+                                    <option>Unassigned</option>
+                                </select></div>
                         </div>
                         <div>
                             <label class="text-xs font-semibold text-gray-600 block mb-1.5">Services Discussed</label>
                             <div class="flex flex-wrap gap-2 text-xs">
-                                <label class="flex items-center gap-1.5 bg-gray-50 border px-2.5 py-1.5 rounded-lg cursor-pointer"><input type="checkbox" value="SEO" checked class="np-svc accent-blue-600"> SEO</label>
-                                <label class="flex items-center gap-1.5 bg-gray-50 border px-2.5 py-1.5 rounded-lg cursor-pointer"><input type="checkbox" value="Content" class="np-svc accent-blue-600"> Content</label>
-                                <label class="flex items-center gap-1.5 bg-gray-50 border px-2.5 py-1.5 rounded-lg cursor-pointer"><input type="checkbox" value="PPC" checked class="np-svc accent-blue-600"> PPC</label>
-                                <label class="flex items-center gap-1.5 bg-gray-50 border px-2.5 py-1.5 rounded-lg cursor-pointer"><input type="checkbox" value="Paid Social" class="np-svc accent-blue-600"> Paid Social</label>
-                                <label class="flex items-center gap-1.5 bg-gray-50 border px-2.5 py-1.5 rounded-lg cursor-pointer"><input type="checkbox" value="Design & Dev" class="np-svc accent-blue-600"> Design &amp; Dev</label>
+                                <label
+                                    class="flex items-center gap-1.5 bg-gray-50 border px-2.5 py-1.5 rounded-lg cursor-pointer"><input
+                                        type="checkbox" value="SEO" checked class="np-svc accent-blue-600"> SEO</label>
+                                <label
+                                    class="flex items-center gap-1.5 bg-gray-50 border px-2.5 py-1.5 rounded-lg cursor-pointer"><input
+                                        type="checkbox" value="Content" class="np-svc accent-blue-600"> Content</label>
+                                <label
+                                    class="flex items-center gap-1.5 bg-gray-50 border px-2.5 py-1.5 rounded-lg cursor-pointer"><input
+                                        type="checkbox" value="PPC" checked class="np-svc accent-blue-600"> PPC</label>
+                                <label
+                                    class="flex items-center gap-1.5 bg-gray-50 border px-2.5 py-1.5 rounded-lg cursor-pointer"><input
+                                        type="checkbox" value="Paid Social" class="np-svc accent-blue-600"> Paid
+                                    Social</label>
+                                <label
+                                    class="flex items-center gap-1.5 bg-gray-50 border px-2.5 py-1.5 rounded-lg cursor-pointer"><input
+                                        type="checkbox" value="Design & Dev" class="np-svc accent-blue-600"> Design
+                                    &amp; Dev</label>
                             </div>
                         </div>
                         <div>
-                            <label class="text-xs font-semibold text-gray-600 block mb-1">Sales Handover / Discovery Notes</label>
-                            <textarea id="np-notes" rows="2" placeholder="Initial goals, timeline, or scope notes..." class="w-full border rounded-lg p-2.5 text-xs outline-none focus:border-blue-500"></textarea>
+                            <label class="text-xs font-semibold text-gray-600 block mb-1">Sales Handover / Discovery
+                                Notes</label>
+                            <textarea id="np-notes" rows="2" placeholder="Initial goals, timeline, or scope notes..."
+                                class="w-full border rounded-lg p-2.5 text-xs outline-none focus:border-blue-500"></textarea>
                         </div>
                         <div class="pt-3 border-t flex justify-end gap-2">
-                            <button type="button" onclick="document.getElementById('addProspectModal').classList.add('hidden')" class="px-4 py-2 border rounded-lg text-sm text-gray-600">Cancel</button>
-                            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700">Save Prospect</button>
+                            <button type="button"
+                                onclick="document.getElementById('addProspectModal').classList.add('hidden')"
+                                class="px-4 py-2 border rounded-lg text-sm text-gray-600">Cancel</button>
+                            <button type="submit"
+                                class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700">Save
+                                Prospect</button>
                         </div>
                     </form>
                 </div>
@@ -648,6 +914,26 @@
     <div id="toast-container" class="fixed bottom-5 right-5 flex flex-col gap-3 z-50"></div>
 
     <script>
+        function switchProspectTab(tabId) {
+            document.querySelectorAll('.prosp-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.prosp-tab').forEach(el => {
+                el.classList.remove('text-blue-600', 'border-b-2', 'border-blue-600');
+                el.classList.add('text-gray-500', 'border-transparent');
+            });
+            document.getElementById('pcontent-' + tabId).classList.remove('hidden');
+            document.getElementById('ptab-' + tabId).classList.remove('text-gray-500', 'border-transparent');
+            document.getElementById('ptab-' + tabId).classList.add('text-blue-600', 'border-b-2', 'border-blue-600');
+        }
+
+        function generateAgreementSubmit(e) {
+            e.preventDefault();
+            const prospect = document.getElementById('es-prospect').value;
+            const value = document.getElementById('es-value').value;
+            document.getElementById('es-gen-sub').textContent = `${prospect} • ${value} — Token: prop_live_8c41e290 (Audit & GCS lock enabled)`;
+            document.getElementById('es-generated-box').classList.remove('hidden');
+            showToast(`Agreement & E-Sign Magic Link generated for ${prospect}!`);
+        }
+
         function setProspectView(view) {
             const isKanban = view === 'kanban';
             document.getElementById('view-kanban').classList.toggle('hidden', !isKanban);
