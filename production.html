@@ -1118,6 +1118,10 @@
                             <label class="block text-xs font-semibold text-gray-600 mb-1">Call / Meeting Notes</label>
                             <textarea id="mc-notes" rows="3" required placeholder="Summary of what was discussed and any next steps..." class="w-full border rounded-lg p-2.5 outline-none focus:border-blue-500"></textarea>
                         </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Attach Document / Recording (Optional)</label>
+                            <input type="file" id="mc-file" class="w-full text-xs text-gray-600 border border-dashed border-gray-300 rounded-lg p-2 bg-gray-50 file:mr-3 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+                        </div>
                         <div class="flex justify-end gap-2 pt-3 border-t">
                             <button type="button" onclick="document.getElementById('manualContactModal').classList.add('hidden')" class="px-4 py-2 border rounded-lg text-sm text-gray-600">Cancel</button>
                             <button type="submit" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-semibold">Save Contact Log</button>
@@ -1236,11 +1240,14 @@
                     const dt = document.getElementById('mc-dt').value;
                     const who = document.getElementById('mc-who').value;
                     const notes = document.getElementById('mc-notes').value;
+                    const fileInput = document.getElementById('mc-file');
+                    const fileName = fileInput.files && fileInput.files[0] ? fileInput.files[0].name : '';
+                    const fileBadge = fileName ? `<span class="block text-[11px] text-indigo-700 mt-1 font-mono"><i class="ph ph-paperclip"></i> ${fileName} (Saved to Files)</span>` : '';
                     const tbody = document.getElementById('meetings-tbody');
                     const tr = document.createElement('tr');
                     tr.className = 'hover:bg-gray-50/70 bg-indigo-50/30';
                     tr.innerHTML = `
-                        <td class="px-5 py-3.5"><strong class="text-gray-900 block">${type} (Manual Log)</strong><span class="text-xs text-gray-500">${who}</span></td>
+                        <td class="px-5 py-3.5"><strong class="text-gray-900 block">${type} (Manual Log)</strong><span class="text-xs text-gray-500">${who}</span>${fileBadge}</td>
                         <td class="px-4 py-3.5 text-xs">${dt}</td>
                         <td class="px-4 py-3.5 text-xs text-gray-400">— (Offline / Ad-hoc)</td>
                         <td class="px-4 py-3.5"><span class="px-2.5 py-1 bg-indigo-100 text-indigo-800 rounded-full text-xs font-semibold">Logged Manually</span></td>
@@ -1249,7 +1256,8 @@
                     tbody.prepend(tr);
                     document.getElementById('manualContactModal').classList.add('hidden');
                     document.getElementById('mc-notes').value = '';
-                    showToast(`${type} logged to client Meetings history!`);
+                    fileInput.value = '';
+                    showToast(fileName ? `${type} & "${fileName}" saved to Meetings & Files!` : `${type} logged to client Meetings history!`);
                 }
 
                 let currentApprovalCardId = null;
