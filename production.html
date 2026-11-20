@@ -1195,9 +1195,14 @@
                             <p class="text-xs text-blue-800">Collected via Client Magic Link • Credentials are AES-256 encrypted and access-logged per staff member.</p>
                         </div>
                     </div>
-                    <button onclick="showToast('Password request Magic Link sent to John Doe!', 'info')" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5">
-                        <i class="ph ph-magic-wand"></i> Request Login via Magic Link
-                    </button>
+                    <div class="flex flex-wrap items-center gap-2.5">
+                        <button onclick="document.getElementById('addCredModal').classList.remove('hidden')" class="bg-white border border-blue-300 hover:bg-blue-100 text-blue-800 px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5">
+                            <i class="ph ph-plus"></i> Add Credential
+                        </button>
+                        <button onclick="document.getElementById('reqLoginModal').classList.remove('hidden')" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5">
+                            <i class="ph ph-magic-wand"></i> Request Login via Magic Link
+                        </button>
+                    </div>
                 </div>
 
                 <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
@@ -1205,7 +1210,7 @@
                         <thead class="bg-gray-50 text-gray-600 uppercase text-xs border-b">
                             <tr><th class="px-5 py-3">System / Service</th><th class="px-4 py-3">Host / Login URL</th><th class="px-4 py-3">Username</th><th class="px-4 py-3">Password / Key</th><th class="px-5 py-3 text-right">Actions</th></tr>
                         </thead>
-                        <tbody class="divide-y divide-gray-100 text-gray-700 text-xs">
+                        <tbody id="passwords-tbody" class="divide-y divide-gray-100 text-gray-700 text-xs">
                             <tr class="hover:bg-gray-50">
                                 <td class="px-5 py-3.5 font-bold text-gray-900">SFTP / FTP (Staging &amp; Prod)</td>
                                 <td class="px-4 py-3.5 font-mono text-blue-600">sftp://staging.globaldyn.com:22</td>
@@ -1248,6 +1253,70 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+
+            <!-- Request Login Magic Link Preview Modal (Client-Facing View) -->
+            <div id="reqLoginModal" class="hidden fixed inset-0 bg-gray-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                <div class="bg-white rounded-2xl shadow-2xl w-full max-w-xl overflow-hidden flex flex-col max-h-[90vh]">
+                    <div class="bg-slate-900 text-white px-5 py-3 flex justify-between items-center text-xs">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2 py-0.5 bg-blue-500 text-white font-bold rounded uppercase text-[10px]">Client Magic Link Preview</span>
+                            <span class="text-slate-300">Passwordless Credential Request • Token: <code>vault_req_71a9c</code></span>
+                        </div>
+                        <button onclick="document.getElementById('reqLoginModal').classList.add('hidden')" class="text-slate-300 hover:text-white"><i class="ph ph-x text-lg"></i></button>
+                    </div>
+                    <form onsubmit="submitClientCredRequest(event)" class="p-6 overflow-y-auto space-y-4 text-sm">
+                        <div class="flex items-center justify-between border-b border-gray-100 pb-3">
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">Share Secure Login with Digital Next</h3>
+                                <p class="text-xs text-gray-500">For <strong>Global Dynamics</strong> • Never sent over plain email</p>
+                            </div>
+                            <span class="text-[11px] bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-full font-semibold flex items-center gap-1"><i class="ph-fill ph-lock-key"></i> AES-256 Vault</span>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-600 mb-1">Requested System / Service *</label>
+                                <input type="text" id="rl-sys" value="Shopify / Hosting Staging" required class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-600 mb-1">Host / Login URL *</label>
+                                <input type="text" id="rl-url" value="https://admin.shopify.com/store/globaldyn" required class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-600 mb-1">Username / Email *</label>
+                                <input type="text" id="rl-user" value="partner@globaldyn.com" required class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-600 mb-1">Password / API Key *</label>
+                                <input type="password" id="rl-pass" value="Shp_9920!ClientKey" required class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500">
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap items-center justify-between gap-2 pt-3 border-t">
+                            <button type="button" onclick="showToast('Magic Link copied: https://hub.agency/vault/vault_req_71a9c', 'info')" class="text-xs border border-gray-300 px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-50 flex items-center gap-1"><i class="ph ph-copy"></i> Copy Link to Send</button>
+                            <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5"><i class="ph-fill ph-shield-check"></i> Simulate Client Submit to Vault</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Manual Add Credential Modal -->
+            <div id="addCredModal" class="hidden fixed inset-0 bg-gray-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 space-y-4">
+                    <div class="flex justify-between items-center border-b pb-3">
+                        <h3 class="text-lg font-bold text-gray-900 flex items-center gap-2"><i class="ph-fill ph-lock-key text-blue-600"></i> Add Credential Manually</h3>
+                        <button onclick="document.getElementById('addCredModal').classList.add('hidden')" class="text-gray-400 hover:text-gray-700"><i class="ph ph-x text-xl"></i></button>
+                    </div>
+                    <form onsubmit="addCredentialRow(event)" class="space-y-3 text-sm">
+                        <div><label class="block text-xs font-semibold text-gray-600 mb-1">System / Service *</label><input type="text" id="ac-sys" required placeholder="e.g. HubSpot CRM / cPanel" class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500"></div>
+                        <div><label class="block text-xs font-semibold text-gray-600 mb-1">Host / Login URL *</label><input type="text" id="ac-url" required placeholder="https://..." class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500"></div>
+                        <div><label class="block text-xs font-semibold text-gray-600 mb-1">Username *</label><input type="text" id="ac-user" required placeholder="username@domain.com" class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500"></div>
+                        <div><label class="block text-xs font-semibold text-gray-600 mb-1">Password / Key *</label><input type="password" id="ac-pass" required placeholder="••••••••••••" class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500"></div>
+                        <div class="flex justify-end gap-2 pt-3 border-t">
+                            <button type="button" onclick="document.getElementById('addCredModal').classList.add('hidden')" class="px-4 py-2 border rounded-lg text-sm text-gray-600">Cancel</button>
+                            <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold">Save to Vault</button>
+                        </div>
+                    </form>
                 </div>
             </div>
 
@@ -1552,6 +1621,48 @@
                 function togglePass(id, realVal) {
                     const el = document.getElementById(id);
                     el.textContent = el.textContent.startsWith('•') ? realVal : '••••••••••••••';
+                }
+
+                function insertVaultRow(sys, url, user, pass) {
+                    const rowId = 'pw-' + Math.random().toString(36).substring(2, 8);
+                    const tr = document.createElement('tr');
+                    tr.className = 'hover:bg-gray-50 bg-emerald-50/30';
+                    tr.innerHTML = `
+                        <td class="px-5 py-3.5 font-bold text-gray-900">${sys}</td>
+                        <td class="px-4 py-3.5 font-mono text-blue-600">${url}</td>
+                        <td class="px-4 py-3.5 font-mono">${user}</td>
+                        <td class="px-4 py-3.5 font-mono"><span id="${rowId}">••••••••••••••</span></td>
+                        <td class="px-5 py-3.5 text-right space-x-2">
+                            <button onclick="togglePass('${rowId}', '${pass.replace(/'/g, "\\'")}')" class="border px-2.5 py-1 rounded hover:bg-gray-100 font-semibold">Reveal</button>
+                            <button onclick="showToast('${sys} password copied to clipboard!')" class="bg-gray-900 text-white px-2.5 py-1 rounded font-semibold">Copy</button>
+                        </td>
+                    `;
+                    document.getElementById('passwords-tbody').prepend(tr);
+                }
+
+                function addCredentialRow(e) {
+                    e.preventDefault();
+                    insertVaultRow(
+                        document.getElementById('ac-sys').value,
+                        document.getElementById('ac-url').value,
+                        document.getElementById('ac-user').value,
+                        document.getElementById('ac-pass').value
+                    );
+                    document.getElementById('addCredModal').classList.add('hidden');
+                    e.target.reset();
+                    showToast('Credential encrypted & saved to 1Password Vault!');
+                }
+
+                function submitClientCredRequest(e) {
+                    e.preventDefault();
+                    insertVaultRow(
+                        document.getElementById('rl-sys').value,
+                        document.getElementById('rl-url').value,
+                        document.getElementById('rl-user').value,
+                        document.getElementById('rl-pass').value
+                    );
+                    document.getElementById('reqLoginModal').classList.add('hidden');
+                    showToast('Client submitted credentials via Magic Link — synced to Vault!');
                 }
 
                 function scheduleMeetSubmit(e) {
