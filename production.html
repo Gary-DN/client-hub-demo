@@ -269,11 +269,23 @@
                             <h2 class="font-bold text-gray-900 text-lg">Connected Accounts &amp; Live Connector Health</h2>
                             <p class="text-xs text-gray-500">Real-time verification of OAuth tokens, analytics properties, ad accounts, and vault access.</p>
                         </div>
-                        <button onclick="showToast('Verified 7/8 connectors active. Meta BM token flagged for refresh.', 'info')" class="text-xs bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-semibold flex items-center gap-1.5 shadow-sm">
+                        <button onclick="showToast('Verified 13/14 connectors active + Website 200 OK (184ms). Meta BM flagged for refresh.', 'info')" class="text-xs bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-semibold flex items-center gap-1.5 shadow-sm">
                             <i class="ph ph-arrows-clockwise"></i> Test All Connections
                         </button>
                     </div>
                     <div class="p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+                        <!-- Website Status (10-min Ping 7am-7pm) -->
+                        <div class="p-3.5 rounded-xl border border-emerald-300 bg-emerald-50/70 space-y-1.5">
+                            <div class="flex justify-between items-center">
+                                <strong class="text-sm text-gray-900">Website Status</strong>
+                                <span class="px-2 py-0.5 bg-emerald-600 text-white rounded-full font-bold flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>Live (200 OK)</span>
+                            </div>
+                            <p class="text-gray-600 font-mono truncate">https://globaldyn.com • 184ms</p>
+                            <div class="flex justify-between items-center text-gray-500">
+                                <span>Pinged every 10m (7am–7pm)</span>
+                                <button onclick="showToast('Pinged https://globaldyn.com → 200 OK (176ms).')" class="text-blue-600 hover:underline font-semibold">Ping</button>
+                            </div>
+                        </div>
                         <div class="p-3.5 rounded-xl border border-emerald-200 bg-emerald-50/40 space-y-1.5">
                             <div class="flex justify-between items-center">
                                 <strong class="text-sm text-gray-900">Google Analytics 4</strong>
@@ -337,6 +349,46 @@
                             </div>
                             <p class="text-gray-600 font-mono">#client-global-dynamics</p>
                             <p class="text-gray-400">Auto-invoicing active</p>
+                        </div>
+                        <div class="p-3.5 rounded-xl border border-emerald-200 bg-emerald-50/40 space-y-1.5">
+                            <div class="flex justify-between items-center">
+                                <strong class="text-sm text-gray-900">Google Merchant Center</strong>
+                                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-full font-bold">Connected</span>
+                            </div>
+                            <p class="text-gray-600 font-mono">Feed #902184</p>
+                            <p class="text-gray-400">100% Products Approved</p>
+                        </div>
+                        <div class="p-3.5 rounded-xl border border-emerald-200 bg-emerald-50/40 space-y-1.5">
+                            <div class="flex justify-between items-center">
+                                <strong class="text-sm text-gray-900">LinkedIn Ads</strong>
+                                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-full font-bold">Connected</span>
+                            </div>
+                            <p class="text-gray-600 font-mono">Acct #50928172</p>
+                            <p class="text-gray-400">Insight Tag active</p>
+                        </div>
+                        <div class="p-3.5 rounded-xl border border-emerald-200 bg-emerald-50/40 space-y-1.5">
+                            <div class="flex justify-between items-center">
+                                <strong class="text-sm text-gray-900">Figma REST API</strong>
+                                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-full font-bold">Connected</span>
+                            </div>
+                            <p class="text-gray-600 font-mono">Project #8821</p>
+                            <p class="text-gray-400">6 Design Files synced</p>
+                        </div>
+                        <div class="p-3.5 rounded-xl border border-emerald-200 bg-emerald-50/40 space-y-1.5">
+                            <div class="flex justify-between items-center">
+                                <strong class="text-sm text-gray-900">SFTP / FTP &amp; GitHub</strong>
+                                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-full font-bold">Connected</span>
+                            </div>
+                            <p class="text-gray-600 font-mono truncate">staging.globaldyn.com:22</p>
+                            <p class="text-gray-400">Repo: globaldyn/web-prod</p>
+                        </div>
+                        <div class="p-3.5 rounded-xl border border-emerald-200 bg-emerald-50/40 space-y-1.5">
+                            <div class="flex justify-between items-center">
+                                <strong class="text-sm text-gray-900">Google Calendar &amp; Meet</strong>
+                                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-full font-bold">Connected</span>
+                            </div>
+                            <p class="text-gray-600">Attendance &amp; Transcripts</p>
+                            <p class="text-gray-400">Auto-saving call notes</p>
                         </div>
                     </div>
                 </div>
