@@ -163,6 +163,9 @@
                 <button onclick="switchTab('meetings')" id="tab-meetings"
                     class="prod-tab px-5 py-3 font-medium text-sm text-gray-500 border-b-2 border-transparent hover:text-gray-700 whitespace-nowrap flex items-center gap-1.5"><i
                         class="ph ph-video-camera"></i> Meetings</button>
+                <button onclick="switchTab('passwords')" id="tab-passwords"
+                    class="prod-tab px-5 py-3 font-medium text-sm text-gray-500 border-b-2 border-transparent hover:text-gray-700 whitespace-nowrap flex items-center gap-1.5"><i
+                        class="ph ph-lock-key"></i> Passwords</button>
                 <button onclick="switchTab('links')" id="tab-links"
                     class="prod-tab px-5 py-3 font-medium text-sm text-gray-500 border-b-2 border-transparent hover:text-gray-700 whitespace-nowrap">Live
                     Links / PR</button>
@@ -762,49 +765,127 @@
             </div>
 
             <!-- Design & Dev Tab -->
-            <div id="content-design" class="prod-content hidden">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
-                        <h3 class="font-bold text-gray-800 mb-3">Pre-Launch QA Checklist</h3>
-                        <ul class="space-y-2.5 text-sm">
-                            <li class="flex items-center gap-2 text-emerald-700"><i class="ph-fill ph-check-circle"></i>
-                                SSL &amp; HTTPS Redirects Verified</li>
-                            <li class="flex items-center gap-2 text-emerald-700"><i class="ph-fill ph-check-circle"></i>
-                                Mobile Responsive Breakpoints</li>
-                            <li class="flex items-center gap-2 text-emerald-700"><i class="ph-fill ph-check-circle"></i>
-                                Core Web Vitals (LCP &lt; 2.5s)</li>
-                            <li class="flex items-center gap-2 text-gray-500"><i class="ph ph-circle"></i> Staging →
-                                Prod DNS Cutover</li>
-                        </ul>
-                    </div>
-                    <div class="md:col-span-2 bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
-                        <h3 class="font-bold text-gray-800 mb-3">Bug / Ticket Intake &amp; Revision Rounds</h3>
-                        <div class="space-y-3 text-sm">
-                            <div
-                                class="p-3 bg-gray-50 rounded-lg border border-gray-200 flex justify-between items-center">
-                                <div>
-                                    <span
-                                        class="text-[10px] font-bold bg-blue-100 text-blue-700 px-2 py-0.5 rounded uppercase">Landing
-                                        Page</span>
-                                    <p class="font-semibold text-gray-800 mt-1">Cloud Security Hero Redesign</p>
-                                    <p class="text-xs text-gray-500">Revision Round: <strong>1 of 2</strong> • Assigned:
-                                        Mike K.</p>
-                                </div>
-                                <span class="px-2.5 py-1 bg-amber-100 text-amber-800 text-xs font-semibold rounded">In
-                                    Review</span>
+            <div id="content-design" class="prod-content hidden space-y-6">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Left Box: Connectors, FTP & Pre-Launch QA -->
+                    <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm space-y-4">
+                        <div class="flex justify-between items-center border-b border-gray-100 pb-2.5">
+                            <h3 class="font-bold text-gray-800">Dev &amp; Design Connectors</h3>
+                            <button onclick="switchTab('passwords')" class="text-xs text-blue-600 hover:underline font-semibold">FTP &amp; Logins →</button>
+                        </div>
+                        <div class="space-y-2.5 text-xs">
+                            <div class="p-2.5 rounded-lg bg-emerald-50 border border-emerald-200 flex justify-between items-center">
+                                <div><strong class="text-gray-900 block">Figma REST API</strong><span class="text-gray-500 font-mono">Project #8821 • 6 Files Created</span></div>
+                                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-full font-bold">Active</span>
                             </div>
-                            <div
-                                class="p-3 bg-gray-50 rounded-lg border border-gray-200 flex justify-between items-center">
-                                <div>
-                                    <span
-                                        class="text-[10px] font-bold bg-red-100 text-red-700 px-2 py-0.5 rounded uppercase">Bug
-                                        Ticket</span>
-                                    <p class="font-semibold text-gray-800 mt-1">HubSpot Form Webhook Timeout on Safari
-                                    </p>
-                                    <p class="text-xs text-gray-500">Est: 2 hrs • Priority: High</p>
+                            <div class="p-2.5 rounded-lg bg-emerald-50 border border-emerald-200 flex justify-between items-center">
+                                <div><strong class="text-gray-900 block">SFTP / FTP Access</strong><span class="text-gray-500 font-mono">sftp://staging.globaldyn.com:22</span></div>
+                                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-full font-bold">Synced</span>
+                            </div>
+                            <div class="p-2.5 rounded-lg bg-emerald-50 border border-emerald-200 flex justify-between items-center">
+                                <div><strong class="text-gray-900 block">GitHub Repo &amp; Staging</strong><span class="text-gray-500 font-mono">globaldyn/web-prod • main</span></div>
+                                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-full font-bold">Active</span>
+                            </div>
+                        </div>
+                        <div class="pt-2 border-t border-gray-100">
+                            <p class="text-[11px] font-bold text-gray-400 uppercase mb-2">Pre-Launch QA Checklist</p>
+                            <ul class="space-y-1.5 text-xs">
+                                <li class="flex items-center gap-2 text-emerald-700"><i class="ph-fill ph-check-circle"></i> SSL &amp; HTTPS Redirects Verified</li>
+                                <li class="flex items-center gap-2 text-emerald-700"><i class="ph-fill ph-check-circle"></i> Mobile Responsive Breakpoints</li>
+                                <li class="flex items-center gap-2 text-emerald-700"><i class="ph-fill ph-check-circle"></i> Core Web Vitals (LCP &lt; 2.5s)</li>
+                                <li class="flex items-center gap-2 text-gray-500"><i class="ph ph-circle"></i> Staging → Prod DNS Cutover</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Right Box: Figma Files Created + Bug / Revision Tracker -->
+                    <div class="lg:col-span-2 bg-white p-5 rounded-xl border border-gray-200 shadow-sm space-y-5">
+                        <div>
+                            <div class="flex justify-between items-center mb-3">
+                                <h3 class="font-bold text-gray-800">Figma Project Files (6 Created via Figma API)</h3>
+                                <button onclick="showToast('Synced latest file list from Figma API!', 'info')" class="text-xs text-blue-600 hover:underline font-semibold">Refresh Figma</button>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                                <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                                    <span class="font-bold text-purple-700 block">Cloud_Security_Hero_v3.fig</span>
+                                    <span class="text-gray-400">Updated 2 hrs ago • Mike K.</span>
                                 </div>
-                                <span
-                                    class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-semibold rounded">Fixed</span>
+                                <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                                    <span class="font-bold text-purple-700 block">PPC_Landing_Page_System.fig</span>
+                                    <span class="text-gray-400">Updated Nov 16 • Mike K.</span>
+                                </div>
+                                <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                                    <span class="font-bold text-purple-700 block">Q4_Ad_Creatives_Templates.fig</span>
+                                    <span class="text-gray-400">Updated Nov 12 • Sarah J.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-3 border-t border-gray-100">
+                            <h3 class="font-bold text-gray-800 mb-3">Bug / Ticket Intake &amp; Revision Rounds</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                                <div class="p-3 bg-gray-50 rounded-lg border border-gray-200 flex justify-between items-center">
+                                    <div>
+                                        <span class="text-[10px] font-bold bg-blue-100 text-blue-700 px-2 py-0.5 rounded uppercase">Landing Page</span>
+                                        <p class="font-semibold text-gray-800 mt-1">Cloud Security Hero Redesign</p>
+                                        <p class="text-xs text-gray-500">Revision Round: <strong>1 of 2</strong> • Mike K.</p>
+                                    </div>
+                                    <span class="px-2.5 py-1 bg-amber-100 text-amber-800 text-xs font-semibold rounded">In Review</span>
+                                </div>
+                                <div class="p-3 bg-gray-50 rounded-lg border border-gray-200 flex justify-between items-center">
+                                    <div>
+                                        <span class="text-[10px] font-bold bg-red-100 text-red-700 px-2 py-0.5 rounded uppercase">Bug Ticket</span>
+                                        <p class="font-semibold text-gray-800 mt-1">HubSpot Form Timeout on Safari</p>
+                                        <p class="text-xs text-gray-500">Est: 2 hrs • Priority: High</p>
+                                    </div>
+                                    <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-semibold rounded">Fixed</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Design & Dev Kanban Board Below -->
+                <div class="flex gap-6 overflow-x-auto pb-4">
+                    <div class="w-80 flex-shrink-0 bg-gray-50 rounded-lg border border-gray-200 flex flex-col">
+                        <h3 class="p-3 border-b font-semibold text-gray-700 bg-gray-100/50">To Do (Design &amp; Dev)</h3>
+                        <div class="p-3 space-y-3">
+                            <div class="bg-white p-3 rounded shadow-sm border border-gray-200 text-sm">
+                                <span class="text-[10px] font-bold bg-blue-100 text-blue-700 px-2 py-0.5 rounded uppercase">Dev • Staging</span>
+                                <p class="font-medium mt-1 mb-2">Deploy Enterprise Demo LP via SFTP</p>
+                                <div class="flex justify-between items-center text-xs text-gray-500 mb-2">
+                                    <span>Est: 4 hrs</span>
+                                    <span class="text-amber-600 font-medium flex items-center gap-1"><i class="ph ph-calendar"></i> Due Nov 24</span>
+                                </div>
+                                <div class="flex justify-end"><div class="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-[10px] font-bold">MK</div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-80 flex-shrink-0 bg-gray-50 rounded-lg border border-gray-200 flex flex-col">
+                        <h3 class="p-3 border-b font-semibold text-gray-700 bg-gray-100/50">In Review / QA</h3>
+                        <div class="p-3 space-y-3">
+                            <div class="bg-white p-3 rounded shadow-sm border border-blue-200 text-sm border-l-4 border-l-blue-500">
+                                <span class="text-[10px] font-bold bg-purple-100 text-purple-700 px-2 py-0.5 rounded uppercase">Figma UI</span>
+                                <p class="font-medium mt-1 mb-2">Cloud Security Hero Redesign (Round 1/2)</p>
+                                <div class="flex justify-between items-center text-xs text-gray-500 mb-2">
+                                    <span>Logged: 5/6 hrs</span>
+                                    <span class="text-red-600 font-semibold flex items-center gap-1"><i class="ph ph-calendar"></i> Due Nov 21</span>
+                                </div>
+                                <div class="flex justify-end"><div class="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-[10px] font-bold">MK</div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-80 flex-shrink-0 bg-gray-50 rounded-lg border border-gray-200 flex flex-col">
+                        <h3 class="p-3 border-b font-semibold text-gray-700 bg-gray-100/50">Done</h3>
+                        <div class="p-3 space-y-3">
+                            <div class="bg-white p-3 rounded shadow-sm border border-gray-200 text-sm opacity-75">
+                                <span class="text-[10px] font-bold bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded uppercase">Bug Fix</span>
+                                <p class="font-medium mt-1 mb-2">HubSpot Form Webhook Timeout on Safari</p>
+                                <div class="flex justify-between items-center text-xs text-gray-500 mb-2">
+                                    <span class="text-emerald-600 font-medium">Deployed</span>
+                                    <span class="text-gray-400">Done Nov 14</span>
+                                </div>
+                                <div class="flex justify-end"><div class="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-[10px] font-bold">MK</div></div>
                             </div>
                         </div>
                     </div>
@@ -1097,6 +1178,72 @@
                                 <td class="px-4 py-3 text-right"><button
                                         onclick="showToast('Downloading Brand_Guidelines_Logos.zip')"
                                         class="text-blue-600 hover:underline text-xs font-semibold">Download</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Passwords & Vault Tab -->
+            <div id="content-passwords" class="prod-content hidden space-y-6">
+                <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 flex flex-wrap items-center justify-between gap-4">
+                    <div class="flex items-center gap-3">
+                        <i class="ph-fill ph-lock-key text-blue-600 text-2xl"></i>
+                        <div>
+                            <h2 class="font-bold text-blue-950 text-sm">Encrypted Client Credential Vault (1Password / Bitwarden Sync)</h2>
+                            <p class="text-xs text-blue-800">Collected via Client Magic Link • Credentials are AES-256 encrypted and access-logged per staff member.</p>
+                        </div>
+                    </div>
+                    <button onclick="showToast('Password request Magic Link sent to John Doe!', 'info')" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5">
+                        <i class="ph ph-magic-wand"></i> Request Login via Magic Link
+                    </button>
+                </div>
+
+                <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-gray-50 text-gray-600 uppercase text-xs border-b">
+                            <tr><th class="px-5 py-3">System / Service</th><th class="px-4 py-3">Host / Login URL</th><th class="px-4 py-3">Username</th><th class="px-4 py-3">Password / Key</th><th class="px-5 py-3 text-right">Actions</th></tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 text-gray-700 text-xs">
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-5 py-3.5 font-bold text-gray-900">SFTP / FTP (Staging &amp; Prod)</td>
+                                <td class="px-4 py-3.5 font-mono text-blue-600">sftp://staging.globaldyn.com:22</td>
+                                <td class="px-4 py-3.5 font-mono">dn_deploy_gdyn</td>
+                                <td class="px-4 py-3.5 font-mono"><span id="pw-ftp">••••••••••••••</span></td>
+                                <td class="px-5 py-3.5 text-right space-x-2">
+                                    <button onclick="togglePass('pw-ftp', 'sftp_9K!mP2x#vL8q')" class="border px-2.5 py-1 rounded hover:bg-gray-100 font-semibold">Reveal</button>
+                                    <button onclick="showToast('SFTP password copied to clipboard!')" class="bg-gray-900 text-white px-2.5 py-1 rounded font-semibold">Copy</button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-5 py-3.5 font-bold text-gray-900">WordPress CMS Admin</td>
+                                <td class="px-4 py-3.5 font-mono text-blue-600">https://globaldyn.com/wp-admin</td>
+                                <td class="px-4 py-3.5 font-mono">agency@digitalnext.co.uk</td>
+                                <td class="px-4 py-3.5 font-mono"><span id="pw-cms">••••••••••••••</span></td>
+                                <td class="px-5 py-3.5 text-right space-x-2">
+                                    <button onclick="togglePass('pw-cms', 'wp_Gdyn#2026!Sec')" class="border px-2.5 py-1 rounded hover:bg-gray-100 font-semibold">Reveal</button>
+                                    <button onclick="showToast('CMS password copied to clipboard!')" class="bg-gray-900 text-white px-2.5 py-1 rounded font-semibold">Copy</button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-5 py-3.5 font-bold text-gray-900">Cloudflare DNS &amp; SSL</td>
+                                <td class="px-4 py-3.5 font-mono text-blue-600">https://dash.cloudflare.com</td>
+                                <td class="px-4 py-3.5 font-mono">infra@globaldyn.com</td>
+                                <td class="px-4 py-3.5 font-mono"><span id="pw-cf">••••••••••••••</span></td>
+                                <td class="px-5 py-3.5 text-right space-x-2">
+                                    <button onclick="togglePass('pw-cf', 'cf_7729_ZeroTrust!')" class="border px-2.5 py-1 rounded hover:bg-gray-100 font-semibold">Reveal</button>
+                                    <button onclick="showToast('Cloudflare password copied to clipboard!')" class="bg-gray-900 text-white px-2.5 py-1 rounded font-semibold">Copy</button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-5 py-3.5 font-bold text-gray-900">WP Engine Hosting</td>
+                                <td class="px-4 py-3.5 font-mono text-blue-600">https://my.wpengine.com</td>
+                                <td class="px-4 py-3.5 font-mono">dev@digitalnext.co.uk</td>
+                                <td class="px-4 py-3.5 font-mono"><span id="pw-wpe">••••••••••••••</span></td>
+                                <td class="px-5 py-3.5 text-right space-x-2">
+                                    <button onclick="togglePass('pw-wpe', 'wpe_Prod@9912!')" class="border px-2.5 py-1 rounded hover:bg-gray-100 font-semibold">Reveal</button>
+                                    <button onclick="showToast('WP Engine password copied to clipboard!')" class="bg-gray-900 text-white px-2.5 py-1 rounded font-semibold">Copy</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -1402,6 +1549,11 @@
             </div>
 
             <script>
+                function togglePass(id, realVal) {
+                    const el = document.getElementById(id);
+                    el.textContent = el.textContent.startsWith('•') ? realVal : '••••••••••••••';
+                }
+
                 function scheduleMeetSubmit(e) {
                     e.preventDefault();
                     const title = document.getElementById('meet-title').value;
