@@ -400,7 +400,12 @@
                 const active = btn.dataset.cat === cat;
                 btn.className = active ? 'cat-btn px-3 py-1.5 rounded-lg bg-blue-600 text-white' : 'cat-btn px-3 py-1.5 rounded-lg text-gray-600 hover:bg-gray-100';
             });
-            renderCategories();
+            const urlClient = new URLSearchParams(window.location.search).get('client');
+        if (urlClient) {
+            document.getElementById('qb-client').value = urlClient;
+        }
+
+        renderCategories();
         }
 
         function fmt(num) {
@@ -465,7 +470,12 @@
                 document.getElementById('social-spend').value = 24000;
                 showToast('Loaded Full Funnel preset.', 'info');
             }
-            renderCategories();
+            const urlClient = new URLSearchParams(window.location.search).get('client');
+        if (urlClient) {
+            document.getElementById('qb-client').value = urlClient;
+        }
+
+        renderCategories();
         }
 
         function resetQuote() {
@@ -492,6 +502,11 @@
             container.appendChild(toast);
             setTimeout(() => toast.classList.remove('translate-y-10', 'opacity-0'), 10);
             setTimeout(() => { toast.classList.add('opacity-0'); setTimeout(() => toast.remove(), 300); }, 3000);
+        }
+
+        const urlClient = new URLSearchParams(window.location.search).get('client');
+        if (urlClient) {
+            document.getElementById('qb-client').value = urlClient;
         }
 
         renderCategories();

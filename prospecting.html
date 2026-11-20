@@ -784,6 +784,28 @@
                                 </ul>
                             </div>
                         </div>
+
+                        <!-- Linked Quote Builder & Agreement / PandaDoc -->
+                        <div class="bg-indigo-50/70 p-4 rounded-lg border border-indigo-200 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                            <div class="space-y-1.5">
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-700 block">Quote Builder Quote</span>
+                                <p id="dm-quote-status" class="font-semibold text-gray-900">Quote #QB-2041 • £5,294.17/mo (12m)</p>
+                                <a id="dm-qb-link" href="quote-builder.html?client=Global%20Dynamics" class="inline-flex items-center gap-1 text-indigo-700 hover:underline font-bold">
+                                    <i class="ph ph-calculator"></i> Open / Build in Quote Builder →
+                                </a>
+                            </div>
+                            <div class="space-y-1.5 sm:border-l sm:border-indigo-200 sm:pl-4">
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-700 block">PandaDoc / E-Sign Agreement</span>
+                                <p id="dm-agreement-status" class="font-semibold text-gray-900">12-Month Growth Retainer SOW</p>
+                                <div class="flex items-center gap-3">
+                                    <a href="proposal-view.html" class="inline-flex items-center gap-1 text-indigo-700 hover:underline font-bold">
+                                        <i class="ph ph-file-signature"></i> Open Agreement →
+                                    </a>
+                                    <a href="proposals.html" class="text-gray-600 hover:underline font-medium">Manage</a>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="bg-emerald-50/70 p-4 rounded-lg border border-emerald-200 text-xs">
                             <div class="flex justify-between items-center mb-2.5">
                                 <h3 class="font-bold text-emerald-900 flex items-center gap-1.5"><i
@@ -1043,6 +1065,9 @@
             document.getElementById('dm-notes').textContent = notes;
             document.getElementById('dm-pandadoc').textContent = pandadoc;
             document.getElementById('dm-xero').textContent = xero;
+            document.getElementById('dm-qb-link').href = `quote-builder.html?client=${encodeURIComponent(title)}`;
+            document.getElementById('dm-quote-status').textContent = pandadoc.includes('Signed') ? `Quote #QB-2041 • ${budget} (${term})` : `Draft / Ready to Build (${budget})`;
+            document.getElementById('dm-agreement-status').textContent = `${term} SOW (${pandadoc})`;
             document.getElementById('dealModal').classList.remove('hidden');
         }
 
