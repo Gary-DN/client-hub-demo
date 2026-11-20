@@ -991,9 +991,14 @@
                         <h2 class="font-bold text-lg text-gray-900">Google Meet Schedule, Attendance &amp; Call Notes</h2>
                         <p class="text-xs text-gray-500">Synced with Google Calendar &amp; Meet REST API — tracks attendance and auto-saves Gemini meeting notes to Files.</p>
                     </div>
-                    <button onclick="document.getElementById('scheduleMeetModal').classList.remove('hidden')" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 shadow-sm">
-                        <i class="ph ph-video-camera"></i> Schedule Google Meet
-                    </button>
+                    <div class="flex flex-wrap items-center gap-2.5">
+                        <button onclick="document.getElementById('manualContactModal').classList.remove('hidden')" class="bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2">
+                            <i class="ph ph-phone-plus"></i> Log Manual Contact
+                        </button>
+                        <button onclick="document.getElementById('scheduleMeetModal').classList.remove('hidden')" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 shadow-sm">
+                            <i class="ph ph-video-camera"></i> Schedule Google Meet
+                        </button>
+                    </div>
                 </div>
 
                 <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
@@ -1077,6 +1082,45 @@
                         <div class="flex justify-end gap-2 pt-3 border-t">
                             <button type="button" onclick="document.getElementById('scheduleMeetModal').classList.add('hidden')" class="px-4 py-2 border rounded-lg text-sm text-gray-600">Cancel</button>
                             <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold">Create Calendar Invite &amp; Meet Link</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Log Manual Contact Modal -->
+            <div id="manualContactModal" class="hidden fixed inset-0 bg-gray-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 space-y-4">
+                    <div class="flex justify-between items-center border-b pb-3">
+                        <h3 class="text-lg font-bold text-gray-900 flex items-center gap-2"><i class="ph-fill ph-phone-plus text-indigo-600"></i> Log Manual Client Contact</h3>
+                        <button onclick="document.getElementById('manualContactModal').classList.add('hidden')" class="text-gray-400 hover:text-gray-700"><i class="ph ph-x text-xl"></i></button>
+                    </div>
+                    <form onsubmit="logManualContactSubmit(event)" class="space-y-3 text-sm">
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-600 mb-1">Contact Type</label>
+                                <select id="mc-type" class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500">
+                                    <option>Phone Call</option>
+                                    <option>In-Person Meeting</option>
+                                    <option>Slack Huddle</option>
+                                    <option>Teams / Zoom Call</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-600 mb-1">Date &amp; Time</label>
+                                <input type="text" id="mc-dt" value="Today • 10:30 AM" required class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Participants</label>
+                            <input type="text" id="mc-who" value="Sarah Jenkins + John Doe (Global Dynamics)" required class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Call / Meeting Notes</label>
+                            <textarea id="mc-notes" rows="3" required placeholder="Summary of what was discussed and any next steps..." class="w-full border rounded-lg p-2.5 outline-none focus:border-blue-500"></textarea>
+                        </div>
+                        <div class="flex justify-end gap-2 pt-3 border-t">
+                            <button type="button" onclick="document.getElementById('manualContactModal').classList.add('hidden')" class="px-4 py-2 border rounded-lg text-sm text-gray-600">Cancel</button>
+                            <button type="submit" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-semibold">Save Contact Log</button>
                         </div>
                     </form>
                 </div>
@@ -1184,6 +1228,28 @@
                     tbody.prepend(tr);
                     document.getElementById('scheduleMeetModal').classList.add('hidden');
                     showToast(`Google Meet scheduled: "${title}" (Calendar invite sent)!`);
+                }
+
+                function logManualContactSubmit(e) {
+                    e.preventDefault();
+                    const type = document.getElementById('mc-type').value;
+                    const dt = document.getElementById('mc-dt').value;
+                    const who = document.getElementById('mc-who').value;
+                    const notes = document.getElementById('mc-notes').value;
+                    const tbody = document.getElementById('meetings-tbody');
+                    const tr = document.createElement('tr');
+                    tr.className = 'hover:bg-gray-50/70 bg-indigo-50/30';
+                    tr.innerHTML = `
+                        <td class="px-5 py-3.5"><strong class="text-gray-900 block">${type} (Manual Log)</strong><span class="text-xs text-gray-500">${who}</span></td>
+                        <td class="px-4 py-3.5 text-xs">${dt}</td>
+                        <td class="px-4 py-3.5 text-xs text-gray-400">— (Offline / Ad-hoc)</td>
+                        <td class="px-4 py-3.5"><span class="px-2.5 py-1 bg-indigo-100 text-indigo-800 rounded-full text-xs font-semibold">Logged Manually</span></td>
+                        <td class="px-5 py-3.5 text-right"><button onclick="showToast('Notes: ${notes.replace(/'/g, "\\'")}', 'info')" class="text-xs border border-indigo-300 text-indigo-700 px-2.5 py-1 rounded hover:bg-indigo-50 font-semibold">View Notes</button></td>
+                    `;
+                    tbody.prepend(tr);
+                    document.getElementById('manualContactModal').classList.add('hidden');
+                    document.getElementById('mc-notes').value = '';
+                    showToast(`${type} logged to client Meetings history!`);
                 }
 
                 let currentApprovalCardId = null;
