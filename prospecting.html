@@ -835,22 +835,19 @@
                             <span id="dm-notes">Client requires strict scope adherence: 4 blogs/mo, 5 outreach links/mo.
                                 No social media included in Phase 1.</span>
                         </div>
-                        <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
-                            <h3 class="text-sm font-bold text-blue-900 mb-1">Mandatory Sign-Off Gate &amp; Automated
-                                Handoff</h3>
-                            <p class="text-xs text-blue-700 mb-3">When the signed agreement is uploaded, PandaDoc is
-                                signed, and Xero deposit is paid, the system automatically flips status to
-                                <em>Onboarding</em>.
-                            </p>
-                            <div class="flex flex-wrap items-center gap-3">
-                                <input type="file" id="agreementFile"
-                                    class="text-xs text-gray-600 file:mr-3 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-white file:text-blue-700 hover:file:bg-blue-100">
-                                <button
-                                    onclick="showToast('Signed Agreement verified! Automated stage change → Onboarding.'); document.getElementById('dealModal').classList.add('hidden');"
-                                    class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 flex items-center gap-2">
-                                    <i class="ph ph-upload-simple"></i> Complete Sign-Off &amp; Move to Onboarding
-                                </button>
+                        <div class="bg-blue-50 p-4 rounded-lg border border-blue-100 flex flex-wrap items-center justify-between gap-4">
+                            <div>
+                                <div class="flex items-center gap-2 mb-1">
+                                    <h3 class="text-sm font-bold text-blue-900">Mandatory Sign-Off Gate</h3>
+                                    <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] font-bold rounded-full uppercase flex items-center gap-1"><i class="ph-fill ph-check-circle"></i> All Documents Complete</span>
+                                </div>
+                                <p class="text-xs text-blue-700">Quote approved, Agreement e-signed (locked to GCS bucket), and Xero deposit verified.</p>
                             </div>
+                            <button
+                                onclick="showToast('Signed off! Moving client to Onboarding & Production Workspace.'); document.getElementById('dealModal').classList.add('hidden');"
+                                class="bg-blue-600 text-white px-4 py-2.5 rounded-lg text-sm font-semibold hover:bg-blue-700 flex items-center gap-2 shadow-sm">
+                                <i class="ph ph-check-circle"></i> Sign Off &amp; Move to Onboarding
+                            </button>
                         </div>
 
                         <!-- Defer Lead (Archive & Auto-Reopen) -->
