@@ -55,7 +55,9 @@ A comprehensive 360-degree agency management platform handling the entire client
     *  Attach audit reports, links built, and critical docs.
     *  Month 1: Competitor Analysis (Automated), Website Audit, 12-Month Work Plan (Semi-automated based on budget/services), One-Click Generate Work Plan.
     *  Months 2-12: Recurring task engine populating the first of every month.
-*   **Content (Client Approval Loop):**
+*   **Content (Client Approval Loop & Budget Attribution):**
+    *   **SEO-Funded Content Tasks:**  An SEO campaign carries a single commercial SEO budget, which includes recurring Content team deliverables (e.g., monthly blogs, on-page copy). Those Content tasks draw their allocated hours/credits from the **SEO budget** rather than requiring a separate Content retainer.
+    *   **Content Upsell Projects:**  Separately, the Content team can also be assigned standalone upsell projects (e.g., ebooks/guides, additional blog packages, copy overhauls) with their own dedicated Content budget.
     *   **Direct Approval Links:**  One-click links sent to the client via email/Slack for blogs, copy, or ad creatives. The client views the asset and clicks  **"Yes (Approve)"**  or  **"No (Reject/Revise)"** . Timestamps and feedback are logged directly back into the Production board.
 *   **PPC & Paid Social:**  Campaign build trackers, pixel QA checklists, ad creative loops, and live budget pacing alerts.
 *   **Design & Dev:**  Bug/ticket intake, revision round counters, and pre-launch QA checklists.
