@@ -95,21 +95,23 @@ Retention / Offboarding  ◀──  Reporting & Portal  ◀──  Production  �
 
 ### 2.4 Reporting & Client Portal (`reporting.html`)
 - **Dual Mode:** **Agency AM View** (editable Executive Summary) vs. **Client Portal (PWA)** (read-only client view).
+- **Unified Channel-Agnostic Data Model:** Joins **SEMrush/DataForSEO**, **Search Console**, **GA4**, **Google/Meta Ads**, and **Production Tasks** by `Landing Page URL` and `Keyword / Topic` in PostgreSQL so clients see unified **Business Performance by Topic & Page** without raw "tool silos".
 - **Mandatory Executive Summary:** Wins & Next Month's Focus added by AM before finalizing.
 - **Data + Output View:** Connects completed production tasks (`4 Blogs Published → +400 sessions`) to performance metrics.
 - **KPIs & Tables:**
-  1. **GA4 Analytics — Traffic Acquisition by Channel**
-  2. **Top Pages (GA4)**
-  3. **Top Landing Pages (Conversions)**
-  4. **SEO Keyword Rankings & Search Console Signals**
-  5. **AI Visibility & GEO Report (30 Focused Prompts):** Google AI Overviews, ChatGPT, Perplexity & Gemini Share of Voice across Focused Keyword Areas vs. Competitors.
+  1. **Unified Business Performance by Topic & Page** (Merged Search + Ads + GA4 + Output)
+  2. **GA4 Analytics — Traffic Acquisition by Channel**
+  3. **Top Pages (GA4)**
+  4. **Top Landing Pages (Conversions)**
+  5. **SEO Keyword Rankings & Search Console Signals**
+  6. **AI Visibility & GEO Report (30 Focused Prompts):** Google AI Overviews, ChatGPT, Perplexity & Gemini Share of Voice across Focused Keyword Areas vs. Competitors.
 
 ---
 
 ### 2.5 Retention, Health Score, Upsells & Offboarding (`upsells.html`)
 - **Tabs:** `Health & Upsells` | `Files` | `Proposals` | `Offboarding / Cancellation`
 - **Automated Client Health Score (RAG):** Red/Amber/Green indicator scored on Invoice Status, KPI Trends, Overdue Tasks, and Client Engagement (including missed meetings). `RED • ISSUE` triggers a **Recovery Playbook** & Slack alert.
-- **90-Day Cross-Sell Triggers:** Flags single-service or high-performing clients for complementary services.
+- **AI Signal-Backed Upsell Engine:** Cross-references the unified reporting table (SQL + Gemini) to surface data-backed opportunities rather than generic missing-service flags (e.g., *High Organic Traffic + Low GA4 CVR → CRO Redesign*, *High-Converting Keyword at Pos #6–15 → PPC Bridge*, *Paid Search Traffic Leak without Retargeting → Paid Social*, *Competitor Winning AI Visibility → Digital PR / GEO*).
 - **Files Tab:** Working upsell pitch decks, audits, and draft quotes before moving to Production.
 - **Proposals Tab:** Full Upsell Proposals & E-Sign tracker (`Created`, `Sent`, `Sent • Viewed`, `Signed`) with **Create from Quote Builder** and **Manual Upsell Proposal**.
 - **Structured Offboarding / Cancellation:** Tracks notice period end date, mandatory **Churn Reason** for leadership analytics, schedules final Xero reconciliation invoice, halts future recurring Production tasks, and provides an interactive Platform Access Revocation Checklist.
