@@ -178,3 +178,18 @@ Retention / Offboarding  ◀──  Reporting & Portal  ◀──  Production  �
 - **SERP & AI Visibility APIs (30 clients):**
   - DataForSEO weekly SERP + AIO checks: **~\$3 – \$5 / mo** (or ~\$25–\$40/mo daily).
   - LLM API calls (30 focused prompts/client weekly): **~\$5 – \$15 / mo** total.
+
+### 5.4 Live On-Demand API Pull (No Raw Analytics Storage)
+- **Analytics & Ads Data (GA4, Search Console, Google Ads, Meta Ads):** Do **not** replicate or store raw daily analytics in Cloud SQL. Pull live via API according to the date range selected at the top of Reporting (with a short 15–60 min cache) and join in memory by URL/Topic.
+- **What Is Stored in PostgreSQL (< 1 GB total):**
+  - Rank Tracker & AI Visibility weekly snapshots (historical timelines not kept by SERP/LLM APIs).
+  - Finalized Monthly Report snapshots & AM Executive Summaries.
+  - Weekly Health Score & AI Upsell Signal summaries.
+
+---
+
+## 6. Security & Compliance Architecture
+1. **Zero Plain-Text Passwords in App DB:** Client CMS/FTP/hosting credentials collected via Onboarding or Vault Magic Links are transmitted over HTTPS directly to **1Password / Bitwarden Vault API** (or **Cloud Secret Manager**), with per-user permissions and audit logging on every *Reveal / Copy*.
+2. **Hardened Magic Links:** Use **256-bit cryptographically random tokens** with strict expiration (e.g., 7 days), single-resource scope (e.g., a Content Approval token can only view/approve that single asset), and rate-limiting.
+3. **Read-Only RBAC on MCP Server:** Every MCP Bearer token enforces per-user RBAC (only assigned clients), read-only queries (no destructive writes), and **never** exposes the `Passwords` vault.
+4. **Staff SSO, Encrypted Tokens & Private Buckets:** Enforce **Google Workspace SSO + 2FA** for staff; encrypt client OAuth refresh tokens with **Cloud KMS / Secret Manager**; keep the GCS Bucket **100% private** (serving signed contract PDFs only via short-lived signed URLs) and validate all file uploads.
