@@ -76,9 +76,6 @@
                 <a href="quote-builder.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
                     <i class="ph-calculator text-xl"></i><span>Quote Builder</span>
                 </a>
-                                                <a href="proposals.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
-                    <i class="ph-file-signature text-xl"></i><span>Proposals &amp; E-Sign</span>
-                </a>
                 <a href="campaign-planner.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
                     <i class="ph-calendar-check text-xl"></i><span>Campaign Planner</span>
                 </a>
@@ -123,19 +120,11 @@
         </header>
         <div class="pt-3 px-8 pb-8 flex-1">
 
-            <div class="flex flex-wrap justify-between items-center gap-4 mb-6">
-                <div>
-                    <h1 class="text-2xl font-bold text-gray-800">Retention, Health Score &amp; Offboarding</h1>
-                    <p class="text-sm text-gray-500">Automated Red/Amber/Green health scoring, 90-day cross-sell
-                        triggers, and structured cancellation.</p>
-                </div>
-                <div class="flex gap-2 bg-white p-1 rounded-lg border border-gray-200 text-sm font-medium">
-                    <button id="ret-tab-health" onclick="switchRetentionTab('health')"
-                        class="px-4 py-1.5 bg-blue-50 text-blue-700 rounded-md">Health &amp; Upsells</button>
-                    <button id="ret-tab-offboard" onclick="switchRetentionTab('offboard')"
-                        class="px-4 py-1.5 text-gray-500 hover:text-gray-700 rounded-md">Offboarding /
-                        Cancellation</button>
-                </div>
+            <div class="border-b border-gray-200 mb-6 flex overflow-x-auto hide-scrollbar">
+                <button id="ret-tab-health" onclick="switchRetentionTab('health')" class="ret-tab px-5 py-3 font-medium text-sm text-blue-600 border-b-2 border-blue-600 whitespace-nowrap flex items-center gap-1.5"><i class="ph ph-heartbeat"></i> Health &amp; Upsells</button>
+                <button id="ret-tab-files" onclick="switchRetentionTab('files')" class="ret-tab px-5 py-3 font-medium text-sm text-gray-500 border-b-2 border-transparent hover:text-gray-700 whitespace-nowrap flex items-center gap-1.5"><i class="ph ph-folder-open"></i> Files</button>
+                <button id="ret-tab-proposals" onclick="switchRetentionTab('proposals')" class="ret-tab px-5 py-3 font-medium text-sm text-gray-500 border-b-2 border-transparent hover:text-gray-700 whitespace-nowrap flex items-center gap-1.5"><i class="ph ph-file-signature"></i> Proposals &amp; E-Sign</button>
+                <button id="ret-tab-offboard" onclick="switchRetentionTab('offboard')" class="ret-tab px-5 py-3 font-medium text-sm text-gray-500 border-b-2 border-transparent hover:text-gray-700 whitespace-nowrap flex items-center gap-1.5"><i class="ph ph-user-minus"></i> Offboarding / Cancellation</button>
             </div>
 
             <!-- Tab 1: Health Score + Upsell Board -->
@@ -393,6 +382,120 @@
                 </div>
             </div>
 
+            <!-- Tab: Files (Upsell Working Files) -->
+            <div id="ret-panel-files" class="hidden space-y-6">
+                <div class="bg-purple-50 border border-purple-200 rounded-xl p-4 flex flex-wrap items-center justify-between gap-4">
+                    <div class="flex items-start gap-3">
+                        <i class="ph-fill ph-google-drive-logo text-purple-600 text-2xl mt-0.5"></i>
+                        <div>
+                            <h2 class="font-bold text-purple-950 text-sm">Upsell Working Files (Google Workspace Sync)</h2>
+                            <p class="text-xs text-purple-800 mt-0.5">Working pitch decks, audit briefs, and draft upsell quotes currently in progress before moving to Production.</p>
+                        </div>
+                    </div>
+                    <button onclick="showToast('Upload to Upsell Workspace Folder opened (Demo).', 'info')" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5">
+                        <i class="ph ph-upload-simple"></i> Upload Working File
+                    </button>
+                </div>
+
+                <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-gray-50 text-gray-600 uppercase text-xs border-b">
+                            <tr><th class="px-5 py-3">File Name</th><th class="px-4 py-3">Client</th><th class="px-4 py-3">Upsell Service</th><th class="px-4 py-3">Updated</th><th class="px-5 py-3 text-right">Action</th></tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 text-gray-700 text-xs">
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-5 py-3.5 font-medium flex items-center gap-2"><i class="ph-fill ph-file-xls text-emerald-600 text-lg"></i> Global_Dynamics_Paid_Social_Quote.xlsx</td>
+                                <td class="px-4 py-3.5">Global Dynamics</td>
+                                <td class="px-4 py-3.5"><span class="bg-purple-100 text-purple-700 px-2 py-0.5 rounded font-semibold">Paid Social</span></td>
+                                <td class="px-4 py-3.5 text-gray-500">Today, 09:10 AM</td>
+                                <td class="px-5 py-3.5 text-right"><button onclick="showToast('Opening in Google Drive...', 'info')" class="text-blue-600 hover:underline font-semibold">Open Drive</button></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-5 py-3.5 font-medium flex items-center gap-2"><i class="ph-fill ph-file-pdf text-red-500 text-lg"></i> Harbour_Dental_PPC_Opportunity_Audit.pdf</td>
+                                <td class="px-4 py-3.5">Harbour Dental Group</td>
+                                <td class="px-4 py-3.5"><span class="bg-amber-100 text-amber-800 px-2 py-0.5 rounded font-semibold">Google Ads PPC</span></td>
+                                <td class="px-4 py-3.5 text-gray-500">Nov 19, 2026</td>
+                                <td class="px-5 py-3.5 text-right"><button onclick="showToast('Downloading Harbour_Dental_PPC_Opportunity_Audit.pdf')" class="text-blue-600 hover:underline font-semibold">Download</button></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-5 py-3.5 font-medium flex items-center gap-2"><i class="ph-fill ph-figma-logo text-indigo-600 text-lg"></i> Nordic_FinTech_CRO_Wireframes.fig</td>
+                                <td class="px-4 py-3.5">Nordic FinTech</td>
+                                <td class="px-4 py-3.5"><span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-semibold">CRO &amp; Design</span></td>
+                                <td class="px-4 py-3.5 text-gray-500">Nov 17, 2026</td>
+                                <td class="px-5 py-3.5 text-right"><button onclick="showToast('Opening Figma project...', 'info')" class="text-blue-600 hover:underline font-semibold">Open Figma</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tab: Proposals & E-Sign (Upsell Flow) -->
+            <div id="ret-panel-proposals" class="hidden space-y-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Manual / Quote Builder Upsell Proposal Form -->
+                    <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+                        <div class="p-5 border-b border-gray-100 bg-gray-50/70 flex justify-between items-center">
+                            <div>
+                                <h2 class="font-bold text-gray-900">Create Upsell Proposal &amp; E-Sign</h2>
+                                <p class="text-xs text-gray-500">Flow: Upsell → Quote Builder → Proposal → Magic Link / Sign-Off</p>
+                            </div>
+                            <a href="quote-builder.html?client=Global%20Dynamics" class="text-xs bg-indigo-50 text-indigo-700 border border-indigo-200 px-3 py-1.5 rounded-lg font-semibold hover:bg-indigo-100 flex items-center gap-1"><i class="ph ph-calculator"></i> Open Quote Builder</a>
+                        </div>
+                        <form onsubmit="generateUpsellProposal(event)" class="p-5 space-y-4 text-sm">
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-600 mb-1">Client</label>
+                                    <select id="up-client" class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500">
+                                        <option>Global Dynamics</option>
+                                        <option>Harbour Dental Group</option>
+                                        <option>Nordic FinTech</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-600 mb-1">Upsell Value</label>
+                                    <input type="text" id="up-val" value="+£2,000 / mo" required class="w-full border rounded-lg px-3 py-2 font-semibold outline-none focus:border-blue-500">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-600 mb-1">Upsell Scope / Add-On Services</label>
+                                <textarea rows="2" class="w-full border rounded-lg p-2.5 text-xs outline-none focus:border-blue-500">LinkedIn Paid Social Campaign Setup, 3x Carousel Creatives/mo, and Retargeting Management.</textarea>
+                            </div>
+                            <div class="flex justify-between items-center pt-2 border-t border-gray-100">
+                                <a href="proposal-view.html" class="text-xs text-blue-600 hover:underline font-semibold">Preview Client E-Sign Link</a>
+                                <button type="submit" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5"><i class="ph ph-file-signature"></i> Generate &amp; Send E-Sign Link</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Active Upsell Proposals -->
+                    <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+                        <div class="p-5 border-b border-gray-100 bg-gray-50/70">
+                            <h2 class="font-bold text-gray-900">Sent Upsell Proposals</h2>
+                            <p class="text-xs text-gray-500">Automatically updates client retainer &amp; Production boards when signed.</p>
+                        </div>
+                        <div class="divide-y divide-gray-100 text-xs">
+                            <div class="p-4 flex items-center justify-between">
+                                <div>
+                                    <strong class="text-sm text-gray-900 block">Nordic FinTech — CRO &amp; Landing Page</strong>
+                                    <span class="text-gray-500">+£3,500 one-off • Viewed 3x</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="px-2.5 py-1 bg-blue-100 text-blue-800 rounded-full font-bold">Viewed</span>
+                                    <a href="proposal-view.html" class="text-blue-600 hover:underline font-semibold">Open</a>
+                                </div>
+                            </div>
+                            <div class="p-4 flex items-center justify-between">
+                                <div>
+                                    <strong class="text-sm text-gray-900 block">Solstice Wellness — +4 Blogs/mo Add-On</strong>
+                                    <span class="text-gray-500">+£1,200/mo • Signed &amp; Added to Retainer</span>
+                                </div>
+                                <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-full font-bold">Signed</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </main>
 
@@ -401,11 +504,20 @@
 
     <script>
         function switchRetentionTab(tab) {
-            const isHealth = tab === 'health';
-            document.getElementById('ret-panel-health').classList.toggle('hidden', !isHealth);
-            document.getElementById('ret-panel-offboard').classList.toggle('hidden', isHealth);
-            document.getElementById('ret-tab-health').className = isHealth ? 'px-4 py-1.5 bg-blue-50 text-blue-700 rounded-md' : 'px-4 py-1.5 text-gray-500 hover:text-gray-700 rounded-md';
-            document.getElementById('ret-tab-offboard').className = !isHealth ? 'px-4 py-1.5 bg-blue-50 text-blue-700 rounded-md' : 'px-4 py-1.5 text-gray-500 hover:text-gray-700 rounded-md';
+            ['health', 'files', 'proposals', 'offboard'].forEach(t => {
+                const active = t === tab;
+                document.getElementById('ret-panel-' + t).classList.toggle('hidden', !active);
+                const btn = document.getElementById('ret-tab-' + t);
+                btn.className = active
+                    ? 'ret-tab px-5 py-3 font-medium text-sm text-blue-600 border-b-2 border-blue-600 whitespace-nowrap flex items-center gap-1.5'
+                    : 'ret-tab px-5 py-3 font-medium text-sm text-gray-500 border-b-2 border-transparent hover:text-gray-700 whitespace-nowrap flex items-center gap-1.5';
+            });
+        }
+        function generateUpsellProposal(e) {
+            e.preventDefault();
+            const c = document.getElementById('up-client').value;
+            const v = document.getElementById('up-val').value;
+            showToast(`Upsell Proposal & E-Sign Magic Link created for ${c} (${v})!`);
         }
         function showToast(message, type = 'success') {
             const container = document.getElementById('toast-container');
