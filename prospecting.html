@@ -652,65 +652,120 @@
                 </div>
             </div>
 
-            <!-- Tab 5: E-Sign (Proposal & Agreement Generator Form) -->
-            <div id="pcontent-esign" class="prosp-content hidden max-w-3xl">
-                <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
-                    <div class="p-6 border-b border-gray-100 bg-gray-50/70 flex justify-between items-center">
-                        <div>
-                            <h2 class="font-bold text-gray-900 text-lg">Generate Agreement &amp; E-Sign Magic Link</h2>
-                            <p class="text-xs text-gray-500">Build a client-ready proposal &amp; agreement from Prospecting data. Signed PDFs lock into the Cloud Storage bucket.</p>
-                        </div>
-                        <span class="text-xs bg-indigo-100 text-indigo-700 px-2.5 py-1 rounded-full font-bold">Native E-Sign</span>
+            <!-- Tab 5: E-Sign (Proposals & E-Sign Tracker) -->
+            <div id="pcontent-esign" class="prosp-content hidden space-y-6">
+                <div class="flex flex-wrap justify-between items-center gap-4">
+                    <div>
+                        <h2 class="font-bold text-lg text-gray-900">Proposals &amp; E-Sign Tracker</h2>
+                        <p class="text-xs text-gray-500">Flow: Lead → Quote Builder → Proposal → Magic Link / E-Sign. Track views, status, and signed agreements.</p>
                     </div>
-                    <form onsubmit="generateAgreementSubmit(event)" class="p-6 space-y-4 text-sm">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs font-semibold text-gray-600 mb-1">Select Prospect *</label>
-                                <select id="es-prospect" class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500">
-                                    <option>Kestrel Logistics (Tom Hardy)</option>
-                                    <option>Global Dynamics (John Doe)</option>
-                                    <option>Nordic FinTech (Erik Lindqvist)</option>
-                                    <option>Oakwood Legal (Hannah Abbott)</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-gray-600 mb-1">Agreement Template *</label>
-                                <select id="es-template" class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500">
-                                    <option>12-Month Growth Retainer SOW + MSA</option>
-                                    <option>6-Month SEO &amp; PPC Agreement</option>
-                                    <option>Web Design &amp; Dev Project SOW</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-gray-600 mb-1">Monthly Retainer Value *</label>
-                                <input type="text" id="es-value" value="£4,800.00 / mo" required class="w-full border rounded-lg px-3 py-2 font-semibold outline-none focus:border-blue-500">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-gray-600 mb-1">Contract Term &amp; Billing</label>
-                                <input type="text" value="12 Months • Monthly in Advance (Xero)" class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500">
-                            </div>
+                    <div class="flex items-center gap-2.5">
+                        <a href="quote-builder.html" class="bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5">
+                            <i class="ph ph-calculator text-indigo-600"></i> Create from Quote Builder
+                        </a>
+                        <button onclick="document.getElementById('manualPropModal').classList.remove('hidden')" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow-sm">
+                            <i class="ph ph-plus"></i> Manual Proposal
+                        </button>
+                    </div>
+                </div>
+
+                <!-- KPI Strip -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm"><p class="text-xs text-gray-500 font-semibold uppercase mb-1">Created / Draft</p><span class="text-2xl font-bold text-gray-800">1</span></div>
+                    <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm"><p class="text-xs text-gray-500 font-semibold uppercase mb-1">Sent (Unopened)</p><span class="text-2xl font-bold text-amber-600">1</span></div>
+                    <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm"><p class="text-xs text-gray-500 font-semibold uppercase mb-1">Viewed by Client</p><span class="text-2xl font-bold text-blue-600">2</span></div>
+                    <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm"><p class="text-xs text-gray-500 font-semibold uppercase mb-1">Signed &amp; Locked</p><span class="text-2xl font-bold text-emerald-600">1</span></div>
+                </div>
+
+                <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-gray-50 text-gray-600 uppercase text-xs border-b">
+                            <tr>
+                                <th class="px-5 py-3">Prospect / Proposal</th>
+                                <th class="px-4 py-3">Template / Source</th>
+                                <th class="px-4 py-3">Value</th>
+                                <th class="px-4 py-3">Status</th>
+                                <th class="px-4 py-3">Client Views &amp; Activity</th>
+                                <th class="px-5 py-3 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="prosp-esign-tbody" class="divide-y divide-gray-100 text-gray-700 text-xs">
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-5 py-3.5"><strong class="text-gray-900 text-sm block">Global Dynamics</strong><span class="text-gray-500">John Doe • john@globaldyn.com</span></td>
+                                <td class="px-4 py-3.5">12m Growth Retainer (Quote #QB-2041)</td>
+                                <td class="px-4 py-3.5 font-semibold text-sm">£5,294.17/mo</td>
+                                <td class="px-4 py-3.5"><span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-full font-bold">Signed</span></td>
+                                <td class="px-4 py-3.5 text-gray-600"><i class="ph-fill ph-eye text-emerald-600"></i> Viewed <strong>4 times</strong> • Signed Nov 18</td>
+                                <td class="px-5 py-3.5 text-right space-x-2">
+                                    <a href="proposal-view.html" class="text-blue-600 hover:underline font-semibold">Open Link</a>
+                                    <button onclick="showToast('Downloaded signed PDF + Audit Certificate.')" class="border border-gray-300 px-2.5 py-1 rounded hover:bg-gray-50 font-medium">PDF</button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-5 py-3.5"><strong class="text-gray-900 text-sm block">Kestrel Logistics</strong><span class="text-gray-500">Tom Hardy • tom@kestrellogistics.com</span></td>
+                                <td class="px-4 py-3.5">SEO + Web Redesign MSA</td>
+                                <td class="px-4 py-3.5 font-semibold text-sm">£4,800.00/mo</td>
+                                <td class="px-4 py-3.5"><span class="px-2.5 py-1 bg-blue-100 text-blue-800 rounded-full font-bold">Sent • Viewed</span></td>
+                                <td class="px-4 py-3.5 text-indigo-700 font-medium"><i class="ph-fill ph-eye"></i> Viewed <strong>3 times</strong> (4m 12s) • Last: 2h ago</td>
+                                <td class="px-5 py-3.5 text-right space-x-2">
+                                    <a href="proposal-view.html" class="bg-blue-600 text-white px-2.5 py-1 rounded font-semibold hover:bg-blue-700">Client View</a>
+                                    <button onclick="showToast('Magic Link copied!', 'info')" class="border border-gray-300 px-2.5 py-1 rounded hover:bg-gray-50 font-medium">Copy</button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-5 py-3.5"><strong class="text-gray-900 text-sm block">Solstice Wellness</strong><span class="text-gray-500">Mia Wallace • mia@solsticewellness.com</span></td>
+                                <td class="px-4 py-3.5">Paid Social &amp; Content SOW</td>
+                                <td class="px-4 py-3.5 font-semibold text-sm">£3,500.00/mo</td>
+                                <td class="px-4 py-3.5"><span class="px-2.5 py-1 bg-blue-100 text-blue-800 rounded-full font-bold">Sent • Viewed</span></td>
+                                <td class="px-4 py-3.5 text-indigo-700 font-medium"><i class="ph-fill ph-eye"></i> Viewed <strong>1 time</strong> (1m 40s) • Today</td>
+                                <td class="px-5 py-3.5 text-right space-x-2">
+                                    <a href="proposal-view.html" class="text-blue-600 hover:underline font-semibold">Open Link</a>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-5 py-3.5"><strong class="text-gray-900 text-sm block">Oakwood Legal</strong><span class="text-gray-500">Hannah Abbott • hannah@oakwoodlegal.co.uk</span></td>
+                                <td class="px-4 py-3.5">SEO &amp; Content Retainer SOW</td>
+                                <td class="px-4 py-3.5 font-semibold text-sm">£3,700.00/mo</td>
+                                <td class="px-4 py-3.5"><span class="px-2.5 py-1 bg-amber-100 text-amber-800 rounded-full font-bold">Sent</span></td>
+                                <td class="px-4 py-3.5 text-gray-400">Sent Nov 17 • 0 views yet</td>
+                                <td class="px-5 py-3.5 text-right space-x-2">
+                                    <button onclick="showToast('Reminder Magic Link re-sent to Hannah Abbott.', 'info')" class="border border-gray-300 px-2.5 py-1 rounded hover:bg-gray-50 font-medium">Nudge</button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-5 py-3.5"><strong class="text-gray-900 text-sm block">Nordic FinTech</strong><span class="text-gray-500">Erik Lindqvist • erik@nordicfintech.eu</span></td>
+                                <td class="px-4 py-3.5">Draft from Quote Builder</td>
+                                <td class="px-4 py-3.5 font-semibold text-sm">£4,500.00/mo</td>
+                                <td class="px-4 py-3.5"><span class="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full font-bold">Created</span></td>
+                                <td class="px-4 py-3.5 text-gray-400">Not sent to client yet</td>
+                                <td class="px-5 py-3.5 text-right space-x-2">
+                                    <button onclick="showToast('Proposal Magic Link sent to Erik Lindqvist!')" class="bg-indigo-600 text-white px-2.5 py-1 rounded font-semibold hover:bg-indigo-700">Send Link</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Manual Proposal Modal (Prospecting) -->
+            <div id="manualPropModal" class="hidden fixed inset-0 bg-gray-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 space-y-4">
+                    <div class="flex justify-between items-center border-b pb-3">
+                        <h3 class="text-lg font-bold text-gray-900">Create Manual Proposal / Agreement</h3>
+                        <button onclick="document.getElementById('manualPropModal').classList.add('hidden')" class="text-gray-400 hover:text-gray-700"><i class="ph ph-x text-xl"></i></button>
+                    </div>
+                    <form onsubmit="generateAgreementSubmit(event)" class="space-y-3 text-sm">
+                        <div class="grid grid-cols-2 gap-3">
+                            <div><label class="block text-xs font-semibold text-gray-600 mb-1">Prospect</label><select id="es-prospect" class="w-full border rounded-lg px-3 py-2"><option>TechFlow Inc (Sarah Connor)</option><option>Veloce Motors (Marcus Vance)</option><option>Kestrel Logistics (Tom Hardy)</option></select></div>
+                            <div><label class="block text-xs font-semibold text-gray-600 mb-1">Monthly Value</label><input type="text" id="es-value" value="£2,500.00/mo" required class="w-full border rounded-lg px-3 py-2 font-semibold"></div>
                         </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-gray-600 mb-1">Included Services &amp; Scope Guardrails</label>
-                            <textarea rows="3" class="w-full border rounded-lg p-3 text-xs outline-none focus:border-blue-500">Technical SEO Audit (Quarterly), On-Page Optimisation, 4x Blogs/month, 5x Digital PR/Outreach Links/month, and Google Ads Management.</textarea>
-                        </div>
-                        <div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-gray-100">
-                            <div class="flex items-center gap-4">
-                                <a href="quote-builder.html" class="text-xs text-indigo-700 hover:underline font-semibold flex items-center gap-1"><i class="ph ph-calculator"></i> Build Quote First</a>
-                                <a href="proposal-view.html" class="text-xs text-blue-600 hover:underline font-semibold flex items-center gap-1"><i class="ph ph-eye"></i> Preview Client E-Sign Page</a>
-                            </div>
-                            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl font-semibold text-sm flex items-center gap-2 shadow-sm">
-                                <i class="ph ph-file-signature"></i> Generate Agreement &amp; Send E-Sign Link
-                            </button>
+                        <div><label class="block text-xs font-semibold text-gray-600 mb-1">Template</label><select id="es-template" class="w-full border rounded-lg px-3 py-2"><option>12-Month Growth Retainer SOW + MSA</option><option>6-Month SEO &amp; PPC Agreement</option></select></div>
+                        <div><label class="block text-xs font-semibold text-gray-600 mb-1">Scope Summary</label><textarea rows="2" class="w-full border rounded-lg p-2.5 text-xs">Technical SEO, Monthly Blogs, and Google Ads Management.</textarea></div>
+                        <div class="flex justify-end gap-2 pt-3 border-t">
+                            <button type="button" onclick="document.getElementById('manualPropModal').classList.add('hidden')" class="px-4 py-2 border rounded-lg text-sm text-gray-600">Cancel</button>
+                            <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold">Create &amp; Send E-Sign Link</button>
                         </div>
                     </form>
-                    <div id="es-generated-box" class="hidden mx-6 mb-6 p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-900 flex flex-wrap items-center justify-between gap-3">
-                        <div>
-                            <p class="font-bold">Agreement Generated &amp; E-Sign Magic Link Ready!</p>
-                            <p id="es-gen-sub" class="text-emerald-700"></p>
-                        </div>
-                        <a href="proposal-view.html" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg font-semibold">Open Client E-Sign Link →</a>
-                    </div>
                 </div>
             </div>
 
@@ -1096,10 +1151,21 @@
         function generateAgreementSubmit(e) {
             e.preventDefault();
             const prospect = document.getElementById('es-prospect').value;
+            const template = document.getElementById('es-template').value;
             const value = document.getElementById('es-value').value;
-            document.getElementById('es-gen-sub').textContent = `${prospect} • ${value} — Token: prop_live_8c41e290 (Audit & GCS lock enabled)`;
-            document.getElementById('es-generated-box').classList.remove('hidden');
-            showToast(`Agreement & E-Sign Magic Link generated for ${prospect}!`);
+            const tr = document.createElement('tr');
+            tr.className = 'hover:bg-gray-50 bg-blue-50/30';
+            tr.innerHTML = `
+                <td class="px-5 py-3.5"><strong class="text-gray-900 text-sm block">${prospect.split(' (')[0]}</strong><span class="text-gray-500">${prospect}</span></td>
+                <td class="px-4 py-3.5">${template}</td>
+                <td class="px-4 py-3.5 font-semibold text-sm">${value}</td>
+                <td class="px-4 py-3.5"><span class="px-2.5 py-1 bg-amber-100 text-amber-800 rounded-full font-bold">Sent</span></td>
+                <td class="px-4 py-3.5 text-gray-500">Sent just now • 0 views yet</td>
+                <td class="px-5 py-3.5 text-right space-x-2"><a href="proposal-view.html" class="text-blue-600 hover:underline font-semibold">Open Link</a></td>
+            `;
+            document.getElementById('prosp-esign-tbody').prepend(tr);
+            document.getElementById('manualPropModal').classList.add('hidden');
+            showToast(`Proposal & E-Sign Magic Link sent to ${prospect}!`);
         }
 
         function setProspectView(view) {
