@@ -138,8 +138,10 @@
                         • Month 1</span>
                 </div>
                 <div class="flex items-center gap-3 text-xs">
-                    <span class="bg-white border border-gray-200 px-3 py-1.5 rounded-lg text-gray-600">Profitability:
-                        <strong class="text-emerald-600">On Track (38 / 55 hrs)</strong></span>
+                    <button type="button" onclick="openProfitabilityModal()" class="bg-white border border-gray-200 hover:border-emerald-400 hover:bg-emerald-50/40 px-3 py-1.5 rounded-lg text-gray-600 cursor-pointer transition-all flex items-center gap-1.5">
+                        <i class="ph ph-chart-bar text-emerald-600"></i>
+                        <span>Profitability: <strong id="profitability-pill-text" class="text-emerald-600">On Track (38 / 55 hrs)</strong></span>
+                    </button>
                     <button onclick="showToast('Recurring Month 2 tasks queued for 1st of next month.', 'info')"
                         class="bg-white border border-gray-300 hover:bg-gray-50 px-3 py-1.5 rounded-lg font-medium text-gray-700 flex items-center gap-1.5"><i
                             class="ph ph-arrows-clockwise"></i> Preview Month 2 Auto-Tasks</button>
@@ -1898,6 +1900,68 @@
                 </div>
             </div>
 
+            <!-- Profitability & Time Log Breakdown Modal -->
+            <div id="profitabilityModal" class="hidden fixed inset-0 bg-gray-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                <div class="bg-white rounded-2xl shadow-2xl border border-gray-200 w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden">
+                    <!-- Modal Header -->
+                    <div class="bg-slate-900 text-white px-6 py-4 flex justify-between items-center">
+                        <div>
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 px-2 py-0.5 rounded uppercase">Profitability Tracker</span>
+                                <span class="text-xs text-slate-300">Global Dynamics • Month 1</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                                Hours &amp; Tasks Logged
+                                <span id="pm-total-badge" class="text-xs font-semibold bg-emerald-600 text-white px-2.5 py-0.5 rounded-full">38.0 / 55.0 hrs (69%)</span>
+                            </h3>
+                        </div>
+                        <button onclick="document.getElementById('profitabilityModal').classList.add('hidden')" class="text-slate-400 hover:text-white p-1">
+                            <i class="ph ph-x text-xl"></i>
+                        </button>
+                    </div>
+
+                    <!-- Modal Body -->
+                    <div class="flex-1 overflow-y-auto p-6 space-y-5">
+                        <!-- Department Summary Cards -->
+                        <div id="pm-dept-cards" class="grid grid-cols-1 sm:grid-cols-3 gap-4"></div>
+
+                        <!-- Filter Pills -->
+                        <div class="flex flex-wrap items-center justify-between gap-3">
+                            <div class="flex items-center gap-2 text-xs font-medium">
+                                <button onclick="filterProfitabilityLogs('all')" data-dept="all" class="pm-filter-btn px-3 py-1.5 rounded-lg bg-blue-600 text-white">All Services</button>
+                                <button onclick="filterProfitabilityLogs('SEO')" data-dept="SEO" class="pm-filter-btn px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200">SEO</button>
+                                <button onclick="filterProfitabilityLogs('Content')" data-dept="Content" class="pm-filter-btn px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200">Content</button>
+                                <button onclick="filterProfitabilityLogs('PPC')" data-dept="PPC" class="pm-filter-btn px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200">PPC</button>
+                            </div>
+                            <span class="text-xs text-gray-400">Logged against day (no exact start/end times)</span>
+                        </div>
+
+                        <!-- Tasks & Hours Table -->
+                        <div class="border border-gray-200 rounded-xl overflow-hidden">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-gray-50 border-b border-gray-200 text-[11px] font-bold text-gray-500 uppercase tracking-wider">
+                                        <th class="px-4 py-3">Date</th>
+                                        <th class="px-4 py-3">Service</th>
+                                        <th class="px-4 py-3">Task</th>
+                                        <th class="px-4 py-3">Logged By</th>
+                                        <th class="px-4 py-3">Status</th>
+                                        <th class="px-4 py-3 text-right">Hours</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="pm-logs-tbody" class="divide-y divide-gray-100 text-sm text-gray-700"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Modal Footer -->
+                    <div class="bg-gray-50 border-t border-gray-200 px-6 py-3.5 flex justify-between items-center">
+                        <span class="text-xs text-gray-500">Retainer Total: <strong class="text-gray-800">$5,200/mo</strong> • Effective Rate: <strong id="pm-eff-rate" class="text-emerald-700">$136.84/hr</strong></span>
+                        <button type="button" onclick="document.getElementById('profitabilityModal').classList.add('hidden')" class="px-4 py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-lg text-sm font-semibold">Close</button>
+                    </div>
+                </div>
+            </div>
+
             <script>
                 function togglePass(id, realVal) {
                     const el = document.getElementById(id);
@@ -2269,6 +2333,107 @@
                     document.getElementById('st-hours-bar').style.width = pct + '%';
                 }
 
+                const deptBudgets = {
+                    SEO: { budgetHrs: 20, retainer: 2500, color: 'indigo' },
+                    Content: { budgetHrs: 15, retainer: 1500, color: 'purple' },
+                    PPC: { budgetHrs: 20, retainer: 1200, color: 'emerald' }
+                };
+
+                const profitabilityLogs = [
+                    { date: 'Nov 24, 2026', dept: 'SEO', taskId: 'seo-101', task: 'Initial Website Audit (Crawl & CWV)', by: 'Alex Rivera', status: 'To Do', hrs: 2.5 },
+                    { date: 'Nov 22, 2026', dept: 'PPC', task: 'RSA Variant A/B Test (Enterprise Cloud)', by: 'Marcus King', status: 'In Progress', hrs: 4.5 },
+                    { date: 'Nov 21, 2026', dept: 'SEO', task: 'Q1 Technical Website Audit Setup', by: 'Alex Rivera', status: 'In Progress', hrs: 6.5 },
+                    { date: 'Nov 20, 2026', dept: 'SEO', taskId: 'seo-103', task: '12-Month Work Plan Generator', by: 'Alex Rivera', status: 'In Progress', hrs: 2.0 },
+                    { date: 'Nov 19, 2026', dept: 'Content', task: 'B2B SaaS Security Solutions (1,250w)', by: 'Marcus Vance', status: 'In Review', hrs: 7.5 },
+                    { date: 'Nov 18, 2026', dept: 'PPC', task: 'Zero-Trust Cloud Campaign Restructure', by: 'Marcus King', status: 'Done', hrs: 7.5 },
+                    { date: 'Nov 16, 2026', dept: 'Content', task: 'Topic Cluster & Editorial Briefs', by: 'Marcus Vance', status: 'Done', hrs: 4.5 },
+                    { date: 'Nov 12, 2026', dept: 'SEO', taskId: 'seo-104', task: 'Competitor Analysis (Automated)', by: 'Alex Rivera', status: 'Done', hrs: 3.0 }
+                ];
+
+                let activeProfitFilter = 'all';
+
+                function getTotalLoggedHours() {
+                    return Math.round(profitabilityLogs.reduce((sum, l) => sum + l.hrs, 0) * 100) / 100;
+                }
+
+                function updateProfitabilityPill() {
+                    const total = getTotalLoggedHours();
+                    const pill = document.getElementById('profitability-pill-text');
+                    if (!pill) return;
+                    const totalStr = Number.isInteger(total) ? total : total.toFixed(2).replace(/\.?0+$/, '');
+                    const label = total > 55 ? `Over Budget (${totalStr} / 55 hrs)` : total > 48 ? `Near Limit (${totalStr} / 55 hrs)` : `On Track (${totalStr} / 55 hrs)`;
+                    pill.textContent = label;
+                    pill.className = total > 55 ? 'text-red-600' : total > 48 ? 'text-amber-600' : 'text-emerald-600';
+                }
+
+                function openProfitabilityModal() {
+                    renderProfitabilityModal();
+                    document.getElementById('profitabilityModal').classList.remove('hidden');
+                }
+
+                function filterProfitabilityLogs(dept) {
+                    activeProfitFilter = dept;
+                    document.querySelectorAll('.pm-filter-btn').forEach(btn => {
+                        const active = btn.dataset.dept === dept;
+                        btn.className = active
+                            ? 'pm-filter-btn px-3 py-1.5 rounded-lg bg-blue-600 text-white'
+                            : 'pm-filter-btn px-3 py-1.5 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200';
+                    });
+                    renderProfitabilityModal();
+                }
+
+                function renderProfitabilityModal() {
+                    const totalHrs = getTotalLoggedHours();
+                    const pctTotal = Math.round((totalHrs / 55) * 100);
+                    const totalStr = Number.isInteger(totalHrs) ? totalHrs.toFixed(1) : totalHrs.toString();
+                    document.getElementById('pm-total-badge').textContent = `${totalStr} / 55.0 hrs (${pctTotal}%)`;
+                    document.getElementById('pm-eff-rate').textContent = totalHrs > 0 ? `$${(5200 / totalHrs).toFixed(2)}/hr` : '$0.00/hr';
+
+                    const cardsHtml = Object.entries(deptBudgets).map(([dept, cfg]) => {
+                        const logged = Math.round(profitabilityLogs.filter(l => l.dept === dept).reduce((s, l) => s + l.hrs, 0) * 100) / 100;
+                        const pct = Math.min(100, Math.round((logged / cfg.budgetHrs) * 100));
+                        const loggedStr = Number.isInteger(logged) ? logged.toFixed(1) : logged.toString();
+                        return `
+                            <div class="bg-gray-50 border border-gray-200 rounded-xl p-4">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-xs font-bold uppercase text-gray-600">${dept}</span>
+                                    <span class="text-xs font-semibold text-gray-500">$${cfg.retainer.toLocaleString()}/mo</span>
+                                </div>
+                                <p class="text-lg font-bold text-gray-900 mb-2">${loggedStr} <span class="text-xs font-normal text-gray-500">/ ${cfg.budgetHrs} hrs (${pct}%)</span></p>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-${cfg.color}-600 h-2 rounded-full" style="width: ${pct}%"></div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                    document.getElementById('pm-dept-cards').innerHTML = cardsHtml;
+
+                    const filtered = activeProfitFilter === 'all'
+                        ? profitabilityLogs
+                        : profitabilityLogs.filter(l => l.dept === activeProfitFilter);
+
+                    const statusBadge = {
+                        'To Do': 'bg-gray-100 text-gray-700',
+                        'In Progress': 'bg-blue-100 text-blue-700',
+                        'In Review': 'bg-amber-100 text-amber-800',
+                        'Done': 'bg-emerald-100 text-emerald-700'
+                    };
+
+                    document.getElementById('pm-logs-tbody').innerHTML = filtered.map(l => `
+                        <tr class="hover:bg-gray-50 ${l.taskId ? 'cursor-pointer' : ''}" ${l.taskId ? `onclick="document.getElementById('profitabilityModal').classList.add('hidden'); switchTab('seo'); openSeoTaskModal('${l.taskId}')"` : ''}>
+                            <td class="px-4 py-3 text-xs text-gray-500 whitespace-nowrap">${l.date}</td>
+                            <td class="px-4 py-3"><span class="text-[11px] font-bold bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded">${l.dept}</span></td>
+                            <td class="px-4 py-3 font-medium text-gray-900">
+                                ${l.task}
+                                ${l.taskId ? '<span class="ml-1.5 text-[10px] text-blue-600 font-semibold">(Open Task)</span>' : ''}
+                            </td>
+                            <td class="px-4 py-3 text-xs text-gray-600">${l.by}</td>
+                            <td class="px-4 py-3"><span class="text-[11px] font-semibold px-2 py-0.5 rounded-full ${statusBadge[l.status] || 'bg-gray-100 text-gray-700'}">${l.status}</span></td>
+                            <td class="px-4 py-3 text-right font-mono font-bold text-gray-900">${l.hrs}h</td>
+                        </tr>
+                    `).join('');
+                }
+
                 function logSeoTaskTime() {
                     const t = seoTasksData[activeSeoTaskId];
                     if (!t) return;
@@ -2279,7 +2444,17 @@
                         return;
                     }
                     t.loggedHrs = Math.round((t.loggedHrs + hrs) * 100) / 100;
+                    profitabilityLogs.unshift({
+                        date: 'Today (Nov 24)',
+                        dept: 'SEO',
+                        taskId: activeSeoTaskId,
+                        task: t.title,
+                        by: 'Admin User',
+                        status: t.status,
+                        hrs: hrs
+                    });
                     renderSeoHours(t);
+                    updateProfitabilityPill();
                     showToast(`Logged +${hrs}h to ${t.title} for Today!`);
                 }
 
