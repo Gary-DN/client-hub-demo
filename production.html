@@ -1596,6 +1596,27 @@
                                 <input type="email" value="john@globaldyn.com" required class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500">
                             </div>
                         </div>
+                        <div class="grid grid-cols-2 gap-3 bg-gray-50 border border-gray-200 rounded-xl p-3">
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-600 mb-1"><i class="ph ph-arrows-clockwise text-blue-600"></i> Repeat Meeting</label>
+                                <select id="meet-recurrence" onchange="document.getElementById('meet-repeat-end-wrap').classList.toggle('opacity-50', !this.value)" class="w-full border rounded-lg px-2.5 py-2 text-xs font-medium bg-white outline-none focus:border-blue-500">
+                                    <option value="">Does not repeat</option>
+                                    <option value="Weekly">Weekly</option>
+                                    <option value="Every 2 weeks">Every 2 weeks (Fortnightly)</option>
+                                    <option value="Monthly">Monthly</option>
+                                    <option value="Quarterly">Quarterly (Every 3 months)</option>
+                                </select>
+                            </div>
+                            <div id="meet-repeat-end-wrap" class="opacity-50 transition-opacity">
+                                <label class="block text-xs font-semibold text-gray-600 mb-1">Series Duration</label>
+                                <select id="meet-repeat-end" class="w-full border rounded-lg px-2.5 py-2 text-xs font-medium bg-white outline-none focus:border-blue-500">
+                                    <option value="Ongoing">Ongoing (No end date)</option>
+                                    <option value="3 meetings">3 occurrences</option>
+                                    <option value="6 meetings">6 occurrences</option>
+                                    <option value="12 meetings">12 occurrences</option>
+                                </select>
+                            </div>
+                        </div>
                         <label class="flex items-center gap-2 text-xs text-gray-700 pt-1 cursor-pointer">
                             <input type="checkbox" checked class="accent-blue-600"> Enable Gemini "Take notes for me" &amp; auto-save transcript to Client Files
                         </label>
@@ -2014,19 +2035,26 @@
                     e.preventDefault();
                     const title = document.getElementById('meet-title').value;
                     const dt = document.getElementById('meet-dt').value;
+                    const recurrence = document.getElementById('meet-recurrence').value;
+                    const repeatEnd = document.getElementById('meet-repeat-end').value;
+                    const recurBadge = recurrence
+                        ? `<span class="inline-flex items-center gap-1 mt-1 text-[10px] font-semibold bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full"><i class="ph ph-arrows-clockwise"></i> ${recurrence} • ${repeatEnd}</span>`
+                        : '';
                     const tbody = document.getElementById('meetings-tbody');
                     const tr = document.createElement('tr');
                     tr.className = 'hover:bg-gray-50/70 bg-blue-50/30';
                     tr.innerHTML = `
-                        <td class="px-5 py-3.5"><strong class="text-gray-900 block">${title}</strong><span class="text-xs text-gray-500">Sarah Jenkins + John Doe (john@globaldyn.com)</span></td>
+                        <td class="px-5 py-3.5"><strong class="text-gray-900 block">${title}</strong><span class="text-xs text-gray-500 block">Sarah Jenkins + John Doe (john@globaldyn.com)</span>${recurBadge}</td>
                         <td class="px-4 py-3.5 text-xs">${dt}</td>
                         <td class="px-4 py-3.5 text-xs font-mono text-blue-600">meet.google.com/new-demo-lnk</td>
-                        <td class="px-4 py-3.5"><span class="px-2.5 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-semibold">Scheduled • Notes On</span></td>
+                        <td class="px-4 py-3.5"><span class="px-2.5 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-semibold">${recurrence ? 'Recurring • Notes On' : 'Scheduled • Notes On'}</span></td>
                         <td class="px-5 py-3.5 text-right"><button onclick="showToast('Copied Google Meet link!', 'info')" class="text-xs border border-gray-300 px-2.5 py-1 rounded hover:bg-gray-50 font-medium">Copy Link</button></td>
                     `;
                     tbody.prepend(tr);
                     document.getElementById('scheduleMeetModal').classList.add('hidden');
-                    showToast(`Google Meet scheduled: "${title}" (Calendar invite sent)!`);
+                    showToast(recurrence
+                        ? `Recurring Google Meet scheduled (${recurrence}, ${repeatEnd}): "${title}"!`
+                        : `Google Meet scheduled: "${title}" (Calendar invite sent)!`);
                 }
 
                 function logManualContactSubmit(e) {
