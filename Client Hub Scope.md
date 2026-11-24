@@ -65,6 +65,7 @@ Retention / Offboarding  ◀──  Reporting & Portal  ◀──  Production  �
    - **Connected Accounts & Live Connector Health:** Real-time status grid for **Website Status** (pinged every **10 minutes, 7am–7pm**), **GA4**, **Search Console**, **GTM**, **Google Ads MCC**, **Ahrefs/SEMrush**, **Meta Business Manager** (with expiring token refresh), **1Password Vault**, **Xero & Slack**, **Google Merchant Center**, **LinkedIn Ads**, **Figma REST API**, **SFTP/FTP & GitHub**, and **Google Calendar & Meet**.
 2. **SEO Tab:**
    - Month 1 automated Competitor Analysis, Initial Website Audit, 12-Month Work Plan Generator; Months 2–12 recurring task engine (populating 1st of each month).
+   - **Quarterly Audit Auto-Regeneration:** Whenever a **Quarterly Audit** task is marked complete (`Done`), the task engine automatically schedules the next Quarterly Audit for **3 months' time**.
    - Kanban cards include **Due Dates**, estimated/logged hours, and file attachments.
 3. **Content Tab & Budget Attribution Rule (CRITICAL BUILD SPEC):**
    - **SEO-Funded Content Tasks:** An SEO campaign carries a single commercial SEO budget that **includes** recurring Content team deliverables (e.g., monthly blogs, on-page copy). Those Content tasks appear on the Content board for delivery & client approval, while drawing their allocated hours/credits from the **SEO budget**.
@@ -72,6 +73,7 @@ Retention / Offboarding  ◀──  Reporting & Portal  ◀──  Production  �
    - **Client Content Approval Magic Link (`content-approval.html`):** Temporary passwordless link showing SEO Meta Title/Description preview + full formatted article draft. Client clicks **"Yes (Approve)"** or **"No (Reject / Revise)"** with optional/required feedback; timestamp and notes log directly back to the Production board & Activity Log.
 4. **PPC Tab:**
    - Live ad spend pacing bar, **Left Box:** Active PPC Connectors (Google Ads MCC, **Google Merchant Center**, GA4 Conversions, GTM), **Right Box:** **Top 3 Campaigns by Conversions**, **Below:** PPC Kanban board with due dates.
+   - **PPC Auto-Generated Tasks (TBD):** PPC will also include recurring auto-generated tasks (finalized task list to be confirmed before build).
 5. **Paid Social Tab:**
    - Live social spend pacing & blended CPL/ROAS, **Left Box:** Active Paid Social Connectors (Meta Business Manager, Meta Pixel & Conversions API, LinkedIn Campaign Manager, TikTok optional), **Right Box:** **Top 3 Paid Social Campaigns by Conversions** (with Creative Fatigue frequency alerts), **Below:** Paid Social Kanban board.
 6. **Design & Dev Tab:**

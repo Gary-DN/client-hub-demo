@@ -66,15 +66,18 @@
                 </a>
             </div>
         </nav>
-        <div class="p-4 border-t border-gray-100">
-            <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">AM</div>
-                <div class="text-sm">
-                    <p class="font-semibold text-gray-800">Admin User</p>
-                    <p class="text-xs text-gray-500">Agency Workspace</p>
+                <a href="my-tasks.html" class="p-4 border-t border-gray-100 hover:bg-gray-50 transition-colors block">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">AM</div>
+                    <div class="text-sm">
+                        <p class="font-semibold text-gray-800">Admin User</p>
+                        <p class="text-xs text-gray-500">My Status &amp; Tasks</p>
+                    </div>
                 </div>
+                <i class="ph ph-caret-right text-gray-400"></i>
             </div>
-        </div>
+        </a>
     </aside>
 
     <!-- Main Content -->
@@ -82,6 +85,9 @@
         <header class="h-14 bg-white border-b border-gray-200 flex items-center justify-between px-8 sticky top-0 z-10 shadow-sm flex-shrink-0">
             <h1 class="text-xl font-semibold text-gray-800">Campaign Planner</h1>
             <div class="flex items-center gap-3">
+                <button onclick="document.getElementById('buildCampaignModal').classList.remove('hidden')" class="text-xs bg-indigo-600 hover:bg-indigo-700 text-white px-3.5 py-2 rounded-lg font-semibold flex items-center gap-1.5 shadow-sm">
+                    <i class="ph ph-plus-circle"></i> Build Campaign
+                </button>
                 <button onclick="autoGeneratePlan()" class="text-xs bg-white border border-gray-300 text-gray-700 px-3.5 py-2 rounded-lg font-medium hover:bg-gray-50 flex items-center gap-1.5">
                     <i class="ph ph-magic-wand text-indigo-600"></i> Auto-Generate From Quote
                 </button>
@@ -168,6 +174,64 @@
             </div>
         </div>
     </main>
+
+    <!-- Build Next Campaign Modal -->
+    <div id="buildCampaignModal" class="hidden fixed inset-0 bg-gray-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col">
+            <div class="flex justify-between items-center p-6 border-b border-gray-100">
+                <div>
+                    <h2 class="text-lg font-bold text-gray-900">Build Next Campaign Run</h2>
+                    <p class="text-xs text-gray-500">Plan the next campaign cycle (monthly links, outreach, focus keyword areas, and custom tasks by month).</p>
+                </div>
+                <button onclick="document.getElementById('buildCampaignModal').classList.add('hidden')" class="text-gray-400 hover:text-gray-700"><i class="ph ph-x text-xl"></i></button>
+            </div>
+            <form onsubmit="buildCampaignSubmit(event)" class="p-6 overflow-y-auto space-y-4 text-sm">
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">Monthly Links / mo</label>
+                        <input type="number" id="bc-links" value="5" min="0" class="w-full border rounded-lg px-3 py-2 font-semibold outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">Outreach Articles / mo</label>
+                        <input type="number" id="bc-outreach" value="4" min="0" class="w-full border rounded-lg px-3 py-2 font-semibold outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">Blogs / Content / mo</label>
+                        <input type="number" id="bc-blogs" value="4" min="0" class="w-full border rounded-lg px-3 py-2 font-semibold outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">Campaign Length</label>
+                        <select id="bc-term" class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500">
+                            <option value="6">6 Months</option>
+                            <option value="12" selected>12 Months</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 mb-1">Focus Keyword Areas</label>
+                    <input type="text" id="bc-focus" value="Enterprise Cloud Security, SOC2 Automation, Zero-Trust IAM" class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500">
+                </div>
+                <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 space-y-2.5">
+                    <div class="flex justify-between items-center">
+                        <label class="text-xs font-bold text-gray-700 uppercase">‘Other’ Custom Tasks &amp; Target Month</label>
+                        <button type="button" onclick="addOtherTaskRow()" class="text-xs text-blue-600 hover:underline font-semibold">+ Add Another</button>
+                    </div>
+                    <div id="bc-other-rows" class="space-y-2">
+                        <div class="flex gap-2">
+                            <input type="text" placeholder="e.g. Schema Markup Overhaul" value="Schema Markup &amp; Migration QA" class="bc-other-title flex-1 border bg-white rounded-lg px-3 py-1.5 text-xs outline-none">
+                            <select class="bc-other-month border bg-white rounded-lg px-2.5 py-1.5 text-xs">
+                                <option>Month 1</option><option selected>Month 2</option><option>Month 3</option><option>Month 4</option><option>Month 6</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-end gap-2 pt-3 border-t border-gray-100">
+                    <button type="button" onclick="document.getElementById('buildCampaignModal').classList.add('hidden')" class="px-4 py-2 border rounded-lg text-sm text-gray-600">Cancel</button>
+                    <button type="submit" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-semibold">Build &amp; Populate Campaign</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <div id="toast-container" class="fixed bottom-5 right-5 flex flex-col gap-3 z-50"></div>
 
@@ -280,6 +344,54 @@
         function toggleAllTasks(checked) {
             clientConfigs[activeClientKey].tasks.forEach(t => t.checked = checked);
             renderPlan();
+        }
+
+        function addOtherTaskRow() {
+            const div = document.createElement('div');
+            div.className = 'flex gap-2';
+            div.innerHTML = `<input type="text" placeholder="Custom task title..." class="bc-other-title flex-1 border bg-white rounded-lg px-3 py-1.5 text-xs outline-none"><select class="bc-other-month border bg-white rounded-lg px-2.5 py-1.5 text-xs"><option>Month 1</option><option>Month 2</option><option>Month 3</option><option>Month 4</option><option>Month 6</option></select>`;
+            document.getElementById('bc-other-rows').appendChild(div);
+        }
+
+        function buildCampaignSubmit(e) {
+            e.preventDefault();
+            const links = document.getElementById('bc-links').value;
+            const outreach = document.getElementById('bc-outreach').value;
+            const focus = document.getElementById('bc-focus').value;
+            const cfg = clientConfigs[activeClientKey];
+            const titles = document.querySelectorAll('.bc-other-title');
+            const months = document.querySelectorAll('.bc-other-month');
+            let added = 0;
+            titles.forEach((inp, idx) => {
+                if (inp.value.trim()) {
+                    cfg.tasks.unshift({
+                        id: Date.now() + idx,
+                        month: months[idx].value,
+                        dept: 'SEO',
+                        title: inp.value.trim(),
+                        assignee: 'Alex Rivera',
+                        hrs: 4,
+                        due: 'Next Cycle',
+                        checked: true,
+                        sent: false
+                    });
+                    added++;
+                }
+            });
+            cfg.tasks.unshift({
+                id: Date.now() + 99,
+                month: 'Month 1',
+                dept: 'Outreach',
+                title: `Next Cycle: ${links} Links/mo & ${outreach} Outreach (${focus.split(',')[0]})`,
+                assignee: 'Alex Rivera',
+                hrs: 8,
+                due: 'Next Cycle',
+                checked: true,
+                sent: false
+            });
+            renderPlan();
+            document.getElementById('buildCampaignModal').classList.add('hidden');
+            showToast(`Built next campaign run (${added + 1} new deliverables queued for ${cfg.name})!`);
         }
 
         function autoGeneratePlan() {
