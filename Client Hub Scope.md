@@ -32,7 +32,7 @@ Retention / Offboarding  ◀──  Reporting & Portal  ◀──  Production  �
   - **Client Data & Commercial Terms** + **Sales Handover Notes (Scope Guardrail)**.
   - **Automated Company & Finance Enrichment (Creditsafe / Companies House):** Credit Limit, Credit Risk Score, Company Reg No., Est. Turnover & Staff Size, VAT Number, CCJs / Adverse Filings.
   - **Linked Quote Builder & Proposal/Agreement:** Direct link (`quote-builder.html?client=...`) pre-filling the prospect in Quote Builder, plus direct link to the E-Sign Agreement.
-  - **Mandatory Sign-Off Gate:** Displays **`All Documents Complete`** (Quote approved, Agreement e-signed & locked, Xero deposit verified) with a **Sign Off & Move to Onboarding** button.
+  - **Mandatory Sign-Off Gate:** Displays **`All Documents Complete`** (Quote approved, Agreement e-signed & locked, Xero invoice sent on 30-day payment terms) with a **Sign Off & Move to Onboarding** button.
   - **Defer Lead (Archive & Re-engage):** Pick a future re-engagement date + note to archive the lead from the active board and automatically return it to `New Lead` on that date.
 - **Files Tab (Sales Workspace Sync & Conversion Handoff):**
   - Prospects sync with a dedicated **Google Workspace Sales Folder** (`/Sales-Prospects/<Prospect>/`).
