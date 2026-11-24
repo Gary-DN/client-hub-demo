@@ -13,6 +13,7 @@ Retention / Offboarding  ◀──  Reporting & Portal  ◀──  Production  �
 ```
 
 - **App Delivery:** Installable **Progressive Web App (PWA)** (`manifest.json`, `sw.js`, Digital Next `favicon.png` / `192x192` / `512x512` icons) so staff can pin the Hub to their Windows Taskbar and clients can access a mobile-responsive Reporting Portal.
+- **Staff Authentication (SSO):** All **Digital Next staff** log in exclusively via **Single Sign-On (SSO)** (Google Workspace / Identity Provider + 2FA) — no separate local staff passwords.
 - **No-Login Client Touchpoints:** Clients interact via expiring, passwordless **Magic Links** (zero per-link cost) for **Proposal E-Sign**, **Onboarding Credential Collection**, **Vault Login Requests**, and **One-Click Content Approvals**.
 
 ---
@@ -55,7 +56,7 @@ Retention / Offboarding  ◀──  Reporting & Portal  ◀──  Production  �
 ---
 
 ### 2.3 Production & Operations (`production.html`, `content-approval.html`)
-- **Header Controls:** Multi-client workspace selector, Active/Month badge, **Profitability Bar** (Allocated vs. Logged Hours), and Month 2 recurring task preview.
+- **Header Controls:** Multi-client workspace selector, Active/Month badge, **Clickable Profitability Tracker** (opens full Hours & Tasks Logged breakdown across SEO, Content, and PPC with effective hourly rate), and Month 2 recurring task preview.
 - **11 Tabs (Default: `Overview`):**
   `Overview` | `SEO` | `Content` | `PPC` | `Design & Dev` | `Paid Social` | `Live Links / PR` | `Files` | `Meetings` | `Passwords` | `Activity Log`
 
@@ -65,8 +66,8 @@ Retention / Offboarding  ◀──  Reporting & Portal  ◀──  Production  �
    - **Connected Accounts & Live Connector Health:** Real-time status grid for **Website Status** (pinged every **10 minutes, 7am–7pm**), **GA4**, **Search Console**, **GTM**, **Google Ads MCC**, **Ahrefs/SEMrush**, **Meta Business Manager** (with expiring token refresh), **1Password Vault**, **Xero & Slack**, **Google Merchant Center**, **LinkedIn Ads**, **Figma REST API**, **SFTP/FTP & GitHub**, and **Google Calendar & Meet**.
 2. **SEO Tab:**
    - Month 1 automated Competitor Analysis, Initial Website Audit, 12-Month Work Plan Generator; Months 2–12 recurring task engine (populating 1st of each month).
-   - **Quarterly Audit Auto-Regeneration:** Whenever a **Quarterly Audit** task is marked complete (`Done`), the task engine automatically schedules the next Quarterly Audit for **3 months' time**.
-   - Kanban cards include **Due Dates**, estimated/logged hours, and file attachments.
+   - **Quarterly Audit & Custom Repeat Engine:** Task Box modal supports **Repeat task in `X` `Y`** (`X` = number, `Y` = Day(s), Week(s), Month(s), Year(s)) so recurring tasks (such as Quarterly Audits set to `3 Month(s)`) auto-schedule on completion.
+   - **Interactive Task Box:** Clicking any task card opens the full Task Box (Brief & Scope, Target URLs & Focus Keywords, Subtasks checklist, Attachments, Team Notes, and **Daily Time Logging** defaulting to `+0.25h` logged against the day without exact timestamps).
 3. **Content Tab & Budget Attribution Rule (CRITICAL BUILD SPEC):**
    - **SEO-Funded Content Tasks:** An SEO campaign carries a single commercial SEO budget that **includes** recurring Content team deliverables (e.g., monthly blogs, on-page copy). Those Content tasks appear on the Content board for delivery & client approval, while drawing their allocated hours/credits from the **SEO budget**.
    - **Standalone Content Upsell Projects:** Separately, the Content team can also receive dedicated **upsell projects** (e.g., ebooks/resource guides, extra blog packages, copy overhauls) which carry their own separate Content budget alongside the SEO retainer.
@@ -85,7 +86,7 @@ Retention / Offboarding  ◀──  Reporting & Portal  ◀──  Production  �
    - **Placed URLs Table:** Pings every placed backlink every **7 days** to verify **Live (`200 OK`)** vs. **Down (`404`)** with Last Checked date and Outreach alerts.
 8. **Files Tab:** Dedicated directory synced with **Google Workspace Shared Drives** (`01_Contracts`, `02_Brand_Assets`, `03_SEO_Audits`, `04_Content_Drafts`, `05_Reports_PDF`).
 9. **Meetings Tab:**
-   - **Schedule Google Meet** (via Google Calendar API).
+   - **Schedule Google Meet** (via Google Calendar API), including **Recurring Meetings** (`Weekly`, `Every 2 weeks`, `Monthly`, `Quarterly`, with series duration).
    - **Attendance Verification** (via Google Meet REST API `conferenceRecords` & `participants`: logs `Completed • duration + who joined` or flags `Client No-Show`).
    - **Auto-Saved Call Notes:** Pulls Gemini *"Take notes for me"* / Meet transcripts via Meet & Drive APIs and saves summaries + action items to Meetings & Files.
    - **Log Manual Contact:** Logs offline Phone Calls, In-Person Meetings, Slack Huddles, or Teams/Zoom calls with optional **File Upload**.
@@ -121,7 +122,7 @@ Retention / Offboarding  ◀──  Reporting & Portal  ◀──  Production  �
 ---
 
 ### 2.6 Users & Teams (`users.html`) & Master Clients Directory (`clients.html`)
-- **Users & Teams (`users.html`):** Staff roster, roles, and client workspace assignments.
+- **Users & Teams (`users.html`):** Staff roster, roles, and client workspace assignments. Digital Next staff authenticate via **SSO** (no manual staff password management).
 - **Clients Directory (`clients.html`):** Master directory housing every client regardless of lifecycle stage (`Prospecting`, `Onboarding`, `Active`, `Issue`, `Offboarded`), with full edit capabilities for company details, contacts, services, hosting flag, connectors, and vault logins.
 
 ---
