@@ -435,24 +435,26 @@
                     <div class="w-80 flex-shrink-0 bg-gray-50 rounded-lg border border-gray-200 flex flex-col">
                         <h3 class="p-3 border-b font-semibold text-gray-700 bg-gray-100/50">To Do (Month 1)</h3>
                         <div class="p-3 space-y-3 flex-1 overflow-y-auto">
-                            <div class="bg-white p-3 rounded shadow-sm border border-gray-200 text-sm">
-                                <span
-                                    class="text-[10px] font-bold bg-blue-100 text-blue-700 px-2 py-0.5 rounded uppercase">Tech
-                                    SEO</span>
-                                <p class="font-medium mt-1 mb-2">Initial Website Audit</p>
+                            <div onclick="openSeoTaskModal('seo-101')" class="bg-white p-3 rounded shadow-sm border border-gray-200 text-sm cursor-pointer hover:border-blue-400 hover:shadow-md transition-all">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-[10px] font-bold bg-blue-100 text-blue-700 px-2 py-0.5 rounded uppercase">Tech SEO</span>
+                                    <span class="text-[10px] font-semibold text-red-600 bg-red-50 px-1.5 py-0.5 rounded">High Priority</span>
+                                </div>
+                                <p class="font-medium mt-1.5 mb-1 text-gray-900">Initial Website Audit</p>
+                                <p class="text-[11px] text-gray-500 mb-2">2/5 subtasks • 1 file attached</p>
                                 <div class="flex justify-between items-center text-xs text-gray-500 mb-2">
-                                    <span>Est: 4 hrs</span>
+                                    <span>Logged: 2.5 / 4 hrs</span>
                                     <span class="text-amber-600 font-medium flex items-center gap-1"><i class="ph ph-calendar"></i> Due Nov 21</span>
                                 </div>
                                 <div class="flex justify-between items-center">
-                                    <button onclick="showToast('Attached file to Initial Website Audit.', 'info')" class="text-xs border px-2 py-1 rounded bg-gray-50 hover:bg-gray-100"><i
-                                            class="ph ph-paperclip"></i> Attach File</button>
+                                    <button onclick="event.stopPropagation(); openSeoTaskModal('seo-101')" class="text-xs border px-2 py-1 rounded bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100 font-medium"><i
+                                            class="ph ph-arrows-out-simple"></i> Open Task Box</button>
                                     <div
                                         class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] font-bold">
                                         AR</div>
                                 </div>
                             </div>
-                            <div class="bg-white p-3 rounded shadow-sm border border-gray-200 text-sm">
+                            <div onclick="openSeoTaskModal('seo-102')" class="bg-white p-3 rounded shadow-sm border border-gray-200 text-sm cursor-pointer hover:border-blue-400 hover:shadow-md transition-all">
                                 <span
                                     class="text-[10px] font-bold bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded uppercase">On-Page</span>
                                 <p class="font-medium mt-1 mb-2">Schema Markup &amp; Meta Optimization</p>
@@ -461,7 +463,7 @@
                                     <span class="text-gray-500 font-medium flex items-center gap-1"><i class="ph ph-calendar"></i> Due Nov 26</span>
                                 </div>
                                 <div class="flex justify-between items-center">
-                                    <button onclick="showToast('Attached file to Schema Markup.', 'info')" class="text-xs border px-2 py-1 rounded bg-gray-50 hover:bg-gray-100"><i
+                                    <button onclick="event.stopPropagation(); showToast('Attached file to Schema Markup.', 'info')" class="text-xs border px-2 py-1 rounded bg-gray-50 hover:bg-gray-100"><i
                                             class="ph ph-paperclip"></i> Attach File</button>
                                     <div
                                         class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] font-bold">
@@ -474,8 +476,8 @@
                     <div class="w-80 flex-shrink-0 bg-gray-50 rounded-lg border border-gray-200 flex flex-col">
                         <h3 class="p-3 border-b font-semibold text-gray-700 bg-gray-100/50">In Progress</h3>
                         <div class="p-3 space-y-3 flex-1 overflow-y-auto">
-                            <div
-                                class="bg-white p-3 rounded shadow-sm border border-blue-200 text-sm border-l-4 border-l-blue-500">
+                            <div onclick="openSeoTaskModal('seo-103')"
+                                class="bg-white p-3 rounded shadow-sm border border-blue-200 text-sm border-l-4 border-l-blue-500 cursor-pointer hover:border-blue-400 hover:shadow-md transition-all">
                                 <span
                                     class="text-[10px] font-bold bg-purple-100 text-purple-700 px-2 py-0.5 rounded uppercase">Strategy</span>
                                 <p class="font-medium mt-1 mb-2">12-Month Work Plan Generator</p>
@@ -484,7 +486,7 @@
                                     <span class="text-red-600 font-semibold flex items-center gap-1"><i class="ph ph-calendar"></i> Due Nov 20</span>
                                 </div>
                                 <div class="flex justify-between items-center">
-                                    <button onclick="showToast('12-Month SEO Work Plan generated & saved to Files tab!')" class="text-xs border px-2 py-1 rounded bg-gray-50 hover:bg-gray-100"><i
+                                    <button onclick="event.stopPropagation(); showToast('12-Month SEO Work Plan generated & saved to Files tab!')" class="text-xs border px-2 py-1 rounded bg-gray-50 hover:bg-gray-100"><i
                                             class="ph ph-magic-wand"></i> Auto-Generate</button>
                                     <div
                                         class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] font-bold">
@@ -497,7 +499,7 @@
                     <div class="w-80 flex-shrink-0 bg-gray-50 rounded-lg border border-gray-200 flex flex-col">
                         <h3 class="p-3 border-b font-semibold text-gray-700 bg-gray-100/50">Done</h3>
                         <div class="p-3 space-y-3 flex-1 overflow-y-auto">
-                            <div class="bg-white p-3 rounded shadow-sm border border-gray-200 text-sm opacity-75">
+                            <div onclick="openSeoTaskModal('seo-104')" class="bg-white p-3 rounded shadow-sm border border-gray-200 text-sm opacity-75 cursor-pointer hover:opacity-100 hover:border-blue-400 transition-all">
                                 <span
                                     class="text-[10px] font-bold bg-gray-100 text-gray-700 px-2 py-0.5 rounded uppercase">Setup</span>
                                 <p class="font-medium mt-1 mb-2">Competitor Analysis (Automated)</p>
@@ -1730,6 +1732,149 @@
                 </div>
             </div>
 
+            <!-- SEO Task Box / Planning Modal -->
+            <div id="seoTaskModal" class="hidden fixed inset-0 bg-gray-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                <div class="bg-white rounded-2xl shadow-2xl border border-gray-200 w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden">
+                    <!-- Modal Header -->
+                    <div class="bg-slate-900 text-white px-6 py-4 flex justify-between items-start gap-4">
+                        <div>
+                            <div class="flex items-center gap-2 mb-1.5">
+                                <span id="st-id" class="text-[10px] font-mono bg-slate-700 text-slate-200 px-2 py-0.5 rounded">SEO-101</span>
+                                <span id="st-cat" class="text-[10px] font-bold bg-blue-500/20 text-blue-300 border border-blue-400/30 px-2 py-0.5 rounded uppercase">Tech SEO</span>
+                                <span id="st-client" class="text-xs text-slate-300 font-medium">Global Dynamics</span>
+                            </div>
+                            <h3 id="st-title" class="text-lg font-bold text-white">Initial Website Audit</h3>
+                        </div>
+                        <button onclick="document.getElementById('seoTaskModal').classList.add('hidden')" class="text-slate-400 hover:text-white p-1">
+                            <i class="ph ph-x text-xl"></i>
+                        </button>
+                    </div>
+
+                    <!-- Modal Body (2-Column Layout) -->
+                    <div class="flex-1 overflow-y-auto p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Left / Main Column (2/3) -->
+                        <div class="lg:col-span-2 space-y-5">
+                            <!-- Brief / Scope -->
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1.5">Task Brief &amp; Scope</label>
+                                <textarea id="st-brief" rows="3" class="w-full border border-gray-300 rounded-xl p-3 text-sm text-gray-700 leading-relaxed outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10"></textarea>
+                            </div>
+
+                            <!-- SEO Specifics: Target URLs & Focus Keywords -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-indigo-50/60 border border-indigo-100 rounded-xl p-4">
+                                <div>
+                                    <label class="block text-[11px] font-bold text-indigo-700 uppercase tracking-wider mb-1.5"><i class="ph ph-link"></i> Target URLs</label>
+                                    <div id="st-urls" class="flex flex-wrap gap-1.5"></div>
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] font-bold text-indigo-700 uppercase tracking-wider mb-1.5"><i class="ph ph-magnifying-glass"></i> Focus Keywords</label>
+                                    <div id="st-keywords" class="flex flex-wrap gap-1.5"></div>
+                                </div>
+                            </div>
+
+                            <!-- Subtasks / Deliverable Checklist -->
+                            <div class="border border-gray-200 rounded-xl p-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <label class="text-xs font-bold text-gray-700 uppercase tracking-wider">Subtasks / Deliverables</label>
+                                    <span id="st-subtask-progress" class="text-xs font-semibold text-blue-600">2 / 5 completed</span>
+                                </div>
+                                <div class="w-full bg-gray-100 rounded-full h-1.5 mb-3">
+                                    <div id="st-subtask-bar" class="bg-blue-600 h-1.5 rounded-full transition-all" style="width: 40%"></div>
+                                </div>
+                                <div id="st-subtasks" class="space-y-2 mb-3"></div>
+                                <div class="flex gap-2 pt-1">
+                                    <input id="st-new-subtask" type="text" placeholder="Add a subtask or deliverable..." class="flex-1 border border-gray-300 rounded-lg px-3 py-1.5 text-xs outline-none focus:border-blue-500">
+                                    <button type="button" onclick="addSeoSubtask()" class="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg text-xs font-semibold">+ Add</button>
+                                </div>
+                            </div>
+
+                            <!-- Attachments -->
+                            <div class="border border-gray-200 rounded-xl p-4">
+                                <div class="flex items-center justify-between mb-2.5">
+                                    <label class="text-xs font-bold text-gray-700 uppercase tracking-wider">Attachments &amp; Deliverables</label>
+                                    <button type="button" onclick="attachDemoSeoFile()" class="text-xs bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 px-2.5 py-1 rounded-lg font-semibold flex items-center gap-1">
+                                        <i class="ph ph-paperclip"></i> Attach File
+                                    </button>
+                                </div>
+                                <div id="st-files" class="space-y-2"></div>
+                            </div>
+
+                            <!-- Activity & Internal Notes -->
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Activity &amp; Team Notes</label>
+                                <div id="st-comments" class="space-y-2.5 mb-3"></div>
+                                <div class="flex gap-2">
+                                    <input id="st-new-comment" type="text" placeholder="Leave an update, blocker, or handoff note..." class="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-xs outline-none focus:border-blue-500">
+                                    <button type="button" onclick="addSeoComment()" class="px-4 py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-lg text-xs font-semibold">Post Note</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right / Meta Sidebar (1/3) -->
+                        <div class="space-y-4 bg-gray-50 border border-gray-200 rounded-xl p-4 h-fit">
+                            <div>
+                                <label class="block text-[11px] font-bold text-gray-500 uppercase mb-1">Status</label>
+                                <select id="st-status" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm font-medium bg-white outline-none focus:border-blue-500">
+                                    <option value="To Do">To Do</option>
+                                    <option value="In Progress">In Progress</option>
+                                    <option value="In Review">In Review</option>
+                                    <option value="Done">Done</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold text-gray-500 uppercase mb-1">Assignee</label>
+                                <select id="st-assignee" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white outline-none focus:border-blue-500">
+                                    <option value="Alex Rivera (SEO Lead)">Alex Rivera (SEO Lead)</option>
+                                    <option value="Sarah Jenkins (AM)">Sarah Jenkins (AM)</option>
+                                    <option value="Marcus Vance (Content)">Marcus Vance (Content)</option>
+                                </select>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-[11px] font-bold text-gray-500 uppercase mb-1">Priority</label>
+                                    <select id="st-priority" class="w-full border border-gray-300 rounded-lg px-2.5 py-2 text-xs font-semibold bg-white outline-none focus:border-blue-500">
+                                        <option value="High">High</option>
+                                        <option value="Medium">Medium</option>
+                                        <option value="Low">Low</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] font-bold text-gray-500 uppercase mb-1">Due Date</label>
+                                    <input id="st-due" type="text" class="w-full border border-gray-300 rounded-lg px-2.5 py-2 text-xs font-medium bg-white outline-none focus:border-blue-500">
+                                </div>
+                            </div>
+                            <div class="border-t border-gray-200 pt-3">
+                                <div class="flex items-center justify-between mb-1">
+                                    <label class="text-[11px] font-bold text-gray-500 uppercase">Time Tracking</label>
+                                    <button type="button" onclick="logSeoTaskTime(0.5)" class="text-[11px] font-semibold text-blue-600 hover:underline">+ Log 0.5h</button>
+                                </div>
+                                <p id="st-hours-text" class="text-sm font-bold text-gray-900 mb-1.5">2.5 / 4.0 hrs logged</p>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div id="st-hours-bar" class="bg-emerald-500 h-2 rounded-full transition-all" style="width: 62%"></div>
+                                </div>
+                            </div>
+                            <div class="border-t border-gray-200 pt-3">
+                                <label class="flex items-start gap-2 cursor-pointer">
+                                    <input id="st-quarterly" type="checkbox" class="mt-0.5 accent-blue-600">
+                                    <span class="text-xs text-gray-700 leading-snug"><strong class="block text-gray-900">Quarterly Auto-Repeat</strong>When marked Done, auto-schedule next audit in +3 months.</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal Footer -->
+                    <div class="bg-gray-50 border-t border-gray-200 px-6 py-3.5 flex justify-between items-center">
+                        <button type="button" onclick="document.getElementById('seoTaskModal').classList.add('hidden')" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100">Close</button>
+                        <div class="flex items-center gap-2.5">
+                            <button type="button" onclick="saveSeoTask(true)" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-sm font-semibold flex items-center gap-1.5">
+                                <i class="ph-fill ph-check-circle"></i> Mark Complete
+                            </button>
+                            <button type="button" onclick="saveSeoTask(false)" class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold">Save Changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <script>
                 function togglePass(id, realVal) {
                     const el = document.getElementById(id);
@@ -1869,6 +2014,260 @@
                     showToast(approved ? `Approved! Moved "${currentApprovalTitle}" & logged timestamp.` : `Revision logged! Moved "${currentApprovalTitle}" back to team.`);
                 }
 
+                const seoTasksData = {
+                    'seo-101': {
+                        id: 'SEO-101',
+                        category: 'Tech SEO',
+                        client: 'Global Dynamics',
+                        title: 'Initial Website Audit',
+                        status: 'To Do',
+                        assignee: 'Alex Rivera (SEO Lead)',
+                        priority: 'High',
+                        due: 'Nov 21, 2026',
+                        loggedHrs: 2.5,
+                        estHrs: 4.0,
+                        quarterly: true,
+                        brief: 'Full Month 1 technical crawl & health audit for globaldynamics.io. Identify indexation blockers, Core Web Vitals (LCP/INP) bottlenecks, broken redirects, and duplicate metadata ahead of Q1 roadmap sign-off.',
+                        urls: ['/solutions/enterprise-cloud', '/pricing', '/resources/security-whitepaper'],
+                        keywords: ['enterprise cloud security', 'b2b saas security', 'zero trust cloud'],
+                        subtasks: [
+                            { text: 'Run full Screaming Frog crawl (max 10k URLs)', done: true },
+                            { text: 'Audit Core Web Vitals (Mobile LCP, INP, CLS)', done: true },
+                            { text: 'Verify XML Sitemap & robots.txt directives', done: false },
+                            { text: 'Check canonical tags & 301/404 redirect chains', done: false },
+                            { text: 'Export Technical_SEO_Audit_Month1.pdf & notify AM', done: false }
+                        ],
+                        files: [
+                            { name: 'Crawl_Export_Nov2026.csv', size: '4.2 MB', by: 'Alex Rivera' }
+                        ],
+                        comments: [
+                            { author: 'Sarah Jenkins (AM)', time: 'Yesterday, 4:15 PM', text: 'Client flagged slow mobile load times on /solutions/enterprise-cloud during kickoff.' },
+                            { author: 'Alex Rivera (SEO)', time: 'Today, 9:40 AM', text: 'Crawl complete — found 14 redirect chains and unoptimized hero WebP images on landing pages.' }
+                        ]
+                    },
+                    'seo-102': {
+                        id: 'SEO-102',
+                        category: 'On-Page',
+                        client: 'Global Dynamics',
+                        title: 'Schema Markup & Meta Optimization',
+                        status: 'To Do',
+                        assignee: 'Alex Rivera (SEO Lead)',
+                        priority: 'Medium',
+                        due: 'Nov 26, 2026',
+                        loggedHrs: 0,
+                        estHrs: 3.0,
+                        quarterly: false,
+                        brief: 'Implement Organization, SoftwareApplication, and FAQPage JSON-LD schema across core commercial pages and refresh meta titles/descriptions for higher CTR.',
+                        urls: ['/solutions/enterprise-cloud', '/faq'],
+                        keywords: ['cloud security platform', 'soc2 compliance software'],
+                        subtasks: [
+                            { text: 'Draft JSON-LD schema templates', done: false },
+                            { text: 'Validate with Google Rich Results Test', done: false },
+                            { text: 'Deploy via GTM & verify live', done: false }
+                        ],
+                        files: [],
+                        comments: []
+                    },
+                    'seo-103': {
+                        id: 'SEO-103',
+                        category: 'Strategy',
+                        client: 'Global Dynamics',
+                        title: '12-Month Work Plan Generator',
+                        status: 'In Progress',
+                        assignee: 'Alex Rivera (SEO Lead)',
+                        priority: 'High',
+                        due: 'Nov 20, 2026',
+                        loggedHrs: 2.0,
+                        estHrs: 3.0,
+                        quarterly: false,
+                        brief: 'Map out Months 1–12 link velocity, content pillars, and technical sprints aligned with the $2,500/mo SEO retainer.',
+                        urls: ['/'],
+                        keywords: ['enterprise cloud security', 'zero trust architecture'],
+                        subtasks: [
+                            { text: 'Import keyword gap targets', done: true },
+                            { text: 'Allocate monthly outreach & content slots', done: true },
+                            { text: 'Export 12_Month_SEO_Workplan_v2.xlsx', done: false }
+                        ],
+                        files: [
+                            { name: '12_Month_SEO_Workplan_v2.xlsx', size: '1.1 MB', by: 'Alex Rivera' }
+                        ],
+                        comments: []
+                    },
+                    'seo-104': {
+                        id: 'SEO-104',
+                        category: 'Setup',
+                        client: 'Global Dynamics',
+                        title: 'Competitor Analysis (Automated)',
+                        status: 'Done',
+                        assignee: 'Alex Rivera (SEO Lead)',
+                        priority: 'Medium',
+                        due: 'Nov 12, 2026',
+                        loggedHrs: 3.0,
+                        estHrs: 3.0,
+                        quarterly: false,
+                        brief: 'Automated SERP & backlink gap benchmark against top 3 B2B cloud security competitors.',
+                        urls: ['/'],
+                        keywords: ['cloud security competitors'],
+                        subtasks: [
+                            { text: 'Pull Ahrefs & Semrush domain comparison', done: true },
+                            { text: 'Save Audit_Report.pdf to Files tab', done: true }
+                        ],
+                        files: [
+                            { name: 'Audit_Report.pdf', size: '2.8 MB', by: 'System Auto' }
+                        ],
+                        comments: []
+                    }
+                };
+
+                let activeSeoTaskId = null;
+
+                function openSeoTaskModal(taskId) {
+                    const t = seoTasksData[taskId];
+                    if (!t) return;
+                    activeSeoTaskId = taskId;
+                    document.getElementById('st-id').textContent = t.id;
+                    document.getElementById('st-cat').textContent = t.category;
+                    document.getElementById('st-client').textContent = t.client;
+                    document.getElementById('st-title').textContent = t.title;
+                    document.getElementById('st-brief').value = t.brief;
+                    document.getElementById('st-status').value = t.status;
+                    document.getElementById('st-assignee').value = t.assignee;
+                    document.getElementById('st-priority').value = t.priority;
+                    document.getElementById('st-due').value = t.due;
+                    document.getElementById('st-quarterly').checked = !!t.quarterly;
+
+                    document.getElementById('st-urls').innerHTML = t.urls.map(u =>
+                        `<span class="text-[11px] font-mono bg-white border border-indigo-200 text-indigo-800 px-2 py-0.5 rounded">${u}</span>`
+                    ).join('');
+                    document.getElementById('st-keywords').innerHTML = t.keywords.map(k =>
+                        `<span class="text-[11px] bg-white border border-indigo-200 text-indigo-800 px-2 py-0.5 rounded font-medium">${k}</span>`
+                    ).join('');
+
+                    renderSeoSubtasks(t);
+                    renderSeoFiles(t);
+                    renderSeoComments(t);
+                    renderSeoHours(t);
+                    document.getElementById('seoTaskModal').classList.remove('hidden');
+                }
+
+                function renderSeoSubtasks(t) {
+                    const doneCount = t.subtasks.filter(s => s.done).length;
+                    const total = t.subtasks.length || 1;
+                    document.getElementById('st-subtask-progress').textContent = `${doneCount} / ${t.subtasks.length} completed`;
+                    document.getElementById('st-subtask-bar').style.width = Math.round((doneCount / total) * 100) + '%';
+                    document.getElementById('st-subtasks').innerHTML = t.subtasks.map((s, idx) => `
+                        <label class="flex items-center gap-2.5 p-2 rounded-lg hover:bg-gray-50 cursor-pointer border border-transparent hover:border-gray-200">
+                            <input type="checkbox" ${s.done ? 'checked' : ''} onchange="toggleSeoSubtask(${idx})" class="accent-blue-600 w-4 h-4">
+                            <span class="text-xs ${s.done ? 'line-through text-gray-400' : 'text-gray-800 font-medium'}">${s.text}</span>
+                        </label>
+                    `).join('');
+                }
+
+                function toggleSeoSubtask(idx) {
+                    const t = seoTasksData[activeSeoTaskId];
+                    if (!t) return;
+                    t.subtasks[idx].done = !t.subtasks[idx].done;
+                    renderSeoSubtasks(t);
+                }
+
+                function addSeoSubtask() {
+                    const input = document.getElementById('st-new-subtask');
+                    const val = input.value.trim();
+                    if (!val || !activeSeoTaskId) return;
+                    seoTasksData[activeSeoTaskId].subtasks.push({ text: val, done: false });
+                    input.value = '';
+                    renderSeoSubtasks(seoTasksData[activeSeoTaskId]);
+                }
+
+                function renderSeoFiles(t) {
+                    const container = document.getElementById('st-files');
+                    if (!t.files.length) {
+                        container.innerHTML = '<p class="text-xs text-gray-400 italic">No files attached yet.</p>';
+                        return;
+                    }
+                    container.innerHTML = t.files.map(f => `
+                        <div class="flex items-center justify-between bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-xs">
+                            <div class="flex items-center gap-2">
+                                <i class="ph-fill ph-file-text text-blue-600 text-base"></i>
+                                <span class="font-semibold text-gray-800">${f.name}</span>
+                                <span class="text-gray-400">(${f.size} • ${f.by})</span>
+                            </div>
+                            <button type="button" onclick="showToast('Downloading ${f.name}...', 'info')" class="text-blue-600 hover:underline font-medium">Download</button>
+                        </div>
+                    `).join('');
+                }
+
+                function attachDemoSeoFile() {
+                    const t = seoTasksData[activeSeoTaskId];
+                    if (!t) return;
+                    const fname = `Deliverable_${t.id}_v${t.files.length + 1}.pdf`;
+                    t.files.push({ name: fname, size: '1.4 MB', by: 'Admin User' });
+                    renderSeoFiles(t);
+                    showToast(`Attached "${fname}" to ${t.title} & synced to Files tab!`);
+                }
+
+                function renderSeoComments(t) {
+                    const container = document.getElementById('st-comments');
+                    if (!t.comments.length) {
+                        container.innerHTML = '<p class="text-xs text-gray-400 italic">No team notes yet.</p>';
+                        return;
+                    }
+                    container.innerHTML = t.comments.map(c => `
+                        <div class="bg-gray-50 border border-gray-200 rounded-lg p-3 text-xs">
+                            <div class="flex justify-between items-center mb-1">
+                                <strong class="text-gray-900">${c.author}</strong>
+                                <span class="text-[11px] text-gray-400">${c.time}</span>
+                            </div>
+                            <p class="text-gray-700">${c.text}</p>
+                        </div>
+                    `).join('');
+                }
+
+                function addSeoComment() {
+                    const input = document.getElementById('st-new-comment');
+                    const val = input.value.trim();
+                    if (!val || !activeSeoTaskId) return;
+                    seoTasksData[activeSeoTaskId].comments.push({
+                        author: 'Admin User',
+                        time: 'Just now',
+                        text: val
+                    });
+                    input.value = '';
+                    renderSeoComments(seoTasksData[activeSeoTaskId]);
+                    showToast('Note added to task activity!');
+                }
+
+                function renderSeoHours(t) {
+                    document.getElementById('st-hours-text').textContent = `${t.loggedHrs.toFixed(1)} / ${t.estHrs.toFixed(1)} hrs logged`;
+                    const pct = Math.min(100, Math.round((t.loggedHrs / (t.estHrs || 1)) * 100));
+                    document.getElementById('st-hours-bar').style.width = pct + '%';
+                }
+
+                function logSeoTaskTime(hrs) {
+                    const t = seoTasksData[activeSeoTaskId];
+                    if (!t) return;
+                    t.loggedHrs += hrs;
+                    renderSeoHours(t);
+                    showToast(`Logged +${hrs}h to ${t.title}!`);
+                }
+
+                function saveSeoTask(markComplete) {
+                    const t = seoTasksData[activeSeoTaskId];
+                    if (!t) return;
+                    t.brief = document.getElementById('st-brief').value;
+                    t.status = markComplete ? 'Done' : document.getElementById('st-status').value;
+                    t.assignee = document.getElementById('st-assignee').value;
+                    t.priority = document.getElementById('st-priority').value;
+                    t.due = document.getElementById('st-due').value;
+                    t.quarterly = document.getElementById('st-quarterly').checked;
+                    document.getElementById('seoTaskModal').classList.add('hidden');
+                    if (markComplete && t.quarterly) {
+                        showToast(`"${t.title}" marked Done! Next Quarterly Audit auto-scheduled for +3 months.`);
+                    } else {
+                        showToast(markComplete ? `"${t.title}" marked Done!` : `Saved changes to "${t.title}".`);
+                    }
+                }
+
                 function switchTab(tabId) {
                     document.querySelectorAll('.prod-content').forEach(el => el.classList.add('hidden'));
                     document.querySelectorAll('.prod-tab').forEach(el => {
@@ -1879,6 +2278,18 @@
                     document.getElementById('tab-' + tabId).classList.remove('text-gray-500', 'border-transparent');
                     document.getElementById('tab-' + tabId).classList.add('text-blue-600', 'border-b-blue-600');
                 }
+
+                (function initProductionFromQuery() {
+                    const params = new URLSearchParams(window.location.search);
+                    const tab = params.get('tab');
+                    const task = params.get('task');
+                    if (tab && document.getElementById('tab-' + tab)) {
+                        switchTab(tab);
+                    }
+                    if (task && seoTasksData[task]) {
+                        openSeoTaskModal(task);
+                    }
+                })();
             </script>
 
         </div>
