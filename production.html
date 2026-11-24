@@ -1845,19 +1845,42 @@
                             </div>
                             <div class="border-t border-gray-200 pt-3">
                                 <div class="flex items-center justify-between mb-1">
-                                    <label class="text-[11px] font-bold text-gray-500 uppercase">Time Tracking</label>
-                                    <button type="button" onclick="logSeoTaskTime(0.5)" class="text-[11px] font-semibold text-blue-600 hover:underline">+ Log 0.5h</button>
+                                    <label class="text-[11px] font-bold text-gray-500 uppercase">Time Tracking (Today)</label>
                                 </div>
                                 <p id="st-hours-text" class="text-sm font-bold text-gray-900 mb-1.5">2.5 / 4.0 hrs logged</p>
-                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="w-full bg-gray-200 rounded-full h-2 mb-2.5">
                                     <div id="st-hours-bar" class="bg-emerald-500 h-2 rounded-full transition-all" style="width: 62%"></div>
                                 </div>
+                                <div class="flex items-center gap-1.5">
+                                    <input id="st-log-hrs" type="number" step="0.25" min="0.25" value="0.25"
+                                        class="w-20 border border-gray-300 rounded-lg px-2.5 py-1.5 text-xs font-semibold bg-white outline-none focus:border-blue-500">
+                                    <button type="button" onclick="logSeoTaskTime()"
+                                        class="flex-1 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors">
+                                        + Log Hours
+                                    </button>
+                                </div>
+                                <p class="text-[10px] text-gray-400 mt-1">Logs against today's date (no exact times needed).</p>
                             </div>
                             <div class="border-t border-gray-200 pt-3">
-                                <label class="flex items-start gap-2 cursor-pointer">
-                                    <input id="st-quarterly" type="checkbox" class="mt-0.5 accent-blue-600">
-                                    <span class="text-xs text-gray-700 leading-snug"><strong class="block text-gray-900">Quarterly Auto-Repeat</strong>When marked Done, auto-schedule next audit in +3 months.</span>
-                                </label>
+                                <label class="block text-[11px] font-bold text-gray-500 uppercase mb-1.5">Repeat task in</label>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <select id="st-repeat-num" class="w-full border border-gray-300 rounded-lg px-2.5 py-2 text-xs font-semibold bg-white outline-none focus:border-blue-500">
+                                        <option value="">None</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="6">6</option>
+                                        <option value="12">12</option>
+                                    </select>
+                                    <select id="st-repeat-unit" class="w-full border border-gray-300 rounded-lg px-2.5 py-2 text-xs font-semibold bg-white outline-none focus:border-blue-500">
+                                        <option value="Day(s)">Day(s)</option>
+                                        <option value="Week(s)">Week(s)</option>
+                                        <option value="Month(s)">Month(s)</option>
+                                        <option value="Year(s)">Year(s)</option>
+                                    </select>
+                                </div>
+                                <p class="text-[10px] text-gray-500 mt-1.5 leading-snug">When marked Done, auto-schedules the next task in X Y.</p>
                             </div>
                         </div>
                     </div>
@@ -2134,7 +2157,9 @@
                     document.getElementById('st-assignee').value = t.assignee;
                     document.getElementById('st-priority').value = t.priority;
                     document.getElementById('st-due').value = t.due;
-                    document.getElementById('st-quarterly').checked = !!t.quarterly;
+                    document.getElementById('st-log-hrs').value = '0.25';
+                    document.getElementById('st-repeat-num').value = t.repeatNum !== undefined ? t.repeatNum : (t.quarterly ? '3' : '');
+                    document.getElementById('st-repeat-unit').value = t.repeatUnit || 'Month(s)';
 
                     document.getElementById('st-urls').innerHTML = t.urls.map(u =>
                         `<span class="text-[11px] font-mono bg-white border border-indigo-200 text-indigo-800 px-2 py-0.5 rounded">${u}</span>`
@@ -2238,17 +2263,24 @@
                 }
 
                 function renderSeoHours(t) {
-                    document.getElementById('st-hours-text').textContent = `${t.loggedHrs.toFixed(1)} / ${t.estHrs.toFixed(1)} hrs logged`;
+                    const hrsStr = Number.isInteger(t.loggedHrs) ? t.loggedHrs.toFixed(1) : t.loggedHrs.toString();
+                    document.getElementById('st-hours-text').textContent = `${hrsStr} / ${t.estHrs.toFixed(1)} hrs logged`;
                     const pct = Math.min(100, Math.round((t.loggedHrs / (t.estHrs || 1)) * 100));
                     document.getElementById('st-hours-bar').style.width = pct + '%';
                 }
 
-                function logSeoTaskTime(hrs) {
+                function logSeoTaskTime() {
                     const t = seoTasksData[activeSeoTaskId];
                     if (!t) return;
-                    t.loggedHrs += hrs;
+                    const input = document.getElementById('st-log-hrs');
+                    const hrs = parseFloat(input.value);
+                    if (isNaN(hrs) || hrs <= 0) {
+                        showToast('Enter hours greater than 0.', 'info');
+                        return;
+                    }
+                    t.loggedHrs = Math.round((t.loggedHrs + hrs) * 100) / 100;
                     renderSeoHours(t);
-                    showToast(`Logged +${hrs}h to ${t.title}!`);
+                    showToast(`Logged +${hrs}h to ${t.title} for Today!`);
                 }
 
                 function saveSeoTask(markComplete) {
@@ -2259,10 +2291,11 @@
                     t.assignee = document.getElementById('st-assignee').value;
                     t.priority = document.getElementById('st-priority').value;
                     t.due = document.getElementById('st-due').value;
-                    t.quarterly = document.getElementById('st-quarterly').checked;
+                    t.repeatNum = document.getElementById('st-repeat-num').value;
+                    t.repeatUnit = document.getElementById('st-repeat-unit').value;
                     document.getElementById('seoTaskModal').classList.add('hidden');
-                    if (markComplete && t.quarterly) {
-                        showToast(`"${t.title}" marked Done! Next Quarterly Audit auto-scheduled for +3 months.`);
+                    if (markComplete && t.repeatNum) {
+                        showToast(`"${t.title}" marked Done! Next task auto-scheduled in ${t.repeatNum} ${t.repeatUnit}.`);
                     } else {
                         showToast(markComplete ? `"${t.title}" marked Done!` : `Saved changes to "${t.title}".`);
                     }
