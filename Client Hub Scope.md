@@ -120,8 +120,9 @@ Retention / Offboarding  ◀──  Reporting & Portal  ◀──  Production  �
 
 ---
 
-### 2.6 Users & Teams (`users.html`)
-- Staff roster, roles, and client workspace assignments.
+### 2.6 Users & Teams (`users.html`) & Master Clients Directory (`clients.html`)
+- **Users & Teams (`users.html`):** Staff roster, roles, and client workspace assignments.
+- **Clients Directory (`clients.html`):** Master directory housing every client regardless of lifecycle stage (`Prospecting`, `Onboarding`, `Active`, `Issue`, `Offboarded`), with full edit capabilities for company details, contacts, services, hosting flag, connectors, and vault logins.
 
 ---
 

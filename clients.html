@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Hub 360 - Clients Directory</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2563eb">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden text-slate-800">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white border-r border-gray-200 flex flex-col shadow-sm z-20 flex-shrink-0">
+        <div class="h-28 flex items-center justify-center px-4 py-3 border-b border-gray-100"><img src="hub-logo.jpeg" alt="DNXT Client Hub" class="w-full h-full object-contain"></div>
+        <nav class="flex-1 py-4 flex flex-col gap-1 overflow-y-auto">
+            <a href="my-tasks.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-squares-four text-xl"></i><span>Overview</span>
+            </a>
+            <a href="prospecting.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-funnel text-xl"></i><span>Prospecting</span>
+            </a>
+            <a href="onboarding.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-user-plus text-xl"></i><span>Onboarding</span>
+            </a>
+            <a href="production.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-kanban text-xl"></i><span>Production</span>
+            </a>
+            <a href="reporting.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-chart-line-up text-xl"></i><span>Reporting</span>
+            </a>
+            <a href="upsells.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-trend-up text-xl"></i><span>Retention &amp; Upsells</span>
+            </a>
+            <a href="users.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <i class="ph-users text-xl"></i><span>Users &amp; Teams</span>
+            </a>
+            <a href="clients.html" class="flex items-center gap-3 px-6 py-2.5 bg-blue-50 text-blue-700 border-r-4 border-blue-600 font-semibold transition-colors">
+                <i class="ph-buildings text-xl"></i><span>Clients</span>
+            </a>
+
+            <!-- Tools Section -->
+            <div class="mt-4 pt-4 border-t border-gray-100 flex flex-col gap-1">
+                <div class="px-6 pb-2 flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-gray-400">
+                    <i class="ph ph-wrench"></i><span>Tools</span>
+                </div>
+                <a href="quote-builder.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                    <i class="ph-calculator text-xl"></i><span>Quote Builder</span>
+                </a>
+                <a href="campaign-planner.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                    <i class="ph-calendar-check text-xl"></i><span>Campaign Planner</span>
+                </a>
+                <a href="rank-tracker.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                    <i class="ph-magnifying-glass-plus text-xl"></i><span>Rank Tracker</span>
+                </a>
+                <a href="https://tools.digitalnext.co.uk" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                    <span class="flex items-center gap-3"><i class="ph-toolbox text-xl"></i><span>DN Tool Suite</span></span>
+                    <i class="ph ph-arrow-square-out text-xs text-gray-400"></i>
+                </a>
+                <a href="mcp-setup.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                    <i class="ph-plugs-connected text-xl"></i><span>MCP Setup</span>
+                </a>
+            </div>
+
+            <!-- Demo Notes -->
+            <div class="mt-4 pt-4 border-t border-gray-100 flex flex-col gap-1">
+                <a href="demo-notes.html" class="flex items-center gap-3 px-6 py-2.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                    <i class="ph-notebook text-xl"></i><span>Demo Notes</span>
+                </a>
+            </div>
+        </nav>
+        <div class="p-4 border-t border-gray-100">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">AM</div>
+                <div class="text-sm">
+                    <p class="font-semibold text-gray-800">Admin User</p>
+                    <p class="text-xs text-gray-500">Agency Workspace</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col h-screen overflow-y-auto relative">
+        <header class="h-14 bg-white border-b border-gray-200 flex items-center justify-between px-8 sticky top-0 z-10 shadow-sm flex-shrink-0">
+            <h1 class="text-xl font-semibold text-gray-800">Clients Directory</h1>
+            <button onclick="openEditClient(-1)" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow-sm">
+                <i class="ph ph-plus"></i> Add Client
+            </button>
+        </header>
+
+        <div class="pt-3 px-8 pb-8 flex-1 space-y-6">
+            <!-- Search & Stage Filter Strip -->
+            <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-4 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex flex-wrap items-center gap-2 text-xs font-semibold">
+                    <button onclick="filterClients('all')" class="cl-btn px-3 py-1.5 rounded-lg bg-blue-600 text-white" data-s="all">All Clients (7)</button>
+                    <button onclick="filterClients('Active')" class="cl-btn px-3 py-1.5 rounded-lg text-gray-600 hover:bg-gray-100" data-s="Active">Active (3)</button>
+                    <button onclick="filterClients('Issue')" class="cl-btn px-3 py-1.5 rounded-lg text-red-600 hover:bg-red-50" data-s="Issue">Issue / At-Risk (1)</button>
+                    <button onclick="filterClients('Onboarding')" class="cl-btn px-3 py-1.5 rounded-lg text-gray-600 hover:bg-gray-100" data-s="Onboarding">Onboarding (1)</button>
+                    <button onclick="filterClients('Prospecting')" class="cl-btn px-3 py-1.5 rounded-lg text-gray-600 hover:bg-gray-100" data-s="Prospecting">Prospecting (1)</button>
+                    <button onclick="filterClients('Offboarded')" class="cl-btn px-3 py-1.5 rounded-lg text-gray-600 hover:bg-gray-100" data-s="Offboarded">Offboarded (1)</button>
+                </div>
+                <div class="relative">
+                    <i class="ph ph-magnifying-glass absolute left-3 top-2.5 text-gray-400"></i>
+                    <input type="text" id="cl-search" oninput="renderClients()" placeholder="Search business or contact..." class="border border-gray-300 rounded-lg pl-9 pr-3 py-1.5 text-xs w-64 outline-none focus:border-blue-500">
+                </div>
+            </div>
+
+            <!-- Master Clients Table -->
+            <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-gray-50 text-gray-600 uppercase text-xs border-b">
+                            <tr>
+                                <th class="px-5 py-3">Business &amp; URL</th>
+                                <th class="px-4 py-3">Primary Contact</th>
+                                <th class="px-4 py-3">Stage</th>
+                                <th class="px-4 py-3">Services</th>
+                                <th class="px-4 py-3">Retainer</th>
+                                <th class="px-4 py-3">AM</th>
+                                <th class="px-5 py-3 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="clients-tbody" class="divide-y divide-gray-100 text-gray-700 text-xs"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Full Edit Client Modal -->
+    <div id="editClientModal" class="hidden fixed inset-0 bg-gray-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] flex flex-col overflow-hidden">
+            <div class="p-5 border-b border-gray-100 flex justify-between items-center bg-gray-50/70">
+                <div>
+                    <h2 id="ec-modal-title" class="text-lg font-bold text-gray-900">Edit Client — Global Dynamics Ltd</h2>
+                    <p class="text-xs text-gray-500">Update company details, contacts, services, connectors, and vault credentials.</p>
+                </div>
+                <button onclick="document.getElementById('editClientModal').classList.add('hidden')" class="text-gray-400 hover:text-gray-700"><i class="ph ph-x text-xl"></i></button>
+            </div>
+
+            <!-- Modal Tabs -->
+            <div class="border-b border-gray-200 px-6 flex gap-6 text-xs font-semibold">
+                <button type="button" onclick="switchModalTab('details')" id="mtab-details" class="py-3 text-blue-600 border-b-2 border-blue-600">Details &amp; Contacts</button>
+                <button type="button" onclick="switchModalTab('commercial')" id="mtab-commercial" class="py-3 text-gray-500 border-b-2 border-transparent hover:text-gray-700">Services &amp; Commercials</button>
+                <button type="button" onclick="switchModalTab('connectors')" id="mtab-connectors" class="py-3 text-gray-500 border-b-2 border-transparent hover:text-gray-700">Connectors &amp; Logins</button>
+            </div>
+
+            <form onsubmit="saveClientEdits(event)" class="flex-1 overflow-y-auto p-6 space-y-5 text-sm">
+                <!-- Panel 1: Details & Contacts -->
+                <div id="mpanel-details" class="space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div><label class="block text-xs font-semibold text-gray-600 mb-1">Business Name *</label><input id="ec-biz" type="text" required class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500"></div>
+                        <div><label class="block text-xs font-semibold text-gray-600 mb-1">Website URL</label><input id="ec-url" type="text" class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500"></div>
+                        <div><label class="block text-xs font-semibold text-gray-600 mb-1">Company Reg No. / VAT</label><input id="ec-reg" type="text" class="w-full border rounded-lg px-3 py-2 font-mono text-xs outline-none focus:border-blue-500"></div>
+                        <div><label class="block text-xs font-semibold text-gray-600 mb-1">Registered Address</label><input id="ec-addr" type="text" class="w-full border rounded-lg px-3 py-2 text-xs outline-none focus:border-blue-500"></div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 border-t border-gray-100">
+                        <div class="space-y-2.5 bg-gray-50 p-3.5 rounded-xl border">
+                            <span class="text-[10px] font-bold uppercase text-blue-700">Primary Contact</span>
+                            <div><label class="block text-[11px] font-semibold text-gray-600">Name *</label><input id="ec-cname" type="text" required class="w-full border bg-white rounded px-2.5 py-1.5 text-xs"></div>
+                            <div><label class="block text-[11px] font-semibold text-gray-600">Email *</label><input id="ec-cemail" type="email" required class="w-full border bg-white rounded px-2.5 py-1.5 text-xs"></div>
+                            <div><label class="block text-[11px] font-semibold text-gray-600">Phone &amp; Slack</label><input id="ec-cphone" type="text" class="w-full border bg-white rounded px-2.5 py-1.5 text-xs"></div>
+                        </div>
+                        <div class="space-y-2.5 bg-gray-50 p-3.5 rounded-xl border">
+                            <span class="text-[10px] font-bold uppercase text-gray-700">Billing / Finance Contact</span>
+                            <div><label class="block text-[11px] font-semibold text-gray-600">Name</label><input id="ec-bname" type="text" class="w-full border bg-white rounded px-2.5 py-1.5 text-xs"></div>
+                            <div><label class="block text-[11px] font-semibold text-gray-600">Finance Email</label><input id="ec-bemail" type="email" class="w-full border bg-white rounded px-2.5 py-1.5 text-xs"></div>
+                            <div><label class="block text-[11px] font-semibold text-gray-600">Billing Terms</label><input id="ec-bterms" type="text" value="30-Day Terms (Xero)" class="w-full border bg-white rounded px-2.5 py-1.5 text-xs"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel 2: Services & Commercials -->
+                <div id="mpanel-commercial" class="hidden space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Lifecycle Stage</label>
+                            <select id="ec-stage" class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500">
+                                <option>Prospecting</option>
+                                <option>Onboarding</option>
+                                <option>Active</option>
+                                <option>Issue</option>
+                                <option>Offboarded</option>
+                            </select>
+                        </div>
+                        <div><label class="block text-xs font-semibold text-gray-600 mb-1">Monthly Retainer</label><input id="ec-budget" type="text" class="w-full border rounded-lg px-3 py-2 font-semibold outline-none focus:border-blue-500"></div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 mb-1">Account Manager</label>
+                            <select id="ec-am" class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500">
+                                <option>Sarah Jenkins</option>
+                                <option>Alex Rivera</option>
+                                <option>Mike K.</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">Subscribed Services</label>
+                        <input id="ec-services" type="text" class="w-full border rounded-lg px-3 py-2 outline-none focus:border-blue-500">
+                    </div>
+                    <label class="flex items-center gap-2 text-xs text-gray-700 bg-blue-50 p-3 rounded-lg border border-blue-200 cursor-pointer">
+                        <input id="ec-hosted" type="checkbox" class="accent-blue-600">
+                        <span><strong>Hosted by Digital Next (£150/mo)</strong> — Enables 10-minute uptime monitoring &amp; Managed Hosting marker</span>
+                    </label>
+                </div>
+
+                <!-- Panel 3: Connectors & Vault Logins -->
+                <div id="mpanel-connectors" class="hidden space-y-4 text-xs">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div><label class="block font-semibold text-gray-600 mb-1">GA4 Property ID</label><input id="ec-ga4" type="text" class="w-full border rounded-lg px-3 py-2 font-mono"></div>
+                        <div><label class="block font-semibold text-gray-600 mb-1">Search Console Property</label><input id="ec-sc" type="text" class="w-full border rounded-lg px-3 py-2 font-mono"></div>
+                        <div><label class="block font-semibold text-gray-600 mb-1">Google Ads MCC / ID</label><input id="ec-gads" type="text" class="w-full border rounded-lg px-3 py-2 font-mono"></div>
+                        <div><label class="block font-semibold text-gray-600 mb-1">Meta Business Manager ID</label><input id="ec-meta" type="text" class="w-full border rounded-lg px-3 py-2 font-mono"></div>
+                        <div><label class="block font-semibold text-gray-600 mb-1">SFTP / FTP Host</label><input id="ec-ftp" type="text" class="w-full border rounded-lg px-3 py-2 font-mono"></div>
+                        <div><label class="block font-semibold text-gray-600 mb-1">CMS Admin URL (Vault Synced)</label><input id="ec-cms" type="text" class="w-full border rounded-lg px-3 py-2 font-mono"></div>
+                    </div>
+                    <div class="bg-gray-50 p-3 rounded-lg border flex justify-between items-center">
+                        <span class="text-gray-600">Passwords are stored encrypted in <strong>1Password / Bitwarden Vault</strong>.</span>
+                        <a href="production.html" class="text-blue-600 hover:underline font-semibold">Open Passwords Vault →</a>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-gray-100 flex justify-end gap-2">
+                    <button type="button" onclick="document.getElementById('editClientModal').classList.add('hidden')" class="px-4 py-2 border rounded-lg text-sm text-gray-600">Cancel</button>
+                    <button type="submit" class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold">Save Client Details</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast-container" class="fixed bottom-5 right-5 flex flex-col gap-3 z-50"></div>
+
+    <script>
+        const clientsData = [
+            { biz: 'Global Dynamics Ltd', url: 'globaldyn.com', reg: '09482173 • GB 248 9102 33', addr: '22 Bishopsgate, London, EC2N 4BQ', cname: 'John Doe', cemail: 'john@globaldyn.com', cphone: '+44 7800 123456 • @johndoe-globaldyn', bname: 'Claire Vance', bemail: 'accounts@globaldyn.com', stage: 'Active', services: 'SEO, Content, PPC', budget: '£5,294.17/mo', am: 'Sarah Jenkins', hosted: true, ga4: 'G-94827104X', sc: 'sc-domain:globaldyn.com', gads: '123-456-7890', meta: 'BM-8849201928', ftp: 'sftp://staging.globaldyn.com:22', cms: 'https://globaldyn.com/wp-admin' },
+            { biz: 'TechFlow Inc', url: 'techflow.io', reg: '11294021 • GB 319 4410 12', addr: '14 Shoreditch High St, London', cname: 'Sarah Connor', cemail: 'sarah@techflow.com', cphone: '+44 7700 900123', bname: 'Mark Reid', bemail: 'finance@techflow.com', stage: 'Onboarding', services: 'SEO, PPC', budget: '£2,500/mo', am: 'Alex Rivera', hosted: false, ga4: 'G-44102938Z', sc: 'sc-domain:techflow.io', gads: '991-204-8821', meta: '—', ftp: '—', cms: 'https://techflow.io/wp-admin' },
+            { biz: 'Apex Logistics', url: 'apexlogistics.co.uk', reg: '08123994 • GB 192 8831 04', addr: '88 Deansgate, Manchester', cname: 'David Chen', cemail: 'd.chen@apexlogistics.co.uk', cphone: '+44 7711 334455', bname: 'David Chen', bemail: 'ap@apexlogistics.co.uk', stage: 'Issue', services: 'Design & Dev, Paid Social', budget: '£4,800/mo', am: 'Mike K.', hosted: true, ga4: 'G-10293847A', sc: 'sc-domain:apexlogistics.co.uk', gads: '—', meta: 'BM-5520192831', ftp: 'sftp://apexlogistics.co.uk:22', cms: 'https://apexlogistics.co.uk/wp-admin' },
+            { biz: 'Harbour Dental Group', url: 'harbourdental.com', reg: '10492811', addr: '4 King St, Manchester', cname: 'Dr. Priya Patel', cemail: 'priya@harbourdental.com', cphone: '+44 7822 112233', bname: 'Priya Patel', bemail: 'accounts@harbourdental.com', stage: 'Active', services: 'Local SEO', budget: '£1,800/mo', am: 'Alex Rivera', hosted: false, ga4: 'G-77281920B', sc: 'sc-domain:harbourdental.com', gads: '—', meta: '—', ftp: '—', cms: 'https://harbourdental.com/wp-admin' },
+            { biz: 'Solstice Wellness', url: 'solsticewellness.com', reg: '12094812', addr: '19 Soho Square, London', cname: 'Mia Wallace', cemail: 'mia@solsticewellness.com', cphone: '+44 7900 554433', bname: 'Mia Wallace', bemail: 'billing@solsticewellness.com', stage: 'Active', services: 'Paid Social, Content', budget: '£4,700/mo', am: 'Sarah Jenkins', hosted: false, ga4: 'G-33819201C', sc: 'sc-domain:solsticewellness.com', gads: '—', meta: 'BM-9910293847', ftp: '—', cms: 'https://solsticewellness.com/admin' },
+            { biz: 'Kestrel Logistics', url: 'kestrellogistics.com', reg: '09912345', addr: 'Leeds Dock, Leeds', cname: 'Tom Hardy', cemail: 'tom@kestrellogistics.com', cphone: '+44 7788 990011', bname: 'Tom Hardy', bemail: 'tom@kestrellogistics.com', stage: 'Prospecting', services: 'SEO, Design & Dev', budget: '£4,800/mo', am: 'Mike K.', hosted: false, ga4: 'Pending', sc: 'Pending', gads: '—', meta: '—', ftp: '—', cms: '—' },
+            { biz: 'Legacy Retail Ltd', url: 'legacyretail.co.uk', reg: '06543210', addr: 'Birmingham', cname: 'Paul Davis', cemail: 'paul@legacyretail.co.uk', cphone: '+44 7700 112200', bname: 'Paul Davis', bemail: 'accounts@legacyretail.co.uk', stage: 'Offboarded', services: 'SEO', budget: '£2,200/mo', am: 'Sarah Jenkins', hosted: false, ga4: 'Revoked', sc: 'Revoked', gads: '—', meta: '—', ftp: 'Revoked', cms: 'Revoked' }
+        ];
+
+        let activeStageFilter = 'all';
+        let editingIndex = 0;
+
+        function stageBadge(stage) {
+            const map = {
+                'Active': 'bg-emerald-100 text-emerald-800',
+                'Issue': 'bg-red-100 text-red-800',
+                'Onboarding': 'bg-yellow-100 text-yellow-800',
+                'Prospecting': 'bg-blue-100 text-blue-800',
+                'Offboarded': 'bg-gray-200 text-gray-700'
+            };
+            return map[stage] || 'bg-gray-100 text-gray-700';
+        }
+
+        function filterClients(s) {
+            activeStageFilter = s;
+            document.querySelectorAll('.cl-btn').forEach(b => {
+                const act = b.dataset.s === s;
+                b.className = act ? 'cl-btn px-3 py-1.5 rounded-lg bg-blue-600 text-white' : 'cl-btn px-3 py-1.5 rounded-lg text-gray-600 hover:bg-gray-100';
+            });
+            renderClients();
+        }
+
+        function renderClients() {
+            const q = document.getElementById('cl-search').value.toLowerCase();
+            const tbody = document.getElementById('clients-tbody');
+            tbody.innerHTML = '';
+            clientsData.forEach((c, idx) => {
+                if (activeStageFilter !== 'all' && c.stage !== activeStageFilter) return;
+                if (q && !c.biz.toLowerCase().includes(q) && !c.cname.toLowerCase().includes(q)) return;
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-gray-50';
+                tr.innerHTML = `
+                    <td class="px-5 py-3.5">
+                        <strong class="text-gray-900 text-sm block">${c.biz} ${c.hosted ? '<span class="ml-1 text-[10px] bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded font-semibold">Hosted by DN</span>' : ''}</strong>
+                        <span class="font-mono text-blue-600">${c.url}</span>
+                    </td>
+                    <td class="px-4 py-3.5"><strong>${c.cname}</strong><span class="block text-gray-500">${c.cemail}</span></td>
+                    <td class="px-4 py-3.5"><span class="px-2.5 py-1 rounded-full font-bold ${stageBadge(c.stage)}">${c.stage}</span></td>
+                    <td class="px-4 py-3.5">${c.services}</td>
+                    <td class="px-4 py-3.5 font-semibold">${c.budget}</td>
+                    <td class="px-4 py-3.5">${c.am}</td>
+                    <td class="px-5 py-3.5 text-right space-x-2">
+                        <button onclick="openEditClient(${idx})" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-lg font-semibold inline-flex items-center gap-1"><i class="ph ph-pencil-simple"></i> Edit</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function switchModalTab(tab) {
+            ['details', 'commercial', 'connectors'].forEach(t => {
+                const act = t === tab;
+                document.getElementById('mpanel-' + t).classList.toggle('hidden', !act);
+                document.getElementById('mtab-' + t).className = act ? 'py-3 text-blue-600 border-b-2 border-blue-600' : 'py-3 text-gray-500 border-b-2 border-transparent hover:text-gray-700';
+            });
+        }
+
+        function openEditClient(idx) {
+            editingIndex = idx;
+            switchModalTab('details');
+            const c = idx >= 0 ? clientsData[idx] : { biz: '', url: '', reg: '', addr: '', cname: '', cemail: '', cphone: '', bname: '', bemail: '', stage: 'Onboarding', services: 'SEO', budget: '£2,500/mo', am: 'Sarah Jenkins', hosted: false, ga4: '', sc: '', gads: '', meta: '', ftp: '', cms: '' };
+            document.getElementById('ec-modal-title').textContent = idx >= 0 ? `Edit Client — ${c.biz}` : 'Add New Client';
+            document.getElementById('ec-biz').value = c.biz;
+            document.getElementById('ec-url').value = c.url;
+            document.getElementById('ec-reg').value = c.reg;
+            document.getElementById('ec-addr').value = c.addr;
+            document.getElementById('ec-cname').value = c.cname;
+            document.getElementById('ec-cemail').value = c.cemail;
+            document.getElementById('ec-cphone').value = c.cphone;
+            document.getElementById('ec-bname').value = c.bname;
+            document.getElementById('ec-bemail').value = c.bemail;
+            document.getElementById('ec-stage').value = c.stage;
+            document.getElementById('ec-budget').value = c.budget;
+            document.getElementById('ec-am').value = c.am;
+            document.getElementById('ec-services').value = c.services;
+            document.getElementById('ec-hosted').checked = c.hosted;
+            document.getElementById('ec-ga4').value = c.ga4;
+            document.getElementById('ec-sc').value = c.sc;
+            document.getElementById('ec-gads').value = c.gads;
+            document.getElementById('ec-meta').value = c.meta;
+            document.getElementById('ec-ftp').value = c.ftp;
+            document.getElementById('ec-cms').value = c.cms;
+            document.getElementById('editClientModal').classList.remove('hidden');
+        }
+
+        function saveClientEdits(e) {
+            e.preventDefault();
+            const updated = {
+                biz: document.getElementById('ec-biz').value,
+                url: document.getElementById('ec-url').value,
+                reg: document.getElementById('ec-reg').value,
+                addr: document.getElementById('ec-addr').value,
+                cname: document.getElementById('ec-cname').value,
+                cemail: document.getElementById('ec-cemail').value,
+                cphone: document.getElementById('ec-cphone').value,
+                bname: document.getElementById('ec-bname').value,
+                bemail: document.getElementById('ec-bemail').value,
+                stage: document.getElementById('ec-stage').value,
+                budget: document.getElementById('ec-budget').value,
+                am: document.getElementById('ec-am').value,
+                services: document.getElementById('ec-services').value,
+                hosted: document.getElementById('ec-hosted').checked,
+                ga4: document.getElementById('ec-ga4').value,
+                sc: document.getElementById('ec-sc').value,
+                gads: document.getElementById('ec-gads').value,
+                meta: document.getElementById('ec-meta').value,
+                ftp: document.getElementById('ec-ftp').value,
+                cms: document.getElementById('ec-cms').value
+            };
+            if (editingIndex >= 0) {
+                clientsData[editingIndex] = updated;
+            } else {
+                clientsData.unshift(updated);
+            }
+            renderClients();
+            document.getElementById('editClientModal').classList.add('hidden');
+            showToast(`Saved all details for "${updated.biz}"!`);
+        }
+
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'flex items-center gap-3 bg-white px-4 py-3 rounded-lg shadow-lg border border-green-100 transform transition-all duration-300 translate-y-10 opacity-0';
+            toast.innerHTML = `<i class="ph-fill ph-check-circle text-green-500 text-xl"></i><span class="text-sm font-medium text-gray-700">${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => toast.classList.remove('translate-y-10', 'opacity-0'), 10);
+            setTimeout(() => { toast.classList.add('opacity-0'); setTimeout(() => toast.remove(), 300); }, 3000);
+        }
+
+        renderClients();
+    </script>
+    <script>if ('serviceWorker' in navigator) { navigator.serviceWorker.register('./sw.js'); }</script>
+</body>
+</html>
