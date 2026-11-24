@@ -922,10 +922,43 @@
                                         class="text-emerald-700">0 Found</strong></div>
                             </div>
                         </div>
-                        <div class="bg-gray-50 p-3 rounded-lg border border-gray-200 text-xs text-gray-700">
-                            <strong class="block text-gray-800 mb-1">Sales Handover Notes (Scope Guardrail):</strong>
-                            <span id="dm-notes">Client requires strict scope adherence: 4 blogs/mo, 5 outreach links/mo.
-                                No social media included in Phase 1.</span>
+                        <div class="bg-gray-50 p-3.5 rounded-lg border border-gray-200 text-xs text-gray-700 space-y-2">
+                            <div class="flex justify-between items-center">
+                                <strong class="text-gray-800">Sales Handover Notes (Scope Guardrail):</strong>
+                                <button id="dm-notes-edit-btn" onclick="toggleEditNotes()" class="text-blue-600 hover:underline font-semibold flex items-center gap-1"><i class="ph ph-pencil-simple"></i> Edit</button>
+                            </div>
+                            <span id="dm-notes" class="block">Client requires strict scope adherence: 4 blogs/mo, 5 outreach links/mo. No social media included in Phase 1.</span>
+                            <div id="dm-notes-editor" class="hidden space-y-2">
+                                <textarea id="dm-notes-input" rows="2" class="w-full border border-gray-300 bg-white rounded p-2 text-xs outline-none focus:border-blue-500"></textarea>
+                                <div class="flex justify-end gap-2">
+                                    <button type="button" onclick="toggleEditNotes(false)" class="px-2.5 py-1 border rounded bg-white text-gray-600">Cancel</button>
+                                    <button type="button" onclick="saveEditNotes()" class="px-3 py-1 bg-blue-600 text-white rounded font-semibold hover:bg-blue-700">Save Notes</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Attach Files to Prospect (Syncs to Sales Folder -> Client 00_Sales Folder) -->
+                        <div class="bg-white p-3.5 rounded-lg border border-gray-200 text-xs space-y-2.5">
+                            <div class="flex flex-wrap justify-between items-center gap-2">
+                                <div>
+                                    <strong class="text-gray-800 block">Attached Prospect Files (Sales Workspace Folder)</strong>
+                                    <span class="text-[11px] text-gray-500">Moves automatically into <code>/Clients/&lt;Client&gt;/00_Sales/</code> when converted.</span>
+                                </div>
+                                <label class="cursor-pointer bg-gray-100 hover:bg-gray-200 text-gray-800 px-3 py-1.5 rounded-md font-semibold flex items-center gap-1.5">
+                                    <i class="ph ph-paperclip"></i> Attach File
+                                    <input type="file" class="hidden" onchange="attachProspectFile(this)">
+                                </label>
+                            </div>
+                            <ul id="dm-files-list" class="space-y-1.5">
+                                <li class="flex items-center justify-between p-2 bg-gray-50 rounded border border-gray-100">
+                                    <span class="flex items-center gap-1.5 font-medium"><i class="ph-fill ph-file-doc text-blue-600"></i> Discovery_Notes_v1.docx</span>
+                                    <span class="text-[11px] text-gray-400">Sales Drive</span>
+                                </li>
+                                <li class="flex items-center justify-between p-2 bg-gray-50 rounded border border-gray-100">
+                                    <span class="flex items-center gap-1.5 font-medium"><i class="ph-fill ph-file-xls text-emerald-600"></i> Quote_Breakdown_12m.xlsx</span>
+                                    <span class="text-[11px] text-gray-400">Sales Drive</span>
+                                </li>
+                            </ul>
                         </div>
                         <div class="bg-blue-50 p-4 rounded-lg border border-blue-100 flex flex-wrap items-center justify-between gap-4">
                             <div>
@@ -1238,6 +1271,38 @@
             document.getElementById('addProspectModal').classList.add('hidden');
             e.target.reset();
             showToast(`Added "${biz}" to Leads column!`);
+        }
+
+        function toggleEditNotes(forceOpen = true) {
+            const editor = document.getElementById('dm-notes-editor');
+            const span = document.getElementById('dm-notes');
+            const isHidden = editor.classList.contains('hidden');
+            if (forceOpen && isHidden) {
+                document.getElementById('dm-notes-input').value = span.textContent.trim();
+                editor.classList.remove('hidden');
+                span.classList.add('hidden');
+            } else {
+                editor.classList.add('hidden');
+                span.classList.remove('hidden');
+            }
+        }
+
+        function saveEditNotes() {
+            const val = document.getElementById('dm-notes-input').value.trim();
+            if (val) document.getElementById('dm-notes').textContent = val;
+            toggleEditNotes(false);
+            showToast('Sales Handover Notes updated!');
+        }
+
+        function attachProspectFile(input) {
+            if (!input.files || !input.files[0]) return;
+            const name = input.files[0].name;
+            const li = document.createElement('li');
+            li.className = 'flex items-center justify-between p-2 bg-blue-50/50 rounded border border-blue-200';
+            li.innerHTML = `<span class="flex items-center gap-1.5 font-medium"><i class="ph-fill ph-file text-blue-600"></i> ${name}</span><span class="text-[11px] text-blue-700 font-semibold">Synced to Sales Drive</span>`;
+            document.getElementById('dm-files-list').prepend(li);
+            input.value = '';
+            showToast(`Attached "${name}" to Prospect & synced to Sales folder!`);
         }
 
         function deferCurrentLead() {
